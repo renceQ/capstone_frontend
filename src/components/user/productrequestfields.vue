@@ -1,14 +1,30 @@
 <template>
-  <div class="container mt-4">
-    <h2 style="margin-left:450px;">Product Request Fields</h2>
+  <nav class="neumorphic-navbar" style="border-radius:5px;height:450px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px;" :class="{ 'navbar-hidden': isNavbarHidden }">
+    <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;">PRODUCT NAME:  <span style="font-size: 20px; font-weight:500; margin-left:5px; color:rgb(223, 146, 5);">{{ productData.prod_name }}</span></p>
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+        <!-- <p>Image:</p> -->
+        <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 250px; max-height: 250px; margin-top:20px; margin-left: 90px;">
+    </div>
+
+    <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:700;">UNIT PRICE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:30px;">₱  {{ productData.unit_price }}</span></p>
+    <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;" >SIZE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:15px;">{{ getSizeName(productData.size_id) }}</span></p>
+    <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:345px; font-size:11px; font-weight:500; color:rgb(45, 121, 55)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
+</nav>
+
+  
+  <div class="container mt-4" style="margin-left:200px; ">
+    <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">PRODUCT DESCRIPTION</h2>
     <form @submit.prevent="placeOrder">
     <div class="row">
       <div class="col">
-        <p>Image:</p>
-        <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 200px; max-height: 200px;">
-        <p>Product Name: {{ productData.prod_name }}</p>
-        <p>Unit Price: ₱{{ productData.unit_price }}</p>
-        <p>size : {{ getSizeName(productData.size_id )}}</p>
+        <div style="display: none;">
+          <p>Image:</p>
+          <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 200px; max-height: 200px;">
+          <p>Product Name: {{ productData.prod_name }}</p>
+          <p>Unit Price: ₱{{ productData.unit_price }}</p>
+          <p>size : {{ getSizeName(productData.size_id) }}</p>
+      </div>
         <div class="mb-3">
           <p>Quantity:</p>
           <div class="btn-group" role="group" aria-label="Quantity">
@@ -22,25 +38,38 @@
           <input type="hidden" v-model="productData.transaction_code">
 
           <div>
-            <h3>Delivery Address</h3>
+            <h5 >CONTACT DETAILS</h5>
             <div style="margin-top: 20px;">
               <div v-for="userData in info" :key="userData.id" class="user-profile">
                 <div class="profile-details">
-                 
-                  <input type="text" v-model="userData.address" placeholder="Enter Address" required>
-                  <input type="text" v-model="userData.contact" placeholder="Enter Contact" required>
-                  <input type="text" v-model="userData.other_info" placeholder="Enter Other Information" required>
-                  <input type="hidden" v-model="userData.token" placeholder="Enter Other Information" required>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <input type="text" v-model="userData.address" placeholder="Enter Address" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <input style="margin-left:90px;" type="text" v-model="userData.contact" placeholder="Enter Contact" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <input type="text" v-model="userData.other_info" placeholder="Enter Other Information" required>
+                      <input type="hidden" v-model="userData.token" placeholder="Enter Other Information" required>
+                  </div>
+                  <div class="col-sm-6">
+                                        <!-- <label for="customerName">Customer Name:</label> -->
+                    <input style="margin-left:90px;"  type="text" id="customerName" v-model="userData.username" placeholder="customer name" required>
+                </div>
+                  </div>
+                  
                    <div>
-                    <label for="customerName">Customer Name:</label>
-                    <input type="text" id="customerName" v-model="userData.username" placeholder="customer name" required>
-                    Total Price:
-                    <input type="text" v-model="productData.total" placeholder="total price" disabled>
+
+                    <a style="position: absolute; margin-left:120px; margin-top:8px;">Total Price: ₱</a>
+                    <input type="text" style="border:0px;  position: absolute;margin-left:192px;" v-model="productData.total" placeholder="total price" disabled> 
                   </div>
                 </div>
               </div>
               
-              <div class="payment-method">
+              <div class="payment-method" style="margin-top:40px; ">
                 <label>Select Payment Method:</label><br>
 
                 <input type="radio" id="paymaya" value="paymaya" v-model="selectedPaymentMethod">
@@ -62,7 +91,7 @@
             </div>
           </div>
 
-          <router-link to="/userproducts" class="btn btn-primary">Choose Another Product</router-link>
+
           <button @click="placeOrder('cart')" type="submit" class="btn btn-success">
             Add to Cart
           </button>
@@ -74,8 +103,7 @@
       </div>
     </form>
     </div>
-
-     Vuetify modal dialog
+    
      <v-dialog v-model="dialog" persistent max-width="400">
       <v-card>
         <v-card-text>
