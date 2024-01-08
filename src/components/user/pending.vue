@@ -18,7 +18,7 @@
               </button>
               <a href="/addtocart" style="position:absolute; margin-left:680px; width:49px; height: 49px; color: black;"  class="search-button">
               <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
-              </a>      
+              </a>  
           </div>
              
                

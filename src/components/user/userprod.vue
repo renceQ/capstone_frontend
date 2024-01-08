@@ -2,19 +2,19 @@
   <div class="container">
     <br><br><br><br><br><br><br>
     <h1 class="text-center" style="font-size: 50px;">Available <span>Products...</span></h1>
-    <br><br>
+    <br>
 
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <label for="category_id" class="label text-center">Category</label>
-        <div class="select-wrapper" style="margin-left:180px;" >
-          <select v-model="category_id" @change="filterProducts" class="select">
+        <label for="category_id" style="font-weight:400;" class="label text-center">Select Product Category</label><br>
+        <div class="select-wrapper" style="margin-left:33%;" >
+          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px;">
             <option value="">All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.category_name }}
             </option>
           </select>
-          <i class="fas fa-caret-down arrow-icon"></i>
+          <i class="fas fa-caret-down arrow-icon" style="position: absolute; margin-right:24px;"></i>
         </div>
       </div>
     </div>
@@ -28,6 +28,7 @@
           <img :src="product.image" alt="" style="width: 180px; height: 180px;">
           <div class="ri-text">
             <h4>{{ product.prod_name }}</h4>
+            <h4>{{ product.category_id }}</h4>
             <p>Unit Price: ₱{{ product.unit_price }}</p>
             <p>Available Size: {{ getSizeName(product.size_id) }}</p>
             <button class="btn btn-outline-danger btn-sm" @click="preOrder(product)">Pre order</button>
@@ -141,7 +142,7 @@ Sound and stage lights production.</p>
   },
    
       preOrder(product) {
-  const { image, prod_name, unit_price, size_id, stock, id,   } = product;
+  const { image, prod_name, unit_price, size_id, stock, id, category_id,   } = product; //category_id di pa tapos iretrieve
   const transactionCode = this.generateTransactionCode();
   this.$router.push({
     name: 'productrequest',
@@ -149,6 +150,7 @@ Sound and stage lights production.</p>
       image,
       prod_name,
       unit_price,
+      category_id,
       size_id,
       stock, // Include stock parameter
       id,
@@ -245,11 +247,12 @@ Sound and stage lights production.</p>
 .select-wrapper {
   position: relative;
   width: 200px;
+  border: 0px;
 }
 
 .select {
   padding: 8px 30px 8px 8px;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   width: 100%;
@@ -257,6 +260,7 @@ Sound and stage lights production.</p>
   -webkit-appearance: none;
   -moz-appearance: none;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333333"><path d="M7 10l5 5 5-5z" /></svg>') no-repeat right 8px center/12px;
+
 }
 
 .arrow-icon {

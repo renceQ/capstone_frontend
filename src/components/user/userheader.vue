@@ -1,7 +1,7 @@
 
 <template>
 	<div>
-	<nav class="neumorphic-navbar" :class="{ 'navbar-hidden': isNavbarHidden }">
+	<nav class="neumorphic-navbar" style="width:90%;" :class="{ 'navbar-hidden': isNavbarHidden }">
     <span class="nav-item">
       <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="require('../../assets/images/logo.jpg')" class="logo-picture-navbar">
     </span>

@@ -1,4 +1,5 @@
 <template>
+
 <nav style="paddiNG; " >    
     <input type="checkbox" id="check">
     <label for="check">

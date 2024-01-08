@@ -107,7 +107,7 @@ const routes = [
     component: forgotpass
   },
   {
-    path: '/productrequest/:image/:prod_name/:unit_price/:size_id/:stock/:id/:transaction_code',
+    path: '/productrequest/:image/:prod_name/:unit_price/:size_id/:stock/:id/:transaction_code/:category_id',
     name: 'productrequest',
     component: () => import('../views/productrequest.vue'), // Replace with your actual path and component
     props: true // Pass route params as props to the component

@@ -1,5 +1,5 @@
 <template>
-  <nav class="neumorphic-navbar" style="border-radius:5px;height:450px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px;" :class="{ 'navbar-hidden': isNavbarHidden }">
+  <nav class="neumorphic-navbar" style="border-radius:5px;height:450px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:15%;" :class="{ 'navbar-hidden': isNavbarHidden }">
     <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;">PRODUCT NAME:  <span style="font-size: 20px; font-weight:500; margin-left:5px; color:rgb(223, 146, 5);">{{ productData.prod_name }}</span></p>
 
     <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
@@ -12,8 +12,8 @@
     <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:345px; font-size:11px; font-weight:500; color:rgb(45, 121, 55)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
 </nav>
 
-  
-  <div class="container mt-4" style="margin-left:200px; ">
+<br>
+  <div class="container mt-4" style="margin-left:270px; height:20px;">
     <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">PRODUCT DESCRIPTION</h2>
     <form @submit.prevent="placeOrder">
     <div class="row">
@@ -35,6 +35,7 @@
           </div>
           <!--hidden fields-->
           <input type="hidden" v-model="productData.id">
+          <input type="text" v-model="productData.category_id">
           <input type="hidden" v-model="productData.transaction_code">
 
           <div>
@@ -44,20 +45,21 @@
                 <div class="profile-details">
                   <div class="row">
                     <div class="col-sm-6">
-                        <input type="text" v-model="userData.address" placeholder="Enter Address" required>
+                      <!-- <input type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/> -->
+                        <input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px;" required>
                     </div>
                     <div class="col-sm-6">
-                        <input style="margin-left:90px;" type="text" v-model="userData.contact" placeholder="Enter Contact" required>
+                        <input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="margin-left:90px; border: 0px;" required>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-6">
-                      <input type="text" v-model="userData.other_info" placeholder="Enter Other Information" required>
-                      <input type="hidden" v-model="userData.token" placeholder="Enter Other Information" required>
+                      <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
+                      <input type="hidden" v-model="userData.token" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
                   </div>
                   <div class="col-sm-6">
                                         <!-- <label for="customerName">Customer Name:</label> -->
-                    <input style="margin-left:90px;"  type="text" id="customerName" v-model="userData.username" placeholder="customer name" required>
+                    <input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; margin-left:90px;" required>
                 </div>
                   </div>
                   
@@ -68,7 +70,7 @@
                   </div>
                 </div>
               </div>
-              
+<!--               
               <div class="payment-method" style="margin-top:40px; ">
                 <label>Select Payment Method:</label><br>
 
@@ -85,25 +87,32 @@
               
                 <input type="radio" id="cod" value="cod" v-model="selectedPaymentMethod">
                 <label for="cod">Cash on Delivery</label>
-              </div>
-
-
+              </div> -->
             </div>
           </div>
 
+        <div >
+          <br>
+          <br>
+          <div class="row">
+          <button1 @click="placeOrder('cart')" type="submit" style=" border-radius:5px; width:24%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Add to Cart</button1>
+          <button1 @click="placeOrder('pending')" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
 
-          <button @click="placeOrder('cart')" type="submit" class="btn btn-success">
+          
+          </div>
+          <!-- <button @click="placeOrder('cart')" type="submit" class="btn btn-success" >
             Add to Cart
           </button>
-          <button @click="placeOrder('pending')" type="submit" class="btn btn-success">
+          <button @click="placeOrder('pending')" type="submit" class="btn btn-success" style="position: absolute; margin-right:100px;">
             Place Order
-          </button>
+          </button> -->
+        </div>
           
         </div>
       </div>
     </form>
     </div>
-    
+
      <v-dialog v-model="dialog" persistent max-width="400">
       <v-card>
         <v-card-text>
@@ -118,9 +127,19 @@
       </v-card>
     </v-dialog>
 
-
-
-
+    <v-dialog v-model="dialogs" persistent max-width="400">
+      <v-card>
+        <v-card-text>
+          <div class="text-center">
+            <p>  Your order has been successfully added to cart. </p>
+            <img :src="require('../../../public/img/dash.gif')"  style="width: 180px; height: 150px;">
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn  style="margin-left:162px;"  href="/userproducts" color="primary" @click="dialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script>
@@ -131,6 +150,7 @@ export default {
     return {
       status: '',
       dialog: false,
+      dialogs: false,
       productData: {
         image: '',
         prod_name: '',
@@ -138,6 +158,7 @@ export default {
         sizes: [],
         transaction_code: '',
         total: 0,
+        category_id: '',
 
       },
       info: [],
@@ -154,6 +175,7 @@ export default {
         token: '',
         status: '',
         username: '',
+        category_id: '',
          
     };
   },
@@ -190,6 +212,7 @@ export default {
           prod_name: this.productData.prod_name,
           unit_price: this.productData.unit_price,
           size_id: this.productData.size_id,
+          category_id: this.productData.category_id,
           quantity: this.quantity,
           address: this.info[0].address, // Assuming you want the first user's address
           contact: this.info[0].contact, // Assuming you want the first user's contact
@@ -210,7 +233,12 @@ export default {
         // Triggering data retrieval after order placement
         await this.getInfo();
 
-        this.dialog = true;
+        if (status === 'cart') {
+      // Open dialog for 'cart' status
+      this.dialogs = true;
+    } else if (status === 'pending') {
+     this.dialog = true;
+    }
       } catch (error) {
         console.error(error);
       }
@@ -231,6 +259,7 @@ export default {
       this.productData.stock = this.$route.params.stock || 0;
       this.productData.id = this.$route.params.id || '';
       this.productData.transaction_code = this.$route.params.transaction_code || '';
+      this.productData.category_id = this.$route.params.category_id || '';
       
     },
     increaseQuantity() {

@@ -21,7 +21,7 @@
               <i class="fas fa-shopping-cart custom-icon"></i>
               </button>
              
-             
+              <!-- <img :src="require('../../../public/img/higa.gif')"  style="width: 180px; height: 150px;">     -->
           </div>
              
                
@@ -66,14 +66,17 @@
                               <span >Total: ₱{{ filteredInfo.total }}</span>
                               <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
                               <span v-if="!hideToken" class="product-info">{{ token }}</span>
+                              <span v-if="!hideCategory" class="product-info">{{ category_id }}</span>
+                         
                             </an>
                             <div>
-                              <!-- <button @click="undo(filteredInfo.id)" class="neumorphic-button" style="width: 200px; "><i class="fas fa-undo custom-icon"></i>&nbsp;&nbsp;
-                                Undo</button> &nbsp;&nbsp; -->
-                              <button @click="openModal" class="neumorphic-button" style="margin-left:450px; width: 200px;"><i class="fas fa-phone custom-icon"></i> &nbsp;&nbsp;Contact Seller</button> &nbsp;&nbsp;
+                                <button @click="openDialog(filteredInfo.category_id)" class="neumorphic-button" style="margin-left:450px; width: 200px;">
+                                  <i class="fas fa-search custom-icon"></i>&nbsp;&nbsp;Find Similar
+                                </button> &nbsp;&nbsp;
+                                
                               <!-- <button @click="buyagain(filteredInfo.id)" class="neumorphic-button" style="margin-left:450px; width: 200px;"><i class="fas fa-phone custom-icon"></i> &nbsp;&nbsp;Buy Again</button> &nbsp;&nbsp; -->
-                              <button  @click="openDialog(filteredInfo)"  class="neumorphic-button" style="width: 200px; background-color:rgb(248, 53, 53); color:white;">
-                                Cancel Order</button>
+                              <button @click="deletehistory(filteredInfo.id)"   class="neumorphic-button" style="width: 200px; background-color:rgb(248, 53, 53); color:white;">
+                                Delete</button>
                             </div>
                           </div>
                         </li>
@@ -84,25 +87,36 @@
                 
 
 
-                <!--cancel modal-->
-                <v-dialog v-model="dialogs" max-width="500px">
-                    <v-card>
-                      <v-card-title class="headline" style="margin-left: 99px;">Reasons for Order Cancellation</v-card-title>
-                      <v-card-text>
-                        <v-radio-group v-model="selectedReason">
-                          <v-radio v-for="(reason, index) in cancellationReasons" :key="index" :label="reason" :value="reason"></v-radio>
-                        </v-radio-group>
-                        <!-- Add a hidden input to store the order ID -->
-                        <input type="hidden" v-model="selectedInfo.id" ref="orderId">
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-btn @click="closeDialog" color="primary">Cancel</v-btn>
-                        <v-btn @click="submitReason" color="primary" small>
-                          Submit
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
+                <!--kelangan walo lang makikita-->
+                <v-dialog v-model="dialogs" max-width="75%">
+                  <v-card>
+                    <v-card-title class="headline" style="margin-left: 99px;"></v-card-title>
+                    <v-card-text>
+                      <div class="row justify-content-center">
+                        <div v-for="(product, index) in getprods.slice(0, 8)" :key="product.id" class="col-lg-3 col-md-6 mb-4">
+                          <!-- Product Card -->
+                          <div class="room-item text-center">
+                            <img :src="product.image" alt="" style="width: 100px; height: 100px;">
+                            <div class="ri-text" >
+                              <h6>{{ product.prod_name }}</h6>
+                              <h6>{{ product.category_id }}</h6>
+                              <p style="font-size: 13px;">Unit Price: ₱{{ product.unit_price }}</p>
+                              <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:</span> {{ getSizeName(product.size_id) }}</p>
+                              <button class="btn btn-outline-danger btn-sm" style="width: 80px; height:33px;" @click="preOrder(product)">Pre order</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-btn @click="closeDialog" color="primary">Cancel</v-btn>
+                      <v-btn @click="submitReason" color="primary" small>
+                        Submit
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                
               
 </template>
 <script>
@@ -110,8 +124,11 @@ import axios from 'axios';
 
 export default {
   data() {
-    return {
-        isNavbarHidden: false,
+    return {  
+      getprods: [],
+      sizes: [],
+      size_id: '',
+      isNavbarHidden: false,
       lastScrollTop: 0,
       inputValue: '',
       isActive: false,
@@ -137,6 +154,8 @@ export default {
   mounted() {
 	this.getInfo(); 
   this.getOrder();
+  this.getprod();
+
   },
   created() {
 	this.token = sessionStorage.getItem('jwt');
@@ -157,17 +176,19 @@ computed: {
   }
 },
   methods: {
-    async buyagain(id) {
+    
+     
+   async deletehistory(id) {
   try {
-    const confirmed = window.confirm('Are you sure you want to discard this change?');
+    const confirmed = window.confirm('Are you sure you want to delete this record?');
 
     if (confirmed) {
       const userInput = prompt('Type "okay" to confirm:');
       if (userInput && userInput.trim().toLowerCase() === 'okay') {
-        const response = await axios.post(`/updateOrderStatus/${id}`, {
-          status: 'pending',
-          reason: 'no valid reason',
-        });
+        const response = await axios.post(`/deleteprod/${id}`, {
+  status: 'deleted',
+});
+
 
         if (response.status === 200) {
           this.getOrder(); // Refresh orders after status update
@@ -185,34 +206,13 @@ computed: {
   }
 },
 
-
-
-    async submitReason() {
-      try {
-        if (this.selectedReason && this.selectedInfo) {
-          const response = await axios.post(`/updateOrderStatus/${this.selectedInfo.id}`, {
-            status: 'cancelled',
-            reason: this.selectedReason,
-          });
-
-          if (response.status === 200) {
-            this.getOrder(); // Refresh orders after status update
-            this.closeDialog(); // Close the dialog after submitting reason
-          } else {
-            console.error('Error updating order status');
-          }
-        } else {
-          console.error('Please select an order and a reason.'); // Inform the user to select an order and a reason
-        }
-      } catch (error) {
-        console.error('Error updating order status:', error);
-      }
-    },
   
-    openDialog(selectedInfo) {
-  this.selectedInfo = selectedInfo; // Store the selected order info
+    openDialog(categoryId) {
   this.dialogs = true; // Open the dialog
+  // Filter products based on category_id
+  this.getprods = this.getprods.filter(product => product.category_id === categoryId);
 },
+
     closeDialog() {
       this.dialogs = false; // Close the dialog
     },
@@ -226,6 +226,28 @@ computed: {
     console.error(error);
   }
 },
+async getprod() {
+  try {
+    const response = await axios.get('getprod');
+    this.getprods = response.data;
+    // Set hideToken to true after fetching notifications
+    this.hideToken = true;
+  } catch (error) {
+    console.error(error);
+  }
+},
+getSizeName(sizeId) {
+      const size = this.sizes.find(size => size.size_id === sizeId);
+      return size ? size.item_size : 'Unknown';
+    },
+    async getItemSizes() {
+      try {
+        const response = await axios.get('getsize');
+        this.sizes = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     toggleDropdown() {
     const menu = document.querySelector('.menu-item');
     menu.classList.toggle('active');
