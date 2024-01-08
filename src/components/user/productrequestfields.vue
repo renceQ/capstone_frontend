@@ -35,7 +35,7 @@
           </div>
           <!--hidden fields-->
           <input type="hidden" v-model="productData.id">
-          <input type="text" v-model="productData.category_id">
+          <input type="hidden" v-model="productData.category_id">
           <input type="hidden" v-model="productData.transaction_code">
 
           <div>

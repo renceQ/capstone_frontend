@@ -6,7 +6,8 @@
         <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info[0].username }}</a><br>
         <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="#"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;&nbsp; Edit Profile</a><br>
         <a style="position:absolute; margin-top:30px; text-decoration: none; color:darkorange;" href="/orderhistory"><i class="fas fa-history custom-icon"></i>&nbsp;&nbsp;&nbsp; Order History</a><br>
-        <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="/toship_main"> <i class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp; My Purchase</a>
+        <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="/toship_main"> <i class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp; My Purchase</a><br>
+        <a style="position:absolute; margin-top:30px; text-decoration: none; color: rgb(0, 0, 0);" href="/addtocart"> <i class="fas fa-shopping-cart custom-icon"></i>  &nbsp;&nbsp;&nbsp;Shopping Cart</a>
       </span>
     </div>
     <div>
@@ -16,9 +17,9 @@
             <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
               </button>
-              <a href="/addtocart" style="position:absolute; margin-left:680px; width:49px; height: 49px; color: black;"  class="search-button">
-              <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
-              </a>  
+              <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
+                <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
+                </a>
           </div>
              
                

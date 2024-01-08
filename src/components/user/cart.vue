@@ -17,9 +17,9 @@
             <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
               </button>
-              <button style="position:absolute; margin-left:680px; width:49px; height: 49px;" href="#" class="search-button">
-              <i class="fas fa-shopping-cart custom-icon"></i>
-              </button>
+              <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
+                <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
+                </a>
              
               <!-- <img :src="require('../../../public/img/higa.gif')"  style="width: 180px; height: 150px;">     -->
           </div>
@@ -34,9 +34,9 @@
           <span class="nav-item">
             <a href="/pending_main" class="nav-link" style="font-weight:700; color:darkorange;" >Shopping Cart</a>
           </span>
-          <!-- <span class="nav-item">
-            <a href="/orderhistory" class="nav-link" style="font-weight:400; color:rgb(0, 0, 0); margin-right:350px;" >Order History</a>
-          </span> -->
+          <span v-if="selectedCheckboxesComputed.length > 0" class="nav-item">
+            <a @click="selectAllItems" class="nav-link" style="font-weight:400; color:rgb(0, 0, 0); margin-right:350px;">Select All</a>
+          </span>
 
           <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Product | <span>Status.</span></a>
         </nav>
@@ -49,6 +49,15 @@
                 <!--products container-->
                 <div>
                   <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
+                    <input
+                    type="checkbox"
+                    :id="'checkbox-' + filteredInfo.id"
+                    class="product-checkbox"
+                    style="position: absolute; margin-top: 18px; margin-left: 220px;"
+                    v-model="selectedCheckboxes"
+                    :value="filteredInfo.id"
+                    @change="updateSelectAllButton"
+                  >
                     <nav class="neumorphic-navbars" style="width: 950px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
@@ -99,7 +108,7 @@
                             <img :src="product.image" alt="" style="width: 100px; height: 100px;">
                             <div class="ri-text" >
                               <h6>{{ product.prod_name }}</h6>
-                              <h6>{{ product.category_id }}</h6>
+                              <h6 style="display: none;">{{ product.category_id }}</h6>
                               <p style="font-size: 13px;">Unit Price: ₱{{ product.unit_price }}</p>
                               <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:</span> {{ getSizeName(product.size_id) }}</p>
                               <button class="btn btn-outline-danger btn-sm" style="width: 80px; height:33px;" @click="preOrder(product)">Pre order</button>
@@ -125,6 +134,9 @@ import axios from 'axios';
 export default {
   data() {
     return {  
+      selectedCheckboxes: [], // Array to store IDs of selected checkboxes
+      showSelectAllButton: false, // Control visibility of a button
+      originalProds: [],
       getprods: [],
       sizes: [],
       size_id: '',
@@ -171,13 +183,31 @@ computed: {
 
 
   filteredInfos() {
-    // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
-    return this.infos.filter(info => info.token === this.token && info.status === 'cart');
-  }
-},
+      // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
+      return this.infos.filter(info => info.token === this.token && info.status === 'cart');
+    },
+
+    selectedCheckboxesComputed() {
+      return this.selectedCheckboxes;
+    },
+  },
   methods: {
-    
-     
+    updateSelectAllButton() {
+      // Check if at least one checkbox is selected
+      this.showSelectAllButton = this.selectedCheckboxes.length > 0;
+    },
+    selectAllItems() {
+      if (this.filteredInfos.length === this.selectedCheckboxes.length) {
+        // If all checkboxes are already checked, uncheck all
+        this.selectedCheckboxes = [];
+      } else {
+        // Otherwise, check all checkboxes
+        this.selectedCheckboxes = this.filteredInfos.map(info => info.id);
+      }
+
+      // Call the method to update the 'Select All' button visibility
+      this.updateSelectAllButton();
+    },
    async deletehistory(id) {
   try {
     const confirmed = window.confirm('Are you sure you want to delete this record?');
@@ -206,12 +236,14 @@ computed: {
   }
 },
 
-  
-    openDialog(categoryId) {
-  this.dialogs = true; // Open the dialog
-  // Filter products based on category_id
-  this.getprods = this.getprods.filter(product => product.category_id === categoryId);
-},
+openDialog(categoryId) {
+      this.dialogs = true; // Open the dialog
+
+      // Filter products based on category_id from originalProds
+      this.getprods = this.originalProds.filter(
+        (product) => product.category_id === categoryId
+      );
+    },  
 
     closeDialog() {
       this.dialogs = false; // Close the dialog
@@ -227,15 +259,16 @@ computed: {
   }
 },
 async getprod() {
-  try {
-    const response = await axios.get('getprod');
-    this.getprods = response.data;
-    // Set hideToken to true after fetching notifications
-    this.hideToken = true;
-  } catch (error) {
-    console.error(error);
-  }
-},
+      try {
+        const response = await axios.get('getprod');
+        this.getprods = response.data;
+        this.originalProds = [...response.data]; // Store original products
+        // Set hideToken to true after fetching notifications
+        this.hideToken = true;
+      } catch (error) {
+        console.error(error);
+      }
+    },
 getSizeName(sizeId) {
       const size = this.sizes.find(size => size.size_id === sizeId);
       return size ? size.item_size : 'Unknown';
