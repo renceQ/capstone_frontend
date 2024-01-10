@@ -40,6 +40,34 @@
 
           <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Product | <span>Status.</span></a>
         </nav>
+
+        <!-- check out box -->
+        <nav class="neumorphic-navbars" style=" position: absolute; margin-top: 140px; width: 250px; height: 150px; margin-left: 40px; z-index: 10;">
+         
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <button class="neumorphic-button" style=" background-color: green; color: white;margin-left:35px; margin-top:30px; width: 158px;">
+                 Check out
+                </button>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-12">
+                <span class="nav-item">
+                  <h1 class="nav-link" style="font-weight:400; margin-left:35px; margin-top:20px; color:rgb(0, 0, 0);">
+                    Total ({{ selectedCheckboxesComputed.length }} item): ₱{{ calculateTotalPrice() }}
+                  </h1>
+                </span>                        
+              </div>
+            </div>
+          </div>
+          
+        
+          <!-- <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Product | <span>Status.</span></a> -->
+        </nav>
       
     </div>
 
@@ -182,7 +210,9 @@ export default {
 },
 computed: {
 
-
+  selectedCheckboxesComputed() {
+    return this.selectedCheckboxes;
+  },
   filteredInfos() {
       // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
       return this.infos.filter(info => info.token === this.token && info.status === 'cart');
@@ -193,6 +223,16 @@ computed: {
     },
   },
   methods: {
+
+    calculateTotalPrice() {
+    let totalPrice = 0;
+    this.filteredInfos.forEach(info => {
+      if (this.selectedCheckboxes.includes(info.id)) {
+        totalPrice += parseFloat(info.total); // Assuming 'info.total' holds the item's price
+      }
+    });
+    return totalPrice.toFixed(2); // To display the total price with 2 decimal places
+  },
     updateSelectAllButton() {
       // Check if at least one checkbox is selected
       this.showSelectAllButton = this.selectedCheckboxes.length > 0;
