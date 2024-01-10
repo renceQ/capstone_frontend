@@ -44,13 +44,14 @@
 
         <!-- empty cart container -->
         <div v-if="filteredInfos.length === 0" class="text-center" style="margin-top: 80px; margin-left:220px;">
-          <img :src="require('../../../public/img/3cart.gif')" style="width: 55px; height: 55px;">
+          <img :src="require('../../../public/img/spin.gif')" style="width: 60px; height: 60px; display: none;" ref="spinGif">
+          <img :src="require('../../../public/img/3cart.gif')" style="width: 55px; height: 55px;" ref="cartGif">
           <p style="font-weight: 600; margin-top:10px; margin-bottom:30px;">your shopping cart is empty.</p>
-          <a href="/userproducts" class="neumorphic-button" style="text-decoration: none; border-radius: 3px;  width: 200px; background-color: rgb(248, 53, 53); color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='rgb(248, 53, 53)'">
+          <a @click="goShoppingNow" class="neumorphic-button" style="text-decoration: none; border-radius: 3px;  width: 200px; background-color: rgb(248, 53, 53); color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='rgb(248, 53, 53)'">
             Go Shopping Now
           </a>
-          
         </div>
+        
         <!-- end of empty cart container -->
 
 
@@ -249,6 +250,17 @@ computed: {
     },
   },
   methods: {
+    goShoppingNow() {
+    // Show spin.gif and hide 3cart.gif
+    this.$refs.spinGif.style.display = 'block' ;
+    this.$refs.spinGif.style.marginLeft = '530px';
+    this.$refs.cartGif.style.display = 'none';
+
+    // Redirect after 3 seconds
+    setTimeout(() => {
+      this.$router.push('/userproducts'); // Redirect to /userproducts route
+    }, 3000);
+  },
     async updateStatusToPending() {
     try {
       const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
