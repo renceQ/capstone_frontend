@@ -12,7 +12,7 @@
     </div>
     <div>
 
-        <div class="neumorphic-search" style="margin-top: 170px; margin-left:315px;">
+        <div class="neumorphic-search" style="margin-top: 170px; margin-left:315px; ">
             <input type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
             <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
@@ -41,18 +41,42 @@
           <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Product | <span>Status.</span></a>
         </nav>
 
-        <!-- check out box -->
-        <nav class="neumorphic-navbars" style=" position: absolute; margin-top: 140px; width: 250px; height: 150px; margin-left: 40px; z-index: 10;">
-         
 
+        <!-- empty cart container -->
+        <div v-if="filteredInfos.length === 0" class="text-center" style="margin-top: 80px; margin-left:220px;">
+          <img :src="require('../../../public/img/3cart.gif')" style="width: 55px; height: 55px;">
+          <p style="font-weight: 600; margin-top:10px; margin-bottom:30px;">your shopping cart is empty.</p>
+          <a href="/userproducts" class="neumorphic-button" style="text-decoration: none; border-radius: 3px;  width: 200px; background-color: rgb(248, 53, 53); color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='rgb(248, 53, 53)'">
+            Go Shopping Now
+          </a>
+          
+        </div>
+        <!-- end of empty cart container -->
+
+
+
+
+
+
+        <!-- check out box -->
+        <nav class="neumorphic-navbars checkout-box" style="position: fixed; bottom: 20px; left: 40px; width: 250px; height: 150px; z-index: 10;">
+          <!-- ... (existing content) ... -->
           <div class="container">
             <div class="row">
               <div class="col-12">
-                <button class="neumorphic-button" style=" background-color: green; color: white;margin-left:35px; margin-top:30px; width: 158px;">
-                 Check out
+                <button
+                  @click="updateStatusToPending"
+                  class="neumorphic-button checkout-button"
+                  :disabled="!hasSelectedItems" 
+                  style="background-color: green; color: white; margin-left: 35px; margin-top: 30px; width: 158px;"
+                  onmouseover="this.style.backgroundColor='darkgreen'; this.style.color='white';"
+                  onmouseout="this.style.backgroundColor='green'; this.style.color='white';"
+                >
+                  Check out
                 </button>
               </div>
             </div>
+            
           
             <div class="row">
               <div class="col-12">
@@ -209,7 +233,9 @@ export default {
   this.getInfo();
 },
 computed: {
-
+  hasSelectedItems() {
+      return this.selectedCheckboxes.length > 0;
+    },
   selectedCheckboxesComputed() {
     return this.selectedCheckboxes;
   },
@@ -223,6 +249,35 @@ computed: {
     },
   },
   methods: {
+    async updateStatusToPending() {
+    try {
+      const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
+
+      if (confirmed) {
+        // Loop through the selectedCheckboxes array and update the status of selected items to 'pending'
+        for (const id of this.selectedCheckboxes) {
+          const response = await axios.post(`/updateOrderStatus/${id}`, {
+            status: 'pending',
+          });
+
+          if (response.status === 200) {
+            // You might want to update the UI or perform other actions upon successful update
+            console.log(`Item with ID ${id} status updated to pending`);
+          } else {
+            console.error(`Error updating status for item with ID ${id}`);
+          }
+        }
+
+        // Clear the selectedCheckboxes array after updating the status
+        this.selectedCheckboxes = [];
+        this.getOrder(); 
+      } else {
+        console.log('Checkout canceled');
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
+  },
 
     calculateTotalPrice() {
     let totalPrice = 0;
