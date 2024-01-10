@@ -4,9 +4,10 @@
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
       <span v-if="info.length > 0">
         <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info[0].username }}</a><br>
-        <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="/editprofiles"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;&nbsp; Edit Profile</a><br>
-        <a style="position:absolute; margin-top:30px; text-decoration: none; color:darkorange;" href="/orderhistory"><i class="fas fa-history custom-icon"></i>&nbsp;&nbsp;&nbsp; Order History</a><br>
-        <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="/toship_main"> <i class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp; My Purchase</a><br>
+        <a style="position:absolute; margin-top:30px; text-decoration: none; color: darkorange;" href="/editprofiles"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;&nbsp; Edit Profile</a><br>
+        <a style="position:absolute; margin-top:30px; text-decoration: none; color:black;" href="/orderhistory"><i class="fas fa-history custom-icon"></i>&nbsp;&nbsp;&nbsp; Order History</a><br>
+        <a style="position:absolute; margin-top:30px; text-decoration: none; color: black;" href="/toship_main"> <i class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp; My Purchase</a>
+        <br>
         <a style="position:absolute; margin-top:30px; text-decoration: none; color: rgb(0, 0, 0);" href="/addtocart"> <i class="fas fa-shopping-cart custom-icon"></i>  &nbsp;&nbsp;&nbsp;Shopping Cart</a>
       </span>
     </div>
@@ -17,9 +18,6 @@
             <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
               </button>
-              <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
-                <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
-                </a>
           </div>
              
                
@@ -30,13 +28,10 @@
          
 
           <span class="nav-item">
-            <a href="/pending_main" class="nav-link" style="font-weight:400; color:rgb(14, 11, 9)" >Pending</a>
-          </span>
-          <span class="nav-item">
-            <a href="/orderhistory" class="nav-link" style="font-weight:700; color:darkorange; margin-right:350px;" >Order History</a>
+            <a href="/editprofiles" class="nav-link" style="font-weight:700; color:darkorange; margin-right:350px;" >Edit Profile</a>
           </span>
 
-          <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Product | <span>Status.</span></a>
+          <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Edit | <span>Profile.</span></a>
         </nav>
       
     </div>
@@ -46,29 +41,87 @@
 
                 <!--products container-->
                 <div>
-                  <div v-for="infos in filteredProducts" :key="infos.id" class="container" style="margin-top: 20px;">
+                  <div class="container" style="margin-top: 20px;">
                     <nav class="neumorphic-navbars" style="width: 950px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
                           <br>
                           <div>
-                            <asd><span style="color:rgb(13, 109, 19); margin-left:730px;"><i class="fas fa-history custom-icon"></i>
-                              &nbsp;&nbsp;&nbsp;Order History...</span></asd>
+                            
                           </div>
             
-                          <div style="margin-bottom: 20px;"> 
-                            <an  v-if="infos.image">
-                              <img :src="infos.image" class="img-fluids" style="max-width: 140px; max-height: 140px;" readonly>
-                              <span style="margin-right: 140px; margin-left: 80px;">Product:{{ infos.prod_name }}</span> 
-                              <span style="margin-right: 140px;">Quantity:{{ infos.quantity }}</span> 
-                              <span >Total: ₱{{ infos.total }}</span>
-                              <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
-                              <span v-if="!hideToken" class="product-info">{{ token }}</span>
-                            </an>
-                            <div>
+                          <div class="card mb-4 mb-xl-0" style="width: 920px;">
+                            <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+               </div>
+               </div>
 
-                                <button @click="deletehistory(infos.id)" class="neumorphic-button" style=" margin-left:650px; width: 200px; background-color:rgb(248, 53, 53); color:white;"><i class="fas fa-trash-alt custom-icon"></i>
-                                    Delete</button>
+              
+            <!-- Account details card-->
+            <div class="card mb-4" style="height:700px;">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+               
+                        <!-- Form Group (username)-->
+                        <div style="margin-left: 50px;">
+                        <div class="mb-3" >
+                            <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Organization name</label>
+                                <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap">
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" style="margin-left: 390px; width: 120px;" type="button">Save changes</button>
+              
                             </div>
                           </div>
                         </li>
@@ -76,7 +129,7 @@
                     </nav>
                   </div>
                 </div>
-                
+            
 
 
                 <!--cancel modal-->
@@ -329,4 +382,63 @@ a[href="#"] {
     width: 40px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
   }
+  body{margin-top:20px;
+background-color:#f2f6fc;
+color:#69707a;
+}
+.img-account-profile {
+    height: 10rem;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nav-borders .nav-link.active {
+    color: #0061f2;
+    border-bottom-color: #0061f2;
+}
+.nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
 </style>

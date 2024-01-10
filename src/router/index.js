@@ -30,6 +30,7 @@ import orderproducts from '../views/orderproducts.vue'
 import orderhistory from '../views/orderhistory.vue'
 import pending_main from '../views/pending_main.vue'
 import addtocart from '../views/addtocart.vue'
+import editprofiles from '../views/editprofiles.vue'
 
 
 
@@ -161,6 +162,10 @@ const routes = [
   {
     path: '/addtocart',
     component: addtocart
+  },
+  {
+    path: '/editprofiles',
+    component: editprofiles
   },
 ]
 
