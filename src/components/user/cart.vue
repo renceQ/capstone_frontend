@@ -79,6 +79,7 @@
                          
                             </an>
                             <div>
+                              
                                 <button @click="openDialog(filteredInfo.category_id)" class="neumorphic-button" style="margin-left:450px; width: 200px;">
                                   <i class="fas fa-search custom-icon"></i>&nbsp;&nbsp;Find Similar
                                 </button> &nbsp;&nbsp;
