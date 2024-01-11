@@ -151,7 +151,7 @@ computed: {
 
   filteredInfos() {
     // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
-    return this.infos.filter(info => info.token === this.token && info.status === 'pending');
+    return this.infos.filter(info => info.token === this.token && (info.status === 'pending' || info.status === 'pendingbackpricestock' ));
   }
 },
   methods: {
@@ -189,7 +189,7 @@ computed: {
       try {
         if (this.selectedReason && this.selectedInfo) {
           const response = await axios.post(`/updateOrderStatus/${this.selectedInfo.id}`, {
-            status: 'cancelled',
+            status: 'cancel',
             reason: this.selectedReason,
           });
 

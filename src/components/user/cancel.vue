@@ -151,7 +151,7 @@ computed: {
 
   filteredInfos() {
     // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
-    return this.infos.filter(info => info.token === this.token && info.status === 'cancelled');
+    return this.infos.filter(info => info.token === this.token && (info.status === 'cancel' || info.status === 'cancelled'));
   }
 },
   methods: {

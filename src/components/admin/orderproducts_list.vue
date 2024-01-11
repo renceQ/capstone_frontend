@@ -26,9 +26,9 @@
                   <img :src="item.image" alt="Product Image" width="50" height="50">
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                  <v-btn @click="pendingEvent(item.id)" color="error" small>
+                  <!-- <v-btn @click="pendingEvent(item.id)" color="error" small>
                     Undo
-                  </v-btn>
+                  </v-btn> -->
                   <v-btn @click="deliveringEvent(item.id)" color="success" small>
                     Deliver Product
                   </v-btn>
@@ -162,7 +162,7 @@
       },
       computed: {
         approvedOrders() {
-          return this.infos.filter(order => order.status !== 'pending' && order.status !== 'denied' && order.status !== 'delivering' && order.status !== 'recieved' && order.status !== 'cancelled');
+          return this.infos.filter(order => order.status !== 'pending' && order.status !== 'denied' && order.status !== 'delivering' && order.status !== 'recieved' && order.status !== 'cancelled' && order.status !== 'cancel' && order.status !== 'cart' && order.status !== 'deleted' && order.status !== 'pendingbackpricestock');
         },
         pendingOrders() {
           return this.infos.filter(order => order.status === 'pending');

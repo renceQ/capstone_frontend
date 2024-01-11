@@ -166,7 +166,7 @@
     },
     computed: {
       pendingOrders() {
-        return this.infos.filter(order => order.status !== 'approved' && order.status !== 'denied' && order.status !== 'cancelled' && order.status !== 'recieved' && order.status !== 'delivering');
+        return this.infos.filter(order => order.status !== 'approved' && order.status !== 'denied' && order.status !== 'cancelled' && order.status !== 'recieved' && order.status !== 'delivering' && order.status !== 'cancel' && order.status !== 'cart' && order.status !== 'deleted');
       },
       approvedOrders() {
         return this.infos.filter(order => order.status === 'approved');
@@ -199,7 +199,9 @@
   
   async pendingEvent(id) {
     try {
-      const response = await axios.post(`/updateOrderStatus/${id}`, { status: 'pending' });
+      const response = await axios.post(`/updateOrderStatus/${id}`, {
+         status: 'pendingbackpricestock' 
+        });
       if (response.status === 200) {
         this.getOrder(); // Refresh orders after status update
       } else {
