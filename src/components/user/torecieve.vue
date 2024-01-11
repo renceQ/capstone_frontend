@@ -57,7 +57,8 @@
                         <li>
                           <br>
                           <div>
-                            Product Status: 
+                            <asd><span style="color:rgb(13, 109, 19); margin-left:660px;"><i class="fas fa-truck custom-icon"></i>
+                              &nbsp;&nbsp;&nbsp;Your order is on the way...</span></asd>
                           </div>
             
                           <div style="margin-bottom: 20px;"> 
