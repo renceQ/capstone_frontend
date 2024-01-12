@@ -40,8 +40,7 @@
 
 
                 <!--products container-->
-             
-              
+         
                 <div>
                   <div class="container" style="margin-top: 20px;">
                     <nav class="neumorphic-navbars" style="width: 945px; margin-left: 200px; z-index: 10;">
@@ -53,60 +52,66 @@
                           </div>
                           <div class="card mb-4 mb-xl-0" style="margin-top:8px; width: 880px;">
                             <div class="card-header">Profile Picture</div>
+
+                            <form @submit.prevent="updateProfilePicture" style="margin-left: 1px;">
                               <div class="card-body text-center">
-                   
-                                  <img class="img-account-profile rounded-circle mb-2" v-if="selectedImage" :src="selectedImage" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
-                                  <img class="img-account-profile rounded-circle mb-2" v-else-if="info.length > 0" :src="info[0].profile_picture" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
-                                  <img class="img-account-profile rounded-circle mb-2" v-else :src="'path_to_default_image.jpg'" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
+                                <img class="img-account-profile rounded-circle mb-2" v-if="selectedImage" :src="selectedImage" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
+                                <img class="img-account-profile rounded-circle mb-2" v-else-if="info.length > 0" :src="info[0].profile_picture" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
+                                <img class="img-account-profile rounded-circle mb-2" v-else :src="'path_to_default_image.jpg'" alt="" style="box-shadow: 10px 10px 30px #eeecec, -5px -5px 20px #ffffff;">
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <input v-if="info.length > 0" class="form-control" id="inputLastName" type="hidden" placeholder="Enter your Address" v-model="info[0].id">
+                                <input type="file" style="border: 0; width: 29%; border-radius: 5px; background-color: rgb(220, 220, 223)" class="neumorphic-button" accept="image/*" @change="updateEditImage" required><br>
+                                <button type="submit" class="neumorphic-button" style="width: 200px; margin-top: 15px; margin-bottom: 10px;">Update Profile Picture</button>
+                              </div>
+                            </form>
 
-                          <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                        <input type="file" style="border: 0; width:29%; border-radius:5px; background-color:rgb(220, 220, 223)" class="neumorphic-button" accept="image/*" @change="updateEditImage" required>
-                       </div>
-                    </div>
+                          </div>
 
-                    <form @submit.prevent="updateProfile">
-            <div class="card mb-4" style="height:700px;">
+                     
+                <form @submit.prevent="updateProfile" style="margin-left: 1px;" >
+            <div class="card mb-4" style="height:700px; width:880px;">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
                     <div style="margin-left: 10px;">
                       <div class="mb-3">
                         <label class="small mb-1" for="inputUsername">Username</label>
-                        <input v-if="info.length > 0" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" v-model="info[0].showed_username">
+                        <input v-if="info.length > 0" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" v-model="info[0].showed_username" required>
                       </div>
                 
                       <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                           <label class="small mb-1" for="inputFirstName">Contact</label>
-                          <input v-if="info.length > 0" class="form-control" id="inputFirstName" type="text" placeholder="Enter your contact" v-model="info[0].contact">
+                          <input v-if="info.length > 0" class="form-control" id="inputFirstName" type="text" placeholder="Enter your contact" v-model="info[0].contact" required>
                         </div>
                         <div class="col-md-6">
                           <label class="small mb-1" for="inputLastName">Address</label>
-                          <input v-if="info.length > 0" class="form-control" id="inputLastName" type="text" placeholder="Enter your Address" v-model="info[0].address">
+                          <input v-if="info.length > 0" class="form-control" id="inputLastName" type="text" placeholder="Enter your Address" v-model="info[0].address" required>
                         </div>
                       </div>
                 
                       <div class="mb-3">
                         <label class="small mb-1" for="inputEmailAddress">Other Information</label>
-                        <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter your other information" v-model="info[0].other_info">
+                        <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter your other information" v-model="info[0].other_info" required>
                       </div>
                 
                       <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                           <label class="small mb-1" for="input_name">Name</label>
-                          <input class="form-control" id="input_name" type="text" placeholder="Enter your name" v-model="info[0].legit_name">
+                          <input class="form-control" id="input_name" type="text" placeholder="Enter your name" v-model="info[0].legit_name" required>
                         </div>
                         <div class="col-md-6">
                           <label>Gender:</label>
                           <br>
                           <label style="margin-top: 8px; margin-left:10px;">
-                            <input type="radio" v-model="info[0].gender" value="male"> Male
+                            <input type="radio" v-model="info[0].gender" value="male" > Male
                           </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <label>
-                            <input type="radio" v-model="info[0].gender" value="female"> Female
+                            <input type="radio" v-model="info[0].gender" value="female" > Female
                           </label>
                         </div>
                       </div>
-                      <button class="btn btn-primary" style="margin-left: 350px; margin-top: 30px; width: 150px;">Update Profile</button>
+                      <button type="submit" class="neumorphic-button" style="width:220px; margin-top:10px; margin-left:300px; margin-bottom:10px;">Update Account Details</button>
+                    
                     </div>
                   </div>
                 </div>
@@ -119,21 +124,22 @@
                     
                   </div>
                 </div>
+
            
 
 
                 <!--cancel modal-->
-                <v-dialog v-model="dialogs" max-width="500px">
+                <v-dialog v-model="dialogs" max-width="400px">
                   <v-card>
-                    <v-card-title class="headline" style="margin-left: 99px;">Reasons for Order Cancellation</v-card-title>
+                    <v-card-title class="headline" style="margin-left: 99px;"></v-card-title>
                     <v-card-text>
-                      <v-radio-group v-model="selectedReason">
-                        <v-radio v-for="(reason, index) in cancellationReasons" :key="index" :label="reason" :value="reason"></v-radio>
-                      </v-radio-group>
+                      <div class="text-center">
+                        <p> Account details successfully updated </p>
+                        <img :src="require('../../../public/img/check.gif')"  style="width: 120px; height: 120px;">
+                      </div>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn @click="closeDialog" color="primary">Cancel</v-btn>
-                      <v-btn @click="submitReason" color="primary">Submit</v-btn>
+                      <v-btn style="margin-left: 43%;" @click="closeDialog" color="primary">ok</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -145,6 +151,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      formData: null,
+    imageInput: null,
       selectedGender: '',
       selectedImage: null,
         isNavbarHidden: false,
@@ -195,20 +203,69 @@ export default {
   },
 
   methods: {
+    updateEditImage(event) {
+  const fileInput = event.target;
+  const selectedFile = fileInput.files[0];
+
+  if (selectedFile) {
+    this.formData = new FormData();
+    // Append the file to the form data
+    this.formData.append('file', selectedFile);
+
+    // Update selectedImage to reflect the selected file immediately
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.selectedImage = e.target.result;
+    };
+    reader.readAsDataURL(selectedFile);
+  }
+},
+
+updateProfilePicture() {
+  if (this.formData) {
+    const userId = this.info.length > 0 ? this.info[0].id : null;
+
+    // Example: You can use axios to make an HTTP request to send the data
+    axios.post(`/api/updateProfilePicture/${userId}`, this.formData)
+      .then(response => {
+        // Handle the response, e.g., update UI or show a success message
+        console.log('Profile picture updated successfully', response.data);
+        
+        // Optionally, you can update the info array with the new profile picture path
+        if (this.info.length > 0) {
+          this.info[0].profile_picture = response.data.newProfilePicturePath;
+        }
+      })
+      .catch(error => {
+        // Handle the error, e.g., show an error message
+        console.error('Error updating profile picture', error);
+      });
+  }
+},
+
+
     async updateProfile() {
     try {
         const userId = this.info[0].id; // Assuming you have access to the user's ID
-        const response = await axios.post(`/updateProfile/${userId}`, {
-            showed_username: this.info[0].showed_username,
-            contact: this.info[0].contact,
-            address: this.info[0].address,
-            other_info: this.info[0].other_info,
-            legit_name: this.info[0].legit_name,
-            gender: this.info[0].gender,
-            // Add other properties as needed
+        const formData = new FormData();
+
+        // Add other properties
+        formData.append('showed_username', this.info[0].showed_username);
+        formData.append('contact', this.info[0].contact);
+        formData.append('address', this.info[0].address);
+        formData.append('other_info', this.info[0].other_info);
+        formData.append('legit_name', this.info[0].legit_name);
+        formData.append('gender', this.info[0].gender);
+
+
+        const response = await axios.post(`/updateProfile/${userId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
 
         if (response.status === 200) {
+          this.dialogs = true;
             console.log('Profile updated successfully');
         } else {
             console.error('Error updating profile');
@@ -217,11 +274,7 @@ export default {
         console.error('Error updating profile:', error);
     }
 },
-    updateEditImage(event) {
-      // Handle image selection
-      const file = event.target.files[0];
-      this.selectedImage = URL.createObjectURL(file);
-    },
+
    async deletehistory(id) {
   try {
     const confirmed = window.confirm('Are you sure you want to delete this record?');
