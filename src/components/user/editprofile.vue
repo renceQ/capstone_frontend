@@ -23,20 +23,10 @@
                
       
     
-        <nav class="neumorphic-navbars" style="margin-top: 150px; width: 950px; height: 60px; margin-left: 315px; z-index: 10;">
-          <!-- Replace these router-links or hrefs with methods that filter based on status -->
-         
-
-          <span class="nav-item">
-            <a href="/editprofiles" class="nav-link" style="font-weight:700; color:darkorange; margin-right:350px;" >Edit Profile</a>
-          </span>
-
-          <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Edit | <span>Profile.</span></a>
-        </nav>
-      
+  
     </div>
 
-
+<br><br><br><br><br>
 
 
                 <!--products container-->
@@ -220,59 +210,80 @@ export default {
     reader.readAsDataURL(selectedFile);
   }
 },
-
 updateProfilePicture() {
+  // Check if there is a file selected for uploading
   if (this.formData) {
+    // Get the user ID
     const userId = this.info.length > 0 ? this.info[0].id : null;
 
-    // Example: You can use axios to make an HTTP request to send the data
-    axios.post(`updateProfilePicture/${userId}`, this.formData)
-      .then(response => {
-        // Handle the response, e.g., update UI or show a success message
-        console.log('Profile picture updated successfully', response.data);
-        
-        // Optionally, you can update the info array with the new profile picture path
-        if (this.info.length > 0) {
-          this.info[0].profile_picture = response.data.newProfilePicturePath;
-        }
-      })
-      .catch(error => {
-        // Handle the error, e.g., show an error message
-        console.error('Error updating profile picture', error);
-      });
+    // Ask for confirmation before proceeding
+    const confirmed = window.confirm('Are you sure you want to update your profile picture?');
+
+    if (confirmed) {
+      // User confirmed, proceed with the update
+      // Example: Use axios to make an HTTP request to send the data
+      axios.post(`updateProfilePicture/${userId}`, this.formData)
+        .then(response => {
+          // Handle the response, e.g., update UI or show a success message
+          console.log('Profile picture updated successfully', response.data);
+          
+          // Optionally, you can update the info array with the new profile picture path
+          if (this.info.length > 0) {
+            this.info[0].profile_picture = response.data.newProfilePicturePath;
+          }
+          window.location.reload();
+        })
+        .catch(error => {
+          // Handle the error, e.g., show an error message
+          console.error('Error updating profile picture', error);
+        });
+    } else {
+      // User canceled the update
+      console.log('Profile picture update canceled.');
+    }
+  } else {
+    // No file selected, show a message or handle accordingly
+    console.warn('No file selected for profile picture update.');
   }
 },
 
 
-    async updateProfile() {
-    try {
-        const userId = this.info[0].id; // Assuming you have access to the user's ID
-        const formData = new FormData();
+async updateProfile() {
+  try {
+    // Ask for confirmation before proceeding
+    const confirmed = window.confirm('Are you sure you want to update your account details?');
 
-        // Add other properties
-        formData.append('showed_username', this.info[0].showed_username);
-        formData.append('contact', this.info[0].contact);
-        formData.append('address', this.info[0].address);
-        formData.append('other_info', this.info[0].other_info);
-        formData.append('legit_name', this.info[0].legit_name);
-        formData.append('gender', this.info[0].gender);
-
-
-        const response = await axios.post(`/updateProfile/${userId}`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
-        if (response.status === 200) {
-          this.dialogs = true;
-            console.log('Profile updated successfully');
-        } else {
-            console.error('Error updating profile');
-        }
-    } catch (error) {
-        console.error('Error updating profile:', error);
+    if (!confirmed) {
+      console.log('Profile update canceled.');
+      return;
     }
+
+    const userId = this.info[0].id; // Assuming you have access to the user's ID
+    const formData = new FormData();
+
+    // Add other properties
+    formData.append('showed_username', this.info[0].showed_username);
+    formData.append('contact', this.info[0].contact);
+    formData.append('address', this.info[0].address);
+    formData.append('other_info', this.info[0].other_info);
+    formData.append('legit_name', this.info[0].legit_name);
+    formData.append('gender', this.info[0].gender);
+
+    const response = await axios.post(`/updateProfile/${userId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    if (response.status === 200) {
+      this.dialogs = true;
+      console.log('Profile updated successfully');
+    } else {
+      console.error('Error updating profile');
+    }
+  } catch (error) {
+    console.error('Error updating profile:', error);
+  }
 },
 
    async deletehistory(id) {
