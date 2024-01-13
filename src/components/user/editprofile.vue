@@ -226,7 +226,7 @@ updateProfilePicture() {
     const userId = this.info.length > 0 ? this.info[0].id : null;
 
     // Example: You can use axios to make an HTTP request to send the data
-    axios.post(`/api/updateProfilePicture/${userId}`, this.formData)
+    axios.post(`updateProfilePicture/${userId}`, this.formData)
       .then(response => {
         // Handle the response, e.g., update UI or show a success message
         console.log('Profile picture updated successfully', response.data);
