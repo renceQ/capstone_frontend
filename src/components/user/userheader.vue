@@ -5,7 +5,7 @@
     <span class="nav-item">
       <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="require('../../assets/images/logo.jpg')" class="logo-picture-navbar">
     </span>
-				<a class="navbar-brand">Qmj<span>Ent.</span></a>
+    <router-link to="/home" class="navbar-brand">Qmj<span>Ent.</span></router-link>
 				<!--profile picture-->
 
 				<span style="margin-left:190px;" class="nav-item">
@@ -110,13 +110,23 @@
               <h2></h2>
 						  <!-- <li><a href="#">View Your Profile</a></li> -->
 						  <li style="width: 140px; margin-top:20px;"><a href="#">Settings and Privacy</a></li>
-						  <li style="width: 140px;"><a href="#">Help and Support</a></li>
+						  <li style="width: 140px;"><a href="editprofiles">Edit Profile</a></li>
 						  <li style="width: 140px;"><a href="#" class="nav-link" @click="logout">Log out</a></li>
               <br>
 						</ul>
 					  </li>
 				  </nav>
-          <img style="width:40px; height:40px;"  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
+          <!-- <router-link to="/editprofiles"> -->
+            <img href="/editprofiles"
+              v-if="info.length > 0"
+              :src="info[0].profile_picture"
+              alt="Profile"
+              class="profile-picture-navbar"
+              style="width: 40px; height: 40px; cursor: pointer; transition: left 0.2s;"
+              :style="{ left: isHovered ? '5px' : '0' }"
+              @mouseover="redirect = true"
+            />
+          <!-- </router-link> -->
         
 
 			  </nav>
@@ -152,6 +162,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      
       isNavbarHidden: false,
       lastScrollTop: 0,
 	    info: [],
@@ -300,6 +311,9 @@ export default {
   margin-left: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+
+
 
 .logo-picture-navbar {
   width: 30px;

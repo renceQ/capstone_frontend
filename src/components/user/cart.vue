@@ -32,7 +32,7 @@
          
 
           <span class="nav-item">
-            <a href="/pending_main" class="nav-link" style="font-weight:700; color:darkorange;" >Shopping Cart</a>
+            <a href="/addtocart" class="nav-link" style="font-weight:700; color:darkorange;" >Shopping Cart</a>
           </span>
           <span v-if="selectedCheckboxesComputed.length > 0" class="nav-item">
             <a @click="selectAllItems" class="nav-link" style="font-weight:400; color:rgb(0, 0, 0); margin-right:350px;">Select All</a>
@@ -66,18 +66,21 @@
             <div class="row">
               <div class="col-12">
                 <button
-                  @click="updateStatusToPending"
+                @click="openDialogs"
+                  
                   class="neumorphic-button checkout-button"
-                  :disabled="!hasSelectedItems" 
+                  :disabled="!hasSelectedItems"
                   style="background-color: green; color: white; margin-left: 35px; margin-top: 30px; width: 158px;"
                   onmouseover="this.style.backgroundColor='darkgreen'; this.style.color='white';"
                   onmouseout="this.style.backgroundColor='green'; this.style.color='white';"
                 >
                   Check out
-                </button>
+                </button>  
               </div>
             </div>
             
+                            <!-- @click="updateStatusToPending" old function-->
+                <!-- :disabled="!hasSelectedItems"  -->
           
             <div class="row">
               <div class="col-12">
@@ -124,7 +127,11 @@
                             <an  v-if="filteredInfo.image">
                               <img :src="filteredInfo.image" class="img-fluids" style="max-width: 140px; max-height: 140px;" readonly>
                               <span style="margin-right: 140px; margin-left: 80px;">Product:{{ filteredInfo.prod_name }}</span> 
-                              <span style="margin-right: 140px;">Quantity:{{ filteredInfo.quantity }}</span> 
+                              <span style="margin-right: 140px;">Quantity: 
+                                <a class="neumorphic-button" @click="decrementQuantity(filteredInfo)" style="margin-right: 5px; width:17px;">-</a>
+                                {{ filteredInfo.quantity }}
+                                <a class="neumorphic-button" @click="incrementQuantity(filteredInfo)" style="margin-left: 5px; width:17px;">+</a>
+                              </span>
                               <span >Total: ₱{{ filteredInfo.total }}</span>
                               <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
                               <span v-if="!hideToken" class="product-info">{{ token }}</span>
@@ -179,6 +186,101 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+
+
+                <v-dialog v-model="dialogss" max-width="76%">
+                  <v-card>
+                    <v-card-title class="headline" style="margin-left: 99px;"></v-card-title>
+                    <v-card-text>
+
+
+                      <nav class="neumorphic-navbars" style="margin-top: 20px; width: 950px; height: 60px; margin-left: 10px; z-index: 10;">
+                        <!-- Replace these router-links or hrefs with methods that filter based on status -->
+                       
+              
+                        <span class="nav-item" style="width: 200px;">
+                          <a1 href="#" class="nav-link" style="font-weight:700; color:darkorange;margin-left:10px;" ><i class="fas fa-map-marker-alt custom-icon"></i>&nbsp;&nbsp;&nbsp;Delivery Address</a1>
+                        </span>
+
+                        <span class="nav-item" style="width: 700px; position:absolute;">
+                          <a2 style="margin-left:170px;">{{ info[0].address }}</a2><br>
+                        </span>
+                        <!-- <span v-if="selectedCheckboxesComputed.length > 0" class="nav-item">
+                          <a @click="selectAllItems" class="nav-link" style="font-weight:400; color:rgb(0, 0, 0); margin-right:350px;">Select All</a>
+                        </span> -->
+                        <a1 style="position: absolute; margin-left: 610px; margin-right: 10px; color:red" class="navbar-brand">Default</a1>
+                        <a style="position: absolute; margin-left: 670px; margin-right: 10px;" class="navbar-brand">Change</a>
+                        <a style="margin-left: 190px; margin-right: 20px;" class="navbar-brand">Order | <span>Summary.</span></a>
+                      </nav>
+              
+              
+
+
+                <div>
+                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
+                    <input
+                      v-if="selectedCheckboxes.includes(filteredInfo.id)"
+                      type="checkbox"
+                      :id="'checkbox-' + filteredInfo.id"
+                      class="product-checkbox"
+                      style="position: absolute; margin-top: 18px; margin-left: 15px;"
+                      v-model="selectedCheckboxes"
+                      :value="filteredInfo.id"
+                      @change="updateSelectAllButton"
+                    >
+                    
+                    <!-- Only display the product card if the checkbox is checked -->
+                    <div v-if="selectedCheckboxes.includes(filteredInfo.id)">
+                      <nav class="neumorphic-navbars" style="width: 950px; z-index: 10;">
+                        <ul>
+                          <li>
+                            <br>
+                            <div>
+                              <asd><span style="color:rgb(13, 109, 19); margin-left:580px;"><i class="fas fa-box custom-icon"></i>
+                                &nbsp;&nbsp;&nbsp;We will be packing your parcel soon...</span></asd>
+                            </div>
+              
+                            <div style="margin-bottom: 20px;"> 
+                              <an  v-if="filteredInfo.image">
+                                <img :src="filteredInfo.image" class="img-fluids" style="max-width: 140px; max-height: 140px;" readonly>
+                                <span style="margin-right: 140px; margin-left: 80px;">Product:{{ filteredInfo.prod_name }}</span> 
+                                <span style="margin-right: 140px;">Quantity:{{ filteredInfo.quantity }}</span> 
+                                <span >Total: ₱{{ filteredInfo.total }}</span>
+                                <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
+                                <span v-if="!hideToken" class="product-info">{{ token }}</span>
+                                <span v-if="!hideCategory" class="product-info">{{ category_id }}</span>
+                           
+                              </an>
+                              <div>
+                                
+                                  <button @click="openDialog(filteredInfo.category_id)" class="neumorphic-button" style="margin-left:450px; width: 200px;">
+                                    <i class="fas fa-search custom-icon"></i>&nbsp;&nbsp;Find Similar
+                                  </button> &nbsp;&nbsp;
+                                  
+                                <!-- <button @click="buyagain(filteredInfo.id)" class="neumorphic-button" style="margin-left:450px; width: 200px;"><i class="fas fa-phone custom-icon"></i> &nbsp;&nbsp;Buy Again</button> &nbsp;&nbsp; -->
+                                <button @click="deletehistory(filteredInfo.id)"   class="neumorphic-button" style="width: 200px; background-color:rgb(248, 53, 53); color:white;">
+                                  Change Item</button>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+                
+
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-btn @click="closeDialogs" color="primary">Cancel</v-btn>
+                      <button @click="deletehistory(filteredInfo.id)"   class="neumorphic-button" style=" position:absolute; margin-left:510px; margin-bottom:30px; width: 200px; background-color:rgb(4, 134, 32); color:white;">
+                        Pre order</button>
+                      <h1 class="nav-link" style="font-weight:400; margin-left:660px; margin-top:5px; margin-bottom:35px; color:rgb(0, 0, 0);">
+                        Total ({{ selectedCheckboxesComputed.length }} item): ₱{{ calculateTotalPrice() }}
+                      </h1>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
                 
               
 </template>
@@ -204,6 +306,7 @@ export default {
       token: '',
       status: '',
       dialogs: false,
+      dialogss: false,
       selectedReason: null,
       cancellationReasons: [
         'Need to change delivery address',
@@ -250,6 +353,25 @@ computed: {
     },
   },
   methods: {
+    incrementQuantity(filteredInfo) {
+  // Ensure the quantity is a number
+  if (typeof filteredInfo.quantity !== 'number') {
+    // Set the quantity to 1 if it's not a number
+    filteredInfo.quantity = 1;
+  } else {
+    // Increment the quantity of the selected product by 1
+    filteredInfo.quantity += 1;
+  }
+  // You might want to save the updated quantity to your backend/database here
+},
+  decrementQuantity(filteredInfo) {
+    // Ensure the quantity does not go below 1
+    if (filteredInfo.quantity > 1) {
+      // Decrement the quantity of the selected product
+      filteredInfo.quantity -= 1;
+      // You might want to save the updated quantity to your backend/database here
+    }
+  },
     goShoppingNow() {
     // Show spin.gif and hide 3cart.gif
     this.$refs.spinGif.style.display = 'block' ;
@@ -343,6 +465,12 @@ computed: {
     console.error('Error updating order status:', error);
   }
 },
+openDialogs() {
+      this.dialogss = true; // Open the dialog
+    },  
+    closeDialogs() {
+      this.dialogss = false; // Close the dialog
+    },
 
 openDialog(categoryId) {
       this.dialogs = true; // Open the dialog
@@ -445,7 +573,7 @@ getSizeName(sizeId) {
 };
 </script>
 
-<style>
+<style scoped>
 
 .neumorphic-navbars {
 
