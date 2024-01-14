@@ -169,9 +169,10 @@
                             <img :src="product.image" alt="" style="width: 100px; height: 100px;">
                             <div class="ri-text" >
                               <h6>{{ product.prod_name }}</h6>
+                              <h6 style="display: none;">{{ product.stock }}</h6>
                               <h6 style="display: none;">{{ product.category_id }}</h6>
                               <p style="font-size: 13px;">Unit Price: ₱{{ product.unit_price }}</p>
-                              <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:</span> {{ getSizeName(product.size_id) }}</p>
+                              <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:wala pa function</span> {{ getSizeName(product.size_id) }}</p> 
                               <button class="btn btn-outline-danger btn-sm" style="width: 80px; height:33px;" @click="preOrder(product)">Pre order</button>
                             </div>
                           </div>
@@ -243,16 +244,18 @@
                             <div style="margin-bottom: 20px;"> 
                               <an  v-if="filteredInfo.image">
                                 <img :src="filteredInfo.image" class="img-fluids" style="max-width: 140px; max-height: 140px;" readonly>
-                                <span style="margin-right: 140px; margin-left: 80px; position:absolute; margin-top:60px;">Product:{{ filteredInfo.prod_name }}</span> 
-                                <span style="margin-right: 140px; ">Quantity: 
-                                  <a class="neumorphic-button" @click="decrementQuantity(filteredInfo)" style="margin-left:320px; margin-right: 5px; width:17px;">-</a>
-                                  {{ filteredInfo.quantity }}
+                                <span style="margin-right: 140px; margin-left: 20px; position:absolute; margin-top:60px;">Product:{{ filteredInfo.prod_name }}</span> 
+                                <span style="margin-right: 140px; margin-left:350px; ">Quantity: 
+                                  <a class="neumorphic-button" @click="decrementQuantity(filteredInfo)" style="margin-left:10px; margin-right: 5px; width:17px;">-</a>
+                                <span > {{ filteredInfo.quantity }} </span>  
                                   <a class="neumorphic-button" @click="incrementQuantity(filteredInfo)" style="margin-left: 5px; width:17px;">+</a>
                                 </span>
                                 <span>Total: ₱{{ parseFloat(filteredInfo.total).toFixed(0) }}</span>
                                 <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
                                 <span v-if="!hideToken" class="product-info">{{ token }}</span>
                                 <span v-if="!hideCategory" class="product-info">{{ category_id }}</span>
+                                <span v-if="!hideproduct_id" class="product-info">{{ category_id }}</span>
+                               
                            
                               </an>
                               <div>
@@ -420,44 +423,7 @@ computed: {
       this.$router.push('/userproducts'); // Redirect to /userproducts route
     }, 3000);
   },
-//   async updateStatusToPending() {
-//   try {
-//     const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
 
-//     if (confirmed) {
-//       // Loop through the selectedCheckboxes array and update the status of selected items to 'pending'
-//       for (const id of this.selectedCheckboxes) {
-//         const selectedItem = this.filteredInfos.find(item => item.id === id);
-
-//         // Ensure the selectedItem exists and has quantity and total properties
-//         if (selectedItem && selectedItem.hasOwnProperty('quantity') && selectedItem.hasOwnProperty('total')) {
-//           const response = await axios.post(`/updateOrderStatus/${id}`, {
-//             status: 'pending',
-//             quantity: selectedItem.quantity,  // Include the quantity in the request payload
-//             total: selectedItem.total,        // Include the total price in the request payload
-//           });
-
-//           if (response.status === 200) {
-//             // You might want to update the UI or perform other actions upon successful update
-//             console.log(`Item with ID ${id} status updated to pending`);
-//           } else {
-//             console.error(`Error updating status for item with ID ${id}`);
-//           }
-//         }
-//       }
-
-//       // Clear the selectedCheckboxes array after updating the status
-//       this.selectedCheckboxes = [];
-//       this.getOrder(); 
-//       this.dialogss = false;
-//       this.dialogsss = true;
-//     } else {
-//       console.log('Checkout canceled');
-//     }
-//   } catch (error) {
-//     console.error('Error during checkout:', error);
-//   }
-// },
 async updateStatusToPending() {
   try {
     const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
