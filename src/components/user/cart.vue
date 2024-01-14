@@ -132,7 +132,7 @@
                                 {{ filteredInfo.quantity }}
                                 <a class="neumorphic-button" @click="incrementQuantity(filteredInfo)" style="margin-left: 5px; width:17px;">+</a>
                               </span>
-                              <span >Total: ₱{{ filteredInfo.total }}</span>
+                              <span>Total: ₱{{ parseFloat(filteredInfo.total).toFixed(0) }}</span>
                               <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
                               <span v-if="!hideToken" class="product-info">{{ token }}</span>
                               <span v-if="!hideCategory" class="product-info">{{ category_id }}</span>
@@ -243,9 +243,13 @@
                             <div style="margin-bottom: 20px;"> 
                               <an  v-if="filteredInfo.image">
                                 <img :src="filteredInfo.image" class="img-fluids" style="max-width: 140px; max-height: 140px;" readonly>
-                                <span style="margin-right: 140px; margin-left: 80px;">Product:{{ filteredInfo.prod_name }}</span> 
-                                <span style="margin-right: 140px;">Quantity:{{ filteredInfo.quantity }}</span> 
-                                <span >Total: ₱{{ filteredInfo.total }}</span>
+                                <span style="margin-right: 140px; margin-left: 80px; position:absolute; margin-top:60px;">Product:{{ filteredInfo.prod_name }}</span> 
+                                <span style="margin-right: 140px; ">Quantity: 
+                                  <a class="neumorphic-button" @click="decrementQuantity(filteredInfo)" style="margin-left:320px; margin-right: 5px; width:17px;">-</a>
+                                  {{ filteredInfo.quantity }}
+                                  <a class="neumorphic-button" @click="incrementQuantity(filteredInfo)" style="margin-left: 5px; width:17px;">+</a>
+                                </span>
+                                <span>Total: ₱{{ parseFloat(filteredInfo.total).toFixed(0) }}</span>
                                 <span v-if="!hideStatus" class="product-info">{{ status }}</span> 
                                 <span v-if="!hideToken" class="product-info">{{ token }}</span>
                                 <span v-if="!hideCategory" class="product-info">{{ category_id }}</span>
@@ -273,7 +277,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-btn @click="closeDialogs" color="primary">Cancel</v-btn>
-                      <button @click="deletehistory(filteredInfo.id)"   class="neumorphic-button" style=" position:absolute; margin-left:510px; margin-bottom:30px; width: 200px; background-color:rgb(4, 134, 32); color:white;">
+                      <button @click="updateStatusToPending"   class="neumorphic-button" style=" position:absolute; margin-left:510px; margin-bottom:30px; width: 200px; background-color:rgb(4, 134, 32); color:white;">
                         Pre order</button>
                       <h1 class="nav-link" style="font-weight:400; margin-left:660px; margin-top:5px; margin-bottom:35px; color:rgb(0, 0, 0);">
                         Total ({{ selectedCheckboxesComputed.length }} item): ₱{{ calculateTotalPrice() }}
@@ -281,6 +285,22 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+
+
+                <v-dialog v-model="dialogsss" persistent max-width="400">
+                  <v-card>
+                    <v-card-text>
+                      <div class="text-center">
+                        <p>  Your order has been successfully placed. </p>
+                        <img :src="require('../../../public/img/check.gif')"  style="width: 120px; height: 120px;">
+                      </div>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-btn  style="margin-left:162px;"   color="primary" @click="closeDialogss" >OK</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
                 
               
 </template>
@@ -307,6 +327,7 @@ export default {
       status: '',
       dialogs: false,
       dialogss: false,
+      dialogsss: false,
       selectedReason: null,
       cancellationReasons: [
         'Need to change delivery address',
@@ -352,25 +373,41 @@ computed: {
       return this.selectedCheckboxes;
     },
   },
+  
   methods: {
     incrementQuantity(filteredInfo) {
-  // Ensure the quantity is a number
-  if (typeof filteredInfo.quantity !== 'number') {
-    // Set the quantity to 1 if it's not a number
-    filteredInfo.quantity = 1;
-  } else {
-    // Increment the quantity of the selected product by 1
-    filteredInfo.quantity += 1;
-  }
-  // You might want to save the updated quantity to your backend/database here
-},
+    // Convert the current quantity to a number and add 1
+    filteredInfo.quantity = +filteredInfo.quantity + 1;
+
+    // Update the total value based on the new quantity
+    this.updateTotalValue(filteredInfo);
+
+    // Force a re-render to update the UI immediately
+    this.$forceUpdate();
+  },
+
   decrementQuantity(filteredInfo) {
     // Ensure the quantity does not go below 1
     if (filteredInfo.quantity > 1) {
+      // Retrieve the current quantity value
+      let currentQuantity = filteredInfo.quantity;
+
       // Decrement the quantity of the selected product
-      filteredInfo.quantity -= 1;
-      // You might want to save the updated quantity to your backend/database here
+      currentQuantity -= 1;
+
+      // Update the quantity value
+      filteredInfo.quantity = currentQuantity;
+
+      // Update the total value based on the new quantity
+      this.updateTotalValue(filteredInfo);
+
+      // Force a re-render to update the UI immediately
+      this.$forceUpdate();
     }
+  },
+  updateTotalValue(filteredInfo) {
+    // Calculate the new total value based on quantity and unit price
+    filteredInfo.total = (filteredInfo.quantity * filteredInfo.unit_price);
   },
     goShoppingNow() {
     // Show spin.gif and hide 3cart.gif
@@ -383,45 +420,94 @@ computed: {
       this.$router.push('/userproducts'); // Redirect to /userproducts route
     }, 3000);
   },
-    async updateStatusToPending() {
-    try {
-      const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
+//   async updateStatusToPending() {
+//   try {
+//     const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
 
-      if (confirmed) {
-        // Loop through the selectedCheckboxes array and update the status of selected items to 'pending'
-        for (const id of this.selectedCheckboxes) {
+//     if (confirmed) {
+//       // Loop through the selectedCheckboxes array and update the status of selected items to 'pending'
+//       for (const id of this.selectedCheckboxes) {
+//         const selectedItem = this.filteredInfos.find(item => item.id === id);
+
+//         // Ensure the selectedItem exists and has quantity and total properties
+//         if (selectedItem && selectedItem.hasOwnProperty('quantity') && selectedItem.hasOwnProperty('total')) {
+//           const response = await axios.post(`/updateOrderStatus/${id}`, {
+//             status: 'pending',
+//             quantity: selectedItem.quantity,  // Include the quantity in the request payload
+//             total: selectedItem.total,        // Include the total price in the request payload
+//           });
+
+//           if (response.status === 200) {
+//             // You might want to update the UI or perform other actions upon successful update
+//             console.log(`Item with ID ${id} status updated to pending`);
+//           } else {
+//             console.error(`Error updating status for item with ID ${id}`);
+//           }
+//         }
+//       }
+
+//       // Clear the selectedCheckboxes array after updating the status
+//       this.selectedCheckboxes = [];
+//       this.getOrder(); 
+//       this.dialogss = false;
+//       this.dialogsss = true;
+//     } else {
+//       console.log('Checkout canceled');
+//     }
+//   } catch (error) {
+//     console.error('Error during checkout:', error);
+//   }
+// },
+async updateStatusToPending() {
+  try {
+    const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
+
+    if (confirmed) {
+      // Loop through the selectedCheckboxes array and update the status, quantity, and total of selected items to 'pending'
+      for (const id of this.selectedCheckboxes) {
+        const selectedItem = this.filteredInfos.find(item => item.id === id);
+
+        // Ensure the selectedItem exists and has quantity and total properties
+        if (selectedItem && selectedItem.hasOwnProperty('quantity') && selectedItem.hasOwnProperty('total')) {
           const response = await axios.post(`/updateOrderStatus/${id}`, {
             status: 'pending',
+            quantity: selectedItem.quantity,  // Include the quantity in the request payload
+            total: selectedItem.total,        // Include the total price in the request payload
           });
 
           if (response.status === 200) {
             // You might want to update the UI or perform other actions upon successful update
-            console.log(`Item with ID ${id} status updated to pending`);
+            console.log(`Item with ID ${id} status, quantity, and total updated to pending`);
           } else {
             console.error(`Error updating status for item with ID ${id}`);
           }
         }
-
-        // Clear the selectedCheckboxes array after updating the status
-        this.selectedCheckboxes = [];
-        this.getOrder(); 
-      } else {
-        console.log('Checkout canceled');
       }
-    } catch (error) {
-      console.error('Error during checkout:', error);
+
+      // Clear the selectedCheckboxes array after updating the status
+      this.selectedCheckboxes = [];
+      this.getOrder(); 
+      this.dialogss = false;
+      this.dialogsss = true;
+    } else {
+      console.log('Checkout canceled');
     }
-  },
+  } catch (error) {
+    console.error('Error during checkout:', error);
+  }
+},
 
-    calculateTotalPrice() {
-    let totalPrice = 0;
-    this.filteredInfos.forEach(info => {
-      if (this.selectedCheckboxes.includes(info.id)) {
-        totalPrice += parseFloat(info.total); // Assuming 'info.total' holds the item's price
-      }
-    });
-    return totalPrice.toFixed(2); // To display the total price with 2 decimal places
-  },
+
+  calculateTotalPrice() {
+  let totalPrice = 0;
+  this.filteredInfos.forEach(info => {
+    if (this.selectedCheckboxes.includes(info.id)) {
+      totalPrice += parseFloat(info.total); // Assuming 'info.total' holds the item's price
+    }
+  });
+  return totalPrice.toFixed(2); // To display the total price with 2 decimal places
+},
+
     updateSelectAllButton() {
       // Check if at least one checkbox is selected
       this.showSelectAllButton = this.selectedCheckboxes.length > 0;
@@ -465,6 +551,13 @@ computed: {
     console.error('Error updating order status:', error);
   }
 },
+
+openDialogss() {
+      this.dialogsss = true; // Open the dialog
+    },  
+    closeDialogss() {
+      this.dialogsss = false; // Close the dialog
+    },
 openDialogs() {
       this.dialogss = true; // Open the dialog
     },  
@@ -574,7 +667,15 @@ getSizeName(sizeId) {
 </script>
 
 <style scoped>
+.dialog-transition-enter-active,
+.dialog-transition-leave-active {
+  transition: opacity 0.5s;
+}
 
+.dialog-transition-enter, 
+.dialog-transition-leave-to /* .dialog-transition-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
 .neumorphic-navbars {
 
   display: flex;
