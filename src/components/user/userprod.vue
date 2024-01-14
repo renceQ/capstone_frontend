@@ -8,7 +8,7 @@
       <div class="col-md-6">
         <label for="category_id" style="font-weight:400;" class="label text-center">Select Product Category</label><br>
         <div class="select-wrapper" style="margin-left:33%;" >
-          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px;">
+          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px; border-radius:5px;">
             <option value="">All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.category_name }}

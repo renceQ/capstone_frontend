@@ -33,13 +33,13 @@
           <a href="#">
             <i class="fas fa-shopping-bag"></i>
           </a>
-          <ul class="dropdown" style="margin-right: 200px; position:absolute;">
+          <ul class="dropdown" style="margin-right: 200px; position:absolute; height:258px;">
             <h2></h2>
-            <li><a href="/toship_main">To Ship</a></li>
-            <li><a href="/torecieve_main">To Recieve</a></li>
-            <li><a href="/completed_main">Recieved</a></li>
-            <li><a href="/cancel_main">Returns and Cancelation</a></li>
-            <li><a href="/orderhistory">Order History</a></li>
+            <li style="width: 138px; margin-top:15px;"><a href="/toship_main">To Ship</a></li>
+            <li style="width: 138px;"><a href="/torecieve_main">To Recieve</a></li>
+            <li style="width: 138px;"><a href="/completed_main">Recieved</a></li>
+            <li style="width: 138px;"><a href="/cancel_main">Returns and Cancelation</a></li>
+            <li style="width: 138px;"><a href="/orderhistory">Order History</a></li>
           </ul>
           </li>
         </nav>
@@ -59,11 +59,11 @@
                 </div>
               </a>
               <ul class="dropdown" :class="{ active: showAll }" style="position: absolute; margin-right: 100px; width:300px;">
-                <li><h4>Notifications</h4></li>
+                <li><h4>Notifications</h4><aa style="font-size: 13px;">mark all as read</aa></li>
                 <!-- Filtered notifications -->
                 <li v-for="(filteredInfo, index) in displayedNotifications" :key="filteredInfo.id">
                   <!-- Display notifications based on 'showAll' flag -->
-                  <a href="/toship_main" style="">
+                  <a href="/toship_main" style="width:230px;">
                     <i class="fas fa-comment custom-icon" style="color: green;"></i>&nbsp;&nbsp;&nbsp; 
                     <span style="font-size: 14px; align-items: center; font-weight:700;">
                       {{ filteredInfo.prod_name }} -
@@ -73,7 +73,7 @@
                     <span v-if="filteredInfo.status === 'approved'">
                       Hi! {{ filteredInfo.customerName }}, your order has been approved. We will be packing your parcel soon!
                     </span>
-                    <span v-else-if="filteredInfo.status === 'denied'">
+                    <span v-else-if="filteredInfo.status === 'denied'" >
                       Your request has been denied due to some reasons.
                     </span>
                     <!-- Display other relevant information -->
@@ -81,10 +81,13 @@
                     <span v-if="!hideStatus">{{ status }}</span>
                   </a>
                 </li>
+                <br>
+                
                 <!-- Change the button text to 'Hide All' when 'showAll' is true -->
                 <a @click.stop.prevent="toggleShowAll" v-if="filteredInfos.length > 3" style="align-items: center; width:88px; margin-left:80px; cursor: pointer;">
                   {{ showAll ? 'Hide All' : 'View All' }}
                 </a>
+                <br>
               </ul>
             </li>  
           </nav>
@@ -106,13 +109,14 @@
 						<ul class="dropdown" style="margin-right: 200px; position:absolute;">
               <h2></h2>
 						  <!-- <li><a href="#">View Your Profile</a></li> -->
-						  <li><a href="#">Settings and Privacy</a></li>
-						  <li><a href="#">Help and Support</a></li>
-						  <li><a href="#" class="nav-link" @click="logout">Log out</a></li>
+						  <li style="width: 140px; margin-top:20px;"><a href="#">Settings and Privacy</a></li>
+						  <li style="width: 140px;"><a href="#">Help and Support</a></li>
+						  <li style="width: 140px;"><a href="#" class="nav-link" @click="logout">Log out</a></li>
+              <br>
 						</ul>
 					  </li>
 				  </nav>
-          <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
+          <img style="width:40px; height:40px;"  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
         
 
 			  </nav>
@@ -248,7 +252,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .dropdown {
   overflow-y: hidden; /* Hide the scrollbar by default */
 }
@@ -320,6 +324,7 @@ export default {
 
 /* Navbar link hover styles */
 .neumorphic-navbar a:hover {
+  margin-left: 3px;
   background-color: #e9e1e1;
   box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
   color: #1b1b1b;

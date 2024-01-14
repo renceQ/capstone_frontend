@@ -31,6 +31,7 @@ import orderhistory from '../views/orderhistory.vue'
 import pending_main from '../views/pending_main.vue'
 import addtocart from '../views/addtocart.vue'
 import editprofiles from '../views/editprofiles.vue'
+import chatbot from '../views/chatbot.vue'
 
 
 
@@ -166,6 +167,10 @@ const routes = [
   {
     path: '/editprofiles',
     component: editprofiles
+  },
+  {
+    path: '/chatbot',
+    component: chatbot
   },
 ]
 

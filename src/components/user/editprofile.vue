@@ -230,8 +230,10 @@ updateProfilePicture() {
           // Optionally, you can update the info array with the new profile picture path
           if (this.info.length > 0) {
             this.info[0].profile_picture = response.data.newProfilePicturePath;
+           
           }
           window.location.reload();
+         
         })
         .catch(error => {
           // Handle the error, e.g., show an error message
