@@ -119,8 +119,8 @@
                         <li>
                           <br>
                           <div>
-                            <asd><span style="color:rgb(13, 109, 19); margin-left:580px;"><i class="fas fa-box custom-icon"></i>
-                              &nbsp;&nbsp;&nbsp;We will be packing your parcel soon...</span></asd>
+                            <asd><span style="color:rgb(13, 109, 19); margin-left:740px;"><i class="fas fa-box custom-icon"></i>
+                              &nbsp;&nbsp;&nbsp;in-cart product.</span></asd>
                           </div>
             
                           <div style="margin-bottom: 20px;"> 
@@ -379,7 +379,7 @@ computed: {
   
   methods: {
     incrementQuantity(filteredInfo) {
-    // Convert the current quantity to a number and add 1
+    // Convert the current quantity to a number and add 1  dipa ayos dapat max quantity ay nakabase sa stock value ng product
     filteredInfo.quantity = +filteredInfo.quantity + 1;
 
     // Update the total value based on the new quantity

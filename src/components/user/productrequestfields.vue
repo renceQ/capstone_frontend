@@ -13,7 +13,7 @@
 </nav>
 
 <br>
-  <div class="container mt-4" style="margin-left:270px; height:20px;">
+  <div class="container mt-4" style="margin-left:270px; height:200px;">
     <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">PRODUCT DESCRIPTION</h2>
     <form @submit.prevent="placeOrder">
     <div class="row">
@@ -21,7 +21,7 @@
         <div style="display: none;">
           <p>Image:</p>
           <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 200px; max-height: 200px;">
-          <p>Product Name: {{ productData.prod_name }}</p>
+          <p>Product Name: <a style="font-size: 10px;">{{ productData.prod_name }}</a></p>
           <p>Unit Price: ₱{{ productData.unit_price }}</p>
           <p>size : {{ getSizeName(productData.size_id) }}</p>
       </div>
@@ -70,24 +70,8 @@
                   </div>
                 </div>
               </div>
-<!--               
-              <div class="payment-method" style="margin-top:40px; ">
-                <label>Select Payment Method:</label><br>
-
-                <input type="radio" id="paymaya" value="paymaya" v-model="selectedPaymentMethod">
-                <label for="paymaya">
-                  <img :src="require('../../../public/img/maya.png')" alt="PayMaya" style="width: 200px; height: 100px;">
-                </label><br>
               
-                <input type="radio" id="gcash" value="gcash" v-model="selectedPaymentMethod">
-                <label for="gcash">
-                  <img :src="require('../../../public/img/gcash.png')" alt="GCash" style="width: 200px; height: 200px;">
-                </label><br>
-              
-              
-                <input type="radio" id="cod" value="cod" v-model="selectedPaymentMethod">
-                <label for="cod">Cash on Delivery</label>
-              </div> -->
+             
             </div>
           </div>
 
@@ -95,8 +79,11 @@
           <br>
           <br>
           <div class="row">
+            <button1 @click="opendialog"  style=" border-radius:5px; width:32%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-credit-card custom-icon"></i>&nbsp;&nbsp;Select Payment Method</button1>
+            <div class="row">
           <button1 @click="placeOrder('cart')" type="submit" style=" border-radius:5px; width:24%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Add to Cart</button1>
           <button1 @click="placeOrder('pending')" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
+        </div>
 
           
           </div>
@@ -140,6 +127,25 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
+
+    <v-dialog v-model="dialogss" persistent max-width="400">
+      <v-card>
+        <v-card-text>
+          <div class="text-center">
+            <p>  Choose payment method </p>
+            <!-- <img :src="require('../../../public/img/dash.gif')"  style="width: 180px; height: 150px;"> -->
+          <!-- add payment button here -->
+          <a class="neumorphic-navbars" style="width: 150px; border-radius:17px; margin-left:96px;" href="https://connect-sb-issuing.paymaya.com/login" target="_blank">
+            <img src="https://payments-web-sbx-assets.maya.ph/payments-web/assets/static/media/pay-with-maya.a7968dfe.svg" alt="Paymaya" style="width: 150px; height: 50px;">
+          </a>  
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn  style="margin-left:162px;"   color="primary" @click="closemodal">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script>
@@ -151,6 +157,7 @@ export default {
       status: '',
       dialog: false,
       dialogs: false,
+      dialogss: false,
       productData: {
         image: '',
         prod_name: '',
@@ -205,6 +212,14 @@ export default {
     }
   },
   methods: {
+
+    opendialog(){
+      this.dialogss = true;
+    },
+    closemodal(){
+      this.dialogss = false;
+    },
+
     async placeOrder(status) {
       try {
         const ins = await axios.post("placeOrder", {
