@@ -104,7 +104,7 @@
 
                 <!--products container-->
                 <div>
-                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="width: 20%;margin-top: 20px; margin-left:100px;">
+                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px; width:820%">
                     <input
                     type="checkbox"
                     :id="'checkbox-' + filteredInfo.id"
