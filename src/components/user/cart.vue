@@ -27,7 +27,7 @@
                
       
     
-        <nav class="neumorphic-navbars" style="margin-top: 20px; width: 950px; height: 60px; margin-left: 315px; z-index: 10;">
+        <nav class="neumorphic-navbars" style="margin-top: 20px; width: 71%; height: 60px; margin-left: 315px; z-index: 10;">
           <!-- Replace these router-links or hrefs with methods that filter based on status -->
          
 
@@ -60,7 +60,7 @@
 
 
         <!-- check out box -->
-        <nav class="neumorphic-navbars checkout-box" style="position: fixed; bottom: 20px; left: 40px; width: 250px; height: 150px; z-index: 10;">
+        <nav class="neumorphic-navbars checkout-box" style="position: fixed; bottom: 20px; left: 40px; width: 19%; height: 150px; z-index: 10;">
           <!-- ... (existing content) ... -->
           <div class="container">
             <div class="row">
@@ -104,7 +104,7 @@
 
                 <!--products container-->
                 <div>
-                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
+                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="width: 20%;margin-top: 20px; margin-left:100px;">
                     <input
                     type="checkbox"
                     :id="'checkbox-' + filteredInfo.id"
