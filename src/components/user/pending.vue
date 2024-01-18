@@ -16,7 +16,7 @@
           <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
           <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
             <i class="fas fa-search"></i>
-          </button>
+          </button> 
               <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
                 <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
                 </a>

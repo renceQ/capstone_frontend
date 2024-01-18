@@ -13,10 +13,10 @@
     <div>
 
         <div class="neumorphic-search" style="margin-top: 170px; margin-left:315px;">
-            <input type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
-            <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
-                <i class="fas fa-search"></i>
-              </button>
+          <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
+          <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
               <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
                 <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
                 </a>
@@ -107,6 +107,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      searchText: '',
         isNavbarHidden: false,
       lastScrollTop: 0,
       inputValue: '',
@@ -146,12 +147,23 @@ computed: {
 
 
   filteredInfos() {
-    // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
-    return this.infos.filter(info => info.token === this.token && info.status === 'delivering');
-  }
+  // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
+  return this.infos.filter(info => {
+    const isTokenMatch = info.token === this.token;
+    const isStatusMatch = info.status === 'delivering'; // Modified status condition
+    const isNameMatch = info.prod_name.toLowerCase().includes(this.searchText.toLowerCase());
+
+    return isTokenMatch && isStatusMatch && isNameMatch;
+  });
+}
 },
   methods: {
 
+    updateSearch() {
+      // Triggered on every input change in the search input
+      // Update searchText and trigger the computed property update
+      this.searchText = event.target.value;
+    },
     openDialog() {
       this.dialogs = true;
     },
