@@ -194,8 +194,7 @@
                     <v-card-title class="headline" style="margin-left: 99px;"></v-card-title>
                     <v-card-text>
 
-
-                      <nav class="neumorphic-navbars" style="margin-top: 20px; width: 950px; height: 60px; margin-left: 10px; z-index: 10;">
+                      <nav class="neumorphic-navbars" style="margin-top: 1px; width: 950px; height: 60px; margin-left: 10px; z-index: 10;">
                         <!-- Replace these router-links or hrefs with methods that filter based on status -->
                        
               
@@ -279,10 +278,11 @@
 
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn @click="closeDialogs" color="primary">Cancel</v-btn>
+                      <button @click="closeDialogs"    class="neumorphic-button" style=" position:absolute; margin-left:30px; margin-bottom:30px; width: 130px; background-color:#f0f0f0; color:rgb(0, 0, 0);">
+                        Cancel</button>
                       <button @click="updateStatusToPending"   class="neumorphic-button" style=" position:absolute; margin-left:510px; margin-bottom:30px; width: 200px; background-color:rgb(4, 134, 32); color:white;">
                         Pre order</button>
-                      <h1 class="nav-link" style="font-weight:400; margin-left:660px; margin-top:5px; margin-bottom:35px; color:rgb(0, 0, 0);">
+                      <h1 class="nav-link" style="font-weight:400; margin-left:750px; margin-top:5px; margin-bottom:35px; color:rgb(0, 0, 0);">
                         Total ({{ selectedCheckboxesComputed.length }} item): ₱{{ calculateTotalPrice() }}
                       </h1>
                     </v-card-actions>

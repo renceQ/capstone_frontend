@@ -77,11 +77,13 @@
                             </an>
                             <div>
                               <button @click="openModal" class="neumorphic-button" style="margin-left:30px;width: 200px;"><i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Buy Again</button> &nbsp;&nbsp;
-                              <button @click="openDialog" class="neumorphic-button" style="margin-left:5px; width: 200px; background-color:rgb(240, 206, 14); color:white;"><i class="fas fa-star custom-icon"></i>
-                                Rate </button>&nbsp;&nbsp;&nbsp;
+                              <button @click="openDialog(filteredInfo)" class="neumorphic-button" style="margin-left:5px; width: 200px; background-color:rgb(240, 206, 14); color:white;">
+                                <i class="fas fa-star custom-icon"></i> Rate
+                              </button>
+                              &nbsp;&nbsp;&nbsp;
 
                               <button @click="openModal" class="neumorphic-button" style="width: 200px;"><i class="fas fa-phone custom-icon"></i> &nbsp;&nbsp;Contact Seller</button> &nbsp;&nbsp;
-                              <button @click="openDialog" class="neumorphic-button" style="width: 200px; background-color:rgb(248, 53, 53); color:white;"><i class="fas fa-trash-alt custom-icon"></i>
+                              <button @click="deletehistory(filteredInfo.id)" class="neumorphic-button" style="width: 200px; background-color:rgb(248, 53, 53); color:white;"><i class="fas fa-trash-alt custom-icon"></i>
                                 Delete</button>
                             </div>
                           </div>
@@ -93,21 +95,63 @@
                 
 
 
-                <!--cancel modal-->
-                <v-dialog v-model="dialogs" max-width="500px">
-                  <v-card>
-                    <v-card-title class="headline" style="margin-left: 99px;">Reasons for Order Cancellation</v-card-title>
-                    <v-card-text>
-                      <v-radio-group v-model="selectedReason">
-                        <v-radio v-for="(reason, index) in cancellationReasons" :key="index" :label="reason" :value="reason"></v-radio>
-                      </v-radio-group>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-btn @click="closeDialog" color="primary">Cancel</v-btn>
-                      <v-btn @click="submitReason" color="primary">Submit</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
+              
+                <!-- review dialog <i class="fas fa-camera"></i>
+-->
+<v-dialog v-model="dialogs" max-width="500px">
+  <v-card>
+    <v-card-title class="headline" style="margin-left: 160px;">Write a Review</v-card-title>
+    <v-card-text>
+      <div v-if="selectedRecord">
+    
+        <img :src="selectedRecord.image" alt="Product Image" class="img-fluids" style="max-width: 100px; max-height: 100px;">
+        <span style="margin-right: 140px; margin-top:30px;position:absolute;margin-left: 40px; width:100px;">Product:<br> {{ selectedRecord.prod_name }}</span>
+        <span style="margin-right: 140px; margin-top:30px; margin-left:140px;position:absolute; width:100px;">Quantity: <br> &nbsp;&nbsp;&nbsp; &nbsp;{{ selectedRecord.quantity }}</span>
+        <span  style="margin-right: 140px;margin-left: 250px; margin-top:30px; position:absolute;">Total: ₱{{ selectedRecord.total }}</span>
+        
+       <!--add here-->
+        <textarea class="search-input" placeholder="  What would you recommend this product to others" v-model="reviewText" rows="1" style="height:100px; margin-top: 30px; width: 100%; padding: 8px;"></textarea>
+
+
+        <!-- Rating component (example) -->
+        <v-rating v-model="rating" label="Rate the product" :max="5"></v-rating>
+
+        <br>
+        <v-btn  style="margin-left:400px; position:absolute; margin-top:15px; " icon @click="openFilePicker">
+          <i class="fas fa-camera"></i>
+        </v-btn>
+        <input type="file" ref="fileInput" style="display: none " multiple @change="handleFileChange" />
+        
+        <div style="display: flex; flex-wrap: wrap; margin-left:10px; height:90px;">
+          <div v-for="(image, index) in selectedImages" :key="index" style="margin-right: 10px; position: relative;">
+            <img :src="image" alt="Selected Image" style="max-width: 70px; max-height: 70px; margin-top:10px;" />
+            <button class="close-button" style="background-color: none; margin-top:10px; margin-right:4px;" @click="removeImage(index)">x</button>
+          </div>
+        </div>
+
+        <div>
+        
+          <input style="margin-left:5px; margin-top:3px;" type="checkbox" id="isAnonymous" >
+          <label style="margin-left:20px;" for="isAnonymous">Make review anonymous</label>
+        </div>
+      
+      </div>
+    </v-card-text>
+    <v-card-actions>
+
+      <div style="margin-bottom: 10px;">
+        <button @click="openDialog(filteredInfo.category_id)" class="neumorphic-button" style="margin-left:10px; width: 460px;">
+          <i class="fas fa-search custom-icon"></i>&nbsp;&nbsp;submit
+        </button>
+      </div>
+    
+      
+      
+      
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+
               
 </template>
 <script>
@@ -116,6 +160,9 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      isAnonymous: false,
+      selectedImages: [],
+      selectedRecord: null,
       searchInput: '',
         isNavbarHidden: false,
       lastScrollTop: 0,
@@ -172,6 +219,49 @@ computed: {
     },
 },
   methods: {
+    openFilePicker() {
+      this.$refs.fileInput.click();
+    },
+    handleFileChange(event) {
+      const selectedFiles = event.target.files;
+      this.selectedImages = [];
+
+      for (let i = 0; i < Math.min(selectedFiles.length, 3); i++) {
+        const selectedFile = selectedFiles[i];
+        this.selectedImages.push(URL.createObjectURL(selectedFile));
+      }
+    },
+    removeImage(index) {
+      // Remove the selected image at the given index
+      this.selectedImages.splice(index, 1);
+    },
+    async deletehistory(id) {
+  try {
+    const confirmed = window.confirm('Are you sure you want to delete this record?');
+
+    if (confirmed) {
+      const userInput = prompt('Type "okay" to confirm:');
+      if (userInput && userInput.trim().toLowerCase() === 'okay') {
+        const response = await axios.post(`/deleteprod/${id}`, {
+  status: 'deleted',
+});
+
+
+        if (response.status === 200) {
+          this.getOrder(); // Refresh orders after status update
+        } else {
+          console.error('Error updating order status');
+        }
+      } else {
+        console.log('No changes were made.');
+      }
+    } else {
+      console.log('No changes were made.');
+    }
+  } catch (error) {
+    console.error('Error updating order status:', error);
+  }
+},
 
     performSearch() {
     // This method is triggered on input change in the search box
@@ -203,9 +293,10 @@ computed: {
     this.filteredInfos = filteredArray;
   },
 
-    openDialog() {
-      this.dialogs = true;
-    },
+  openDialog(selectedRecord) {
+    this.selectedRecord = selectedRecord;
+    this.dialogs = true;
+  },
     closeDialog() {
       this.dialogs = false;
       this.selectedReason = null; // Reset selected reason
@@ -291,6 +382,14 @@ computed: {
 </script>
 
 <style>
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+ 
+  border: none;
+  cursor: pointer;
+}
 
 .neumorphic-navbars {
 
