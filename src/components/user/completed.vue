@@ -13,7 +13,14 @@
     <div>
 
         <div class="neumorphic-search" style="margin-top: 170px; margin-left:315px;">
-            <input type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
+          <input
+          v-model="searchInput"
+          @input="performSearch"
+          type="text"
+          placeholder="Search Product by name..."
+          class="search-input"
+          style="border: 0px;"
+        />
             <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
               </button>
@@ -50,7 +57,7 @@
 
                 <!--products container--> <!--filtered container-->
                 <div>
-                 <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
+                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
                     <nav class="neumorphic-navbars" style="width: 950px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
@@ -109,6 +116,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      searchInput: '',
         isNavbarHidden: false,
       lastScrollTop: 0,
       inputValue: '',
@@ -148,11 +156,52 @@ computed: {
 
 
   filteredInfos() {
-    // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
-    return this.infos.filter(info => info.token === this.token && info.status === 'recieved');
-  }
+      // Filter the 'infos' array based on the token in session storage and status equals 'Approved'
+      let filteredArray = this.infos.filter(info => info.token === this.token && info.status === 'recieved');
+
+      // Apply search filter if searchInput is not empty
+      if (this.searchInput.trim() !== '') {
+        const searchQuery = this.searchInput.toLowerCase();
+
+        filteredArray = filteredArray.filter(info =>
+          info.prod_name.toLowerCase().includes(searchQuery)
+        );
+      }
+
+      return filteredArray;
+    },
 },
   methods: {
+
+    performSearch() {
+    // This method is triggered on input change in the search box
+    // It updates the filteredInfos array based on the search input
+    // You can add additional logic here if needed
+
+    // Trim leading and trailing whitespaces from the search input
+    const searchQuery = this.searchInput.trim().toLowerCase();
+
+    // Filter the 'infos' array based on the token in session storage and status equals 'recieved'
+    let filteredArray = this.infos.filter(info => info.token === this.token && info.status === 'recieved');
+
+    // Apply search filter if searchInput is not empty
+    if (searchQuery !== '') {
+      // Filter based on the product name
+      filteredArray = filteredArray.filter(info =>
+        info.prod_name.toLowerCase().includes(searchQuery)
+      );
+
+      // Additional logic: You can add more conditions to filter based on other properties
+      // Example: Filter based on quantity, total, or any other property in 'info' object
+      // filteredArray = filteredArray.filter(info =>
+      //   info.quantity.toString().includes(searchQuery) ||
+      //   info.total.toString().includes(searchQuery)
+      // );
+    }
+
+    // Set the filtered array to update the UI
+    this.filteredInfos = filteredArray;
+  },
 
     openDialog() {
       this.dialogs = true;
