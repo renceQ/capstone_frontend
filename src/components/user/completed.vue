@@ -105,7 +105,7 @@
       <div v-if="selectedRecord">
     
         <img :src="selectedRecord.image" alt="Product Image" class="img-fluids" style="max-width: 100px; max-height: 100px;">
-        <span style="margin-right: 140px; margin-top:30px;position:absolute;margin-left: 40px; width:100px;">Product:<br> {{ selectedRecord.prod_name }}</span>
+        <span style="margin-right: 140px; margin-top:30px;position:absolute;margin-left: 40px; width:70px;">Product:<br> {{ selectedRecord.prod_name }}</span>
         <span style="margin-right: 140px; margin-top:30px; margin-left:140px;position:absolute; width:100px;">Quantity: <br> &nbsp;&nbsp;&nbsp; &nbsp;{{ selectedRecord.quantity }}</span>
         <span  style="margin-right: 140px;margin-left: 250px; margin-top:30px; position:absolute;">Total: ₱{{ selectedRecord.total }}</span>
         
@@ -113,10 +113,12 @@
         <textarea class="search-input" placeholder="  What would you recommend this product to others" v-model="reviewText" rows="1" style="height:100px; margin-top: 30px; width: 100%; padding: 8px;"></textarea>
 
 
-        <!-- Rating component (example) -->
-        <v-rating v-model="rating" label="Rate the product" :max="5"></v-rating>
+        <div style="display: flex; align-items: center;">
+          <v-rating v-model="rating" label="Rate the product" :max="5" style="color: rgb(255, 255, 0); "></v-rating>
+          <div style="margin-left: 50px; color: rgb(0, 0, 0)5, 255, 255);">{{ getRatingMessage() }}</div>
+        </div>
 
-        <br>
+   
         <v-btn  style="margin-left:400px; position:absolute; margin-top:15px; " icon @click="openFilePicker">
           <i class="fas fa-camera"></i>
         </v-btn>
@@ -140,9 +142,16 @@
     <v-card-actions>
 
       <div style="margin-bottom: 10px;">
-        <button @click="openDialog(filteredInfo.category_id)" class="neumorphic-button" style="margin-left:10px; width: 460px;">
-          <i class="fas fa-search custom-icon"></i>&nbsp;&nbsp;submit
-        </button>
+        <button
+        @click="openDialog(filteredInfo.category_id)"
+        class="neumorphic-button"
+        style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;"
+        onmouseover="this.style.backgroundColor='rgb(30, 41, 32)'; this.style.color='white';"
+        onmouseout="this.style.backgroundColor='rgb(49, 48, 48)'; this.style.color='white';"
+      >
+        &nbsp;&nbsp;submit
+      </button>
+      
       </div>
     
       
@@ -160,6 +169,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      rating: 0,
       isAnonymous: false,
       selectedImages: [],
       selectedRecord: null,
@@ -219,6 +229,22 @@ computed: {
     },
 },
   methods: {
+    getRatingMessage() {
+      switch (this.rating) {
+        case 1:
+          return 'Bad';
+        case 2:
+          return 'Poor';
+        case 3:
+          return 'Average';
+        case 4:
+          return 'Great';
+        case 5:
+          return 'Excellent';
+        default:
+          return '';
+      }
+    },
     openFilePicker() {
       this.$refs.fileInput.click();
     },
