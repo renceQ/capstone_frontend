@@ -3,7 +3,7 @@
     <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;">PRODUCT NAME:  <span style="font-size: 20px; font-weight:500; margin-left:5px; color:rgb(223, 146, 5);">{{ productData.prod_name }}</span></p>
 
     <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
-        <!-- <p>Image:</p> -->
+        <!-- <p>Image: change toreview</p> -->
         <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 250px; max-height: 250px; margin-top:20px; margin-left: 90px;">
     </div>
 
@@ -87,14 +87,7 @@
 
           
           </div>
-          <!-- <button @click="placeOrder('cart')" type="submit" class="btn btn-success" >
-            Add to Cart
-          </button>
-          <button @click="placeOrder('pending')" type="submit" class="btn btn-success" style="position: absolute; margin-right:100px;">
-            Place Order
-          </button> -->
         </div>
-          
         </div>
       </div>
     </form>
@@ -146,6 +139,25 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+
+
+    <nav class="neumorphic-navbar" style="border-radius:5px;height:450px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:15%;" :class="{ 'navbar-hidden': isNavbarHidden }">
+      <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;">PRODUCT NAME:  <span style="font-size: 20px; font-weight:500; margin-left:5px; color:rgb(223, 146, 5);">{{ productData.prod_name }}</span></p>
+  
+      <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+          <!-- <p>Image:</p> -->
+          <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 250px; max-height: 250px; margin-top:20px; margin-left: 90px;">
+      </div>
+  
+      <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:700;">UNIT PRICE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:30px;">₱  {{ productData.unit_price }}</span></p>
+      <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;" >SIZE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:15px;">{{ getSizeName(productData.size_id) }}</span></p>
+      <p style="margin-left: 20px; margin-bottom: 15px; font-size: 12px; font-weight:600;" >SHARE: <span style="margin-left: 10px; font-size:20px; "><i class="fab fa-facebook custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-instagram custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-twitter custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-facebook-messenger custom-icon"></i></span></p>
+      <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:345px; font-size:11px; font-weight:500; color:rgb(45, 121, 55)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
+      
+  </nav>
+
+    
 </template>
 
 <script>
