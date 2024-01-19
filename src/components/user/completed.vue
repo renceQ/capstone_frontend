@@ -218,31 +218,75 @@ computed: {
     },
 },
   methods: {
-    submitReview() {
-      const requestData = {
-        prod_name: this.selectedRecord.prod_name,
-        product_id: this.selectedRecord.product_id,
-        comment: this.reviewText,
-        rate: this.getRatingMessage(),
-        first_image: this.selectedImages[0] || null,
-        second_image: this.selectedImages[1] || null,
-        third_image: this.selectedImages[2] || null,
-        isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
-      };
+    async submitReview() {
+    try {
+        const filteredComment = this.filterBadWords(this.reviewText);
 
-      // Make a request to the backend API to save the ratings
-      axios.post('/save_ratings', requestData)
-        .then(response => {
-          // Handle the response as needed
-          console.log('Review submitted successfully:', response.data);
-          // Close the dialog
-          this.dialogs = false;
-        })
-        .catch(error => {
-          // Handle errors
-          console.error('Error submitting review:', error);
-        });
-    },
+        if (filteredComment === null) {
+            // If filteredComment is null, it means inappropriate words were found
+            window.alert('Please remove unnecessary words. Comment not saved.');
+            return;
+        }
+
+        const requestData = {
+            prod_name: this.selectedRecord.prod_name,
+            product_id: this.selectedRecord.product_id,
+            comment: filteredComment,
+            rate: this.getRatingMessage(),
+            first_image: this.selectedImages[0] || null,
+            second_image: this.selectedImages[1] || null,
+            third_image: this.selectedImages[2] || null,
+            isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
+        };
+
+        const response = await axios.post('/submitReview', requestData);
+
+        // Check if 'data' property exists before accessing it
+        const responseData = response?.data;
+
+        // Handle the response as needed
+        if (responseData) {
+            console.log('Review submitted successfully:', responseData);
+
+            // Close the dialog
+            this.dialogs = false;
+
+            // You can emit an event or perform other actions after successful submission
+            this.$emit('data-saved');
+            this.getInfo();
+
+            // Show success modal
+            $('#successModal').modal('show');
+        } else {
+            console.error('Unexpected response format:', response);
+        }
+    } catch (error) {
+        // Handle errors
+        console.error('Error submitting review:', error.response?.data || error.message);
+    }
+},
+
+filterBadWords(comment) {
+    const badWords = [
+        'tangina mo', 'gago', 'bastos', 'puta', 'putang ina mo',
+        'putanginamo', 'tanga', 'bobo', 'inaka', 'baluga',
+        'puke', 'tite', 'kipay', 'ulaga', 'puki', 'titi', 'uten', 'gago', 'kinginamo', 'in@ka', 'tang ina mo', 'tanginamo', 'inamo', 'inamoka'
+    ];
+
+    const lowerCaseComment = comment.toLowerCase();
+
+    for (const word of badWords) {
+        // Use indexOf for case-insensitive matching
+        if (lowerCaseComment.includes(word.toLowerCase())) {
+            // Comment contains a forbidden word, show alert and do not save
+            return null;
+        }
+    }
+
+    // No forbidden words found, return the comment
+    return comment;
+},
+
 
     getRatingMessage() {
       switch (this.rating) {
