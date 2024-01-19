@@ -96,8 +96,7 @@
 
 
               
-                <!-- review dialog <i class="fas fa-camera"></i>
--->
+                <!-- review dialog-->
 <v-dialog v-model="dialogs" max-width="500px">
   <v-card>
     <v-card-title class="headline" style="margin-left: 160px;">Write a Review</v-card-title>
@@ -106,19 +105,16 @@
     
         <img :src="selectedRecord.image" alt="Product Image" class="img-fluids" style="max-width: 100px; max-height: 100px;">
         <span style="margin-right: 140px; margin-top:30px;position:absolute;margin-left: 40px; width:70px;">Product:<br> {{ selectedRecord.prod_name }}</span>
+        <span style="display: none;">Product:<br> {{ selectedRecord.product_id }}</span>
         <span style="margin-right: 140px; margin-top:30px; margin-left:140px;position:absolute; width:100px;">Quantity: <br> &nbsp;&nbsp;&nbsp; &nbsp;{{ selectedRecord.quantity }}</span>
         <span  style="margin-right: 140px;margin-left: 250px; margin-top:30px; position:absolute;">Total: ₱{{ selectedRecord.total }}</span>
-        
-       <!--add here-->
         <textarea class="search-input" placeholder="  What would you recommend this product to others" v-model="reviewText" rows="1" style="height:100px; margin-top: 30px; width: 100%; padding: 8px;"></textarea>
-
 
         <div style="display: flex; align-items: center;">
           <v-rating v-model="rating" label="Rate the product" :max="5" style="color: rgb(255, 255, 0); "></v-rating>
           <div style="margin-left: 50px; color: rgb(0, 0, 0)5, 255, 255);">{{ getRatingMessage() }}</div>
         </div>
 
-   
         <v-btn  style="margin-left:400px; position:absolute; margin-top:15px; " icon @click="openFilePicker">
           <i class="fas fa-camera"></i>
         </v-btn>
@@ -132,8 +128,7 @@
         </div>
 
         <div>
-        
-          <input style="margin-left:5px; margin-top:3px;" type="checkbox" id="isAnonymous" >
+          <input style="margin-left:5px; margin-top:3px;" type="checkbox" id="isAnonymous" ref="isAnonymous">
           <label style="margin-left:20px;" for="isAnonymous">Make review anonymous</label>
         </div>
       
@@ -143,20 +138,14 @@
 
       <div style="margin-bottom: 10px;">
         <button
-        @click="openDialog(filteredInfo.category_id)"
-        class="neumorphic-button"
-        style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;"
-        onmouseover="this.style.backgroundColor='rgb(30, 41, 32)'; this.style.color='white';"
-        onmouseout="this.style.backgroundColor='rgb(49, 48, 48)'; this.style.color='white';"
-      >
-        &nbsp;&nbsp;submit
-      </button>
-      
+            class="neumorphic-button"
+            style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;"
+            @click="submitReview"
+          >
+            &nbsp;&nbsp;submit
+          </button>
       </div>
-    
-      
-      
-      
+ 
     </v-card-actions>
   </v-card>
 </v-dialog>
@@ -229,6 +218,32 @@ computed: {
     },
 },
   methods: {
+    submitReview() {
+      const requestData = {
+        prod_name: this.selectedRecord.prod_name,
+        product_id: this.selectedRecord.product_id,
+        comment: this.reviewText,
+        rate: this.getRatingMessage(),
+        first_image: this.selectedImages[0] || null,
+        second_image: this.selectedImages[1] || null,
+        third_image: this.selectedImages[2] || null,
+        isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
+      };
+
+      // Make a request to the backend API to save the ratings
+      axios.post('/save_ratings', requestData)
+        .then(response => {
+          // Handle the response as needed
+          console.log('Review submitted successfully:', response.data);
+          // Close the dialog
+          this.dialogs = false;
+        })
+        .catch(error => {
+          // Handle errors
+          console.error('Error submitting review:', error);
+        });
+    },
+
     getRatingMessage() {
       switch (this.rating) {
         case 1:
