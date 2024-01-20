@@ -47,27 +47,7 @@
 
 			  <router-view></router-view>
 			</div>
-			  <!-- <div style="margin-top: 150px;">
-				Your form or insert component
-				  <tbody>
-					<tr v-for="userData in info" :key="userData.id">
-					  <td>
-						<div class="user-profile">
-						  <img :src="userData.profile_picture" alt="" class="profile-picture">
-						  <div class="profile-details">
-							<div>{{ userData.username }}</div>
-							<div>{{ userData.address }}</div>
-							<div>{{ userData.contact }}</div>
-							<div>{{ userData.other_info }}</div>
-						  </div>
-						</div>
-					  </td>
-					</tr>
-				  </tbody>
-	
-			  </div> -->
-
-
+			
               <!--Dialog for request account-->
 
               <v-dialog v-model="dialog" max-width="500px">

@@ -108,7 +108,9 @@
         <span style="display: none;">Product:<br> {{ selectedRecord.product_id }}</span>
         <span style="margin-right: 140px; margin-top:30px; margin-left:140px;position:absolute; width:100px;">Quantity: <br> &nbsp;&nbsp;&nbsp; &nbsp;{{ selectedRecord.quantity }}</span>
         <span  style="margin-right: 140px;margin-left: 250px; margin-top:30px; position:absolute;">Total: ₱{{ selectedRecord.total }}</span>
-        <textarea class="search-input" placeholder="  What would you recommend this product to others" v-model="reviewText" rows="1" style="height:100px; margin-top: 30px; width: 100%; padding: 8px;"></textarea>
+        <textarea ref="reviewTextarea" class="search-input" placeholder="  What would you recommend this product to others" v-model="reviewText" rows="1" style="height:100px; margin-top: 30px; width: 100%; padding: 8px;" required></textarea>
+        <a v-if="shouldShowUsername">{{ info[0].showed_username }}</a><br>
+        <a v-if="shouldShowUsername">{{ info[0].profile_picture }}</a>
 
         <div style="display: flex; align-items: center;">
           <v-rating v-model="rating" label="Rate the product" :max="5" style="color: rgb(255, 255, 0); "></v-rating>
@@ -138,12 +140,12 @@
 
       <div style="margin-bottom: 10px;">
         <button
-            class="neumorphic-button"
-            style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;"
-            @click="submitReview"
-          >
-            &nbsp;&nbsp;submit
-          </button>
+        class="neumorphic-button"
+        style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;"
+        @click="validateAndSubmitReview"
+    >
+        &nbsp;&nbsp;submit
+    </button>
       </div>
  
     </v-card-actions>
@@ -158,6 +160,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      reviewText: '', 
+      shouldShowUsername: false, 
       rating: 0,
       isAnonymous: false,
       selectedImages: [],
@@ -218,6 +222,18 @@ computed: {
     },
 },
   methods: {
+    async validateAndSubmitReview() {
+    // Check if the textarea is empty
+    if (!this.reviewText.trim()) {
+        window.alert('Please provide a comment before submitting.');
+        // Focus on the textarea to bring user attention
+        this.$refs.reviewTextarea.focus();
+        return;
+    }
+
+    // If the textarea is not empty, proceed to submit the review
+    await this.submitReview();
+},
     async submitReview() {
     try {
         const filteredComment = this.filterBadWords(this.reviewText);
@@ -237,6 +253,8 @@ computed: {
             second_image: this.selectedImages[1] || null,
             third_image: this.selectedImages[2] || null,
             isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
+            username: this.info[0].showed_username,
+            profile_picture: this.info[0].profile_picture,
         };
 
         const response = await axios.post('/submitReview', requestData);
@@ -270,7 +288,7 @@ filterBadWords(comment) {
     const badWords = [
         'tangina mo', 'gago', 'bastos', 'puta', 'putang ina mo',
         'putanginamo', 'tanga', 'bobo', 'inaka', 'baluga',
-        'puke', 'tite', 'kipay', 'ulaga', 'puki', 'titi', 'uten', 'gago', 'kinginamo', 'in@ka', 'tang ina mo', 'tanginamo', 'inamo', 'inamoka'
+        'gago', 'kinginamo', 'in@ka', 'tang ina mo', 'tanginamo', 'inamo', 'inamoka', 'bitch', 'fuck', 'fuckyou', 'fuck you', 'asshole', 'puke', 'tite', 'kipay', 'ulaga', 'puki', 'titi', 'uten', 
     ];
 
     const lowerCaseComment = comment.toLowerCase();
