@@ -6,7 +6,7 @@
            align-items: flex-start; margin-top: 60px; margin-left: 15%;"
   >
 
-    <div v-for="product in products" :key="product.product_id" style="width: 350px;">
+    <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
       
       <img style="width:50px; height:50px; margin-bottom:15px;"  v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">&nbsp;&nbsp;&nbsp;&nbsp;{{ product.username }}
       
@@ -25,6 +25,14 @@
       </div>
       <hr />
     </div>
+    <router-link
+    to="#"
+    @click="toggleReviews"
+    style="position: fixed; bottom: 100px; left: 465px; width:150px; font-size: 14px; font-weight: 200; font-size: 11px; background-color: green; color: rgb(255, 255, 255)"
+    class="neumorphic-button">
+    &nbsp;&nbsp; &nbsp;&nbsp; PRODUCT INFO
+</router-link>
+
     
   </nav>
 
