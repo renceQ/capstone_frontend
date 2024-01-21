@@ -6,25 +6,29 @@
            align-items: flex-start; margin-top: 60px; margin-left: 15%;"
   >
 
-    <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
-      
-      <img style="width:50px; height:50px; margin-bottom:15px;"  v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">&nbsp;&nbsp;&nbsp;&nbsp;{{ product.username }}
-      
-      <p>ordered item: {{ product.prod_name }}</p>
-      <p>Comment:</p>
-      <p>{{ product.comment }}</p>
-      <!-- Add other fields as needed -->
-      <img v-if="product.first_image" style="height:100px; width:100px;margin-right:10px;" :src="product.first_image" />
-      <img v-if="product.second_image" style="height:100px; width:100px;margin-right:10px;" :src="product.second_image" />
-      <img v-if="product.third_image" style="height:100px; width:100px;" :src="product.third_image" />      
-      <div>
+  <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
+  
+    <img style="width:50px; height:50px; margin-bottom:15px; margin-top:3px;" v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">
+    
+    <span v-if="info.length > 0 && product.isAnonymous === 'anonymous'">&nbsp;&nbsp; &nbsp;&nbsp;******</span>
+    <span style="position:absolute; margin-top:20px;" v-else>&nbsp;&nbsp; &nbsp;&nbsp;{{ product.username }}</span>
+  
+    <p>ordered item: {{ product.prod_name }}</p>
+    <p>Comment:</p>
+    <p>{{ product.comment }}</p>
+    <!-- Add other fields as needed -->
+    <img v-if="product.first_image" style="height:100px; width:100px;margin-right:10px;" :src="product.first_image" />
+    <img v-if="product.second_image" style="height:100px; width:100px;margin-right:10px;" :src="product.second_image" />
+    <img v-if="product.third_image" style="height:100px; width:100px;" :src="product.third_image" />      
+    <div>
       <br>
       <p>Product ID: {{ product.product_id }}</p>
       <p>Rate: {{ product.rate }}</p>
-      <p>Anonymous: {{ product.isAnonymous }}</p>
-      </div>
-      <hr />
+      <p style="display: none;">Anonymous: {{ product.isAnonymous }}</p>
     </div>
+    <hr />
+  </div>
+  
     <router-link
     to="#"
     @click="toggleReviews"
