@@ -135,6 +135,9 @@ export default {
      
      
   }
+  .sidebar ul a{
+    text-decoration: none;
+  }
   #check:checked ~ .sidebar {
     left: 0;
 
