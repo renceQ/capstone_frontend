@@ -288,64 +288,52 @@ async submitReview() {
         const filteredComment = this.filterBadWords(this.reviewText);
 
         if (filteredComment === null) {
-            // If filteredComment is null, it means inappropriate words were found
             window.alert('Please remove unnecessary words. Comment not saved.');
             return;
         }
 
-        // Function to generate a unique identifier
-        const generateUniqueName = () => {
-            const timestamp = new Date().getTime();
-            const randomString = Math.random().toString(36).substring(7);
-            return `${timestamp}_${randomString}`;
-        };
-
-        // Convert file objects to URLs with unique names
-        const imageUrls = this.selectedImageFiles.map(file => {
-    return file ? `http://localhost:8080/public/uploads/${generateUniqueName()}_${file.name}` : null; //need baguhin path pag mag deploy
-});
+        const imageBase64Data = await Promise.all(this.selectedImageFiles.map(file => {
+            return file ? this.convertFileToBase64(file) : null;
+        }));
 
         const requestData = {
             prod_name: this.selectedRecord.prod_name,
             product_id: this.selectedRecord.product_id,
             comment: filteredComment,
             rate: this.getRatingMessage(),
-            first_image: imageUrls[0] || null,
-            second_image: imageUrls[1] || null,
-            third_image: imageUrls[2] || null,
+            first_image: imageBase64Data[0] || null,
+            second_image: imageBase64Data[1] || null,
+            third_image: imageBase64Data[2] || null,
             isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
             username: this.info[0].showed_username,
             profile_picture: this.info[0].profile_picture,
         };
 
         const response = await axios.post('/submitReview', requestData);
-
-        // Check if 'data' property exists before accessing it
         const responseData = response?.data;
 
-        // Handle the response as needed
         if (responseData) {
             console.log('Review submitted successfully:', responseData);
-
-            // Close the dialog
             this.dialogs = false;
-
-            // You can emit an event or perform other actions after successful submission
             this.$emit('data-saved');
             this.getInfo();
-
-            // Show success modal
             $('#successModal').modal('show');
         } else {
             console.error('Unexpected response format:', response);
         }
     } catch (error) {
-        // Handle errors
         console.error('Error submitting review:', error.response?.data || error.message);
     }
 },
 
-
+convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+},
 filterBadWords(comment) {
     const badWords = [
         'tangina mo', 'gago', 'bastos', 'puta', 'putang ina mo',

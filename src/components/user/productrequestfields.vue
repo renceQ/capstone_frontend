@@ -14,9 +14,9 @@
       <p>Comment:</p>
       <p>{{ product.comment }}</p>
       <!-- Add other fields as needed -->
-      <img style="height:100px; width:100px;margin-right:10px;" :src="product.first_image" />
-      <img style="height:100px; width:100px;margin-right:10px;" :src="product.second_image"  />
-      <img style="height:100px; width:100px;" :src="product.third_image"  />
+      <img v-if="product.first_image" style="height:100px; width:100px;margin-right:10px;" :src="product.first_image" />
+      <img v-if="product.second_image" style="height:100px; width:100px;margin-right:10px;" :src="product.second_image" />
+      <img v-if="product.third_image" style="height:100px; width:100px;" :src="product.third_image" />      
       <div>
       <br>
       <p>Product ID: {{ product.product_id }}</p>
