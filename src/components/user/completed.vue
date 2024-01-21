@@ -234,7 +234,56 @@ computed: {
     // If the textarea is not empty, proceed to submit the review
     await this.submitReview();
 },
-    async submitReview() {
+//     async submitReview() {
+//     try {
+//         const filteredComment = this.filterBadWords(this.reviewText);
+
+//         if (filteredComment === null) {
+//             // If filteredComment is null, it means inappropriate words were found
+//             window.alert('Please remove unnecessary words. Comment not saved.');
+//             return;
+//         }
+
+//         const requestData = {
+//             prod_name: this.selectedRecord.prod_name,
+//             product_id: this.selectedRecord.product_id,
+//             comment: filteredComment,
+//             rate: this.getRatingMessage(),
+//             first_image: this.selectedImages[0] || null,
+//             second_image: this.selectedImages[1] || null,
+//             third_image: this.selectedImages[2] || null,
+//             isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
+//             username: this.info[0].showed_username,
+//             profile_picture: this.info[0].profile_picture,
+//         };
+
+//         const response = await axios.post('/submitReview', requestData);
+
+//         // Check if 'data' property exists before accessing it
+//         const responseData = response?.data;
+
+//         // Handle the response as needed
+//         if (responseData) {
+//             console.log('Review submitted successfully:', responseData);
+
+//             // Close the dialog
+//             this.dialogs = false;
+
+//             // You can emit an event or perform other actions after successful submission
+//             this.$emit('data-saved');
+//             this.getInfo();
+
+//             // Show success modal
+//             $('#successModal').modal('show');
+//         } else {
+//             console.error('Unexpected response format:', response);
+//         }
+//     } catch (error) {
+//         // Handle errors
+//         console.error('Error submitting review:', error.response?.data || error.message);
+//     }
+// },
+async submitReview() {
     try {
         const filteredComment = this.filterBadWords(this.reviewText);
 
@@ -244,14 +293,26 @@ computed: {
             return;
         }
 
+        // Function to generate a unique identifier
+        const generateUniqueName = () => {
+            const timestamp = new Date().getTime();
+            const randomString = Math.random().toString(36).substring(7);
+            return `${timestamp}_${randomString}`;
+        };
+
+        // Convert file objects to URLs with unique names
+        const imageUrls = this.selectedImageFiles.map(file => {
+    return file ? `http://localhost:8080/public/uploads/${generateUniqueName()}_${file.name}` : null; //need baguhin path pag mag deploy
+});
+
         const requestData = {
             prod_name: this.selectedRecord.prod_name,
             product_id: this.selectedRecord.product_id,
             comment: filteredComment,
             rate: this.getRatingMessage(),
-            first_image: this.selectedImages[0] || null,
-            second_image: this.selectedImages[1] || null,
-            third_image: this.selectedImages[2] || null,
+            first_image: imageUrls[0] || null,
+            second_image: imageUrls[1] || null,
+            third_image: imageUrls[2] || null,
             isAnonymous: document.getElementById('isAnonymous').checked ? 'anonymous' : 'public',
             username: this.info[0].showed_username,
             profile_picture: this.info[0].profile_picture,
@@ -283,6 +344,7 @@ computed: {
         console.error('Error submitting review:', error.response?.data || error.message);
     }
 },
+
 
 filterBadWords(comment) {
     const badWords = [
@@ -326,14 +388,19 @@ filterBadWords(comment) {
       this.$refs.fileInput.click();
     },
     handleFileChange(event) {
-      const selectedFiles = event.target.files;
-      this.selectedImages = [];
+    const selectedFiles = event.target.files;
+    this.selectedImages = [];
+    this.selectedImageFiles = []; // Store File objects
 
-      for (let i = 0; i < Math.min(selectedFiles.length, 3); i++) {
+    for (let i = 0; i < Math.min(selectedFiles.length, 3); i++) {
         const selectedFile = selectedFiles[i];
-        this.selectedImages.push(URL.createObjectURL(selectedFile));
-      }
-    },
+        const imageUrl = URL.createObjectURL(selectedFile);
+
+        this.selectedImages.push(imageUrl);
+        this.selectedImageFiles.push(selectedFile);
+    }
+},
+
     removeImage(index) {
       // Remove the selected image at the given index
       this.selectedImages.splice(index, 1);
