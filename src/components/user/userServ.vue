@@ -9,6 +9,16 @@
   <br>
   <div>
 <div style="margin-left:450px;">
+  <div class="row d-flex align-items-center">
+     
+    <img 
+    :src="require('../../../public/img/black.png')" 
+    alt="Description of the image" 
+    style="position:absolute; top:6%; border-radius: 10px; width: 300px; left:5%; transition: transform 0.3s ease-in-out;"
+    onmouseover="this.style.transform='scale(1.1)'" 
+    onmouseout="this.style.transform='scale(1)'"
+  /> lagyan ko pa shadow
+</div>
 			<h1 class="navbar-brand" href="index.html" style="font-size: 50px;margin-left:90px; "> Our|<span>Services...</span></h1>
 			<br>
       <br>

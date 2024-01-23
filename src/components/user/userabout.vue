@@ -16,6 +16,7 @@
            personalized and exceptional touches that leave a lasting impression.
         </h2>
       </div>
+      
       <div style="display: flex; align-items: center; justify-content: flex-end;">
         <img 
           :src="require('../../assets/img/first.png')" 
@@ -51,9 +52,11 @@
       </div>
       <br>
       <br>
+      <br>
+      <br>
       <div class="row">
-        <div class="col-md-7" style="margin-left:30px;">
-          <h1 class="navbar-brand" style="font-size: 25px;"> Our Story&nbsp;|<span>&nbsp;2013...</span></h1>
+        <div class="col-md-7" style="margin-left:550px;">
+          <h1 class="navbar-brand" style="font-size: 25px;  margin-top:40px;"> Our Story&nbsp;|<span>&nbsp;2013...</span></h1>
           <h4 class="navbar-brand" style="font-size: 15px; text-align: justify;">
             The early days weren't without challenges. From navigating <br>
             market fluctuations to establishing a foothold in a competitive <br> 
@@ -65,48 +68,34 @@
             solutions that not only met but exceeded expectations.
           </h4>
         </div>
-        <br>
-        <div class="col-md-5" style="posotion:abosolute; margin-top: px;">
+        <div style="display: flex; align-items: center; justify-content: flex-end;">
+          <img 
+            :src="require('../../assets/img/KRAM (1).png')" 
+            alt="Description of the image" 
+            style="position:absolute; top:800px; border-radius: 10px; width: 760px; right:40%; transition: transform 0.3s ease-in-out;"
+            onmouseover="this.style.transform='scale(1.1)'" 
+            onmouseout="this.style.transform='scale(1)'"
+          />
+        </div>
+      
+        <div class="col-md-5" style="posotion:abosolute; margin-top:90px; margin-left:50px;">
           <h1 class="navbar-brand" style="font-size: 30px;"> Challenges<span>...</span></h1>
           <h4 class="navbar-brand" style="font-size: 15px; text-align: justify;">
-            It's important to note that businesses also use challenges as <br>
-            opportunities for growth and improvement. Qmj may develop strategies,<br>
-            innovate, and adapt to overcome obstacles and enhance their overall <br> 
-            resilience. To get specific information about challenges faced by QMJ <br>
-            Enterprises, I recommend checking their official communications, reports,<br>
-            or contacting the company directly for the latest and most accurate details.
+            It's important to note that businesses also use challenges as opportunities for growth and improvement. Qmj may develop strategies, innovate,  and adapt<br>
+            to overcome obstacles and enhance their overall resilience. To get specific information about challenges faced by QMJ Enterprises, I recommend checking  <br> 
+            their official communications, reports,  or contacting the company directly for the latest and most accurate details.<br>
+           
           </h4>
         </div>
       </div>
-      
-      <div class="row d-flex align-items-center">
-        <div class="col-md-7">
-         
-          <img :src="require('../../assets/images/logo2.jpg')" alt="Description of the image" style="border-radius: 10px; width: 600px; margin-right: 20px; margin-top: 80px;">
-        </div>
-        <div class="col-md-5">
-          <div class="col-md-5">
-          <h3 class="navbar-brand" style="font-size: 15px; text-align: justify;">
-            At the heart of QMJ Enterprise lies a dedication to crafting unforgettable <br> 
-            experience. Established with a vision to redefine industry standards, QMJ <br>
-            Enterprise has consistently delivered excellence across its diverse array <br>
-            of services. From expertly arranging sound and lighting setups to capturing <br>
-            captivating moments through professional photo and video shoots, QMJ <br> 
-            Enterprise ensures that every project is marked by personalized and <br> 
-            exceptional touches. This commitment not only ensures that its offerings <br> 
-            are cutting-edge but also reflects a proactive approach to meeting and <br>
-            exceeding client expectations. Whether it's designing albums, creating <br> 
-            bespoke souvenirs, customizing clothing, or excelling in printing tarpaulins,<br>
-            QMJ Enterprise embraces innovation as a driving force for success.
-          </h3>
-        </div>
-      </div>
-    </div>
+
+  
     </div>
   </section>
   <br>
-  <br>
-
+  <br><br>
+  <br><br>
+  <br><br>
   
   <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -162,7 +151,7 @@ Sound and stage lights production.</p>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-  
+ 
           </div>
         </div>
       </div>
