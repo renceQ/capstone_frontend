@@ -1,6 +1,7 @@
 
 <template>
 	<div>
+
 	<nav class="neumorphic-navbar" style="width:90%;" :class="{ 'navbar-hidden': isNavbarHidden }">
     <span class="nav-item">
       <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="require('../../assets/images/logo.jpg')" class="logo-picture-navbar">
@@ -59,7 +60,9 @@
                 </div>
               </a>
               <ul class="dropdown" :class="{ active: showAll }" style="position: absolute; margin-right: 100px; width:300px;">
+                <br>
                 <li><h4>Notifications</h4><aa style="font-size: 13px;">mark all as read</aa></li>
+                <br>
                 <!-- Filtered notifications -->
                 <li v-for="(filteredInfo, index) in displayedNotifications" :key="filteredInfo.id">
                   <!-- Display notifications based on 'showAll' flag -->
@@ -288,19 +291,19 @@ export default {
 /* Common styles for the navbar */
 .neumorphic-navbar {
   position: fixed;
-  top: 0;
+
   left: 0;
   width: 1200px;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 10px 10px 30px #eeecec, -10px -10px 30px #ffffff;
+  box-shadow: 5px 5px 30px #eeecec, -10px 5px 60px #ffffff;
   transition: top 0.3s;
-  margin-top: 35px;
+  margin-top: 40px;
   margin-left: 70px;
 }
 
@@ -334,6 +337,7 @@ export default {
   padding: 8px 15px;
   border-radius: 3px;
   transition: all 0.3s ease;
+ 
 }
 
 /* Navbar link hover styles */

@@ -149,7 +149,7 @@ if (this.productId) {
 };
 </script>
   
-<style>
+<style >
 /* Add styles to the table container */
 .table-container {
   width: 1000px;

@@ -29,17 +29,7 @@
 				<span class="nav-item cta">
 				  <router-link to="/contacts" class="nav-link">Contact Us</router-link>
 				</span>	
-				<!-- <nav class="navbar">
-					  <li class="menu-item" >
-						<a href="#">Menu</a>
-						<ul class="dropdown">
-						  <li><a href="#">View Your Profile</a></li>
-						  <li><a href="#">Settings and Privacy</a></li>
-						  <li><a href="#">Help and Support</a></li>
-						  <li><a href="#" class="nav-link" @click="logout">Log out</a></li>
-						</ul>
-					  </li>
-				  </nav> -->
+		
 				
 
 				
@@ -159,7 +149,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
 @import '../../assets/css/open-iconic-bootstrap.min.css';
@@ -184,10 +174,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #fffdfd;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 10px 10px 30px #eeecec, -10px -10px 30px #ffffff;
+  box-shadow: 5px 5px 30px #eeecec, -10px 5px 60px #ffffff;
   transition: top 0.3s;
   margin-top: 35px;
   margin-left: 70px;

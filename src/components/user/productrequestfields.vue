@@ -1,7 +1,7 @@
   <template>
     <nav
     class="neumorphic-navbar"
-    style="border-radius: 5px; height: 470px; width: 450px; overflow-y: auto;
+    style="border-radius: 5px; height: 475px; width: 450px; overflow-y: auto;
            display: flex; flex-direction: column; justify-content: flex-start;
            align-items: flex-start; margin-top: 60px; margin-left: 15%;"
   >
@@ -10,8 +10,8 @@
   
     <img style="width:50px; height:50px; margin-bottom:15px; margin-top:3px;" v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">
     
-    <span v-if="info.length > 0 && product.isAnonymous === 'anonymous'">&nbsp;&nbsp; &nbsp;&nbsp;******</span>
-    <span style="position:absolute; margin-top:20px;" v-else>&nbsp;&nbsp; &nbsp;&nbsp;{{ product.username }}</span>
+    <span style="font-weight:900;" v-if="info.length > 0 && product.isAnonymous === 'anonymous'">&nbsp;&nbsp; &nbsp;&nbsp;******</span>
+    <span style="position:absolute; margin-top:15px;font-family: 'Sacramento', cursive; font-weight:600; font-size:22px;" v-else>&nbsp;&nbsp; &nbsp;&nbsp;{{ product.username }}</span>
   
     <p>ordered item: {{ product.prod_name }}</p>
     <p>Comment:</p>
@@ -22,8 +22,28 @@
     <img v-if="product.third_image" style="height:100px; width:100px;" :src="product.third_image" />      
     <div>
       <br>
-      <p>Product ID: {{ product.product_id }}</p>
-      <p>Rate: {{ product.rate }}</p>
+      <p style="display: none;">Product ID: {{ product.product_id }}</p>
+      <p style="display: none;">Rate: {{ product.rate }}</p>
+      <div v-if="product.rate === 'Bad'">
+        
+        <p>Rate:&nbsp;&nbsp;<span style="color: yellow; font-size:20px;">★ &nbsp;&nbsp;<span style="color: black; font-size:14px;">Bad</span></span></p>
+      </div>
+      <div v-else-if="product.rate === 'Poor'">
+        
+        <p> Rate:&nbsp;&nbsp;<span style="color: yellow; font-size:20px;">★★ &nbsp;&nbsp;<span style="color: black; font-size:14px;">Poor</span></span></p>
+      </div>
+      <div v-else-if="product.rate === 'Average'">
+   
+        <p> Rate:&nbsp;&nbsp;<span style="color: yellow; font-size:20px;">★★★ &nbsp;&nbsp;<span style="color: black; font-size:14px;">Average</span></span></p>
+      </div>
+      <div v-else-if="product.rate === 'Great'">
+       
+        <p> Rate:&nbsp;&nbsp;<span style="color: yellow; font-size:20px;">★★★★ &nbsp;&nbsp;<span style="color: black; font-size:14px;">Great</span></span></p>
+      </div>
+      <div v-else-if="product.rate === 'Excellent'">
+       
+        <p> Rate:&nbsp;&nbsp;<span style="color: yellow; font-size:20px;">★★★★★ &nbsp;&nbsp;<span style="color: black; font-size:14px;">Excellent</span></span></p>
+      </div>
       <p style="display: none;">Anonymous: {{ product.isAnonymous }}</p>
     </div>
     <hr />
@@ -37,13 +57,14 @@
     &nbsp;&nbsp; &nbsp;&nbsp; PRODUCT INFO
 </router-link>
 
+
     
   </nav>
 
  
   <br>
     <div class="container mt-4" style="margin-left:270px; height:200px;">
-      <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">PRODUCT DESCRIPTION</h2>
+      <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">ORDER FORM</h2>
       <form @submit.prevent="placeOrder">
       <div class="row">
         <div class="col">
@@ -74,21 +95,21 @@
                   <div class="profile-details">
                     <div class="row">
                       <div class="col-sm-6">
-                        <!-- <input type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/> -->
-                          <input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px;" required>
+                          
+                        Address:<input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px;" required>
                       </div>
                       <div class="col-sm-6">
-                          <input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="margin-left:90px; border: 0px;" required>
+                        Contact:<input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="margin-left:90px; border: 0px;" required>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
-                        <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
+                        Other Information: <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
                         <input type="hidden" v-model="userData.token" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
                     </div>
                     <div class="col-sm-6">
                                           <!-- <label for="customerName">Customer Name:</label> -->
-                      <input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; margin-left:90px;" required>
+                      <p>Username:</p><input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; margin-left:90px;" required>
                   </div>
                     </div>
                     
@@ -173,27 +194,35 @@
       <div v-if="!showReviews" >
         <nav
         class="neumorphic-navbar"
-        style="border-radius:5px;height:470px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:15%;"
+        style="border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:15%;"
       >
-          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;">PRODUCT NAME:  <span style="font-size: 20px; font-weight:500; margin-left:5px; color:rgb(223, 146, 5);">{{ productData.prod_name }}</span></p> 
+          <p style=" margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME:  <span style="font-size: 30px; font-weight:400; margin-left:15px; color:rgb(223, 146, 5);font-family: 'Sacramento', cursive;">{{ productData.prod_name }}</span></p> 
       
           <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
               <!-- <p>Image:</p> -->
               <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 250px; max-height: 250px; margin-top:20px; margin-left: 90px;">
           </div>
       
-          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:700;">UNIT PRICE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:30px;">₱  {{ productData.unit_price }}</span></p>
-          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 12px; font-weight:600;" >SIZE: <span style="margin-left: 10px; color:rgb(240, 141, 29); font-size:15px;">{{ getSizeName(productData.size_id) }}</span></p>
-          <p style="margin-left: 20px; margin-bottom: 15px; font-size: 12px; font-weight:600;" >SHARE: <span style="margin-left: 10px; font-size:20px; "><i class="fab fa-facebook custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-instagram custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-twitter custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-facebook-messenger custom-icon"></i></span></p>
+          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">UNIT PRICE: <span style="font-weight: 200; margin-left: 10px; color:rgb(240, 141, 29); font-size:20px; font-family: 'Podkova', sans-serif;">₱  <span style="font-family: 'Wallpoet', cursive; font-weight:200;font-size:30px; color:rgb(240, 141, 29);">{{ productData.unit_price }}</span></span></p>
+          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600;font-family: 'Audiowide', cursive;" >SIZE: <span style="margin-left: 10px; color:rgb(240, 141, 29);font-weight:100; font-size:16px;">{{ getSizeName(productData.size_id) }}</span></p>
+          <p style="margin-left: 20px; margin-bottom: 15px; font-size: 11px; font-weight:600;font-family: 'Audiowide', cursive;" >SHARE: <span style="margin-left: 10px; font-size:20px; "><i class="fab fa-facebook custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-instagram custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-twitter custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-facebook-messenger custom-icon"></i></span></p>
           <router-link
         to="#"
         @click="toggleReviews"
-        style="position: absolute; bottom: 89px; width: 150px; right: 36px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
+        style="position: absolute; bottom: 114px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
         class="neumorphic-button"
       >
         &nbsp;&nbsp;PRODUCT REVIEWS
       </router-link>
-          <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:380px; font-size:10px; font-weight:500; background-color:rgb(241, 51, 44);color:rgb(255, 255, 255)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
+      <router-link
+      to="#"
+      @click="toggleReviews"
+      style="position: absolute; bottom: 74px; width: 150px; right: 35px; height:31px; font-size: 9.5px; font-weight: 200;  background-color:#868686; color: rgb(255, 255, 255)"
+      class="neumorphic-button"
+    >
+      &nbsp;&nbsp;PRODUCT DESCRIPTION
+    </router-link>
+          <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:402px; font-size:10px; font-weight:500; background-color:rgb(19, 18, 18);color:rgb(255, 255, 255)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
           
       </nav>
     </div>
@@ -378,6 +407,10 @@
   </script>
 
   <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
   .neumorphic-navbar {
     scrollbar-width: thin;
     scrollbar-color: #b0b0b0 #f0f0f0;
@@ -412,6 +445,8 @@
   }
 
   @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+  @import url('https://fonts.googleapis.com/css2?family=Podkova&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
   /* Add additional styles if needed */
   .user-profile {
     width: 220px;

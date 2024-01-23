@@ -273,7 +273,7 @@ computed: {
 };
 </script>
 
-<style>
+<style >
 
 .neumorphic-navbars {
 

@@ -1,16 +1,13 @@
 <template>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <section class="hero-wrap-0 js-fullheight" style="background-image: url('images/bg_2.jpg'); margin-bottom:100px;" data-stellar-background-ratio="0.5">
+  
+  <section class="hero-wrap-0 js-fullheight" style=" margin-bottom:100px; margin-top:220px; margin-left:80px;" data-stellar-background-ratio="0.5">
+    
     <div style="display: flex; align-items: left; text-align: justify;">
-      <div style="margin-right: 50px; margin-left: 100px;">
-        <h1 class="navbar-brand" style="font-size: 50px;"> About|<span>US...</span></h1>
+
+      <div style="margin-right: 0px; margin-left: 120px;">
+        <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:30px;">ABOUT <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
         <h2 class="navbar-brand" href="index.html" style="font-size: 15px;">
-          QMJ Enterprises is dedicated to crafting unforgettable experiences <br>
+          &nbsp;&nbsp;&nbsp; QMJ Enterprises is dedicated to crafting unforgettable experiences <br>
           through a diverse array of services. From expertly arranging sound <br>
           and lighting setups to capturing captivating moments through professional<br>
            photo and video shoots, their expertise extends to designing albums, <br>
@@ -20,28 +17,43 @@
         </h2>
       </div>
       <div style="display: flex; align-items: center; justify-content: flex-end;">
-        <img :src="require('../../assets/images/logo2.jpg')" alt="Description of the image" style="border-radius: 10px; width: 450px; margin-right: 100px; ">
+        <img 
+          :src="require('../../assets/img/first.png')" 
+          alt="Description of the image" 
+          style="position:absolute; border-radius: 10px; width: 570px; right:7%; transition: transform 0.3s ease-in-out;"
+          onmouseover="this.style.transform='scale(1.1)'" 
+          onmouseout="this.style.transform='scale(1)'"
+        />
       </div>
+
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <br>
     <div class="container">
       <div class="row d-flex">
         <div class="col-md-7">
           <h3 class="navbar-brand" style="font-size: 15px;">
-            At the heart of QMJ Enterprise lies a dedication to crafting unforgettable experiences. Established with a vision to redefine industry <br>
-            standards, QMJ Enterprise has consistently delivered excellence across its diverse array of services. From expertly arranging sound and <br> 
-            lighting setups to capturing captivating moments through professional photo and video shoots, QMJ Enterprise ensures that every project <br>
-            is marked by personalized and exceptional touches. This commitment not only ensures that its offerings are cutting-edge but also reflects <br>  
-            a proactive approach to meeting and exceeding client expectations. Whether it's designing albums, creating bespoke souvenirs, customizing <br>
-            clothing, or excelling in printing tarpaulins, QMJ Enterprise embraces innovation as a driving force for success.
+            <span style="margin-left:45px;font-size: 20px;">BE SPOKE |</span>&nbsp;&nbsp;<span style="font-size: 21px; font-weight:200;">CREATIONS</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; At the heart of Qmj Enterprise lies a dedication to crafting unforgettable experiences. Established with a vision to redefine industry standards, QMJ  <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enterprise has consistently delivered excellence across its diverse array of services. From expertly arranging sound and lighting setups to capturing cap-<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tivating moments through professional photo and video shoots, QMJ Enterprise ensures that every project is marked by personalized and exceptional to-<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uches. This commitment not only ensures that its offerings are cutting-edge but also reflects a proactive approach to meeting and exceeding client expec-<br>  
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tations. Whether it's designing albums, creating bespoke souvenirs, customizing clothing, or excelling in printing tarpaulins, QMJ Enterprise embraces in- <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;novation as a driving force for success.
           </h3>
         </div>
       </div>
       <br>
       <br>
       <div class="row">
-        <div class="col-md-7">
-          <h1 class="navbar-brand" style="font-size: 30px;"> OurStory|<span>2013...</span></h1>
+        <div class="col-md-7" style="margin-left:30px;">
+          <h1 class="navbar-brand" style="font-size: 25px;"> Our Story&nbsp;|<span>&nbsp;2013...</span></h1>
           <h4 class="navbar-brand" style="font-size: 15px; text-align: justify;">
             The early days weren't without challenges. From navigating <br>
             market fluctuations to establishing a foothold in a competitive <br> 
@@ -53,7 +65,8 @@
             solutions that not only met but exceeded expectations.
           </h4>
         </div>
-        <div class="col-md-5" style="margin-top: 10px;">
+        <br>
+        <div class="col-md-5" style="posotion:abosolute; margin-top: px;">
           <h1 class="navbar-brand" style="font-size: 30px;"> Challenges<span>...</span></h1>
           <h4 class="navbar-brand" style="font-size: 15px; text-align: justify;">
             It's important to note that businesses also use challenges as <br>
@@ -65,8 +78,10 @@
           </h4>
         </div>
       </div>
+      
       <div class="row d-flex align-items-center">
         <div class="col-md-7">
+         
           <img :src="require('../../assets/images/logo2.jpg')" alt="Description of the image" style="border-radius: 10px; width: 600px; margin-right: 20px; margin-top: 80px;">
         </div>
         <div class="col-md-5">
@@ -156,44 +171,17 @@ Sound and stage lights production.</p>
   
 <script>
 
-//   import mig from'../../assets/js/jquery-migrate-3.0.1.min.js'
-//   import popper from '../../assets/js/popper.min.js'
-
-//   import easing from '../../assets/js/jquery.easing.1.3.js'
-//   import way from '../../assets/js/jquery.waypoints.min.js'
-//   import stell from '../../assets/js/jquery.stellar.min.js'
-//   import carou from '../../assets/js/owl.carousel.min.js'
-
-//   import aos from '../../assets/js/aos.js'
-//   import animun from '../../assets/js/jquery.animateNumber.min.js'
-//   import date from '../../assets/js/bootstrap-datepicker.js'
- 
-//   import goog from'../../assets/js/google-map.js'
-//   import Main from '../../assets/js/main.js'
-
-//   export default{
-//     created(){
-//     console.log(jmin);
-//     console.log(mig);
-//     console.log(popper);
-
-//     console.log(easing);
-//     console.log(way);
-//     console.log(stell);
-//     console.log(carou);
-  
-//     console.log(aos);
-//     console.log(animun);
-//     console.log(date);
-
-//     console.log(goog);
-//     console.log(Main);
+// export default {
+//   data() {
+//     return {
+//       imageUrl: 'https://example.com/your-image.jpg' // Replace with your image URL
+//     };
 //   }
-
-// }
+// };
 </script>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
 @import '../../assets/css/open-iconic-bootstrap.min.css';
 @import '../../assets/css/animate.css';

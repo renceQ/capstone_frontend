@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <br><br><br><br><br><br><br>
-    <h1 class="text-center" style="font-size: 50px;">Available <span>Products...</span></h1>
-    <br>
-
+    <br><br><br><br><br><br><br><br>
+    <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
+    
     <div class="row justify-content-center">
       <div class="col-md-6">
         <label for="category_id" style="font-weight:400;" class="label text-center">Select Product Category</label><br>
@@ -27,11 +26,11 @@
         <div class="room-item text-center">
           <img :src="product.image" alt="" style="width: 180px; height: 180px;">
           <div class="ri-text">
-            <h4>{{ product.prod_name }}</h4>
+            <h4 style="font-family: 'Bebas Neue', cursive;">{{ product.prod_name }}</h4>
             <h4 style="display: none;">{{ product.category_id }}</h4>
-            <p>Unit Price: ₱{{ product.unit_price }}</p>
+            <p style="font-weight:400; color:rgb(221, 120, 4)">Unit Price: ₱{{ product.unit_price }}</p>
             <p>Available Size: {{ getSizeName(product.size_id) }}</p>
-            <button class="btn btn-outline-danger btn-sm" @click="preOrder(product)">Pre order</button>
+            <button class="neumorphic-button" style="width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:92%; left:41%;">Pre order</span></button>
           </div>
         </div>
       </div>
@@ -233,9 +232,10 @@ Sound and stage lights production.</p>
 
 
 
-<style>
+<style >
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
+@import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 /* Style for the label */
 .label {
   font-weight: bold;

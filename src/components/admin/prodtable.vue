@@ -748,7 +748,7 @@ saveBarcodeImage() {
   },
 };
 </script>
-<style>
+<style >
 /* Additional or modified CSS styles for the table */
 /* Additional or modified CSS styles for the table */
 .sticky-header th {
