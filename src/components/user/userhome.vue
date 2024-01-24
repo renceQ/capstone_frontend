@@ -15,17 +15,21 @@
 	<br>
 	<br>
     <div style="display: flex; align-items: center;">
-		<img :src="require('../../../public/img/black2.png')" alt="Description of the image" style="width: 400px; margin-left: 170px; margin-right: 0px; margin-top: 30px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+		<img :src="require('../../../public/img/black2.png')" alt="Description of the image" style="position:absolute;width: 420px; margin-left: 130px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); ">
 
-		<div style="margin-left:10px;">
+		<div style="margin-left:580px;">
 			<br>
 			<br>
 			<br>
 			<br>
 	
-			<h1 class="text-center" style="font-size: 20px;font-size:20px; font-weight:900;  margin-right:255px; margin-top:10px;">WELCOME TO QMJ <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:180px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Images...</span></h1>
+			<h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+			animation: fade-up .8s ease-out forwards;
+			animation-delay: 0.2s;font-size: 20px;font-size:20px; font-weight:900;  margin-right:255px; margin-top:10px;">WELCOME TO QMJ <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Images...</span></h1>
 		
-			<h2 class="navbar-brand" href="index.html" style="margin-top:40px;font-size: 16px;">
+			<h2 class="navbar-brand" href="index.html" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+			animation: fade-up .8s ease-out forwards;
+			animation-delay: 0.4s;margin-top:40px;font-size: 16px; ">
 				Youre one stop destination for memorable experiences!
 				<br>Explore our curated book event services, discover<br>
 				  unique products, and personalized items to make each<br>
@@ -40,10 +44,12 @@
   to="/about"
   class="neumorphic-link"
   style="
-	
-    padding: 10px 20px;
+  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+animation: fade-up .8s ease-out forwards;
+animation-delay: 0.5s;
+    padding: 10px 30px;
     font-size: 16px;
-    background: linear-gradient(45deg, #000, #6d6d6d);
+    background: linear-gradient(45deg, #000,#000, #6d6d6d);
     border: none;
 	color:white;
     border-radius: 4px;
@@ -63,11 +69,14 @@
 	<router-link
 	to="/userServices"
 	class="neumorphic-link"
-	style="
+	style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+	animation: fade-up .8s ease-out forwards;
+	animation-delay: 0.5s;
 	  margin-left:8px;
 	  padding: 10px 20px;
 	  font-size: 16px;
-	  background-color: rgb(151, 150, 150);
+	  background: linear-gradient(45deg, #6d6d6d, rgb(173, 173, 173));
+	
 	  height:45px;
 	  color:white;
 	  border-radius: 4px;

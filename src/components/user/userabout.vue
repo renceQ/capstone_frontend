@@ -1,12 +1,15 @@
 <template>
   
-  <section class="hero-wrap-0 js-fullheight" style=" margin-bottom:100px; margin-top:220px; margin-left:80px;" data-stellar-background-ratio="0.5">
+  <section class="hero-wrap-0 js-fullheight" style=" margin-bottom:100px; margin-top:190px; margin-left:80px;" data-stellar-background-ratio="0.5">
     
     <div style="display: flex; align-items: left; text-align: justify;">
 
-      <div style="margin-right: 0px; margin-left: 120px;">
+      <div style="margin-right: 0px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up 0.8s ease-out forwards;">
         <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:30px;">ABOUT <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
-        <h2 class="navbar-brand" href="index.html" style="font-size: 15px;">
+        <h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.2s;font-size: 15px;">
           &nbsp;&nbsp;&nbsp; QMJ Enterprises is dedicated to crafting unforgettable experiences <br>
           through a diverse array of services. From expertly arranging sound <br>
           and lighting setups to capturing captivating moments through professional<br>
@@ -16,12 +19,43 @@
            personalized and exceptional touches that leave a lasting impression.
         </h2>
       </div>
-      
+
+      <router-link
+  to="#"
+  @click="scrollDown"
+  class="neumorphic-link"
+  style="
+  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+animation: fade-up .8s ease-out forwards;
+animation-delay: 0.5s;
+    padding: 8px 30px;
+    margin-top:20%;
+    height:40px;
+    left:14.5%;
+    font-size: 16px;
+    background: linear-gradient(45deg, #000, #000, #ff7920);
+    border: none;
+	color:white;
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* To remove underline */
+    position: absolute
+    ; /* For pseudo-element */
+  "
+>
+  Read More
+</router-link>
+
       <div style="display: flex; align-items: center; justify-content: flex-end;">
         <img 
           :src="require('../../assets/img/first.png')" 
           alt="Description of the image" 
-          style="position:absolute; border-radius: 10px; width: 570px; right:7%; transition: transform 0.3s ease-in-out;"
+          style="  
+        
+          animation-delay: 0.3s;
+        position:absolute; border-radius: 10px; width: 570px; right:7%;margin-top:45px; transition: transform 0.3s ease-in-out ;"
           onmouseover="this.style.transform='scale(1.1)'" 
           onmouseout="this.style.transform='scale(1)'"
         />
@@ -56,7 +90,7 @@
       <br>
       <div class="row">
         <div class="col-md-7" style="margin-left:550px;">
-          <h1 class="navbar-brand" style="font-size: 25px;  margin-top:40px;"> Our Story&nbsp;|<span>&nbsp;2013...</span></h1>
+          <h1 class="navbar-brand" style="font-size: 25px;  margin-top:-20px;"> Our Story&nbsp;|<span>&nbsp;2013...</span></h1>
           <h4 class="navbar-brand" style="font-size: 15px; text-align: justify;">
             The early days weren't without challenges. From navigating <br>
             market fluctuations to establishing a foothold in a competitive <br> 
@@ -72,7 +106,7 @@
           <img 
             :src="require('../../assets/img/KRAM (1).png')" 
             alt="Description of the image" 
-            style="position:absolute; top:800px; border-radius: 10px; width: 760px; right:40%; transition: transform 0.3s ease-in-out;"
+            style="position:absolute; top:37%; border-radius: 10px; width: 650px; right:44%; transition: transform 0.3s ease-in-out;"
             onmouseover="this.style.transform='scale(1.1)'" 
             onmouseout="this.style.transform='scale(1)'"
           />
@@ -159,14 +193,21 @@ Sound and stage lights production.</p>
   </template>
   
 <script>
+export default {
+  methods: {
+    scrollDown() {
+      // Calculate the position to scroll to (adjust the value as needed)
+      const scrollPosition = window.scrollY + 530; // You can adjust the value as needed
 
-// export default {
-//   data() {
-//     return {
-//       imageUrl: 'https://example.com/your-image.jpg' // Replace with your image URL
-//     };
-//   }
-// };
+      // Use smooth scroll for a better user experience
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+};
+
 </script>
 
 <style>

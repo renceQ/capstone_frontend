@@ -9,9 +9,14 @@
           <br>
   
           <div class="center-text">
-          <h1 class="navbar-brand" href="index.html" style="font-size: 50px; "> Monthly|<span>BLOG</span></h1>
-                      <h2>Blogs and Articles</h2>
-                      <p>Always upto date with our latest News and Events </p>
+            <h1 class="text-center" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .6s ease-out forwards;
+            font-size: 20px;font-size:20px; font-weight:900;  margin-right:190px; margin-top:70px;">MONTHLY<span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Blog...</span></h1>
+                    
+            <h4 style="margin-top:50px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+                      animation: fade-up .6s ease-out forwards; animation-delay: 0.3s;">Blogs and Articles</h4>
+                      <p style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+                      animation: fade-up .6s ease-out forwards; animation-delay: 0.4s;">Always upto date with our latest News and Events </p>
                   </div><!--/.section-header-->
           </div>
           <br>

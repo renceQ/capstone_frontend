@@ -1,46 +1,74 @@
 <template>
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
   <div>
-<div style="margin-left:450px;">
+<div style="margin-left:600px; margin-top:230px">
   <div class="row d-flex align-items-center">
      
-    <img 
-    :src="require('../../../public/img/black.png')" 
+   <img 
+    :src="require('../../../public/img/cart.png')" 
     alt="Description of the image" 
-    style="position:absolute; top:6%; border-radius: 10px; width: 300px; left:5%; transition: transform 0.3s ease-in-out;"
+    style="  
+        
+    animation-delay: 0.3s;
+  position:absolute; border-radius: 10px;top:4.5%; width: 790px; left:-1%; transition: transform 0.3s ease-in-out ;"
     onmouseover="this.style.transform='scale(1.1)'" 
     onmouseout="this.style.transform='scale(1)'"
-  /> lagyan ko pa shadow
+/>
+
+
 </div>
-			<h1 class="navbar-brand" href="index.html" style="font-size: 50px;margin-left:90px; "> Our|<span>Services...</span></h1>
+<h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left:49%; position:absolute; top:5.5%;">OUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:74px; font-weight:400; font-family: 'WindSong', cursive;">Services...</span></h1>
+
 			<br>
       <br>
-			<h2 class="navbar-brand" href="index.html" style="font-size: 20px;">
-				"Welcome to QMJ Enterprises! We offer a diverse range of <br>services including sounds and lighting appointments, <br>professional photo and video shoots, album production, <br>invitations, souvenirs, personalized clothing, and bespoke <br>design suggestions."
-			</h2>
+			<h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.2s;font-size: 17px; margin-left:65px; margin-top:30px;">
+				"Welcome to QMJ Enterprises! We offer a diverse range of <br>services including sounds and lighting appointments, <br>professional photo and video shoots, album production, <br>invitations, souvenirs, pre order products,  personalized clothing,<br> and bespoke design suggestions."
+			</h2>  
+      
+      
+      <router-link
+      to="#"
+      @click="scrollDown"
+      class="neumorphic-link"
+      style="
+      opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.5s;
+        padding: 8px 30px;
+        margin-top:13%;
+        height:40px;
+        right:40.5%;
+        font-size: 16px;
+        background: linear-gradient(45deg, #000, #000, #dad8d8);
+        border: none;
+      color:white;
+        border-radius: 4px;
+        box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+        transition: all 0.3s ease;
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* To remove underline */
+        position: absolute
+        ; /* For pseudo-element */
+      "
+    >
+      Read More
+    </router-link>
+
+
             <br>
             <br>
+            
             <br>
           </div>
-			<div style="margin-left:320px;">
-				<a href="#" style="padding: 10px 20px; font-size: 16px; background-color: #f0f0f0; border: none;  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff; transition: all 0.3s ease;">Sounds and Lights</a>
-                <a  href="#" style="padding: 10px 20px; font-size: 16px; background-color: #f0f0f0; border: none;  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff; transition: all 0.3s ease;">photo/video production</a>
-                <a href="#"  style="padding: 10px 20px; font-size: 16px; background-color: #f0f0f0; border: none;  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff; transition: all 0.3s ease;">Items Customization</a>
-                <a href="#"  style="padding: 10px 20px; font-size: 16px; background-color: #f0f0f0; border: none;  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff; transition: all 0.3s ease;">Tarpaulin Printing </a>
-			</div>
     </div>
       <br>
 
-            <br><br><br><br>
+           
         
-          <div class="row justify-content-end" style="margin-left:450px;">
+          <div class="row justify-content-end" style="margin-left:450px; margin-top:110px;">
             <strong class="mb-4" style="margin-right: 300px; font-size: 50px;">What We Do....</strong>
             <div class="col-md-7">
                
@@ -248,6 +276,15 @@ Sound and stage lights production.</p>
   </template>
 
 <style>
+.zoomable {
+  cursor: pointer;
+}
+
+.zoomable:hover {
+  transform: scale(1.1);
+  opacity: 1;
+
+}
 
 
 </style>
@@ -260,23 +297,16 @@ export default {
     };
   },
   methods: {
-    scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Check if the target element is a <template>
-      if (element.tagName.toLowerCase() === 'template') {
-        // Do something if it's a <template>, like showing an alert or performing a different action
-        console.log("This is a template, skipping scroll");
-        return; // Exit the function without scrolling
-      }
+    scrollDown() {
+      // Calculate the position to scroll to (adjust the value as needed)
+      const scrollPosition = window.scrollY + 530; // You can adjust the value as needed
 
-      // Scroll to the element if it's not a <template>
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      // Use smooth scroll for a better user experience
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
       });
     }
-  }
 }
 };
 </script>

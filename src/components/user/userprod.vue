@@ -1,19 +1,25 @@
 <template>
   <div class="container">
     <br><br><br><br><br><br><br><br>
-    <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
+    <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
     
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <label for="category_id" style="font-weight:400;" class="label text-center">Select Product Category</label><br>
+        <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up 0.8s ease-out forwards; font-weight:400;" class="label text-center">Select Product Category</label><br>
         <div class="select-wrapper" style="margin-left:33%;" >
-          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px; border-radius:5px;">
+          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.2s;width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px; border-radius:5px;">
             <option value="">All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.category_name }}
             </option>
           </select>
-          <i class="fas fa-caret-down arrow-icon" style="position: absolute; margin-right:24px;"></i>
+          <i class="fas fa-caret-down arrow-icon" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.1s; top:15px; position: absolute; margin-right:24px;"></i>
         </div>
       </div>
     </div>
@@ -24,13 +30,23 @@
       <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4">
         <!-- Product Card -->
         <div class="room-item text-center">
-          <img :src="product.image" alt="" style="width: 180px; height: 180px;">
+          <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.1s;width: 180px; height: 180px;">
           <div class="ri-text">
-            <h4 style="font-family: 'Bebas Neue', cursive;">{{ product.prod_name }}</h4>
+            <h4 style="font-family: 'Bebas Neue', cursive; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s; ">{{ product.prod_name }}</h4>
             <h4 style="display: none;">{{ product.category_id }}</h4>
-            <p style="font-weight:400; color:rgb(221, 120, 4)">Unit Price: ₱{{ product.unit_price }}</p>
-            <p>Available Size: {{ getSizeName(product.size_id) }}</p>
-            <button class="neumorphic-button" style="width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:92%; left:41%;">Pre order</span></button>
+            <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;  color:rgb(221, 120, 4)">Unit Price: ₱{{ product.unit_price }}</p>
+            <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s; ">Available Size: {{ getSizeName(product.size_id) }}</p>
+            <button class="neumorphic-button" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s; width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:25%; left:25%;">Pre order</span></button>
           </div>
         </div>
       </div>
