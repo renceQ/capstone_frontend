@@ -1,11 +1,16 @@
 <template>
-	
+	<div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px;">
+		<div class="box speech-bottom success">
+		  <em>Hello! welcome</em><br/>
+		  <strong v-if="info.length > 0" style="font-size: 15px;"> {{ info[0].showed_username }} </strong>
+		</div>
+	  </div>
 	<form @data-saved="getUserDetails" />
 	<div>
 		<tr v-for="info in info">
 			<td>{{ info.category_name}}</td>
 			<td>
-			  <button @click="editprofile" class="btn btn-success btn-sm edit">Edit profile</button>
+			 
 			</td>
 		  </tr>
 	</div>
@@ -15,8 +20,7 @@
 	<br>
 	<br>
     <div style="display: flex; align-items: center;">
-		<img :src="require('../../../public/img/black2.png')" alt="Description of the image" style="position:absolute;width: 420px; margin-left: 130px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); ">
-
+		<img @click="toggleWelcomeMessage" :src="require('../../../public/img/black2.png')" alt="Description of the image" style="position:absolute;width: 420px; margin-left: 130px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" />
 		<div style="margin-left:580px;">
 			<br>
 			<br>
@@ -146,9 +150,125 @@ img:hover {
 	bottom: -10px; /* Move the underline away on hover */
 	background-color: transparent; /* Hide the underline on hover */
   }
+
+
+
+
+.box.success
+{
+  border-color:  rgb(25, 26, 25);
+  background: rgb(25, 26, 25);
+  color: white;
+}
+
+.box
+{
+  min-width: 50px;
+  min-height: 40px;
+  border-color: #CCC;
+  background-color: #CCC;
+  color: #555;
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  font-size: 13px;
+  margin: 20px;
+  border-radius: 10px;  
+  box-shadow: inset 1px 1px 0px rgba(172, 171, 171, 0.2),
+              inset -1px -1px 0px rgba(0, 0, 0, 0.6),
+              0 14px 6px -10px rgba(0, 0, 0, 0.3);
+}
+
+.speech-top:after
+{
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -19px;
+  left: 10px;
+  border: 10px solid;
+  border-color: transparent;
+  border-bottom-color: inherit;  
+}
+
+.speech-bottom:after
+{
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 89%;
+  left: 82px;
+  margin-top: -2px;
+  border: 10px solid;  
+  border-color: transparent;
+  border-top-color: inherit;
+}
+
+.speech-push-right:after
+{
+  left: 100%;
+  margin-left: -30px;
+}
+.welcome-message {
+	opacity: 1;
+	transition: opacity 0.4s ease-in-out; /* Adjust the duration and timing function as needed */
+  }
+  
+  .welcome-message.hidden {
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out; /* Adjust the duration and timing function as needed */
+  }
 </style>
 
 <script>
 
+import axios from 'axios';
 
+export default {
+  data() {
+    return {
+	    info: [],
+		showWelcomeMessage: false,
+    };
+  },
+  mounted() {
+	this.getInfo(); 
+  },
+  
+  created() {
+	this.token = sessionStorage.getItem('jwt');
+  if (this.token) {
+    this.getInfo();
+  } else {
+    // Handle the case where token is not available in local storage
+    console.error('JWT token not found in local storage');
+  }
+  this.getInfo();
+},
+  methods: {
+	toggleWelcomeMessage() {
+  // Toggle the welcome message visibility
+  this.showWelcomeMessage = !this.showWelcomeMessage;
+
+  // If showing the welcome message, set a timeout to hide it after 3 seconds
+  if (this.showWelcomeMessage) {
+    setTimeout(() => {
+      this.showWelcomeMessage = false;
+    }, 3000); // 3000 milliseconds (3 seconds)
+  }
+},
+ 
+  async getInfo() {
+    try {
+      const response = await axios.get(`getUserData/${this.token}`);
+      this.info = response.data; // Assuming response.data is an object/array of user data
+    } catch (error) {
+      console.error(error);
+      // Handle the error case, such as showing a message to the user
+    }
+  },
+}
+};
 </script>
