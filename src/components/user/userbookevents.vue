@@ -1,7 +1,8 @@
 <template>
+  <div style="height:100%;">
     <br>
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap hero-wrap-2 js-fullheight" style="height:1400px;" data-stellar-background-ratio="0.5">
       <div style="width: 600px; position: absolute; margin-left: 100px;">
         <div >
           <br>
@@ -9,88 +10,129 @@
           <br>
           <br>
           <br>
-          <h1 class="navbar-brand" href="index.html" style="font-size: 50px; margin-left: 110px;"> Book|<span>US now...</span></h1>
+          <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:50px;">BOOK FOR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
           <br>
           <div>
-           
-            <form @submit.prevent="saveBooking" class="container mt-5 p-4 bg-light rounded shadow-lg" >
-              <h2 class="mb-4">Request for event</h2>
-              
-              <!-- Event Information -->
-              <div class="form-group">
-                <label for="event_title">Event Title:</label>
-                <input type="text" class="form-control" placeholder="Event Title" v-model="event_title" required>
-              </div>
 
-              <div class="form-group">
-                <label for="service">Services</label>
-                <div class="position-relative">
-                    <select class="form-control" v-model="service" required>
-                        <option value="" disabled selected>Select a service</option>
-                        <option value="Sounds Service">Sounds Service</option>
-                        <option value="Lights Service">Lights Service</option>
-                        <option value="Photo Shoot Service">Photo Shoot Service</option>
-                        <option value="Video Shoot Service">Video Shoot Service</option>
-                        <option value="Photo & Video Shoots Service">Photo & Video Shoots Service</option>
-                        <option value="Photo & Video Shoots Service With SDE">Photo & Video Shoots Service With SDE</option>
-                        <option value="Sounds & Lights Service">Sounds & Lights Service</option>
-                        <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
-                        <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
-                        <option value="Sounds and Lights with Photo Video Shoots and SDE Service">Sounds and Lights with Photo Video Shoots and SDE Service</option>
-                    </select>
-                    <i class="fas fa-caret-down position-absolute end-0 bottom-0 p-3" style="pointer-events: none;"></i>
-                </div>
-            </div>
-            
-              
-              
-              <div class="form-group">
-                <label for="start_date">Start Date:</label>
-                <input type="date" class="form-control" v-model="start_date" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="end_date">End Date:</label>
-                <input type="date" class="form-control" v-model="end_date" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" class="form-control" placeholder="Location" v-model="location" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="event_description">Description:</label>
-                <textarea class="form-control" v-model="event_description" placeholder="Other Description" required></textarea>
-              </div>
-              
-              <!-- Attendee Information -->
-              <h3>Contact Details</h3>
-              
-              <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" placeholder="Name" v-model="name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" placeholder="Email Address" v-model="email" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" class="form-control" placeholder="Phone" v-model="phone" required>
-              </div>
-              
-              <button type="submit" class="btn btn-primary">Book Event</button>
-            </form>
+            <button  @click="openDialog" type="button" class="neumorphic-button"  style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;background-color: rgb(255, 255, 255);width: 260px;
+            height:100px; margin-left:40px;">
+            <img :src="require('../../assets/images/1.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+           <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;"> SOUNDS SERVICE</span><span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+          </button>
+
+
+          <button  @click="openDialog" type="button" class="neumorphic-button"  style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.2s;background-color: rgb(255, 255, 255);width: 260px;
+          height:100px; margin-left:30px;">
+          <img :src="require('../../assets/images/2.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+         <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;"> LIGHTS SERVICE</span><span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+        </button>
+
+        <br>
+
+        <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+        height:100px; margin-left:40px; margin-top:20px;">
+        <img :src="require('../../assets/images/3.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+       <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO SHOOT<span style="position:absolute; left:1%; margin-top:20px;">SERVICE</span>
+       </span>
+       <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+      </button>
+
+
+      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+        height:100px; margin-left:30px; margin-top:20px;">
+        <img :src="require('../../assets/images/5.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+       <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">VIDEO SHOOT<span style="position:absolute; left:1%; margin-top:20px;">SERVICE</span>
+       </span>
+       <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+      </button>
+
+      <br>
+
+      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+      height:100px; margin-left:40px; margin-top:20px;">
+      <img :src="require('../../assets/images/4.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO AND VIDEO<span style="position:absolute; left:1%; margin-top:20px;">SHOOT</span>
+     </span>
+     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+    </button>
+
+
+    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+      height:100px; margin-left:30px; margin-top:20px;">
+      <img :src="require('../../assets/images/6.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO AND VIDEO<span style="position:absolute; left:1%; margin-top:20px;">SHOOT WITH SDE</span>
+     </span>
+     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+    </button>
+
+    <br>
+
+      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+      height:100px; margin-left:40px; margin-top:20px;">
+      <img :src="require('../../assets/images/7.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:-55%; margin-top:20px; width:200px;">LIGHTS SERVICE</span>
+     </span>
+     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+    </button>
+
+
+    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+      height:100px; margin-left:30px; margin-top:20px;">
+      <img :src="require('../../assets/images/8.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+     <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:1%; margin-top:20px;">LIGHTS WITH <span style="position:absolute; left:-60%; margin-top:20px;width:200px;">PHOTO SERVICE </span> </span>
+     </span>
+     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+    </button>
+
+
+    <br>
+
+    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+    height:100px; margin-left:40px; margin-top:20px;">
+    <img :src="require('../../assets/images/9.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+    <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:1%; margin-top:20px;">LIGHTS WITH <span style="position:absolute; left:-70%; margin-top:20px;width:200px;">PHOTO VIDEO </span> </span>
+  </span>
+   <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+  </button>
+
+
+  <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+  animation: fade-up .8s ease-out forwards;
+  animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+    height:100px; margin-left:30px; margin-top:20px;">
+    <img :src="require('../../assets/images/10.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+   <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS, LIGHTS<span style="position:absolute; left:1%; margin-top:20px;">PHOTO, VIDEO <span style="position:absolute; left:-80%; margin-top:20px;width:200px;">WITH SDE </span> </span>
+   </span>
+   <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+  </button>
 
                 
-<div class="calendar-container" style=" position: absolute; margin-left:700px; top: 160px;">
+<div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+animation: fade-up .8s ease-out forwards;
+animation-delay: 0.4s;position: absolute; margin-left:700px; top: 160px;">
 
   <v-row>
     <v-col cols="12">
-      <h2>Event Schedules</h2>
+      <h2 style=" font-family: 'Bebas Neue', cursive; ">Event Schedules</h2>
       <ul>
         <li v-for="event in approvedRequests" :key="event.id">
           {{ event.event_title }} - {{ formatDate(event.start_date) }} to {{ formatDate(event.end_date) }}
@@ -111,7 +153,7 @@
         </select>
   </div>
   <div >
-    <table style="width: 450px; height: 450px;">
+    <table style="width: 440px; height: 400px;">
       <thead>
         <tr>
           <th colspan="7">{{ currentMonth }} {{ selectedYear }}</th>
@@ -139,89 +181,11 @@
 
     
     </div>
-    </section>
+    </div>
     
   
-    <section class="ftco-section d-md-flex bg-light" id="sec1">
-      <div class="container" >
-        <div class="row justify-content-end">
-          <div class="col-md-7">
-            <h6>With 19 years of invaluable experience, QMJ Enterprises stands as a 
-              seasoned <br><br>expert in creating exceptional and memorable experiences. Over nearly two decades,<br>
-              <br>their expertise which ensures every client receives unparalleled service and enduring<br><br>
-               satisfaction.</h6>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <section class="ftco-counter img" id="section-counter">
-      <div class="container">
-        <div class="row d-flex">
-          <div class="col-md-6 d-flex">
-            <img :src="require('../../assets/images/log.jpg')" alt="Description of the image" style="border-radius: 10px; width: 500px; margin-right: 100px; margin-top: 80px;margin-bottom: 100px;">
-          </div>
-          <div class="col-md-6 pl-md-5 py-5">
-            <div class="row justify-content-start pb-3">
-              <div class="col-md-12 ">
-                <span class="subheading">Fun Facts</span>
-                <h2 class="mb-4"><span>Fun</span> Facts</h2>
-                <p>wala pako datasssssssssssssssssssss</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 ">
-                <div class="block-18 text-center py-4 bg-light mb-4">
-                  <div class="text">
-                    <div class="icon ">
-                      <span class="flaticon-guest"></span>
-                    </div>
-                    <strong class="number" data-number="30">31</strong>
-                    <span>Speakers</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 ">
-                <div class="block-18 text-center py-4 bg-light mb-4">
-                  <div class="text">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                      <span class="flaticon-handshake"></span>
-                    </div>
-                    <strong class="number" data-number="200">13</strong>
-                    <span>Sponsor</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 ">
-                <div class="block-18 text-center py-4 bg-light mb-4">
-                  <div class="text">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                      <span class="flaticon-chair"></span>
-                    </div>
-                    <strong class="number" data-number="2500">21</strong>
-                    <span>Total Seats</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 ">
-                <div class="block-18 text-center py-4 bg-light mb-4">
-                  <div class="text">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                      <span class="flaticon-idea"></span>
-                    </div>
-                    <strong class="number" data-number="40">42</strong>
-                    <span>Topics</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-  
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
+   
+    <div class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
@@ -279,7 +243,102 @@ Sound and stage lights production.</p>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
+
+
+
+
+             
+                <!-- review dialog-->
+                <v-dialog v-model="dialogs" max-width="500px">
+                  <form @submit.prevent="saveBooking" class="container  " >
+                  <v-card>
+                    <v-card-title class="headline" style="margin-left: 160px;">Request Form</v-card-title>
+                    <v-card-text>
+                        
+            
+              <div class="form-group">
+                <label for="event_title">Event Title:</label>
+                <input type="text" class="form-control" placeholder="Event Title" v-model="event_title" required>
+              </div>
+
+              <div class="form-group">
+                <label for="service">Services</label>
+                <div class="position-relative">
+                    <select class="form-control" v-model="service" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="Sounds Service">Sounds Service</option>
+                        <option value="Lights Service">Lights Service</option>
+                        <option value="Photo Shoot Service">Photo Shoot Service</option>
+                        <option value="Video Shoot Service">Video Shoot Service</option>
+                        <option value="Photo & Video Shoots Service">Photo & Video Shoots Service</option>
+                        <option value="Photo & Video Shoots Service With SDE">Photo & Video Shoots Service With SDE</option>
+                        <option value="Sounds & Lights Service">Sounds & Lights Service</option>
+                        <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
+                        <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
+                        <option value="Sounds and Lights with Photo Video Shoots and SDE Service">Sounds and Lights with Photo Video Shoots and SDE Service</option>
+                    </select>
+                    <i class="fas fa-caret-down position-absolute end-0 bottom-0 p-3" style="pointer-events: none;"></i>
+                </div>
+            </div>
+            
+              
+              
+              <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" class="form-control" v-model="start_date" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" class="form-control" v-model="end_date" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" placeholder="Location" v-model="location" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="event_description">Description:</label>
+                <textarea class="form-control" v-model="event_description" placeholder="Other Description" required></textarea>
+              </div>
+          
+              <h3>Contact Details</h3>
+              
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" placeholder="Name" v-model="name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" placeholder="Email Address" v-model="email" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" placeholder="Phone" v-model="phone" required>
+              </div>
+              
+             
+                    </v-card-text>
+                    <v-card-actions>
+                
+                      <div style="margin-bottom: 10px;">
+                        <button type="submit"   class="neumorphic-button"
+                        style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
+                     
+                      </div>
+                    
+                    </v-card-actions>
+                    
+                  </v-card>
+                </form>
+                </v-dialog>
+
+
   </template>
   
   
@@ -289,6 +348,7 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      dialogs: false,
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -338,6 +398,12 @@ Sound and stage lights production.</p>
     this.updateCalendar();
   },
   methods: {
+    openDialog() {
+    this.dialogs = true;
+  },
+    closeDialog() {
+      this.dialogs = false;
+    },
     updateCalendar() {
     const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
     const lastDate = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
@@ -478,6 +544,7 @@ hasEventOnDate(date) {
 
         this.$emit('data-saved');
         this.getInfo();
+        this.dialogs = false;
       } catch (error) {
         console.error(error);
       }
@@ -486,7 +553,7 @@ hasEventOnDate(date) {
 };
   </script>
   
-  <style> 
+  <style scoped> 
  
   .calendar-container {
     position: absolute;

@@ -68,8 +68,10 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
 
            
         
-          <div class="row justify-content-end" style="margin-left:450px; margin-top:110px;">
-            <strong class="mb-4" style="margin-right: 300px; font-size: 50px;">What We Do....</strong>
+          <div class="row justify-content-end" style="margin-left:450px; margin-top:140px;">
+            <h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;font-size: 20px;font-size:20px; font-weight:900;  margin-right:70%; margin-top:10px;">What we <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Do...</span></h1>
             <div class="col-md-7">
                
             </div>
@@ -80,15 +82,15 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
         <div class="container">
           <div class="row d-flex">
             <div class="col-md-6 d-flex">
-              <img :src="require('../../assets/images/soundsandlights.jpg')" alt="Description of the image" style="border-radius: 10px; width: 500px; margin-right: 100px; margin-top: 10px;margin-bottom: 100px;">
+              <img :src="require('../../assets/images/soundsandlights.jpg')" alt="Description of the image" style="border-radius: 10px; width: 400px; height:350px; margin-left: 15%; margin-top: 8%;margin-bottom: 100px;">
             </div>
             <div class="col-md-6 pl-md-5 py-5">    
                 <div class="col-md-12 ">
-                  <h2 class="mb-4">Sounds and Lights</h2>
+                  <h2 class="mb-4" style="margin-top:70px;">Sounds and Lights</h2>
               </div>
               <div class="row" style="width: 1100px;">
                 <div class="col-md-6 ">
-                  <div class="block-18 text-center py-4 bg-light mb-4">
+                  <div class="block-18 py-4 bg-white mb-4">
                     <div class="text">
                       <div class="icon ">
                       </div>
@@ -99,14 +101,46 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                         occasion. With our expertise, we guarantee an immersive <br>audio-visual
                         experience, ensuring your event stands out with  <br>unparalleled ambiance
                         and professional-grade equipment.</h5>
+         
                         <br> <br> <br>
                     </div>
+                  
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <router-link
+        to="/bookevents"
+        @click="scrollUp"
+        class="neumorphic-link"
+        style="
+       
+        position:absolute;
+        opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.5s;
+          padding: 8px 30px;
+        
+          top:32%;
+          height:40px;
+          left:51.5%;
+          font-size: 16px;
+          background: linear-gradient(45deg, #180101, #740a0a, #fae6e6);
+          border: none;
+        color:white;
+          border-radius: 4px;
+          box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+          transition: all 0.3s ease;
+          text-decoration: none; /* Remove underline */
+          display: inline-block; /* To remove underline */
+          
+          ; /* For pseudo-element */
+        "
+      >
+        Make Request
+      </router-link>
         </section>
 
             
@@ -114,20 +148,20 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
             <div class="container">
               <div class="row d-flex">
                 <div class="col-md-6 d-flex">
-                  <img :src="require('../../assets/images/pis2.jpg')" alt="Description of the image" style="border-radius: 10px; width: 500px; margin-right: 100px; margin-top: 10px;margin-bottom: 100px;">
+                  <img :src="require('../../assets/images/pis2.jpg')" alt="Description of the image" style="border-radius: 10px;  width: 400px; height:380px; margin-left: 80px; margin-top: 25px;margin-bottom: 100px;">
                 </div>
                 <div class="col-md-6 pl-md-5 py-5">    
                     <div class="col-md-12 ">
-                      <h2 class="mb-4">Photo and Video Production</h2>
+                      <h2 class="mb-4" style="margin-top:50px;">Photo and Video Production</h2>
                   </div>
                   <div class="row" style="width: 1100px;">
                     <div class="col-md-6 ">
-                      <div class="block-18 text-center py-4 bg-light mb-4">
+                      <div class="block-18  py-4 bg-white mb-4">
                         <div class="text">
                           <div class="icon ">
                           </div>
                           <h5 style="font-size:17px;">Our services cover a complete spectrum of event solutions,<br> 
-                            specializing in cutting-edge sound and lighting arrangements.<br>
+                            specializing in cutting-edge sound and whiteing arrangements.<br>
                             We provide a comprehensive range of top-quality sound systems <br>
                             and state-of-the-art lighting setups tailored to elevate any <br>
                             occasion. With our expertise, we guarantee an immersive <br>audio-visual
@@ -141,6 +175,36 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                 </div>
               </div>
             </div>
+            <router-link
+            to="/bookevents"
+            @click="scrollUps"
+            class="neumorphic-link"
+            style="
+           
+            position:absolute;
+            opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.5s;
+              padding: 8px 30px;
+            
+              top:46.8%;
+              height:40px;
+              left:51.5%;
+              font-size: 16px;
+              background: linear-gradient(45deg, #000000, #394255, #f6f3fd);
+              border: none;
+            color:white;
+              border-radius: 4px;
+              box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+              transition: all 0.3s ease;
+              text-decoration: none; /* Remove underline */
+              display: inline-block; /* To remove underline */
+              
+              ; /* For pseudo-element */
+            "
+          >
+            Make Request
+          </router-link>
             </section>
     
     
@@ -148,15 +212,15 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                 <div class="container">
                   <div class="row d-flex">
                     <div class="col-md-6 d-flex">
-                      <img :src="require('../../assets/images/hood.jpg')" alt="Description of the image" style="border-radius: 10px; width: 500px; margin-right: 100px; margin-top: 10px;margin-bottom: 100px;">
+                      <img :src="require('../../assets/images/hood.jpg')" alt="Description of the image" style="border-radius: 10px; width: 400px; margin-left: 80px; margin-top: 40px;margin-bottom: 100px;">
                     </div>
                     <div class="col-md-6 pl-md-5 py-5">    
                         <div class="col-md-12 ">
-                          <h2 class="mb-4">Items Customization</h2>
+                          <h2 class="mb-4" style="margin-top:60px;">Items Customization</h2>
                       </div>
-                      <div class="row" style="width: 1100px;">
+                      <div class="row" style="width: 1100px; ">
                         <div class="col-md-6 ">
-                          <div class="block-18 text-center py-4 bg-light mb-4">
+                          <div class="block-18 py-4 bg-white mb-4 " >
                             <div class="text">
                               <div class="icon ">
                               </div>
@@ -175,6 +239,36 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                     </div>
                   </div>
                 </div>
+                <router-link
+                to="/bookevents"
+                @click="scrollUps"
+                class="neumorphic-link"
+                style="
+               
+                position:absolute;
+                opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+              animation: fade-up .8s ease-out forwards;
+              animation-delay: 0.5s;
+                  padding: 8px 30px;
+                
+                  top:62.8%;
+                  height:40px;
+                  left:51.5%;
+                  font-size: 16px;
+                  background: linear-gradient(45deg, #000000, #553b26, #f6f3fd);
+                  border: none;
+                color:white;
+                  border-radius: 4px;
+                  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+                  transition: all 0.3s ease;
+                  text-decoration: none; /* Remove underline */
+                  display: inline-block; /* To remove underline */
+                  
+                  ; /* For pseudo-element */
+                "
+              >
+                Make Request
+              </router-link>
                 </section>
 
                 
@@ -183,15 +277,15 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                 <div class="container">
                   <div class="row d-flex">
                     <div class="col-md-6 d-flex">
-                      <img :src="require('../../assets/images/tarp.jpg')" alt="Description of the image" style="border-radius: 10px; width: 500px; margin-right: 100px; margin-top: 10px;margin-bottom: 100px;">
+                      <img :src="require('../../assets/images/tarp.jpg')" alt="Description of the image" style="border-radius: 10px; width: 400px; height:370px; margin-left: 80px; margin-top: 40px;margin-bottom: 100px;">
                     </div>
                     <div class="col-md-6 pl-md-5 py-5">    
                         <div class="col-md-12 ">
-                          <h2 class="mb-4">Tarpaulin Printing </h2>
+                          <h2 class="mb-4" style="margin-top:60px;">Tarpaulin Printing </h2>
                       </div>
                       <div class="row" style="width: 1100px;">
                         <div class="col-md-6 ">
-                          <div class="block-18 text-center py-4 bg-light mb-4">
+                          <div class="block-18  py-4 bg-white mb-4">
                             <div class="text">
                               <div class="icon ">
                               </div>
@@ -209,7 +303,36 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>  <router-link
+                to="/bookevents"
+                @click="scrollUps"
+                class="neumorphic-link"
+                style="
+               
+                position:absolute;
+                opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+              animation: fade-up .8s ease-out forwards;
+              animation-delay: 0.5s;
+                  padding: 8px 30px;
+                
+                  top:78.1%;
+                  height:40px;
+                  left:51.5%;
+                  font-size: 16px;
+                  background: linear-gradient(45deg, #000000, #022457, #f6f3fd);
+                  border: none;
+                color:white;
+                  border-radius: 4px;
+                  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
+                  transition: all 0.3s ease;
+                  text-decoration: none; /* Remove underline */
+                  display: inline-block; /* To remove underline */
+                  
+                  ; /* For pseudo-element */
+                "
+              >
+                Make Request
+              </router-link>
                 </section>
 
                 
@@ -299,7 +422,27 @@ export default {
   methods: {
     scrollDown() {
       // Calculate the position to scroll to (adjust the value as needed)
-      const scrollPosition = window.scrollY + 530; // You can adjust the value as needed
+      const scrollPosition = window.scrollY + 550; // You can adjust the value as needed
+
+      // Use smooth scroll for a better user experience
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    },
+    scrollUp() {
+      // Calculate the position to scroll to (adjust the value as needed)
+      const scrollPosition = window.scrollY - 1050; // You can adjust the value as needed
+
+      // Use smooth scroll for a better user experience
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    },
+    scrollUps() {
+      // Calculate the position to scroll to (adjust the value as needed)
+      const scrollPosition = window.scrollY - 1200; // You can adjust the value as needed
 
       // Use smooth scroll for a better user experience
       window.scrollTo({
