@@ -11,7 +11,7 @@
           <br>
           <br>
           <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:50px;">BOOK FOR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
+    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:50px;">BOOK YOUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
           <br>
           <div>
 
@@ -249,94 +249,102 @@ Sound and stage lights production.</p>
 
 
 
-             
-                <!-- review dialog-->
-                <v-dialog v-model="dialogs" max-width="500px">
-                  <form @submit.prevent="saveBooking" class="container  " >
-                  <v-card>
-                    <v-card-title class="headline" style="margin-left: 160px;">Request Form</v-card-title>
-                    <v-card-text>
-                        
-            
-              <div class="form-group">
-                <label for="event_title">Event Title:</label>
-                <input type="text" class="form-control" placeholder="Event Title" v-model="event_title" required>
-              </div>
 
-              <div class="form-group">
-                <label for="service">Services</label>
-                <div class="position-relative">
-                    <select class="form-control" v-model="service" required>
-                        <option value="" disabled selected>Select a service</option>
-                        <option value="Sounds Service">Sounds Service</option>
-                        <option value="Lights Service">Lights Service</option>
-                        <option value="Photo Shoot Service">Photo Shoot Service</option>
-                        <option value="Video Shoot Service">Video Shoot Service</option>
-                        <option value="Photo & Video Shoots Service">Photo & Video Shoots Service</option>
-                        <option value="Photo & Video Shoots Service With SDE">Photo & Video Shoots Service With SDE</option>
-                        <option value="Sounds & Lights Service">Sounds & Lights Service</option>
-                        <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
-                        <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
-                        <option value="Sounds and Lights with Photo Video Shoots and SDE Service">Sounds and Lights with Photo Video Shoots and SDE Service</option>
-                    </select>
-                    <i class="fas fa-caret-down position-absolute end-0 bottom-0 p-3" style="pointer-events: none;"></i>
-                </div>
-            </div>
-            
-              
-              
-              <div class="form-group">
-                <label for="start_date">Start Date:</label>
-                <input type="date" class="form-control" v-model="start_date" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="end_date">End Date:</label>
-                <input type="date" class="form-control" v-model="end_date" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" class="form-control" placeholder="Location" v-model="location" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="event_description">Description:</label>
-                <textarea class="form-control" v-model="event_description" placeholder="Other Description" required></textarea>
-              </div>
-          
-              <h3>Contact Details</h3>
-              
-              <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" placeholder="Name" v-model="name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" placeholder="Email Address" v-model="email" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" class="form-control" placeholder="Phone" v-model="phone" required>
-              </div>
-              
-             
-                    </v-card-text>
-                    <v-card-actions>
-                
-                      <div style="margin-bottom: 10px;">
-                        <button type="submit"   class="neumorphic-button"
-                        style="margin-left: 10px; width: 460px; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
-                     
-                      </div>
-                    
-                    </v-card-actions>
-                    
-                  </v-card>
-                </form>
-                </v-dialog>
+
+                <!-- booking dialog-->
+<v-dialog v-model="dialogs" max-width="500px">
+  <form @submit.prevent="saveBooking" class="container">
+    <v-card>
+      <br>
+      <v-card-title class="headline" style="margin-left: 130px; font-size: 14px; font-weight:900;  ">REQUEST<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Form</span></v-card-title>
+      <v-card-text>
+
+        <div class="form-group">
+          <label for="event_title">Event Title:</label>
+          <input type="text" class="search-input" style="width:100%; height:45px;" placeholder="Event Title" v-model="event_title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="service">Services</label>
+          <div class="position-relative">
+            <select class="neumorphic-button" style="width:100%;" v-model="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option value="Sounds Service">Sounds Service</option>
+              <option value="Lights Service">Lights Service</option>
+              <option value="Photo Shoot Service">Photo Shoot Service</option>
+              <option value="Video Shoot Service">Video Shoot Service</option>
+              <option value="Photo & Video Shoots Service">Photo & Video Shoots Service</option>
+              <option value="Photo & Video Shoots Service With SDE">Photo & Video Shoots Service With SDE</option>
+              <option value="Sounds & Lights Service">Sounds & Lights Service</option>
+              <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
+              <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
+              <option value="Sounds and Lights with Photo Video Shoots and SDE Service">Sounds and Lights with Photo Video Shoots and SDE Service</option>
+            </select>
+            <i class="fas fa-caret-down position-absolute end-0 bottom-0 p-3" style="pointer-events: none; top:-5px;"></i>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="start_date">Start Date:</label>
+            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="start_date" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="end_date">End Date:</label>
+            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="end_date" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="location">Location:</label>
+            <input type="text" class="search-input" style="width:206%;height:60%" placeholder="Location" v-model="location" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="event_description">Description:</label>
+            <textarea class="search-input" v-model="event_description" style="width:206%; height:60%;" placeholder="Other Description" required></textarea>
+          </div>
+        </div>
+
+        <br><br>
+        <h3 style="margin-left: 95px; font-size: 14px; font-weight:900;" >CONTACT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Details</span></h3>
+        <br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">Name:</label>
+            <input type="text" class="search-input" style="width:206%;height:70%;" placeholder="Name" v-model="name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email:</label>
+            <input type="email" class="search-input" style="width:206%;height:70%;" placeholder="Email Address" v-model="email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="tel" class="search-input" style="width:100%;height:50px;;" placeholder="09*********" v-model="phone" required>
+        </div>
+
+      </v-card-text>
+      <v-card-actions>
+
+        <div style="margin-bottom: 10px;">
+          <button type="submit" class="neumorphic-button" style="margin-left: 10px; width: 320%; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
+        </div>
+
+      </v-card-actions>
+
+    </v-card>
+  </form>
+</v-dialog>
+
 
 
   </template>
@@ -518,37 +526,46 @@ hasEventOnDate(date) {
       }
     },
     async saveBooking() {
-      try {
-        const ins = await axios.post("saveBooking", {
-          event_title: this.event_title,
-          start_date: this.start_date,
-          end_date: this.end_date,
-          location: this.location,
-          event_description: this.event_description,
-          name: this.name,
-          email: this.email,
-          phone: this.phone,
-          service: this.service,
-        });
+  try {
+    // Display a confirmation dialog
+    const userConfirmed = window.confirm('Are you sure you want to save?');
 
-        this.event_title ="";
-        this.start_date ="";
-        this.end_date ="";
-        this.location ="";
-        this.event_description ="";
-        this.name ="";
-        this.email ="";
-        this.phone ="";
-        this.service ="";
+    // Check if the user clicked OK
+    if (userConfirmed) {
+      const ins = await axios.post("saveBooking", {
+        event_title: this.event_title,
+        start_date: this.start_date,
+        end_date: this.end_date,
+        location: this.location,
+        event_description: this.event_description,
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        service: this.service,
+      });
 
+      // Clear form fields after successful save
+      this.event_title ="";
+      this.start_date ="";
+      this.end_date ="";
+      this.location ="";
+      this.event_description ="";
+      this.name ="";
+      this.email ="";
+      this.phone ="";
+      this.service ="";
 
-        this.$emit('data-saved');
-        this.getInfo();
-        this.dialogs = false;
-      } catch (error) {
-        console.error(error);
-      }
-    },
+      // Emit event and perform other actions
+      this.$emit('data-saved');
+     
+      this.dialogs = false;
+    }
+    // If the user clicked Cancel, do nothing
+  } catch (error) {
+    console.error(error);
+  }
+},
+
   }
 };
   </script>
