@@ -3,7 +3,7 @@
     class="neumorphic-navbar"
     style="border-radius: 5px; height: 475px; width: 450px; overflow-y: auto;
            display: flex; flex-direction: column; justify-content: flex-start;
-           align-items: flex-start; margin-top: 60px; margin-left: 15%;"
+           align-items: flex-start; margin-top: 60px; margin-left: 13%;"
   >
 
   <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
@@ -64,7 +64,7 @@
  
   <br>
     <div class="container mt-4" style="margin-left:270px; height:200px;">
-      <h2 style="margin-left:450px; font-size:25px; margin-top:70px; ">ORDER FORM</h2>
+      <h2 style="margin-left:450px; font-size:30px; margin-top:70px; font-family: 'Bebas Neue', cursive; ">ORDER FORM</h2>
       <form @submit.prevent="placeOrder">
       <div class="row">
         <div class="col">
@@ -75,12 +75,12 @@
             <p>Unit Price: ₱{{ productData.unit_price }}</p>
             <p>size : {{ getSizeName(productData.size_id) }}</p>
         </div>
-          <div class="mb-3">
+          <div class="mb-3" style="position:absolute; left:-5.5%;">
             <p>Quantity:</p>
             <div class="btn-group" role="group" aria-label="Quantity">
-              <button @click="decreaseQuantity" type="button" class="btn btn-secondary" style="height:38px;">-</button>
-              <p class="btn btn-secondary">{{ quantity }}</p>
-              <button @click="increaseQuantity" type="button" class="btn btn-secondary" style="height:38px;">+</button>
+              <button @click="decreaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px;">-</button>
+              <p class="btn">{{ quantity }}</p>
+              <button @click="increaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px;">+</button>
             </div>
             </div>
             <!--hidden fields-->
@@ -88,35 +88,41 @@
             <input type="hidden" v-model="productData.category_id">
             <input type="hidden" v-model="productData.transaction_code">
 
-            <div>
-              <h5 >CONTACT DETAILS</h5>
+            <div style=" position:absolute; top:-39.3%; left:30%;">
+              <h5 style="margin-top:30%; font-weight:900; font-size:15px;">CONTACT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Details</span></h5>
               <div style="margin-top: 20px;">
                 <div v-for="userData in info" :key="userData.id" class="user-profile">
                   <div class="profile-details">
                     <div class="row">
                       <div class="col-sm-6">
                           
-                        Address:<input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px;" required>
-                      </div>
-                      <div class="col-sm-6">
-                        Contact:<input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="margin-left:90px; border: 0px;" required>
+                       <input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px; height:43px;" required>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
-                        Other Information: <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
-                        <input type="hidden" v-model="userData.token" placeholder="Enter Other Information"  class="search-input" style="border: 0px;" required>
+                        <input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="border: 0px; height:43px;" required>
+                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px; height:43px;" required>
+                        <input type="hidden" v-model="userData.token" placeholder="Enter Other Information"  class="search-input" style="border: 0px; height:43px;" required>
+                    </div>
+
+                  <div class="row">
                     <div class="col-sm-6">
-                                          <!-- <label for="customerName">Customer Name:</label> -->
-                      <p>Username:</p><input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; margin-left:90px;" required>
-                  </div>
+                      <input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; height:43px;" required>
                     </div>
+                  </div>
+
+
+
+              </div>
                     
                     <div>
-
-                      <a style="position: absolute; margin-left:120px; margin-top:8px;">Total Price: ₱</a>
-                      <input type="text" style="border:0px;  position: absolute;margin-left:192px;" v-model="productData.total" placeholder="total price" disabled> 
+                      <a style="position: absolute; font-size:15px; margin-left:-10px; margin-top:8px;">Total Price: ₱</a>
+                      <input type="text" style="border:0px; font-size:15px;  position: absolute;margin-left:75px;" v-model="productData.total" placeholder="total price" disabled> 
                     </div>
                   </div>
                 </div>
@@ -128,9 +134,9 @@
           <div >
             <br>
             <br>
-            <div class="row">
-              <button1 @click="opendialog"  style=" border-radius:5px; width:32%; width:220px; margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-credit-card custom-icon"></i>&nbsp;&nbsp;Select Payment Method</button1>
-              <div class="row">
+            <div class="row" style="margin-top:200px;">
+              <button1 @click="opendialog"  style=" position: absolute; border-radius:5px; width:32%; width:152px; right:83%; top:85%; background-color:rgb(32, 32, 32); color:white;" class="neumorphic-button">&nbsp;&nbsp;&nbsp;Payment Method</button1>
+              <div class="row" style="margin-top:90px; margin-left:17%;">
             <button1 @click="placeOrder('cart')" type="submit" style=" border-radius:5px; width:24%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Add to Cart</button1>
             <button1 @click="placeOrder('pending')" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
           </div>
@@ -194,7 +200,7 @@
       <div v-if="!showReviews" >
         <nav
         class="neumorphic-navbar"
-        style="border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:15%;"
+        style="border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:13%;"
       >
           <p style=" margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME:  <span style="font-size: 30px; font-weight:400; margin-left:15px; color:rgb(223, 146, 5);font-family: 'Sacramento', cursive;">{{ productData.prod_name }}</span></p> 
       
