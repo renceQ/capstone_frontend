@@ -5,7 +5,8 @@
 <br>
 <br>
 <section class="ftco-section contact-section">
-  <div class="container">
+  <div class="container" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+  animation: fade-up .8s ease-out forwards;">
     <div class="row align-items-center">
       <div class="mb-5">
         <h2 class="h3">Contact Info</h2>

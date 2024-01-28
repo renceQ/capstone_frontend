@@ -1,4 +1,29 @@
   <template>
+    <div v-show="showDescription" style="position: absolute; z-index: 9999;">
+      <nav
+        class="neumorphic-navbar"
+        style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up .8s ease-out forwards;
+          animation-delay: 0.4s; border-radius: 5px; height: 490px; width: 450px; overflow-y: auto;
+          display: flex; flex-direction: column; justify-content: flex-start;
+          align-items: flex-start; margin-top: 60px; margin-left: 13%;"
+      >
+        no comment
+        <router-link
+        to="#"
+        @click="toggleDescription"
+        style="position: absolute; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
+        class="neumorphic-button"
+      >
+        &nbsp;&nbsp;PRODUCT REVIEWS
+      </router-link>
+      </nav>
+    </div>
+
+
+
+
+
     <div  v-if="showReviews" style="">
     <button
     to="#"
@@ -233,7 +258,7 @@
       </router-link>
       <router-link
       to="#"
-      @click="toggleReviews"
+      @click="toggleDescription"
       style="position: absolute; bottom: 74px; width: 150px; right: 35px; height:31px; font-size: 9.5px; font-weight: 200;  background-color:#868686; color: rgb(255, 255, 255)"
       class="neumorphic-button"
     >
@@ -256,6 +281,8 @@
       return {
         products: [],
         showReviews: false,
+        showDescription: false,
+
         status: '',
         dialog: false,
         dialogs: false,
@@ -322,6 +349,9 @@
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+    },
+    toggleDescription() {
+      this.showDescription = !this.showDescription;
     },
       toggleReviews() {
       this.showReviews = !this.showReviews;

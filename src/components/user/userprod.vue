@@ -32,7 +32,7 @@
         <div class="room-item text-center">
           <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.1s;width: 180px; height: 180px;">
+          animation-delay: 0.4s;width: 180px; height: 180px;">
           <div class="ri-text">
             <h4 style="font-family: 'Bebas Neue', cursive; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
