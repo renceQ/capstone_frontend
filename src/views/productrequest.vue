@@ -1,8 +1,5 @@
 <template>
-    <productrequestfields />
-
-
-    
+    <productrequestfields />  
   </template>
     
   <script>

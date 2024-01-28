@@ -1,9 +1,24 @@
   <template>
+    <div  v-if="showReviews" style="">
+    <button
+    to="#"
+    @click="toggleReviews"
+    style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.4s; position: fixed; bottom: 80px; left: 440px; width: 150px; font-size: 14px;border-radius:3px; font-weight:200; font-size: 11px; background-color: green; color: rgb(255, 255, 255); z-index: 1000;"
+    class="neumorphic-button">
+     PRODUCT INFO
+  </button>
+</div>
+
+    <div v-if="showReviews" style="position: relative; z-index: 100;">
     <nav
     class="neumorphic-navbar"
-    style="border-radius: 5px; height: 475px; width: 450px; overflow-y: auto;
-           display: flex; flex-direction: column; justify-content: flex-start;
-           align-items: flex-start; margin-top: 60px; margin-left: 13%;"
+    style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.4s; border-radius: 5px; height: 490px; width: 450px; overflow-y: auto;
+      display: flex; flex-direction: column; justify-content: flex-start;
+      align-items: flex-start; margin-top: 60px; margin-left: 13%;"
   >
 
   <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
@@ -48,22 +63,17 @@
     </div>
     <hr />
   </div>
-  
-    <router-link
-    to="#"
-    @click="toggleReviews"
-    style="position: fixed; bottom: 100px; left: 465px; width:150px; font-size: 14px; font-weight: 200; font-size: 11px; background-color: green; color: rgb(255, 255, 255)"
-    class="neumorphic-button">
-    &nbsp;&nbsp; &nbsp;&nbsp; PRODUCT INFO
-</router-link>
-
-
-    
   </nav>
+</div>
+
+
+
 
  
   <br>
-    <div class="container mt-4" style="margin-left:270px; height:200px;">
+    <div class="container mt-4" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.3s;margin-left:270px; height:200px;">
       <h2 style="margin-left:450px; font-size:30px; margin-top:70px; font-family: 'Bebas Neue', cursive; ">ORDER FORM</h2>
       <form @submit.prevent="placeOrder">
       <div class="row">
@@ -197,10 +207,11 @@
       </v-dialog>
 
 
-      <div v-if="!showReviews" >
+      <div v-if="!showReviews" style="" >
         <nav
         class="neumorphic-navbar"
-        style="border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:13%;"
+        style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up 0.8s ease-out forwards;border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:13%;"
       >
           <p style=" margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME:  <span style="font-size: 30px; font-weight:400; margin-left:15px; color:rgb(223, 146, 5);font-family: 'Sacramento', cursive;">{{ productData.prod_name }}</span></p> 
       
@@ -232,7 +243,7 @@
           
       </nav>
     </div>
-  
+    
 
       
   </template>
@@ -420,7 +431,10 @@
   .neumorphic-navbar {
     scrollbar-width: thin;
     scrollbar-color: #b0b0b0 #f0f0f0;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
   }
+  
   
   .neumorphic-navbar::-webkit-scrollbar {
     width: 12px;

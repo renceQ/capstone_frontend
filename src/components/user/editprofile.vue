@@ -1,6 +1,7 @@
 <template>
 
-    <div style="position: absolute; margin-top:160px; margin-left:90px; ">
+    <div style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up 0.8s ease-out forwards; position: absolute; margin-top:160px; margin-left:90px; ">
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
       <span v-if="info.length > 0">
         <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info[0].showed_username }}</a><br>
@@ -32,7 +33,9 @@
                 <!--products container-->
          
                 <div>
-                  <div class="container" style="margin-top: 20px;">
+                  <div class="container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+                  animation: fade-up .8s ease-out forwards;
+                  animation-delay: 0.2s;margin-top: 20px;">
                     <nav class="neumorphic-navbars" style="width: 945px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
@@ -58,7 +61,9 @@
                           </div>
 
                      
-                <form @submit.prevent="updateProfile" style="margin-left: 1px;" >
+                <form @submit.prevent="updateProfile" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+                animation: fade-up .8s ease-out forwards;
+                animation-delay: 0.4s; margin-left: 1px;" >
             <div class="card mb-4" style="height:700px; width:880px;">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">

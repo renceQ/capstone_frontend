@@ -1,6 +1,7 @@
 <template>
 
-    <div style="position: absolute; margin-top:160px; margin-left:90px; ">
+    <div style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up 0.8s ease-out forwards; position: absolute; margin-top:160px; margin-left:90px; ">
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
       <span v-if="info.length > 0">
         <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info[0].showed_username }}</a><br>
@@ -12,7 +13,9 @@
     </div>
     <div>
 
-        <div class="neumorphic-search" style="margin-top: 170px; margin-left:315px;">
+        <div class="neumorphic-search" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.2s; margin-top: 170px; margin-left:315px;">
           <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
           <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
             <i class="fas fa-search"></i>
@@ -26,7 +29,9 @@
                
       
     
-        <nav class="neumorphic-navbars" style="margin-top: 20px; width: 950px; height: 60px; margin-left: 315px; z-index: 10;">
+        <nav class="neumorphic-navbars" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.4s; margin-top: 20px; width: 950px; height: 60px; margin-left: 315px; z-index: 10;">
           <!-- Replace these router-links or hrefs with methods that filter based on status -->
           
           <span class="nav-item">
@@ -51,7 +56,9 @@
 
                 <!--products container-->
                 <div>
-                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="margin-top: 20px;">
+                  <div v-for="filteredInfo in filteredInfos" :key="filteredInfo.id" class="container" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+                  animation: fade-up .8s ease-out forwards;
+                  animation-delay: 0.5s; margin-top: 20px;">
                     <nav class="neumorphic-navbars" style="width: 950px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
