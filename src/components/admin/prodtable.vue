@@ -39,7 +39,7 @@
                         <tr v-for="product in paginatedData" :key="product.id">
                           <td>{{ product.UPC }}</td>
 
-                          <td>{{ getCategoryName(product.category_id) }}</td>
+                          <td>{{ getCategoryName(product.category_id) }}</td> 
                           <td v-if="product.image">
                             <img :src="product.image" alt="image" class="img-fluid" style="max-width: 100px; max-height:100px;">
                           </td>

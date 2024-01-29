@@ -8,14 +8,18 @@
           display: flex; flex-direction: column; justify-content: flex-start;
           align-items: flex-start; margin-top: 60px; margin-left: 13%;"
       >
-
+      <div style="width:400px;">
+      <p style="margin-left: 20px; margin-top: 20px; font-size: 14px; font-weight:700;">PRODUCT SPECIFICATION: <br><br><span style=" font-weight:200;font-size:14px; color:rgb(240, 141, 29);"> <span style="color: gray;">Stock: </span><span style="color: black;">&nbsp;&nbsp;{{ productData.stock }}</span></span></p>
+      <p style="margin-left: 20px; font-size: 14px; font-weight:700;"><span style=" font-weight:200;font-size:14px; color:rgb(240, 141, 29);"> <span style="color: gray;">Category: </span><span style="color: black;">&nbsp;&nbsp;{{ getCategoryName(productData.category_id) }}</span></span></p>
+      <p style="margin-left: 20px; font-size: 14px; font-weight:700;"><span style=" font-weight:200;font-size:14px; color:rgb(240, 141, 29);"> <span style="color: gray;">Ships From: </span><span style="color: black;">&nbsp;&nbsp;{{ productData.ships }}</span></span></p><br>
       <p style="margin-left: 20px; margin-top: 20px; font-size: 14px; font-weight:700;">PRODUCT DESCRIPTION: <br><br><span style=" font-weight:200;font-size:14px; color:rgb(240, 141, 29);"> {{ productData.product_description }}</span></p>
+    </div>
        
         
         <router-link
         to="#"
         @click="toggleDescription"
-        style="position: absolute; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
+        style="position: fixed; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
         class="neumorphic-button"
       >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRODUCT INFO
@@ -49,7 +53,7 @@
       align-items: flex-start; margin-top: 60px; margin-left: 13%;"
   >
 
-  <div v-for="product in products" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
+  <div v-for="product in filteredProducts" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
   
     <img style="width:50px; height:50px; margin-bottom:15px; margin-top:3px;" v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">
     
@@ -299,9 +303,11 @@
           total: 0,
           category_id: '',
           product_description: '',
+          ships: '',
 
         },
         info: [],
+        categories: [],
         quantity: 1, // Initial quantity
         size_id: '',
         image:'', 
@@ -333,7 +339,10 @@
       // Calculate total price based on quantity and unit price
       totalAmount() {
         return this.quantity * this.productData.unit_price;
-      }
+      },
+      filteredProducts() {
+      return this.products.filter(product => product.prod_name.includes(this.productData.prod_name));
+    },
     },
     watch: {
       // Watch for changes in quantity or unit price to update total
@@ -423,6 +432,7 @@
         this.productData.transaction_code = this.$route.params.transaction_code || '';
         this.productData.category_id = this.$route.params.category_id || '';
         this.productData.product_description = this.$route.params.product_description || '';
+        this.productData.ships = this.$route.params.ships || '';
         
       },
       increaseQuantity() {
@@ -430,6 +440,7 @@
       this.quantity += 1;
     } else {
       console.log('Maximum stock reached');
+      window.alert('Maximum stock reached. Cannot increase quantity further.');
     }
   },
       decreaseQuantity() {
@@ -448,12 +459,25 @@
       getSizeName(sizeId) {
     const size = this.productData.sizes.find(size => size.size_id === sizeId);
     return size ? size.item_size : 'Unknown';
-  },
+  }, 
+  async fetchCategories() {
+      try {
+        const response = await axios.get("getcat");
+        this.categories = response.data; // Assuming response.data contains the categories array
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    getCategoryName(categoryId) {
+      const category = this.categories.find(category => category.id === categoryId);
+      return category ? category.category_name : 'Unknown';
+    },
     },
     mounted() {
       this.fetchSizes();
       this.getInfo();
       this.fetchData();
+      this.fetchCategories();
     },
   };
   </script>

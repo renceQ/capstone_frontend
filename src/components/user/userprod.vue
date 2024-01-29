@@ -157,7 +157,7 @@ Sound and stage lights production.</p>
   },
    
       preOrder(product) {
-  const { image, prod_name, unit_price, size_id, stock, id, category_id, product_description, } = product; //category_id di pa tapos iretrieve
+  const { image, prod_name, unit_price, size_id, stock, id, category_id, product_description, ships, } = product; //category_id di pa tapos iretrieve
   const transactionCode = this.generateTransactionCode();
   this.$router.push({
     name: 'productrequest',
@@ -171,6 +171,7 @@ Sound and stage lights production.</p>
       id,
       transaction_code: transactionCode,
       product_description,
+      ships,
       
     }
   });
