@@ -8,14 +8,17 @@
           display: flex; flex-direction: column; justify-content: flex-start;
           align-items: flex-start; margin-top: 60px; margin-left: 13%;"
       >
-        no comment
+
+      <p style="margin-left: 20px; margin-top: 20px; font-size: 14px; font-weight:700;">PRODUCT DESCRIPTION: <br><br><span style=" font-weight:200;font-size:14px; color:rgb(240, 141, 29);"> {{ productData.product_description }}</span></p>
+       
+        
         <router-link
         to="#"
         @click="toggleDescription"
         style="position: absolute; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
         class="neumorphic-button"
       >
-        &nbsp;&nbsp;PRODUCT REVIEWS
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRODUCT INFO
       </router-link>
       </nav>
     </div>
@@ -295,6 +298,7 @@
           transaction_code: '',
           total: 0,
           category_id: '',
+          product_description: '',
 
         },
         info: [],
@@ -418,6 +422,7 @@
         this.productData.id = this.$route.params.id || '';
         this.productData.transaction_code = this.$route.params.transaction_code || '';
         this.productData.category_id = this.$route.params.category_id || '';
+        this.productData.product_description = this.$route.params.product_description || '';
         
       },
       increaseQuantity() {
