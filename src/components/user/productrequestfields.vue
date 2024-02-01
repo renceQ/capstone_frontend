@@ -42,6 +42,11 @@
      PRODUCT INFO
   </button>
 </div>
+<div  v-if="showReviews" style="">
+ 
+</div>
+
+
 
     <div v-if="showReviews" style="position: relative; z-index: 100;">
     <nav
@@ -52,9 +57,57 @@
       display: flex; flex-direction: column; justify-content: flex-start;
       align-items: flex-start; margin-top: 60px; margin-left: 13%;"
   >
+  <p
+  to="#"
+ 
+  style="font-weight:600; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+  animation: fade-up .8s ease-out forwards;
+  animation-delay: 0.4s; position: fixed; top: 20px; left: 30px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(240, 141, 29); zrgb(255, 129, 27);"
+ >
+   PRODUCT RATINGS 
+</p>
+ <p
+  to="#"
+ 
+  style="font-weight:600; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+  animation: fade-up .8s ease-out forwards;
+  animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(0, 0, 0); zrgb(255, 129, 27);"
+ >
+ ({{ calculateAverageRating() }}) out of 5
+</p>
 
-  <div v-for="product in filteredProducts" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:10px;">
+
+<div style="display: flex; justify-content: space-between;">
+  <button @click="selectRating('all')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 42px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> All  ({{ filteredProducts.length }}) </span>
+  </button>
+  <button @click="selectRating('Excellent')" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 42px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 5 Star ({{ getCountByRating('Excellent') }}) </span>
+  </button>
+  <button @click="selectRating('Great')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 42px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 4 Star ({{ getCountByRating('Great') }}) </span>
+  </button>
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <button @click="selectRating('Average')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 20px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 3 Star ({{ getCountByRating('Average') }}) </span>
+  </button>
+  <button @click="selectRating('Poor')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 20px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 2 Star ({{ getCountByRating('Poor') }}) </span>
+  </button>
+  <button @click="selectRating('Bad')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 20px;">
+    <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 1 Star ({{ getCountByRating('Bad') }}) </span>
+  </button>
   
+</div>
+
+
+
+
+
+  <div  v-for="product in filteredProducts" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:20px;">
+
     <img style="width:50px; height:50px; margin-bottom:15px; margin-top:3px;" v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">
     
     <span style="font-weight:900;" v-if="info.length > 0 && product.isAnonymous === 'anonymous'">&nbsp;&nbsp; &nbsp;&nbsp;******</span>
@@ -286,6 +339,7 @@
   export default {
     data() {
       return {
+        selectedRating: 'all',
         products: [],
         showReviews: false,
         showDescription: false,
@@ -341,7 +395,11 @@
         return this.quantity * this.productData.unit_price;
       },
       filteredProducts() {
-      return this.products.filter(product => product.prod_name.includes(this.productData.prod_name));
+      if (this.selectedRating === 'all') {
+        return this.products.filter(product => product.prod_name.includes(this.productData.prod_name));
+      } else {
+        return this.products.filter(product => product.rate === this.selectedRating && product.prod_name.includes(this.productData.prod_name));
+      }
     },
     },
     watch: {
@@ -354,6 +412,44 @@
       }
     },
     methods: {
+      selectRating(rating) {
+      this.selectedRating = rating;
+    },
+      getCountByRating(rating) {
+      return this.filteredProducts.filter(product => product.rate === rating).length;
+    },
+
+      calculateAverageRating() {
+      const totalRatings = this.filteredProducts.length;
+      let totalStars = 0;
+
+      // Calculate total stars based on the ratings
+      this.filteredProducts.forEach((product) => {
+        switch (product.rate) {
+          case 'Bad':
+            totalStars += 1;
+            break;
+          case 'Poor':
+            totalStars += 2;
+            break;
+          case 'Average':
+            totalStars += 3;
+            break;
+          case 'Great':
+            totalStars += 4;
+            break;
+          case 'Excellent':
+            totalStars += 5;
+            break;
+        }
+      });
+
+      // Calculate the average rating
+      const averageRating = totalRatings > 0 ? totalStars / (totalRatings * 5) : 0;
+
+      // Format the average rating to 1 decimal place
+      return averageRating.toFixed(1);
+    },
 
       async fetchData() {
       try {
@@ -487,42 +583,6 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
-  .neumorphic-navbar {
-    scrollbar-width: thin;
-    scrollbar-color: #b0b0b0 #f0f0f0;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  
-  .neumorphic-navbar::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  .neumorphic-navbar::-webkit-scrollbar-thumb {
-    background-color: #b0b0b0;
-    border-radius: 10px;
-  }
-  
-  .neumorphic-circle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #f0f0f0;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  
-  .custom-icon {
-    font-size: 16px;
-  }
-
   @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
   @import url('https://fonts.googleapis.com/css2?family=Podkova&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
@@ -531,5 +591,7 @@
     width: 220px;
     margin-right: 100px;
   }
+
+  
  
   </style>
