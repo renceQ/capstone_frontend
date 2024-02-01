@@ -78,25 +78,25 @@
 
 
 <div style="display: flex; justify-content: space-between;">
-  <button @click="selectRating('all')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 42px;">
+  <button @click="selectRating('all')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 33px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> All  ({{ filteredProducts.length }}) </span>
   </button>
-  <button @click="selectRating('Excellent')" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 42px;">
+  <button @click="selectRating('Excellent')" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 33px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 5 Star ({{ getCountByRating('Excellent') }}) </span>
   </button>
-  <button @click="selectRating('Great')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 42px;">
+  <button @click="selectRating('Great')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 33px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 4 Star ({{ getCountByRating('Great') }}) </span>
   </button>
 </div>
 
 <div style="display: flex; justify-content: space-between;">
-  <button @click="selectRating('Average')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 20px;">
+  <button @click="selectRating('Average')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 30px; width: 110px; border-radius: 2px; margin-top: 10px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 3 Star ({{ getCountByRating('Average') }}) </span>
   </button>
-  <button @click="selectRating('Poor')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 20px;">
+  <button @click="selectRating('Poor')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 10px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 2 Star ({{ getCountByRating('Poor') }}) </span>
   </button>
-  <button @click="selectRating('Bad')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 20px;">
+  <button @click="selectRating('Bad')" type="button" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; background-color: rgb(255, 255, 255);  height: 40px; margin-left: 15px; width: 110px; border-radius: 2px; margin-top: 10px;">
     <span style="margin-top: 10px; font-size: 11px; font-weight: 700;"> 1 Star ({{ getCountByRating('Bad') }}) </span>
   </button>
   
@@ -106,7 +106,7 @@
 
 
 
-  <div  v-for="product in filteredProducts" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:20px;">
+  <div  v-for="product in filteredProducts" :key="product.product_id" style="width: 350px; margin-left:20px; margin-top:15px;">
 
     <img style="width:50px; height:50px; margin-bottom:15px; margin-top:3px;" v-if="info.length > 0" :src="product.profile_picture" alt="Profile" class="profile-picture-navbar">
     
