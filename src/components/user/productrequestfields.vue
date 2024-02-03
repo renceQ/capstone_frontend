@@ -168,7 +168,7 @@
             <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 200px; max-height: 200px;">
             <p>Product Name: <a style="font-size: 10px;">{{ productData.prod_name }}</a></p>
             <p>Unit Price: ₱{{ productData.unit_price }}</p>
-            <p>size : {{ getSizeName(productData.size_id) }}</p>
+            <p>size : {{ getSizeName(productData.size_id) }}</p> 
         </div>
           <div class="mb-3" style="position:absolute; left:-5.5%;">
             <p>Quantity:</p>
@@ -177,7 +177,7 @@
               <p class="btn">{{ quantity }}</p>
               <button @click="increaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px;">+</button>
             </div>
-            </div>
+          </div>
             <!--hidden fields-->
             <input type="hidden" v-model="productData.id">
             <input type="hidden" v-model="productData.category_id">
@@ -232,8 +232,11 @@
             <div class="row" style="margin-top:200px;">
               <button1 @click="opendialog"  style=" position: absolute; border-radius:5px; width:32%; width:152px; right:83%; top:85%; background-color:rgb(32, 32, 32); color:white;" class="neumorphic-button">&nbsp;&nbsp;&nbsp;Payment Method</button1>
               <div class="row" style="margin-top:90px; margin-left:17%;">
+
+            <!-- <button1 @click="placeOrder('cart')" type="submit" style=" border-radius:5px; width:24%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Add to Cart</button1> -->
+            <!-- <button1 @click="placeOrder('pending')" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1> -->
             <button1 @click="placeOrder('cart')" type="submit" style=" border-radius:5px; width:24%;  margin-right:2%; margin-bottom:3%; " class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-cart custom-icon"></i>&nbsp;&nbsp;Add to Cart</button1>
-            <button1 @click="placeOrder('pending')" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
+            <button1 @click="open" type="submit" style="  border-radius:5px;width:24%;  margin-bottom:3%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
           </div>
 
             
@@ -243,6 +246,74 @@
         </div>
       </form>
       </div>
+
+
+
+
+
+      <v-dialog v-model="dialogsss" persistent max-width="600"  >
+        <v-card>
+          <v-card-text style="height: 400px;">
+            <form @submit.prevent="placeOrder">
+              <div>
+                <div
+                class="neumorphic-navbars" style="width:200px; height:200px; margin-left:-500px; margin-top:-30%;" >
+               
+                 <img :src="productData.image" alt="Product Image" class="img-fluid" style="position:absolute; max-width: 170px; max-height: 170px; left:6.5%
+                 ;top:8%;">
+
+              </div>
+              </div>
+          
+              <div>
+               <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
+               <p style="position:absolute; left:43%; top:16%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">UNIT PRICE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;₱&nbsp;{{ productData.unit_price }}</a></p>
+               <p style="position:absolute; left:43%; top:24%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">SIZE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp; {{ getSizeName(productData.size_id) }}</a></p>
+
+              
+              </div>
+              
+              <div class="mb-3" style="position:absolute; left:43%; top:32%;">
+                <p style=" font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">QUANTITY:</p>
+                <div class="btn-group" role="group" aria-label="Quantity">
+                  <button @click="decreaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px; border-radius:4px;">-</button>
+                  <p class="btn">{{ quantity }}</p>
+                  <button @click="increaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px; border-radius:4px;">+</button>
+                </div>
+                 <!--hidden fields-->
+            <input type="hidden" v-model="productData.id">
+            <input type="hidden" v-model="productData.category_id">
+            <input type="hidden" v-model="productData.transaction_code">
+              </div>
+
+
+              <div v-for="userData in info" :key="userData.id" class="user-profile" style="position:absolute;">
+                <a style="position:absolute;margin-top:70px; left:-233%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">DELIVERY ADDRESS:</a>
+                <input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px; height:43px; position:absolute;left:-220%; margin-top:170px;" readonly>
+                <a style="position:absolute;margin-top:70px; left:-128%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">CONTACT:</a>
+                <input type="text" v-model="userData.contact" placeholder="Enter Contact" class="search-input" style="border: 0px; height:43px;  position:absolute;left:-99%; margin-top:170px;" readonly>
+                <a style="position:absolute;margin-top:250px; left:-233%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">DELIVERY ADDRESS:</a>
+                <input type="text" v-model="userData.other_info" placeholder="Enter Other Information"  class="search-input" style="border: 0px; height:43px;position:absolute;left:-220%; margin-top:350px;" readonly>
+                <input type="hidden" v-model="userData.token" placeholder="Enter Other Information"  class="search-input" style="border: 0px; height:43px;" required>
+                <a style="position:absolute;margin-top:250px; left:-123%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">USER NAME:</a>
+                <input  type="text" id="customerName" v-model="userData.username" placeholder="customer name"  class="search-input" style="border: 0px; height:43px;position:absolute;left:-99%; margin-top:350px;" readonly>
+
+              </div>
+              <div>
+                <h3 style="font-size: 14px; left:15%;font-weight:900;position:absolute; margin-top:215px;" >PRODUCT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Summary</span></h3>
+              </div>
+     
+          
+          </form>
+          </v-card-text>
+          <v-card-actions>
+            <button1 @click="placeOrder('pending')" type="submit" style="margin-left:64%;  border-radius:5px;width:30%;  margin-bottom:3%; margin-top:4%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+
+
 
       <v-dialog v-model="dialog" persistent max-width="400">
         <v-card>
@@ -256,7 +327,7 @@
             <v-btn  style="margin-left:162px;"  href="/userproducts" color="primary" @click="dialog = false">OK</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog>      
 
       <v-dialog v-model="dialogs" persistent max-width="400">
         <v-card>
@@ -348,6 +419,7 @@
         dialog: false,
         dialogs: false,
         dialogss: false,
+        dialogsss: false,
         productData: {
           image: '',
           prod_name: '',
@@ -470,6 +542,13 @@
       },
       closemodal(){
         this.dialogss = false;
+      },
+
+      open(){
+        this.dialogsss = true;
+      },
+      close(){
+        this.dialogsss = false;
       },
 
       async placeOrder(status) {
