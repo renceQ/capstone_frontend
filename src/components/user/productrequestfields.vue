@@ -253,27 +253,27 @@
 
       <v-dialog v-model="dialogsss" persistent max-width="600"  >
         <v-card>
-          <v-card-text style="height: 400px;">
+          <v-card-text style="height: 495px;">
             <form @submit.prevent="placeOrder">
               <div>
                 <div
                 class="neumorphic-navbars" style="width:200px; height:200px; margin-left:-500px; margin-top:-30%;" >
                
                  <img :src="productData.image" alt="Product Image" class="img-fluid" style="position:absolute; max-width: 170px; max-height: 170px; left:6.5%
-                 ;top:8%;">
+                 ;top:6.5%;">
 
               </div>
               </div>
           
               <div>
                <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
-               <p style="position:absolute; left:43%; top:16%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">UNIT PRICE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;₱&nbsp;{{ productData.unit_price }}</a></p>
-               <p style="position:absolute; left:43%; top:24%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">SIZE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp; {{ getSizeName(productData.size_id) }}</a></p>
+               <p style="position:absolute; left:43%; top:14%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">UNIT PRICE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;₱&nbsp;{{ productData.unit_price }}</a></p>
+               <p style="position:absolute; left:43%; top:20%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">SIZE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp; {{ getSizeName(productData.size_id) }}</a></p>
 
               
               </div>
               
-              <div class="mb-3" style="position:absolute; left:43%; top:32%;">
+              <div class="mb-3" style="position:absolute; left:43%; top:26%;">
                 <p style=" font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">QUANTITY:</p>
                 <div class="btn-group" role="group" aria-label="Quantity">
                   <button @click="decreaseQuantity" type="button" class="neumorphic-button" style="height:38px;width:40px; border-radius:4px;">-</button>
@@ -287,7 +287,8 @@
               </div>
 
 
-              <div v-for="userData in info" :key="userData.id" class="user-profile" style="position:absolute;">
+              <div v-for="userData in info" :key="userData.id" class="user-profile" style="position:absolute;margin-top:-20px;">
+                <br><br>
                 <a style="position:absolute;margin-top:70px; left:-233%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">DELIVERY ADDRESS:</a>
                 <input type="text" v-model="userData.address" placeholder="Enter Address" class="search-input" style="border: 0px; height:43px; position:absolute;left:-220%; margin-top:170px;" readonly>
                 <a style="position:absolute;margin-top:70px; left:-128%;width:200px;font-weight:600; font-family: 'Audiowide', cursive; font-size:11px;">CONTACT:</a>
@@ -300,14 +301,15 @@
 
               </div>
               <div>
-                <h3 style="font-size: 14px; left:15%;font-weight:900;position:absolute; margin-top:215px;" >PRODUCT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Summary</span></h3>
+                <h3 style="font-size: 14px; left:13%;font-weight:900;position:absolute; margin-top:240px;" >PRODUCT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Summary</span></h3>
               </div>
      
           
           </form>
           </v-card-text>
           <v-card-actions>
-            <button1 @click="placeOrder('pending')" type="submit" style="margin-left:64%;  border-radius:5px;width:30%;  margin-bottom:3%; margin-top:4%;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;Place Order</button1>
+            <button1 @click="close()" type="submit" style="margin-left:62%;  border-radius:5px;width:29%;  margin-bottom:3%; margin-top:11.5%;position:absolute;" class="neumorphic-button">&nbsp;&nbsp;<i class="fas fa-undo custom-icon"></i>&nbsp;&nbsp;Change Details</button1>
+            <button1 @click="placeOrder('pending')" type="submit" style="margin-left:64%;  border-radius:5px;width:30%;  margin-bottom:2.5%; margin-top:30%; background-color:rgb(37, 37, 37); color:white;" class="neumorphic-button">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-shopping-bag custom-icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;Check Out</button1>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -671,6 +673,18 @@
     margin-right: 100px;
   }
 
-  
+  .neumorphic-navbar::-webkit-scrollbar {
+    width: 11px; /* Set the width of the scrollbar */
+    height: 5px;
+  }
+
+  .neumorphic-navbar::-webkit-scrollbar-thumb {
+    background-color: rgba(54, 54, 54, 0.26); /* Set the color of the scrollbar thumb */
+    border-radius: 10px; /* Set the border radius of the scrollbar thumb */
+  }
+
+  .neumorphic-navbar::-webkit-scrollbar-track {
+    background-color: #eee8e871; /* Set the color of the scrollbar track */
+  }
  
   </style>
