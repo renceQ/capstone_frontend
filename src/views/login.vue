@@ -1,24 +1,66 @@
 User
 
 <template>
+  <div class="neumorphic-navbar" style="position:absolute; width:500px; height:500px; margin-left:450px; ">
   <div>
-     <div style="margin-right: 500px;">
+     <div style="">
     <div>
     
-      <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-        <div style="width: 100px; height: 100px; overflow: hidden; border-radius: 50%;margin-left: 500px; margin-bottom: 20px;">
-          <img :src="require('../assets/images/logo.jpg')" alt="Description of the image" style="border-radius: 50%;max-width: 100%; height: 100%; object-fit: cover;">
+      <div style="position:absolute;" >
+        <div style="margin-bottom: 20px;">
+          <img :src="require('../assets/images/logo.jpg')" alt="Description of the image" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          animation: fade-up 0.8s ease-out forwards;max-width: 100%; height: 100%; width:50px; height:50px; margin-top:-390px; margin-left:370px;">
         </div>
         
-        <h2 style="margin-left: 500px; ">Welcome to QMJEnt!</h2>
-        <p style="margin-left: 500px;">Please Login</p>
+        <h3 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up 0.8s ease-out forwards;margin-left: 70px; margin-top:-250px; font-size: 14px; font-weight:900;" >WELCOME TO<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Qmj Ent</span></h3>
+        <p style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up 0.8s ease-out forwards;margin-left:70px; margin-top:-15px; font-weight:800;">LOG IN FORM</p>
       </div>
 
+
+
+
+      <div style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.2s;position:absolute; right:170px; margin-top:-150px;">
+        <form @submit.prevent="login">
+          <div v-if="message" class="error-message-box" style="position:absolute; top:-1%; width:350px;" >
+            <div class="error-message">{{ message }}</div>
+          </div>
+          <br>
       
+          <label for="username" style="position:aboslute; margin-top:15px;margin-right:180px;">Username:</label>
+          <input v-model="username" class="search-input" type="text" id="username" name="username" style="border: 0px;position:absolute; margin-left:-150px;" />
+      
+          <label for="password" style="position:absolute; margin-top:70px; margin-left:-250px;">Password:</label>
+          <input v-model="password" :type="showPassword ? 'text' : 'password'" id="password" name="password" class="search-input" style="position:absolute; margin-left:-150px; width:250px; border: 0px; margin-top:60px;" />
+      
+          
+          <label for="showPassword" style="margin-top:110px; margin-left:-2px; width:200px; position:absolute;" >Show Password</label>
+          <input v-model="showPassword" type="checkbox" style="font-weight: 5px; font-size:10px; margin-top:70px; margin-left:227px;" id="showPassword" name="showPassword" />
+      
+          <button type="submit" class="mt-4 custom-login-btn" style="position:absolute; background-color:black; color: #ffffff; width: 47%; top:110%; left:66%;">Login</button>
+          <div style="position:absolute; top:140%; left:67.3%;">
+          <div class="line-with-text" >
+            <div class="line" style="width:300px;"></div>
+            <div class="text">or</div>
+            <div class="line"></div>
+          </div>
+      
+          <a href="/register" class="neumorphic-button" style="color: #000000; width: 105.3%; display: block; text-align: center; margin-top:16px; position:absolute; left:-3%;">Create New Account</a>
+          <p onclick="window.location.href='/forgotpass'" class="new" style="color: black; margin-left: auto; right: 33%; top: 280%; display: block; position: absolute; text-align: center; cursor: pointer;">Forgot Password?</p>
+
+        </div>
+        </form>
+      </div>
+      
+
+<!--       
       <v-sheet >
         
-        <v-form @submit.prevent="login" class="login-form">
-          <div v-if="message" class="error-message-box">
+        <v-form @submit.prevent="login" >
+          <div v-if="message" class="error-message-box" style="position:absolute;">
             <div class="error-message">{{ message }}</div>
           </div>
           <br>
@@ -51,12 +93,12 @@ User
 
         </v-form>
       
-      </v-sheet>
+      </v-sheet> -->
       
     </div>
   </div>
 </div>
-
+</div>
 </template>
 
 

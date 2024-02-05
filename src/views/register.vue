@@ -1,26 +1,53 @@
 <template>
-    <div style="margin-right: 500px;">
+  <div class="neumorphic-navbar" style="position:absolute; width:500px; height:500px; margin-left:450px; ">
+
+    <div style="position:absolute;" >
+      <div style="margin-bottom: 20px;">
+        <img :src="require('../assets/images/logo.jpg')" alt="Description of the image" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up 0.8s ease-out forwards;max-width: 100%; height: 100%; width:50px; height:50px; margin-top:-390px; margin-left:370px;">
+      </div>
+      
+      <h3 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up 0.8s ease-out forwards;margin-left: 70px; margin-top:-250px; font-size: 14px; font-weight:900;" >WELCOME TO<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Qmj Ent</span></h3>
+      <p style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up 0.8s ease-out forwards;margin-left:70px; margin-top:-15px; font-weight:800;">REGISTER FORM</p>
+    </div>
+    <div >
       <div>
+
+       
+        
         <br>
-        <h4 style="margin-left:550px">Register New Account</h4>
+        <h4 style="margin-left:100px; font-size: 14px; margin-top:-130px; margin-left:170px;">Register New Account</h4>
         <h5 style="margin-left: 630px;"></h5>
-        <v-sheet>
-          <v-form @submit.prevent="register">
+        
+        <div class="v-sheet">
+          <form onsubmit="event.preventDefault(); register();">
             <div v-if="message" class="error-message-box">
               <div class="error-message">{{ message }}</div>
             </div>
-<br>
-  
-            <v-text-field v-model="username" label="Username" type="username" outlined dense required></v-text-field>
-            <v-text-field v-model="password" label="Password" type="password" outlined dense required></v-text-field>
-            <v-text-field v-model="passwordConfirm" label="Password Confirm" type="password" outlined dense required></v-text-field>
-  
-            <v-btn type="submit" block class="mt-2" color="#000000">Submit</v-btn>
-            <router-link to="/" style="color: #FFFFCC;" class="d-block text-center mt-2">Login</router-link>
-          </v-form>
-        </v-sheet>
+            <br>
+        
+            <label for="username" style="position:absolute; right:70%;">Username:</label>
+            <input style="position:absolute;  right:13%; top:36.5%; border:0px;" class="search-input" v-model="username" id="username" type="text" required>
+        
+            <label for="password" style="position:absolute; right:70.5%;top:51.5%;">Password:</label>
+            <input style="position:absolute;  right:13%; top:48.5%; width:250px;" class="search-input" v-model="password" id="password" type="password" required>
+        
+            <label for="passwordConfirm" style="position:absolute; right:66.5%;top:62.5%;">Confirm Pass:</label>
+            <input  style="position:absolute;  right:13%; top:60.5%; width:250px;" v-model="passwordConfirm" id="passwordConfirm"  class="search-input" type="password" required>
+        
+            <button type="submit" class="mt-2" style="background-color: #000000; color: #FFFFFF;position:absolute;  right:13%; top:74.5%; width:360px;">Submit</button>
+            <p onclick="window.location.href='/'" class="new" style="color: black; margin-left: 10%; right: 45.5%; top: 90%; display: block; position: absolute; text-align: center; cursor: pointer; top:88%;">Login</p>
+          </form>
+        </div>
+        
+
+
       </div>
     </div>
+    </div>
+    
   </template>
   
   <script>
