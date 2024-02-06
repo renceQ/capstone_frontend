@@ -182,8 +182,11 @@
                               <h6 style="display: none;">{{ product.stock }}</h6>
                               <h6 style="display: none;">{{ product.category_id }}</h6>
                               <p style="font-size: 13px;">Unit Price: ₱{{ product.unit_price }}</p>
-                              <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:wala pa function</span> {{ getSizeName(product.size_id) }}</p> 
-                              <button class="btn btn-outline-danger btn-sm" style="width: 80px; height:33px;" @click="preOrder(product)">Pre order</button>
+                              <p style="font-size: 13px;"><span style="font-size: 13px;">Available Size:</span> {{ getSizeName(product.size_id) }}</p> 
+                              <button class="neumorphic-button" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s; width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:25%; left:25%;">Pre order</span></button>
+                              <!-- @click="preOrder(product)" function ng preorder button -->
                             </div>
                           </div>
                         </div>
@@ -323,6 +326,11 @@ import axios from 'axios';
 export default {
   data() {
     return {  
+
+      productData: { // Initialize productData object
+      transaction_code: '', // Initialize transaction_code property
+    },
+
       searchText: '',
       selectedCheckboxes: [], // Array to store IDs of selected checkboxes
       showSelectAllButton: false, // Control visibility of a button
@@ -395,6 +403,41 @@ computed: {
   },
   
   methods: {
+    
+    generateTransactionCode() {
+    // Generate a random transaction code (for example purposes)
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 8;
+    let transactionCode = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      transactionCode += chars.charAt(randomIndex);
+    }
+    return transactionCode;
+  },
+   
+      preOrder(product) {
+  const { image, prod_name, unit_price, size_id, stock, id, category_id, product_description, ships, } = product; //category_id di pa tapos iretrieve
+  const transactionCode = this.generateTransactionCode();
+  this.$router.push({
+    name: 'productrequest',
+    params: {
+      image,
+      prod_name,
+      unit_price,
+      category_id,
+      size_id,
+      stock, // Include stock parameter
+      id,
+      transaction_code: transactionCode,
+      product_description,
+      ships,
+      
+    }
+  });
+},
+
+
     updateSearch() {
       // Triggered on every input change in the search input
       // Update searchText and trigger the computed property update

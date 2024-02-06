@@ -18,27 +18,45 @@
        
         
         <br>
-        <h4 style="margin-left:100px; font-size: 14px; margin-top:-130px; margin-left:170px;">Register New Account</h4>
+        <h4 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.2s;margin-left:100px; font-size: 14px; margin-top:-110px; margin-left:170px;">Register New Account</h4>
         <h5 style="margin-left: 630px;"></h5>
         
-        <div class="v-sheet">
-          <form onsubmit="event.preventDefault(); register();">
-            <div v-if="message" class="error-message-box">
+        <div class="v-sheet"> 
+          <form @submit.prevent="register">
+            <div v-if="message" class="error-message-box" style="position:absolute; width:355px; margin-left:-87%; top:20%;">
               <div class="error-message">{{ message }}</div>
             </div>
             <br>
         
-            <label for="username" style="position:absolute; right:70%;">Username:</label>
-            <input style="position:absolute;  right:13%; top:36.5%; border:0px;" class="search-input" v-model="username" id="username" type="text" required>
+            <label for="username" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute; right:70%;">Username:</label>
+            <input style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute;  right:13%; top:40.5%; border:0px;" class="search-input" v-model="username" id="username" type="text" required>
         
-            <label for="password" style="position:absolute; right:70.5%;top:51.5%;">Password:</label>
-            <input style="position:absolute;  right:13%; top:48.5%; width:250px;" class="search-input" v-model="password" id="password" type="password" required>
+            <label for="password" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute; right:70.5%;top:54.5%;">Password:</label>
+            <input style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute;  right:13%; top:51.5%; width:250px;" class="search-input" v-model="password" id="password" type="password" required>
         
-            <label for="passwordConfirm" style="position:absolute; right:66.5%;top:62.5%;">Confirm Pass:</label>
-            <input  style="position:absolute;  right:13%; top:60.5%; width:250px;" v-model="passwordConfirm" id="passwordConfirm"  class="search-input" type="password" required>
+            <label for="passwordConfirm" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute; right:66.5%;top:64.5%;">Confirm Pass:</label>
+            <input  style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;position:absolute;  right:13%; top:62.5%; width:250px;" v-model="passwordConfirm" id="passwordConfirm"  class="search-input" type="password" required>
         
-            <button type="submit" class="mt-2" style="background-color: #000000; color: #FFFFFF;position:absolute;  right:13%; top:74.5%; width:360px;">Submit</button>
-            <p onclick="window.location.href='/'" class="new" style="color: black; margin-left: 10%; right: 45.5%; top: 90%; display: block; position: absolute; text-align: center; cursor: pointer; top:88%;">Login</p>
+            <button type="submit" class="mt-2" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;background-color: #222121; color: #FFFFFF;position:absolute;  right:13%; top:76.5%; width:360px;">Submit</button>
+            <p onclick="window.location.href='/'" class="new" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;color: black; margin-left: 10%; right: 45.5%; top: 90%; display: block; position: absolute; text-align: center; cursor: pointer; top:88%;">Login</p>
           </form>
         </div>
         

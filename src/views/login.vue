@@ -1,6 +1,7 @@
 User
 
 <template>
+  
   <div class="neumorphic-navbar" style="position:absolute; width:500px; height:500px; margin-left:450px; ">
   <div>
      <div style="">
@@ -40,11 +41,11 @@ User
           <label for="showPassword" style="margin-top:110px; margin-left:-2px; width:200px; position:absolute;" >Show Password</label>
           <input v-model="showPassword" type="checkbox" style="font-weight: 5px; font-size:10px; margin-top:70px; margin-left:227px;" id="showPassword" name="showPassword" />
       
-          <button type="submit" class="mt-4 custom-login-btn" style="position:absolute; background-color:black; color: #ffffff; width: 47%; top:110%; left:66%;">Login</button>
+          <button type="submit" class="mt-4 custom-login-btn" style="position:absolute; background-color:rgb(27, 27, 27); color: #ffffff; width: 47%; top:110%; left:66%;">Login</button>
           <div style="position:absolute; top:140%; left:67.3%;">
           <div class="line-with-text" >
             <div class="line" style="width:300px;"></div>
-            <div class="text">or</div>
+            <div class="text">or</div>  
             <div class="line"></div>
           </div>
       
