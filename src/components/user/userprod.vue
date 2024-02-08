@@ -27,7 +27,7 @@
 
     <!-- Show products -->
     <div class="row justify-content-center">
-      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4">
+      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4"> 
         <!-- Product Card -->
         <div class="room-item text-center">
           <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */

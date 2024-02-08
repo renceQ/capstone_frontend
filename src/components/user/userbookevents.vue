@@ -125,6 +125,29 @@
    <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
   </button>
 
+  <!-- v-for="info in info" -->
+
+  <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+  animation: fade-up .8s ease-out forwards;
+  animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
+  height:100px; margin-left:40px; margin-top:20px;">
+
+  
+ 
+  <div v-for="(item, index) in servinfo" :key="index"> 
+  <img :src="item.image" alt="Service Image" v-if="item.image"  style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
+  <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">{{ item.service }}</span>
+  <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+  </div>
+ 
+ 
+</button>
+
+
+
+
+
+
                 
 <div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 animation: fade-up .8s ease-out forwards;
@@ -356,6 +379,7 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      servinfo: [],
       dialogs: false,
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
@@ -404,8 +428,19 @@ Sound and stage lights production.</p>
   },
   mounted() {
     this.updateCalendar();
+    this.getInfo(); 
   },
+  
   methods: {
+    async getInfo() {
+      try {
+        const response = await axios.get('getservice');
+        this.servinfo = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }, 
+
     openDialog() {
     this.dialogs = true;
   },

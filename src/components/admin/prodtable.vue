@@ -44,7 +44,7 @@
                             <img :src="product.image" alt="image" class="img-fluid" style="max-width: 100px; max-height:100px;">
                           </td>
                           <td>{{ product.prod_name }}</td>
-                          <td>
+                          <td> 
                             <span v-if="product.stock <= 15" class="text-danger">Low Stock</span>
                             <span v-else class="text-success">High Stock</span>
                           </td>

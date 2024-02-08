@@ -40,6 +40,7 @@
       </form>
     </div>
 
+  
 
 </template>
 
@@ -82,7 +83,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    },
+    }, 
     deleteRecord(categoryId) {
       console.log(`Deleting category with ID: ${categoryId}`);
       // Implement delete logic here
