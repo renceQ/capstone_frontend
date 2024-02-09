@@ -362,7 +362,7 @@
             <v-btn  style="margin-left:162px;"   color="primary" @click="closemodal">OK</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog> 
 
 
       <div v-if="!showReviews" style="" >

@@ -32,11 +32,7 @@ import pending_main from '../views/pending_main.vue'
 import addtocart from '../views/addtocart.vue'
 import editprofiles from '../views/editprofiles.vue'
 import chatbot from '../views/chatbot.vue'
-
-
-
-
-
+import service from '../views/service.vue'
 
 
 const routes = [
@@ -171,6 +167,10 @@ const routes = [
   {
     path: '/chatbot',
     component: chatbot
+  },
+  {
+    path: '/service',
+    component: service
   },
 ]
 

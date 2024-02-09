@@ -31,7 +31,7 @@
           </div>
 
 
-<div>
+    <div>
       <form @submit.prevent="savecateg">
         <label for="category_name">Category</label>
         <input type="text" placeholder="category_name" v-model="category_name" required>
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       category_name:"", 
-      info: [],
+      info: [], 
  
     }
   },

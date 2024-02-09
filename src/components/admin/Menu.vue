@@ -16,6 +16,7 @@
       <li><a href="/orderRequest"><i class="fas fa-eye"></i>Product Order Request</a></li>
       <li><a href="/productcategory"><i class="fas fa-eye"></i>Product Category</a></li>
       <li><a href="/orderproducts"><i class="fas fa-eye"></i>Order List</a></li>
+      <li><a href="/service"><i class="fas fa-eye"></i>Service List</a></li>
       <li><a href="/bookingtable"><i class="fas fa-link"></i>Book Request</a></li>
       <li><a href="/customer"><i class="fas fa-link"></i>Customer List</a></li>
       <li><a href="/approved_events"><i class="fas fa-link"></i>Event Schedules</a></li>

@@ -15,136 +15,60 @@
           <br>
           <div>
 
-            <button  @click="openDialog" type="button" class="neumorphic-button"  style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-            animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;background-color: rgb(255, 255, 255);width: 260px;
-            height:100px; margin-left:40px;">
-            <img :src="require('../../assets/images/1.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-           <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;"> SOUNDS SERVICE</span><span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
+
+            <button
+            v-for="(item, index) in servinfo"
+            :key="index"
+            @click="openDialog(item)"
+            type="button"
+            class="neumorphic-button"
+            style="
+              opacity: 0;
+              animation: fade-up 0.8s ease-out forwards;
+              animation-delay: 0.2s;
+              background-color: rgb(255, 255, 255);
+              width: 260px;
+              height: 100px;
+              margin-left: 40px;
+              margin-top: 20px;
+            "
+          >
+            <div>
+              <img
+                :src="item.image"
+                alt="Service Image"
+                v-if="item.image"
+                style="
+                  box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
+                  border-radius: 5px;
+                  width: 80px;
+                  margin-left: -158px;
+                  margin-bottom: 10px;
+                "
+              />
+              <span
+                style="
+                  position: absolute;
+                  margin-left: 24px;
+                  margin-top: 2px;
+                  font-size: 11px;
+                  font-weight: 700;
+                  text-align: left;
+                  font-family: 'Audiowide', cursive; 
+                "
+              >{{ item.service }}</span>
+              <span style="display:none;">{{ item.id }}</span>
+              <span
+                style="
+                  position: absolute;
+                  margin-left: 80px;
+                  font-size: 12px;
+                  margin-top: 60px;
+                  color: orange;
+                "
+              >Click here</span>
+            </div>
           </button>
-
-
-          <button  @click="openDialog" type="button" class="neumorphic-button"  style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-          animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.2s;background-color: rgb(255, 255, 255);width: 260px;
-          height:100px; margin-left:30px;">
-          <img :src="require('../../assets/images/2.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-         <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;"> LIGHTS SERVICE</span><span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-        </button>
-
-        <br>
-
-        <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-        animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-        height:100px; margin-left:40px; margin-top:20px;">
-        <img :src="require('../../assets/images/3.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-       <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO SHOOT<span style="position:absolute; left:1%; margin-top:20px;">SERVICE</span>
-       </span>
-       <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-      </button>
-
-
-      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-      animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-        height:100px; margin-left:30px; margin-top:20px;">
-        <img :src="require('../../assets/images/5.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-       <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">VIDEO SHOOT<span style="position:absolute; left:1%; margin-top:20px;">SERVICE</span>
-       </span>
-       <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-      </button>
-
-      <br>
-
-      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-      animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-      height:100px; margin-left:40px; margin-top:20px;">
-      <img :src="require('../../assets/images/4.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO AND VIDEO<span style="position:absolute; left:1%; margin-top:20px;">SHOOT</span>
-     </span>
-     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-    </button>
-
-
-    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up .8s ease-out forwards;
-    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-      height:100px; margin-left:30px; margin-top:20px;">
-      <img :src="require('../../assets/images/6.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">PHOTO AND VIDEO<span style="position:absolute; left:1%; margin-top:20px;">SHOOT WITH SDE</span>
-     </span>
-     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-    </button>
-
-    <br>
-
-      <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-      animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-      height:100px; margin-left:40px; margin-top:20px;">
-      <img :src="require('../../assets/images/7.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-     <span style="position:absolute; margin-left:24px; margin-top:10px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:-55%; margin-top:20px; width:200px;">LIGHTS SERVICE</span>
-     </span>
-     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-    </button>
-
-
-    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up .8s ease-out forwards;
-    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-      height:100px; margin-left:30px; margin-top:20px;">
-      <img :src="require('../../assets/images/8.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-     <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:1%; margin-top:20px;">LIGHTS WITH <span style="position:absolute; left:-60%; margin-top:20px;width:200px;">PHOTO SERVICE </span> </span>
-     </span>
-     <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-    </button>
-
-
-    <br>
-
-    <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up .8s ease-out forwards;
-    animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-    height:100px; margin-left:40px; margin-top:20px;">
-    <img :src="require('../../assets/images/9.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-    <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS AND<span style="position:absolute; left:1%; margin-top:20px;">LIGHTS WITH <span style="position:absolute; left:-70%; margin-top:20px;width:200px;">PHOTO VIDEO </span> </span>
-  </span>
-   <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-  </button>
-
-
-  <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-  animation: fade-up .8s ease-out forwards;
-  animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-    height:100px; margin-left:30px; margin-top:20px;">
-    <img :src="require('../../assets/images/10.png')" alt="Description of the image" style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-   <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">SOUNDS, LIGHTS<span style="position:absolute; left:1%; margin-top:20px;">PHOTO, VIDEO <span style="position:absolute; left:-80%; margin-top:20px;width:200px;">WITH SDE </span> </span>
-   </span>
-   <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-  </button>
-
-  <!-- v-for="info in info" -->
-
-  <button  @click="openDialog" type="button" class="neumorphic-button"  style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-  animation: fade-up .8s ease-out forwards;
-  animation-delay: 0.2s; background-color: rgb(255, 255, 255);width: 260px;
-  height:100px; margin-left:40px; margin-top:20px;">
-
-  
- 
-  <div v-for="(item, index) in servinfo" :key="index"> 
-  <img :src="item.image" alt="Service Image" v-if="item.image"  style=" box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2); border-radius: 5px; width: 80px; margin-left: -158px;  margin-bottom: 10px;">
-  <span style="position:absolute; margin-left:24px; margin-top:2px;  font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">{{ item.service }}</span>
-  <span style="position:absolute; margin-left:80px;font-size:12px; margin-top:60px; color:orange;"> Click here</span>
-  </div>
- 
- 
-</button>
-
-
-
 
 
 
