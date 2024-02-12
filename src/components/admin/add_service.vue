@@ -304,6 +304,7 @@
       const file = event.target.files[0];
       if (file) {
         this.imageUrl = URL.createObjectURL(file);
+        this.image = file.name; // Set the image property to the file name or URL
       }
     },
     opendialog(){
