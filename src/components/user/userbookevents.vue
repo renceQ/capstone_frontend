@@ -19,7 +19,7 @@
             <button
             v-for="(item, index) in servinfo"
             :key="index"
-            @click="openDialog(item)"
+            @click="openDialogs(item)"
             type="button"
             class="neumorphic-button"
             style="
@@ -70,6 +70,7 @@
             </div>
           </button>
 
+          <!-- @click="openDialog(item)" this is bookingform the form dialog -->
 
 
                 
@@ -294,6 +295,104 @@ Sound and stage lights production.</p>
 
 
 
+
+<!--service info dialog-->
+<v-dialog v-model="dialogss" max-width="620px">
+  <form @submit.prevent="saveBooking" class="container">
+    <v-card style="height:500px;">
+      <br>
+      <v-card-title class="headline text-center" style="font-size: 14px; font-weight:900;  ">SERVICE<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Information</span></v-card-title>
+      <v-card-text>
+       
+        <v-card-text class="headline text-center" style="font-size: 14px; font-weight:900;">
+          {{ selectedService.service }} 
+        </v-card-text>
+
+        <div style=" margin-left:20px; width:150px;" class="neumorphic-navbars" >
+        <v-card-text class="headline text-left" style="">
+          <img :src="selectedService.image" style="height:120px; height:120px;" alt="Service Image">
+        </v-card-text>
+        </div>
+
+        <v-card-text class="headline text-left" style="position:absolute; top:30%; left:36%; width:350px; font-size: 14px; font-weight:400;">
+         &nbsp;&nbsp;{{ selectedService.information }} 
+        </v-card-text>  
+
+        
+        <span><v-card-text class="headline text-left" style="position:absolute; top:60%; left:5%; width:350px; font-size: 14px; font-weight:600;">
+          &nbsp;&nbsp;Reques for item quantity:
+         </v-card-text>  </span>
+         
+        <button
+        type="button"
+        class="neumorphic-button"
+        style="
+          position:absolute;
+          opacity: 0;
+          animation: fade-up 0.8s ease-out forwards;
+          animation-delay: 0.2s;
+          background-color: rgb(255, 255, 255);
+          width: 150px;
+          height: 40px;
+          margin-left: 20px;
+          margin-top: 70px;
+          border-radius:3px;
+        "
+      >{{ selectedService.first_req }} - {{ selectedService.first_price }} 
+      </button>
+      <button
+        type="button"
+        class="neumorphic-button"
+        style="
+          position:absolute;
+          opacity: 0;
+          animation: fade-up 0.8s ease-out forwards;
+          animation-delay: 0.2s;
+          background-color: rgb(255, 255, 255);
+          width: 150px;
+          height: 40px;
+          margin-left: 180px;
+          margin-top: 70px;
+          border-radius:3px;
+        "
+      >{{ selectedService.second_req }} - {{ selectedService.second_price }} 
+      </button>
+
+
+      <button
+      type="button"
+      class="neumorphic-button"
+      style="
+        position:absolute;
+        opacity: 0;
+        animation: fade-up 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+        background-color: rgb(51, 50, 50);
+        width: 150px;
+        height: 40px;
+        margin-left:390px;
+        margin-top: 138px;
+        border-radius:3px;
+        color:white;
+        
+      "
+    >File Request
+    </button>
+
+
+        <v-card-text class="headline text-left" style="position:absolute; font-size: 14px; font-weight:400; margin-top:22%;">
+          &nbsp;&nbsp;&nbsp;&nbsp; Estimated Price:&nbsp;&nbsp;{{ formatPrice(selectedService.low_pricing) }} - {{ formatPrice(selectedService.high_pricing) }}
+        </v-card-text>     
+
+      </v-card-text>
+      <v-card-actions>
+      
+      </v-card-actions>
+    </v-card>
+  </form>
+</v-dialog>
+
+
   </template>
   
   
@@ -303,8 +402,10 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      selectedService: {},
       servinfo: [],
       dialogs: false,
+      dialogss: false,
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -356,6 +457,16 @@ Sound and stage lights production.</p>
   },
   
   methods: {
+    formatPrice(price) {
+      if (price >= 1e6) {
+        return (price / 1e6).toFixed(price % 1e6 !== 0 ? 1 : 0) + 'M';
+      } else if (price >= 1e3) {
+        return (price / 1e3).toFixed(price % 1e3 !== 0 ? 1 : 0) + 'K'; // Add 'K' only for values in the thousands
+      } else {
+        return price.toString(); // Keep the original value for smaller values
+      }
+    },
+
     async getInfo() {
       try {
         const response = await axios.get('getservice');
@@ -370,6 +481,14 @@ Sound and stage lights production.</p>
   },
     closeDialog() {
       this.dialogs = false;
+    },
+    openDialogs(item) {
+      this.selectedService = item; // Set the selected service information
+      this.dialogss = true; // Open the dialog
+    },
+
+    closeDialogs() {
+      this.dialogss = false;
     },
     updateCalendar() {
     const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
