@@ -235,61 +235,72 @@
       },
       methods: {
 
-        async saveService() {
+async saveService() {
   try {
     // Display a confirmation dialog
     const userConfirmed = window.confirm('Are you sure you want to save?');
 
     // Check if the user clicked OK
     if (userConfirmed) {
-      const ins = await axios.post("saveService", {
-        service: this.service,
-        information: this.information,
-        low_pricing: this.low_pricing,
-        high_pricing: this.high_pricing,
-        image: this.image,
-        first_req: this.first_req,
-        second_req: this.second_req,
-        third_req: this.third_req,
-        fourth_req: this.fourth_req,
-        fifth_req: this.fifth_req,
-        sixth_req: this.sixth_req,
-        first_price: this.first_price,
-        second_price: this.second_price,
-        third_price: this.third_price,
-        fourth_price: this.fourth_price,
-        fifth_price: this.fifth_price,
-        sixth_price: this.sixth_price,
-      });
+      const formData = new FormData();
+      formData.append('service', this.service);
+      formData.append('information', this.information);
+      formData.append('low_pricing', this.low_pricing);
+      formData.append('high_pricing', this.high_pricing);
+      formData.append('first_req', this.first_req);
+      formData.append('second_req', this.second_req);
+      formData.append('third_req', this.third_req);
+      formData.append('fourth_req', this.fourth_req);
+      formData.append('fifth_req', this.fifth_req);
+      formData.append('sixth_req', this.sixth_req);
+      formData.append('first_price', this.first_price);
+      formData.append('second_price', this.second_price);
+      formData.append('third_price', this.third_price);
+      formData.append('fourth_price', this.fourth_price);
+      formData.append('fifth_price', this.fifth_price);
+      formData.append('sixth_price', this.sixth_price);
+
+      if (this.image instanceof File) {
+        formData.append('image', this.image);
+      }
+
+      const ins = await axios.post("saveService", formData);
 
       // Clear form fields after successful save
-      this.event_title ="";
-      this.service ="";
-      this.information ="";
-      this.low_pricing ="";
-      this.high_pricing ="";
-      this.image ="";
-      this.first_req ="";
-      this.second_req ="";
-      this.third_req ="";
-      this.fourth_req ="";
-      this.fifth_req ="";
-      this.sixth_req ="";
-      this.first_price ="";
-      this.second_price ="";
-      this.third_price ="";
-      this.fourth_price ="";
-      this.fifth_price ="";
-      this.sixth_price ="";
+      this.event_title = "";
+      this.service = "";
+      this.information = "";
+      this.low_pricing = "";
+      this.high_pricing = "";
+      this.first_req = "";
+      this.second_req = "";
+      this.third_req = "";
+      this.fourth_req = "";
+      this.fifth_req = "";
+      this.sixth_req = "";
+      this.first_price = "";
+      this.second_price = "";
+      this.third_price = "";
+      this.fourth_price = "";
+      this.fifth_price = "";
+      this.sixth_price = "";
 
       // Emit event and perform other actions
       this.$emit('data-saved');
-     
       this.dialogss = false;
+      this.getInfo();
     }
     // If the user clicked Cancel, do nothing
   } catch (error) {
     console.error(error);
+  }
+},
+
+handleFileChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    this.imageUrl = URL.createObjectURL(file);
+    this.image = file; // Store the file object
   }
 },
         async getInfo() {
@@ -300,13 +311,7 @@
         console.error(error);
       }
     }, 
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.imageUrl = URL.createObjectURL(file);
-        this.image = file.name; // Set the image property to the file name or URL
-      }
-    },
+  
     opendialog(){
         this.dialogss = true;
       },
