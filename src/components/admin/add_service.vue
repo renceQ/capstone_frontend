@@ -72,20 +72,20 @@
                       <div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="low_pricing">Lowest Price:</label>
+                            <label for="low_pricing">Minimum Price:</label>
                             <input
                               type="number"
                               inputmode="numeric"
                               class="search-input"
                               style="width: 206%; height: 60%"
-                              placeholder="Lowest price"
+                              placeholder="Minimum price"
                               v-model="low_pricing"
                               required
                             />
                           </div>
                         </div>
                     
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="high_pricing">Highest Price:</label>
                             <input
@@ -98,7 +98,7 @@
                               required
                             />
                           </div>
-                        </div>
+                        </div> -->
                       </div>
               
                       <div class="form-row">
@@ -208,7 +208,6 @@
       service:"", 
       information:"", 
       low_pricing:"", 
-      high_pricing:"", 
       image:"", 
       first_req:"", 
       second_req:"", 
@@ -246,7 +245,6 @@ async saveService() {
       formData.append('service', this.service);
       formData.append('information', this.information);
       formData.append('low_pricing', this.low_pricing);
-      formData.append('high_pricing', this.high_pricing);
       formData.append('first_req', this.first_req);
       formData.append('second_req', this.second_req);
       formData.append('third_req', this.third_req);
@@ -271,7 +269,6 @@ async saveService() {
       this.service = "";
       this.information = "";
       this.low_pricing = "";
-      this.high_pricing = "";
       this.first_req = "";
       this.second_req = "";
       this.third_req = "";

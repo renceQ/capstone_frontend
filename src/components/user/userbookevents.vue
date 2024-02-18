@@ -299,12 +299,12 @@ Sound and stage lights production.</p>
 <!--service info dialog-->
 <v-dialog v-model="dialogss" max-width="620px">
   <form @submit.prevent="saveBooking" class="container">
-    <v-card style="height:500px;">
+    <v-card style="height:550px;">
       <br>
       <v-card-title class="headline text-center" style="font-size: 14px; font-weight:900;  ">SERVICE<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Information</span></v-card-title>
       <v-card-text>
        
-        <v-card-text class="headline text-center" style="font-size: 14px; font-weight:900;">
+        <v-card-text class="headline text-center" style="font-size: 14px; font-weight:900; margin-top:-25px;">
           {{ selectedService.service }} 
         </v-card-text>
 
@@ -314,64 +314,228 @@ Sound and stage lights production.</p>
         </v-card-text>
         </div>
 
-        <v-card-text class="headline text-left" style="position:absolute; top:30%; left:36%; width:350px; font-size: 14px; font-weight:400;">
+        <v-card-text class="headline text-left" style="position:absolute; top:22%; left:36%; width:350px; font-size: 14px; font-weight:400;">
          &nbsp;&nbsp;{{ selectedService.information }} 
         </v-card-text>  
 
+        <br>
+  <!-- &nbsp;&nbsp;Minimum Price:{{ formatPrice(selectedService.low_pricing) }} old pricing method convert 1000 into 1k -->
+  <span>
+    <v-card-text class="headline text-left" style="position:absolute; top:49%; left:5%; width:350px; font-size: 14px; font-weight:600;">
+      &nbsp;&nbsp;Minimum Price: {{ displayMinimumPrice }}
+    </v-card-text>
+  </span>
         
-        <span><v-card-text class="headline text-left" style="position:absolute; top:60%; left:5%; width:350px; font-size: 14px; font-weight:600;">
-          &nbsp;&nbsp;Reques for item quantity:
+        <span><v-card-text class="headline text-left" style="position:absolute; top:55%; left:5%; width:350px; font-size: 14px; font-weight:600;">
+          &nbsp;&nbsp;Request for additional item quantity:
          </v-card-text>  </span>
          
         <button
         type="button"
-        class="neumorphic-button"
+        @click="openDialogss(selectedService.first_req)"
+        
         style="
           position:absolute;
           opacity: 0;
           animation: fade-up 0.8s ease-out forwards;
           animation-delay: 0.2s;
           background-color: rgb(255, 255, 255);
-          width: 150px;
-          height: 40px;
+          width: 164px;
+          height: 50px;
           margin-left: 20px;
-          margin-top: 70px;
+          margin-top: 75px;
           border-radius:3px;
         "
       >{{ selectedService.first_req }} - {{ selectedService.first_price }} 
       </button>
+
+        <input type="number" class="search-input"  inputmode="numeric"  style="
+        position:absolute;
+        opacity: 0;
+        animation: fade-up 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+        background-color: rgb(255, 255, 255);
+        width: 154px;
+        height: 50px;
+        margin-left: 20px;
+        margin-top: 125px;
+        border-radius:3px;
+      " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" >
+
       <button
         type="button"
-        class="neumorphic-button"
+        @click="openDialogss(selectedService.second_req)"
+        
         style="
           position:absolute;
           opacity: 0;
           animation: fade-up 0.8s ease-out forwards;
           animation-delay: 0.2s;
           background-color: rgb(255, 255, 255);
-          width: 150px;
-          height: 40px;
-          margin-left: 180px;
-          margin-top: 70px;
+          width: 164px;
+          height: 50px;
+          margin-left: 190px;
+          margin-top: 75px;
           border-radius:3px;
         "
       >{{ selectedService.second_req }} - {{ selectedService.second_price }} 
       </button>
 
+      <input type="number" class="search-input"  inputmode="numeric"  style="
+      position:absolute;
+      opacity: 0;
+      animation: fade-up 0.8s ease-out forwards;
+      animation-delay: 0.2s;
+      background-color: rgb(255, 255, 255);
+      width: 154px;
+      height: 50px;
+      margin-left: 196px;
+      margin-top: 125px;
+      border-radius:3px;
+    " placeholder="0"  >
 
       <button
       type="button"
-      class="neumorphic-button"
+      @click="openDialogss(selectedService.third_req)"
+    
       style="
         position:absolute;
         opacity: 0;
         animation: fade-up 0.8s ease-out forwards;
         animation-delay: 0.2s;
+        background-color: rgb(255, 255, 255);
+        width: 164px;
+        height: 50px;
+        margin-left: 360px;
+        margin-top: 75px;
+        border-radius:3px;
+      "
+    >{{ selectedService.third_req }} - {{ selectedService.third_price }} 
+    </button>
+
+    <input type="number" class="search-input"  inputmode="numeric"  style="
+    position:absolute;
+    opacity: 0;
+    animation: fade-up 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    background-color: rgb(255, 255, 255);
+    width: 154px;
+    height: 50px;
+    margin-left: 370px;
+    margin-top: 125px;
+    border-radius:3px;
+  " placeholder="0"  >
+
+      <button
+        type="button"
+        @click="openDialogss(selectedService.fourth_req)"
+       
+        style="
+          position:absolute;
+          opacity: 0;
+          animation: fade-up 0.8s ease-out forwards;
+          animation-delay: 0.2s;
+          background-color: rgb(255, 255, 255);
+          width: 164px;
+          height: 50px;
+          margin-left: 20px;
+          margin-top: 182px;
+          border-radius:3px;
+        "
+      >{{ selectedService.fourth_req }} - {{ selectedService.fourth_price }} 
+      </button>
+
+      <input type="number" class="search-input"  inputmode="numeric"  style="
+      position:absolute;
+      opacity: 0;
+      animation: fade-up 0.8s ease-out forwards;
+      animation-delay: 0.2s;
+      background-color: rgb(255, 255, 255);
+      width: 154px;
+      height: 50px;
+      margin-left: 20px;
+      margin-top: 230px;
+      border-radius:3px;
+    " placeholder="0"  >
+
+
+      <button
+      type="button"
+      @click="openDialogss(selectedService.fifth_req)"
+     
+      style="
+        position:absolute;
+        opacity: 0;
+        animation: fade-up 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+        background-color: rgb(255, 255, 255);
+        width: 164px;
+        height: 50px;
+        margin-left: 190px;
+        margin-top: 182px;
+        border-radius:3px;
+      "
+    >{{ selectedService.fifth_req }} - {{ selectedService.fifth_price }} 
+    </button>
+
+    <input type="number" class="search-input"  inputmode="numeric"  style="
+    position:absolute;
+    opacity: 0;
+    animation: fade-up 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    background-color: rgb(255, 255, 255);
+    width: 154px;
+    height: 50px;
+    margin-left: 196px;
+    margin-top: 230px;
+    border-radius:3px;
+  " placeholder="0"  >
+
+    <button
+    type="button"
+    @click="openDialogss(selectedService.sixth_req)"
+   
+    style="
+      position:absolute;
+      opacity: 0;
+      animation: fade-up 0.8s ease-out forwards;
+      animation-delay: 0.2s;
+      background-color: rgb(255, 255, 255);
+      width: 164px;
+      height: 50px;
+      margin-left: 360px;
+      margin-top: 182px;
+      border-radius:3px;
+    "
+  >{{ selectedService.sixth_req }} - {{ selectedService.sixth_price }} 
+  </button>
+
+
+  <input type="number" class="search-input"  inputmode="numeric"  style="
+    position:absolute;
+    opacity: 0;
+    animation: fade-up 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    background-color: rgb(255, 255, 255);
+    width: 154px;
+    height: 50px;
+    margin-left: 370px;
+    margin-top: 230px;
+    border-radius:3px;
+  " placeholder="0"  >
+
+
+      <button
+      type="button"
+      @click="openDialog(item)"
+      class="neumorphic-button"
+      style="
+        position:absolute;
         background-color: rgb(51, 50, 50);
-        width: 150px;
+        width: 155px;
         height: 40px;
-        margin-left:390px;
-        margin-top: 138px;
+        margin-left:370px;
+        margin-top: 318px;
         border-radius:3px;
         color:white;
         
@@ -379,11 +543,70 @@ Sound and stage lights production.</p>
     >File Request
     </button>
 
+    <li class="menu-item" >
+    <a
+      type="button"
+      @click="openDialogsss()"
+      class="neumorphic-button"
+      style="
+        position:absolute;
+        opacity: 0;
+        animation: fade-up 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+        background-color: rgb(255, 255, 255);
+        width: 169px;
+        height: 40px;
+        margin-left: 354px;
+        margin-top: 15px;
+        border-radius:3px;
+      "
+    > Show Added Items
+    </a>
+     <!-- <i class="fas fa-caret-down arrow-icon" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.1s; top:28px; position: absolute; margin-right:-526px;"></i> -->
+    <ul class="dropdown" style="margin-left: 200px; margin-top:-170px; height: 168px; width:325px;"> 
+      <h2></h2>
+    </ul>
+    </li>
 
-        <v-card-text class="headline text-left" style="position:absolute; font-size: 14px; font-weight:400; margin-top:22%;">
-          &nbsp;&nbsp;&nbsp;&nbsp; Estimated Price:&nbsp;&nbsp;{{ formatPrice(selectedService.low_pricing) }} - {{ formatPrice(selectedService.high_pricing) }}
+   
+
+        <v-card-text class="headline text-left" style=" font-size: 14px; font-weight:400; margin-top:50%;">
+          &nbsp;   &nbsp;&nbsp;
         </v-card-text>     
 
+      </v-card-text>
+      <v-card-actions>
+      
+      </v-card-actions>
+    </v-card>
+  </form>
+</v-dialog>
+
+
+
+
+<v-dialog v-model="dialogssss" max-width="400px">
+  <form @submit.prevent="saveBooking" class="container">
+    <v-card style="height:360px;">
+      <br>
+      <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:900;   ">  Added Items</v-card-title>
+      <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:400; margin-top:-15px; ">  Added Quantity of the items</v-card-title>
+      <v-card-text>
+
+        <div>{{ selectedService.first_req }}: 0</div>
+        <div>{{ selectedService.second_req }} : 0</div>
+        <div>{{ selectedService.third_req }} : 0</div>
+        <div>{{ selectedService.fourth_req }} : 0</div>
+        <div>{{ selectedService.fifth_req }} : 0</div>
+        <div>{{ selectedService.sixth_req }} : 0</div>
+        <br>
+        <div>Added items total: 0</div>
+        <div>Minimum price: {{selectedService.low_pricing}}</div>
+        <div>Total cost: {{selectedService.low_pricing}}</div>
+        
+        
       </v-card-text>
       <v-card-actions>
       
@@ -402,10 +625,16 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      inputValue: "",
+      selectedServiceInDialog: null,
       selectedService: {},
+      selectedService: null,
+      retrievedService: "",
       servinfo: [],
       dialogs: false,
       dialogss: false,
+      dialogsss: false,
+      dialogssss: false,
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -429,6 +658,15 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    displayMinimumPrice() {
+      if (this.inputValue === "") {
+        return this.selectedService.low_pricing;
+      } else {
+        const inputMultiplier = parseInt(this.inputValue);
+        const calculatedPrice = inputMultiplier * this.selectedService.first_price + parseInt(this.selectedService.low_pricing);
+        return calculatedPrice.toString(); // Convert to string to concatenate
+      }
+    },
     currentMonth() {
       return this.months[this.selectedMonth];
     },
@@ -457,6 +695,11 @@ Sound and stage lights production.</p>
   },
   
   methods: {
+
+    updateMinimumPrice() {
+      // You can add any additional logic here if needed
+      // This method is called whenever the user input changes
+    },
     formatPrice(price) {
       if (price >= 1e6) {
         return (price / 1e6).toFixed(price % 1e6 !== 0 ? 1 : 0) + 'M';
@@ -489,6 +732,22 @@ Sound and stage lights production.</p>
 
     closeDialogs() {
       this.dialogss = false;
+    },
+    openDialogss(req) {
+      this.dialogsss = true;
+      this.retrievedService = req;
+    },
+
+    closeDialogss() {
+      this.dialogsss = false;
+    },
+    
+    openDialogsss() {
+      this.dialogssss = true;
+    },
+
+    closeDialogsss() {
+      this.dialogssss = false;
     },
     updateCalendar() {
     const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
