@@ -195,12 +195,93 @@ Sound and stage lights production.</p>
   </div>
 
 
+ <v-dialog v-model="dialogs" max-width="500px">
+  <form @submit.prevent="saveBooking" class="container">
+    <v-card>
+      <br>
+      <v-card-title class="headline" style="margin-left: 130px; font-size: 14px; font-weight:900;  ">REQUEST<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Form</span></v-card-title>
+      <v-card-text>
 
+        <div class="form-group">
+          <label for="event_title">Selected Service:</label>
+          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="selectedService.service" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="total_cost">Total Cost:</label>
+          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="computedTotal" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="total_cost">Added Items:</label>
+          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="computedTotal" readonly>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="start_date">Start Date:</label>
+            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="start_date" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="end_date">End Date:</label>
+            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="end_date" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="location">Location:</label>
+            <input type="text" class="search-input" style="width:206%;height:60%" placeholder="Location" v-model="location" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="event_description">Description:</label>
+            <textarea class="search-input" v-model="event_description" style="width:206%; height:60%;" placeholder="Other Description" required></textarea>
+          </div>
+        </div>
+
+        <br><br>
+        <h3 style="margin-left: 95px; font-size: 14px; font-weight:900;" >CONTACT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Details</span></h3>
+        <br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">Name:</label>
+            <input type="text" class="search-input" style="width:206%;height:70%;" placeholder="Name" v-model="name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email:</label>
+            <input type="email" class="search-input" style="width:206%;height:70%;" placeholder="Email Address" v-model="email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="tel" class="search-input" style="width:100%;height:50px;;" placeholder="09*********" v-model="phone" required>
+        </div>
+
+      </v-card-text>
+      <v-card-actions>
+
+        <div style="margin-bottom: 10px;">
+          <button type="submit" class="neumorphic-button" style="margin-left: 10px; width: 320%; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
+        </div>
+
+      </v-card-actions>
+
+    </v-card>
+  </form>
+</v-dialog> 
 
 
 
                 <!-- booking dialog-->
-<v-dialog v-model="dialogs" max-width="500px">
+<!-- <v-dialog v-model="dialogs" max-width="500px">
   <form @submit.prevent="saveBooking" class="container">
     <v-card>
       <br>
@@ -291,7 +372,7 @@ Sound and stage lights production.</p>
 
     </v-card>
   </form>
-</v-dialog>
+</v-dialog> -->
 
 
 
@@ -589,12 +670,12 @@ Sound and stage lights production.</p>
       <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:400; margin-top:-15px; ">  Added Quantity of the items</v-card-title>
       <v-card-text>
 
-        <div>{{ selectedService.first_req }}: {{ inputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ first_totalPrice }}) <span style="">{{ selectedService.first_price }}</span></div>
-        <div>{{ selectedService.second_req }} : {{ secondInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ second_totalPrice }}) <span style="">{{ selectedService.second_price }}</span></div>
-        <div>{{ selectedService.third_req }} : {{ thirdInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ third_totalPrice }}) <span style="">{{ selectedService.third_price }}</span></div>
-        <div>{{ selectedService.fourth_req }} : {{ fourthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fourth_totalPrice }}) <span style="">{{ selectedService.fourth_price }}</span></div>
-        <div>{{ selectedService.fifth_req }} : {{ fifthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fifth_totalPrice }}) <span style="">{{ selectedService.fifth_price }}</span></div>
-        <div>{{ selectedService.sixth_req }} : {{ sixthInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ sixth_totalPrice }}) <span style="">{{ selectedService.sixth_price }}</span></div>
+        <div>{{ selectedService.first_req }}: {{ inputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ first_totalPrice }}) <span style="display:none;">{{ selectedService.first_price }}</span></div>
+        <div>{{ selectedService.second_req }} : {{ secondInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ second_totalPrice }}) <span style="display:none;">{{ selectedService.second_price }}</span></div>
+        <div>{{ selectedService.third_req }} : {{ thirdInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ third_totalPrice }}) <span style="display:none;">{{ selectedService.third_price }}</span></div>
+        <div>{{ selectedService.fourth_req }} : {{ fourthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fourth_totalPrice }}) <span style="display:none;">{{ selectedService.fourth_price }}</span></div>
+        <div>{{ selectedService.fifth_req }} : {{ fifthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fifth_totalPrice }}) <span style="display:none;">{{ selectedService.fifth_price }}</span></div>
+        <div>{{ selectedService.sixth_req }} : {{ sixthInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ sixth_totalPrice }}) <span style="display:none;">{{ selectedService.sixth_price }}</span></div>
         <br>
         <div>Added items total price: {{ totalSum }}</div>
         <div>Minimum price: {{selectedService.low_pricing}}</div>
@@ -657,6 +738,11 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    computedTotal() {
+      const sum = parseFloat(this.totalSum) + parseFloat(this.selectedService.low_pricing);
+      return sum.toFixed(2).replace(/\.0+$/, '');
+    },
+  
     first_totalPrice: function() {
       const inputNumber = parseFloat(this.inputValue) || 0;
       const result = inputNumber * this.selectedService.first_price;

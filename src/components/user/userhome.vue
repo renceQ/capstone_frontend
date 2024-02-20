@@ -1,5 +1,6 @@
 <template>
-	<div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px;">
+  <div class="all" style="position: absolute;">
+	<div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px; ">
 		<div class="box speech-bottom success">
 		  <em>Hello! welcome</em><br/>
 		  <strong v-if="info.length > 0" style="font-size: 15px;"> {{ info[0].showed_username }} </strong>
@@ -20,7 +21,7 @@
 	<br>
 	<br>
     <div style="display: flex; align-items: center;">
-		<img @click="toggleWelcomeMessage" :src="require('../../../public/img/black2.png')" alt="Description of the image" style="position:absolute;width: 420px; margin-left: 130px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" />
+		<img @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/qmj.png')" alt="Description of the image" style="position:absolute;width: 300px; margin-left: 220px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" />
 		<div style="margin-left:580px;">
 			<br>
 			<br>
@@ -100,6 +101,7 @@ animation-delay: 0.5s;
 		
 		</div>
 	</div>
+</div>
 </template>
 
 <style scoped>
@@ -220,7 +222,20 @@ img:hover {
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out; /* Adjust the duration and timing function as needed */
   }
+  
 </style>
+<style scoped>
+  /* Your existing styles */
+
+ 
+
+  img:hover {
+    transform: scale(1.1);
+  }
+
+  /* ... your other styles ... */
+</style>
+
 
 <script>
 
