@@ -598,8 +598,8 @@ Sound and stage lights production.</p>
         <br>
         <div>Added items total price: {{ totalSum }}</div>
         <div>Minimum price: {{selectedService.low_pricing}}</div>
-        <div>Total cost: {{ (parseFloat(totalSum) + parseFloat(selectedService.low_pricing)).toFixed(2) }}</div>
-        
+        <div>Total cost: {{ (parseFloat(totalSum) + parseFloat(selectedService.low_pricing)).toFixed(2).replace(/\.0+$/, '') }}</div>
+
         
       </v-card-text>
       <v-card-actions>
