@@ -392,7 +392,7 @@ Sound and stage lights production.</p>
       margin-left: 196px;
       margin-top: 125px;
       border-radius:3px;
-    " placeholder="0"  >
+    " placeholder="0" v-model="secondInputValue" @input="updateMinimumPrice"  >
 
       <button
       type="button"
@@ -424,7 +424,7 @@ Sound and stage lights production.</p>
     margin-left: 370px;
     margin-top: 125px;
     border-radius:3px;
-  " placeholder="0"  >
+  " placeholder="0" v-model="thirdInputValue" @input="updateMinimumPrice"  >
 
       <button
         type="button"
@@ -456,7 +456,7 @@ Sound and stage lights production.</p>
       margin-left: 20px;
       margin-top: 230px;
       border-radius:3px;
-    " placeholder="0"  >
+    " placeholder="0" v-model="fourthInputValue" @input="updateMinimumPrice" >
 
 
       <button
@@ -489,7 +489,7 @@ Sound and stage lights production.</p>
     margin-left: 196px;
     margin-top: 230px;
     border-radius:3px;
-  " placeholder="0"  >
+  " placeholder="0"  v-model="fifthInputValue" @input="updateMinimumPrice" >
 
     <button
     type="button"
@@ -522,7 +522,7 @@ Sound and stage lights production.</p>
     margin-left: 370px;
     margin-top: 230px;
     border-radius:3px;
-  " placeholder="0"  >
+  " placeholder="0" v-model="sixthInputValue" @input="updateMinimumPrice" >
 
 
       <button
@@ -562,12 +562,6 @@ Sound and stage lights production.</p>
       "
     > Show Added Items
     </a>
-     <!-- <i class="fas fa-caret-down arrow-icon" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up .8s ease-out forwards;
-    animation-delay: 0.1s; top:28px; position: absolute; margin-right:-526px;"></i> -->
-    <ul class="dropdown" style="margin-left: 200px; margin-top:-170px; height: 168px; width:325px;"> 
-      <h2></h2>
-    </ul>
     </li>
 
    
@@ -595,16 +589,16 @@ Sound and stage lights production.</p>
       <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:400; margin-top:-15px; ">  Added Quantity of the items</v-card-title>
       <v-card-text>
 
-        <div>{{ selectedService.first_req }}: 0</div>
-        <div>{{ selectedService.second_req }} : 0</div>
-        <div>{{ selectedService.third_req }} : 0</div>
-        <div>{{ selectedService.fourth_req }} : 0</div>
-        <div>{{ selectedService.fifth_req }} : 0</div>
-        <div>{{ selectedService.sixth_req }} : 0</div>
+        <div>{{ selectedService.first_req }}: {{ inputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ first_totalPrice }}) <span style="">{{ selectedService.first_price }}</span></div>
+        <div>{{ selectedService.second_req }} : {{ secondInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ second_totalPrice }}) <span style="">{{ selectedService.second_price }}</span></div>
+        <div>{{ selectedService.third_req }} : {{ thirdInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ third_totalPrice }}) <span style="">{{ selectedService.third_price }}</span></div>
+        <div>{{ selectedService.fourth_req }} : {{ fourthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fourth_totalPrice }}) <span style="">{{ selectedService.fourth_price }}</span></div>
+        <div>{{ selectedService.fifth_req }} : {{ fifthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fifth_totalPrice }}) <span style="">{{ selectedService.fifth_price }}</span></div>
+        <div>{{ selectedService.sixth_req }} : {{ sixthInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ sixth_totalPrice }}) <span style="">{{ selectedService.sixth_price }}</span></div>
         <br>
-        <div>Added items total: 0</div>
+        <div>Added items total price: {{ totalSum }}</div>
         <div>Minimum price: {{selectedService.low_pricing}}</div>
-        <div>Total cost: {{selectedService.low_pricing}}</div>
+        <div>Total cost: {{ (parseFloat(totalSum) + parseFloat(selectedService.low_pricing)).toFixed(2) }}</div>
         
         
       </v-card-text>
@@ -626,6 +620,11 @@ Sound and stage lights production.</p>
   data() {
     return {
       inputValue: "",
+      secondInputValue: "",
+      thirdInputValue: "",
+    fourthInputValue: "",
+    fifthInputValue: "",
+    sixthInputValue: "",
       selectedServiceInDialog: null,
       selectedService: {},
       selectedService: null,
@@ -658,15 +657,112 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
-    displayMinimumPrice() {
-      if (this.inputValue === "") {
-        return this.selectedService.low_pricing;
-      } else {
-        const inputMultiplier = parseInt(this.inputValue);
-        const calculatedPrice = inputMultiplier * this.selectedService.first_price + parseInt(this.selectedService.low_pricing);
-        return calculatedPrice.toString(); // Convert to string to concatenate
-      }
+    first_totalPrice: function() {
+      const inputNumber = parseFloat(this.inputValue) || 0;
+      const result = inputNumber * this.selectedService.first_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
     },
+    second_totalPrice: function() {
+      const inputNumber = parseFloat(this.secondInputValue) || 0;
+      const result = inputNumber * this.selectedService.second_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
+    },
+    third_totalPrice: function() {
+      const inputNumber = parseFloat(this.thirdInputValue) || 0;
+      const result = inputNumber * this.selectedService.third_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
+    },
+    fourth_totalPrice: function() {
+      const inputNumber = parseFloat(this.fourthInputValue) || 0;
+      const result = inputNumber * this.selectedService.fourth_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
+    },
+    fifth_totalPrice: function() {
+      const inputNumber = parseFloat(this.fifthInputValue) || 0;
+      const result = inputNumber * this.selectedService.fifth_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
+    },
+    sixth_totalPrice: function() {
+      const inputNumber = parseFloat(this.sixthInputValue) || 0;
+      const result = inputNumber * this.selectedService.sixth_price;
+      const formattedResult = result % 1 === 0 ? result.toFixed(0) : result.toFixed(2);
+      return formattedResult;
+    },
+    totalSum: function() {
+  const sum =
+    parseFloat(this.first_totalPrice) +
+    parseFloat(this.second_totalPrice) +
+    parseFloat(this.third_totalPrice) +
+    parseFloat(this.fourth_totalPrice) +
+    parseFloat(this.fifth_totalPrice) +
+    parseFloat(this.sixth_totalPrice);
+
+  const formattedSum = sum.toFixed(2).toString();
+
+  // Remove the trailing .00
+  const totalWithoutDecimal = formattedSum.endsWith('.00') ? formattedSum.slice(0, -3) : formattedSum;
+
+  return totalWithoutDecimal;
+},
+    displayMinimumPrice() {
+    const firstInputMultiplier = this.inputValue === "" ? 0 : parseInt(this.inputValue);
+    const secondInputMultiplier = this.secondInputValue === "" ? 0 : parseInt(this.secondInputValue);
+    const thirdInputMultiplier = this.thirdInputValue === "" ? 0 : parseInt(this.thirdInputValue);
+    const fourthInputMultiplier = this.fourthInputValue === "" ? 0 : parseInt(this.fourthInputValue);
+    const fifthInputMultiplier = this.fifthInputValue === "" ? 0 : parseInt(this.fifthInputValue);
+    const sixthInputMultiplier = this.sixthInputValue === "" ? 0 : parseInt(this.sixthInputValue);
+
+    const calculatedPrice =
+      firstInputMultiplier * this.selectedService.first_price +
+      secondInputMultiplier * this.selectedService.second_price +
+      thirdInputMultiplier * this.selectedService.third_price +
+      fourthInputMultiplier * this.selectedService.fourth_price +
+      fifthInputMultiplier * this.selectedService.fifth_price +
+      sixthInputMultiplier * this.selectedService.sixth_price +
+      parseInt(this.selectedService.low_pricing);
+
+    return calculatedPrice.toString();
+  },
+    displaySecondPrice() {
+    if (this.secondInputValue === "") {
+      return 0; // Default value if no input
+    } else {
+      return parseInt(this.secondInputValue) * this.selectedService.second_price;
+    }
+  },
+  displayThirdPrice() {
+    if (this.thirdInputValue === "") {
+      return 0; // Default value if no input
+    } else {
+      return parseInt(this.thirdInputValue) * this.selectedService.third_price;
+    }
+  },
+  displayFourthPrice() {
+    if (this.fourthInputValue === "") {
+      return 0; // Default value if no input
+    } else {
+      return parseInt(this.fourthInputValue) * this.selectedService.fourth_price;
+    }
+  },
+  displayFifthPrice() {
+    if (this.fifthInputValue === "") {
+      return 0; // Default value if no input
+    } else {
+      return parseInt(this.fifthInputValue) * this.selectedService.fifth_price;
+    }
+  },
+  displaySixthPrice() {
+    if (this.sixthInputValue === "") {
+      return 0; // Default value if no input
+    } else {
+      return parseInt(this.sixthInputValue) * this.selectedService.sixth_price;
+    }
+  },
     currentMonth() {
       return this.months[this.selectedMonth];
     },
@@ -694,6 +790,23 @@ Sound and stage lights production.</p>
     this.getInfo(); 
   },
   
+  watch: {
+  secondInputValue: function () {
+    this.updateMinimumPrice();
+  },
+  thirdInputValue: function () {
+    this.updateMinimumPrice();
+  },
+  fourthInputValue: function () {
+    this.updateMinimumPrice();
+  },
+  fifthInputValue: function () {
+    this.updateMinimumPrice();
+  },
+  sixthInputValue: function () {
+    this.updateMinimumPrice();
+  },
+},
   methods: {
 
     updateMinimumPrice() {
