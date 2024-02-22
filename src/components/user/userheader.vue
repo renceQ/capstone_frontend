@@ -2,30 +2,31 @@
 <template>
 	<div>
 
-	<nav class="neumorphic-navbar" style="width:90%; " :class="{ 'navbar-hidden': isNavbarHidden }">
+	<nav class="neumorphic-navbar" style="width:90%; background-color:rgb(245, 245, 245)" :class="{ 'navbar-hidden': isNavbarHidden }">
     <span class="nav-item">
-      <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="require('../../assets/images/logo.jpg')" class="logo-picture-navbar">
+      <img style="width:80px; height:80px;"  v-if="info.length > 0" :src="require('../../../src/assets/img/qmj.png')" class="logo-picture-navbar">
+      <img style="width:80px; height:80px;"  v-if="info.length > 0" :src="require('../../../src/assets/img/qmj2.png')" class="logo-picture-navbar">
     </span>
-    <router-link to="/home" class="navbar-brand">Qmj<span>Ent.</span></router-link>
+    <!-- <router-link to="/home" style=" font-weight: 400; font-family: 'Poppins', sans-serif; color:black;" >Qmj<span>Ent.</span></router-link> -->
 				<!--profile picture-->
 
 				<span style="margin-left:190px;" class="nav-item">
-				  <router-link to="/home" class="nav-link">Home</router-link>
+				  <router-link to="/home" style="font-weight:500;" class="nav-link">Home</router-link>
 				</span>
 				<span class="nav-item">
-				  <router-link to="/about" class="nav-link">About</router-link>
+				  <router-link to="/about" style="font-weight:500;" class="nav-link">About</router-link>
+				</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+				<span class="nav-item">
+				  <a href="/userServices" style="font-weight:500;" class="nav-link">Services</a>
 				</span>
 				<span class="nav-item">
-				  <a href="/userServices" class="nav-link">Services</a>
+				  <a href="/bookevents" style="font-weight:500;" class="nav-link">Book event</a>
 				</span>
 				<span class="nav-item">
-				  <a href="/bookevents" class="nav-link">Book event</a>
+				  <a href="userblog" style="font-weight:500;" class="nav-link">Blog</a>
 				</span>
 				<span class="nav-item">
-				  <a href="userblog" class="nav-link">Blog</a>
-				</span>
-				<span class="nav-item">
-				  <a href="/userproducts" class="nav-link">Products</a>
+				  <a href="/userproducts" style="font-weight:500;" class="nav-link">Products</a>
 				</span>
         
 
@@ -61,7 +62,7 @@
               </a>
               <ul class="dropdown" :class="{ active: showAll }" style="position: absolute; margin-right: 100px; width:300px;">
                 <br>
-                <li><h4>Notifications</h4><aa style="font-size: 13px;">mark all as read</aa></li>
+                <li><h4>Notifications</h4><aa  style="font-weight:500; font-size:13px;">mark all as read</aa></li>
                 <br>
                 <!-- Filtered notifications -->
                 <li v-for="(filteredInfo, index) in displayedNotifications" :key="filteredInfo.id">
@@ -100,7 +101,7 @@
         
 
 				<span class="nav-item cta">
-				  <router-link to="/contacts" class="nav-link">Contact Us</router-link>
+				  <router-link  style="font-weight:500;" to="/contacts" class="nav-link">Contact Us</router-link>
 				</span>	
 
 
@@ -108,7 +109,7 @@
         
 				<nav class="navbar">
 					  <li class="menu-item" >
-						<a href="#">Menu</a>
+						<a  style="font-weight:500;" href="#">Menu</a>
 						<ul class="dropdown" style="margin-right: 200px; position:absolute;">
               <h2></h2>
 						  <!-- <li><a href="#">View Your Profile</a></li> -->
@@ -301,9 +302,9 @@ export default {
   background-color: #ffffff;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 5px 5px 30px #eeecec, -10px 5px 60px #ffffff;
+ 
   transition: top 0.3s;
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: 70px;
 }
 
@@ -337,15 +338,15 @@ export default {
   padding: 8px 15px;
   border-radius: 3px;
   transition: all 0.3s ease;
- 
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Navbar link hover styles */
 .neumorphic-navbar a:hover {
   margin-left: 3px;
-  background-color: #e9e1e1;
+  background-color: #f3f3f3;
   box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
-  color: #1b1b1b;
+  color: #ff9900;
 }
 
 /* Additional styles for user profile display */

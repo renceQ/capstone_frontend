@@ -673,6 +673,11 @@
     margin-right: 100px;
   }
 
+  .neumorphic-navbar {
+    background-color: #fffefe;
+    box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
+    color: #1b1b1b;
+  }
   .neumorphic-navbar::-webkit-scrollbar {
     width: 11px; /* Set the width of the scrollbar */
     height: 5px;

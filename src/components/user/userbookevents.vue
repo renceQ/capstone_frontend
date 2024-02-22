@@ -73,7 +73,7 @@
           <!-- @click="openDialog(item)" this is bookingform the form dialog -->
 
 
-                
+<!--                 
 <div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 animation: fade-up .8s ease-out forwards;
 animation-delay: 0.4s;position: absolute; margin-left:700px; top: 160px;">
@@ -120,7 +120,7 @@ animation-delay: 0.4s;position: absolute; margin-left:700px; top: 160px;">
         </tbody>
     </table>
   </div>
-  </div>
+  </div> -->
   
             
           </div>
@@ -378,7 +378,7 @@ Sound and stage lights production.</p>
 
 
 <!--service info dialog-->
-<v-dialog v-model="dialogss" max-width="620px">
+<v-dialog v-model="dialogss" max-width="900px">
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:550px;">
       <br>

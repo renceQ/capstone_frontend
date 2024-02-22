@@ -1,10 +1,10 @@
 <template>
-  
-  <section class="hero-wrap-0 js-fullheight" style=" margin-bottom:100px; margin-top:190px; margin-left:80px;" data-stellar-background-ratio="0.5">
+  <div style="background-color:rgb(245, 245, 245); width:100%; height:100%;">
+  <div class="hero-wrap-0 js-fullheight" style=" margin-bottom:100px;  margin-left:80px;" data-stellar-background-ratio="0.5">
     
     <div style="display: flex; align-items: left; text-align: justify;">
 
-      <div style="margin-right: 0px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      <div style="margin-right: 0px;margin-top:190px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
       animation: fade-up 0.8s ease-out forwards;">
         <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:30px;">ABOUT <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
         <h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
@@ -29,7 +29,7 @@
 animation: fade-up .8s ease-out forwards;
 animation-delay: 0.5s;
     padding: 8px 30px;
-    margin-top:20%;
+    margin-top:34%;
     height:40px;
     left:14.5%;
     font-size: 16px;
@@ -48,7 +48,7 @@ animation-delay: 0.5s;
   Read More
 </router-link>
 
-      <div style="display: flex; align-items: center; justify-content: flex-end;">
+      <div style="display: flex; margin-top:140px; align-items: center; justify-content: flex-end;">
         <img 
           :src="require('../../assets/img/first.png')" 
           alt="Description of the image" 
@@ -125,7 +125,7 @@ animation-delay: 0.5s;
 
   
     </div>
-  </section>
+  </div>
   <br>
   <br><br>
   <br><br>
@@ -190,6 +190,7 @@ Sound and stage lights production.</p>
         </div>
       </div>
     </footer>
+  </div>
   </template>
   
 <script>

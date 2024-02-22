@@ -1,11 +1,11 @@
 <template>
-  <div class="all" style="position: absolute;">
-	<div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px; ">
+  <div class="all" style="position: absolute;background-color:rgb(245, 245, 245); width:100%; height:100%;">
+	<!-- <div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px; ">
 		<div class="box speech-bottom success">
 		  <em>Hello! welcome</em><br/>
 		  <strong v-if="info.length > 0" style="font-size: 15px;"> {{ info[0].showed_username }} </strong>
 		</div>
-	  </div>
+	  </div> -->
 	<form @data-saved="getUserDetails" />
 	<div>
 		<tr v-for="info in info">
@@ -21,26 +21,30 @@
 	<br>
 	<br>
     <div style="display: flex; align-items: center;">
-		<img @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/qmj.png')" alt="Description of the image" style="position:absolute;width: 300px; margin-left: 220px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" />
-		<div style="margin-left:580px;">
+		<!-- <img @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/qmj.png')" alt="Description of the image" style="position:absolute;width: 300px; margin-left: 900px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" /> -->
+		<div style="margin-left:200px;">
 			<br>
 			<br>
 			<br>
 			<br>
 	
-			<h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-			animation: fade-up .8s ease-out forwards;
-			animation-delay: 0.2s;font-size: 20px;font-size:20px; font-weight:900;  margin-right:255px; margin-top:10px;">WELCOME TO QMJ <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Images...</span></h1>
+        <h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        animation: fade-up .8s ease-out forwards;
+        animation-delay: 0.2s;font-size: 20px;font-family: 'Poppins', sans-serif; font-size:40px; font-weight:700;  margin-right:255px; margin-top:-30px;">Introducing QMJ <span style="font-size: 52px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-10px;font-size:63px; font-weight:400; font-family: 'WindSong', cursive;">Images...</span></h1>
 		
 			<h2 class="navbar-brand" href="index.html" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-			animation: fade-up .8s ease-out forwards;
+			animation: fade-up .8s ease-out forwards; font-family: 'Poppins', sans-serif;
 			animation-delay: 0.4s;margin-top:40px;font-size: 16px; ">
 				Youre one stop destination for memorable experiences!
-				<br>Explore our curated book event services, discover<br>
-				  unique products, and personalized items to make each<br>
-			moment uniquely yours, Immerse yourself in a world<br>
-			of creativity and possibilities. Let's create unforgettable <br>
-			memories together!.
+        <br>
+				<br><a style="font-size: 13px; text-align: justify;">
+          Explore our curated book event services, discover unique<br>
+          products, and personalized items to make  each moment<br>
+          uniquely yours, Immerse yourself in a world of creativity<br>
+           and possibilities. Let's create unforgettable <br>
+           memories together!.
+        </a>
+        
 			</h2>
 			<div>
 				<br>
@@ -52,12 +56,15 @@
   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 animation: fade-up .8s ease-out forwards;
 animation-delay: 0.5s;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+    font-weight:500;
     padding: 10px 30px;
-    font-size: 16px;
-    background: linear-gradient(45deg, #000,#000, #6d6d6d);
-    border: none;
-	color:white;
-    border-radius: 4px;
+    
+    background: none;
+    border: black;
+	color:rgb(0, 0, 0);
+    border-radius: 2px;
     box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
     transition: all 0.3s ease;
     text-decoration: none; /* Remove underline */
@@ -80,17 +87,19 @@ animation-delay: 0.5s;
 	  margin-left:8px;
 	  padding: 10px 20px;
 	  font-size: 16px;
-	  background: linear-gradient(45deg, #6d6d6d, rgb(173, 173, 173));
-	
-	  height:45px;
-	  color:white;
+	  background: none;
+    font-family: 'Poppins', sans-serif;
+font-size: 14px;
+    font-weight:500;
+	  height:41px;
+	  color:rgb(0, 0, 0);
 	  border-radius: 4px;
 	  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
 	  transition: all 0.3s ease;
 	  text-decoration: 1pxx; /* Remove underline */
 	  display: inline-block; /* To remove underline */
 	  position: absolute; /* For pseudo-element */
-	  height:43.5px;
+
 	"
   >
 	Our Services

@@ -1,7 +1,7 @@
 <template>
-
+<div style="background-color:rgb(245, 245, 245); width:100%; height:100%;">
   <div>
-<div style="margin-left:600px; margin-top:230px">
+<div style="margin-left:600px; ">
   <div class="row d-flex align-items-center">
      
    <img 
@@ -24,7 +24,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
       <br>
 			<h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
       animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.2s;font-size: 17px; margin-left:65px; margin-top:30px;">
+      animation-delay: 0.2s;font-size: 17px; margin-left:65px;  margin-top:250px;">
 				"Welcome to QMJ Enterprises! We offer a diverse range of <br>services including sounds and lighting appointments, <br>professional photo and video shoots, album production, <br>invitations, souvenirs, pre order products,  personalized clothing,<br> and bespoke design suggestions."
 			</h2>  
       
@@ -38,7 +38,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
     animation: fade-up .8s ease-out forwards;
     animation-delay: 0.5s;
         padding: 8px 30px;
-        margin-top:13%;
+        margin-top:30%;
         height:40px;
         right:40.5%;
         font-size: 16px;
@@ -88,13 +88,13 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                 <div class="col-md-12 ">
                   <h2 class="mb-4" style="margin-top:70px;">Sounds and Lights</h2>
               </div>
-              <div class="row" style="width: 1100px;">
+              <div class="row" style="width: 1100px; ">
                 <div class="col-md-6 ">
                   <div class="block-18 py-4 bg-white mb-4">
                     <div class="text">
                       <div class="icon ">
                       </div>
-                      <h5 style="font-size:17px;">Our services cover a complete spectrum of event solutions,<br> 
+                      <h5 style="font-size:17px; ">Our services cover a complete spectrum of event solutions,<br> 
                         specializing in cutting-edge sound and lighting arrangements.<br>
                         We provide a comprehensive range of top-quality sound systems <br>
                         and state-of-the-art lighting setups tailored to elevate any <br>
@@ -396,6 +396,7 @@ Sound and stage lights production.</p>
         </div>
       </div>
     </footer>
+  </div>
   </template>
 
 <style>

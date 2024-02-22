@@ -6,7 +6,7 @@
 				<!--profile picture-->
 				<!-- <img style="width:50px; height:50px;"  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar"> -->
 				<span style="margin-left:300px;" class="nav-item">
-				  <router-link to="/qmjimages" class="nav-link">Home</router-link>
+				  <router-link to="/qmjimages"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           zxaclass="nav-link">Home</router-link>
 				</span>
 				<span class="nav-item">
 				  <router-link to="#" class="nav-link">About</router-link>
@@ -15,7 +15,7 @@
 				  <a href="#" class="nav-link">Services</a>
 				</span>
 				<span class="nav-item">
-				  <a class="nav-link" @click="openDialog">Book Event</a>
+				  <a class="nav-link" @click="openDialog">Book Event</a>Zaxz
 				</span>
 				<span class="nav-item">
 				  <a href="#" class="nav-link">Blog</a>
@@ -177,7 +177,7 @@ export default {
   background-color: #fffdfd;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 5px 5px 30px #eeecec, -10px 5px 60px #ffffff;
+
   transition: top 0.3s;
   margin-top: 35px;
   margin-left: 70px;
@@ -203,6 +203,8 @@ export default {
   padding: 8px 15px;
   border-radius: 3px;
   transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight:400 ;
 }
 
 /* Navbar link hover styles */
