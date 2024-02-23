@@ -1,7 +1,7 @@
 <template>
   <div style="background-color:rgb(245, 245, 245);">
   <div class="container">
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
     
@@ -12,7 +12,7 @@
         <div class="select-wrapper" style="margin-left:33%;" >
           <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.2s;width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); boarder: 0px; border-radius:5px;">
+          animation-delay: 0.2s;width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); border:none; border-radius:3px;">
             <option value="">All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.category_name }}
@@ -27,21 +27,22 @@
     <br>
 
     <!-- Show products -->
-    <div class="row justify-content-center">
-      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4"> 
+    <div class="row justify-content-center" style="">
+      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4" > 
         <!-- Product Card -->
-        <div class="room-item text-center">
+        <div class="room-item text-center" style=" background-color: #ffffff;
+        box-shadow: 2px 2px 5px #bcbcbc, -2px -2px 7px #ffffff; border-radius:6px;">
           <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
           animation-delay: 0.4s;width: 180px; height: 180px;">
           <div class="ri-text">
+            <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up .8s ease-out forwards;
+            animation-delay: 0.2s;  color:rgb(54, 54, 54); font-weight:500;  font-family: 'Poppins', sans-serif;"> ₱ &nbsp;&nbsp;{{ product.unit_price }}</p>
             <h4 style="font-family: 'Bebas Neue', cursive; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
             animation-delay: 0.2s; ">{{ product.prod_name }}</h4>
             <h4 style="display: none;">{{ product.category_id }}</h4>
-            <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-            animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;  color:rgb(221, 120, 4)">Unit Price: ₱{{ product.unit_price }}</p>
             <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
             animation-delay: 0.2s; ">Available Size: {{ getSizeName(product.size_id) }}</p>
