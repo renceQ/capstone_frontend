@@ -1,4 +1,5 @@
 <template>
+  <div style="background-color:rgb(245, 245, 245);">
   <div class="container">
     <br><br><br><br><br><br><br><br>
     <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
@@ -116,6 +117,7 @@ Sound and stage lights production.</p>
         </div>
       </div>
     </footer>
+  </div>
   </template>
   
 

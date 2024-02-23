@@ -21,8 +21,28 @@
 	<br>
 	<br>
     <div style="display: flex; align-items: center;">
-		<!-- <img @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/qmj.png')" alt="Description of the image" style="position:absolute;width: 300px; margin-left: 900px; margin-right: 0px; margin-top: 80px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);" /> -->
-		<div style="margin-left:200px;">
+      <img 
+      class="neumorphic-navbar" 
+      @click="toggleWelcomeMessage" 
+      :src="require('../../../src/assets/img/band.png')" 
+      alt="Description of the image" 
+      style="position:absolute; width: 250px; margin-left: 680px; margin-right: 0px; margin-top:280px; transition: transform 0.3s ease; border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; transform: rotate(-5deg);" 
+      onmouseover="this.style.transform='scale(1.1)'" 
+      onmouseout="this.style.transform='rotate(-5deg)'"
+    />
+    
+		<img class="neumorphic-navbar" @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/shoot.png')" alt="Description of the image" style="position:absolute;width: 270px; margin-left: 900px; margin-right: 0px; margin-top:160px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc;" />
+		<img 
+  class="neumorphic-navbar" 
+  @click="toggleWelcomeMessage" 
+  :src="require('../../../src/assets/img/damit.png')" 
+  alt="Description of the image" 
+  style="position:absolute; width: 190px; margin-left: 1060px; margin-right: 0px; margin-top:320px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);  transform: rotate(5deg); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc;" 
+  onmouseover="this.style.transform='scale(1.1)'" 
+  onmouseout="this.style.transform='rotate(5deg)'"
+/>
+
+		<div style="margin-left:180px;">
 			<br>
 			<br>
 			<br>
@@ -61,9 +81,9 @@ font-size: 14px;
     font-weight:500;
     padding: 10px 30px;
     
-    background: none;
-    border: black;
-	color:rgb(0, 0, 0);
+    background: rgb(22, 22, 22);
+   
+	color:rgb(255, 255, 255);
     border-radius: 2px;
     box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
     transition: all 0.3s ease;
@@ -84,12 +104,12 @@ font-size: 14px;
 	style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 	animation: fade-up .8s ease-out forwards;
 	animation-delay: 0.5s;
-	  margin-left:8px;
+	  margin-left:10px;
 	  padding: 10px 20px;
 	  font-size: 16px;
 	  background: none;
     font-family: 'Poppins', sans-serif;
-font-size: 14px;
+font-size: 14px;Settings
     font-weight:500;
 	  height:41px;
 	  color:rgb(0, 0, 0);

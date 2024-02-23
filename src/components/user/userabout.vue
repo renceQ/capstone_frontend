@@ -6,17 +6,16 @@
 
       <div style="margin-right: 0px;margin-top:190px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
       animation: fade-up 0.8s ease-out forwards;">
-        <h1 class="text-center" style="font-size: 20px; font-weight:900; margin-left:30px;">ABOUT <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
+        <h1 class="text-center" style="font-size: 30px; font-weight:900; margin-left:30px;font-family: 'Poppins', sans-serif;">ABOUT <span style="font-size: 30px; font-weight:100;margin-left:10px;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
         <h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s;font-size: 15px;">
-          &nbsp;&nbsp;&nbsp; QMJ Enterprises is dedicated to crafting unforgettable experiences <br>
-          through a diverse array of services. From expertly arranging sound <br>
-          and lighting setups to capturing captivating moments through professional<br>
-           photo and video shoots, their expertise extends to designing albums, <br>
-           creating bespoke souvenirs, and customizing clothing. Additionally, <br>
-           they excel in printing tarpaulins, ensuring every event is marked with <br>
-           personalized and exceptional touches that leave a lasting impression.
+        animation-delay: 0.2s;font-size: 14px;  font-family: 'Poppins', sans-serif;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;QMJ Enterprises is dedicated to crafting unforgettable experiences <br>
+          through a diverse array of services. From expertly arranging sound and<br>
+         lighting setups to capturing captivating moments through professional<br>
+           photo and video shoots, their expertise extends to designing albums, cr <br>
+           eating bespoke souvenirs, and customizing clothing. Additionally, they<br>excel in printing tarpaulins, ensuring every event is marked with person<br>
+           alized and exceptional touches that leave a lasting impression.
         </h2>
       </div>
 
@@ -28,14 +27,16 @@
   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 animation: fade-up .8s ease-out forwards;
 animation-delay: 0.5s;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+    font-weight:500;
     padding: 8px 30px;
     margin-top:34%;
     height:40px;
     left:14.5%;
-    font-size: 16px;
-    background: linear-gradient(45deg, #000, #000, #ff7920);
+    background: ;
     border: none;
-	color:white;
+	color:rgb(0, 0, 0);
     border-radius: 4px;
     box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
     transition: all 0.3s ease;
@@ -62,6 +63,8 @@ animation-delay: 0.5s;
       </div>
 
     </div>
+    <br>
+    <br>
     <br>
     <br>
     <br>
@@ -198,7 +201,7 @@ export default {
   methods: {
     scrollDown() {
       // Calculate the position to scroll to (adjust the value as needed)
-      const scrollPosition = window.scrollY + 530; // You can adjust the value as needed
+      const scrollPosition = window.scrollY + 570; // You can adjust the value as needed
 
       // Use smooth scroll for a better user experience
       window.scrollTo({

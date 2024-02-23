@@ -11,22 +11,22 @@
 				<!--profile picture-->
 
 				<span style="margin-left:190px;" class="nav-item">
-				  <router-link to="/home" style="font-weight:500;" class="nav-link">Home</router-link>
+				  <router-link to="/home" style="font-weight:500; font-size:13px;" class="nav-link">Home</router-link>
 				</span>
 				<span class="nav-item">
-				  <router-link to="/about" style="font-weight:500;" class="nav-link">About</router-link>
+				  <router-link to="/about" style="font-weight:500; font-size:13px;" class="nav-link">About</router-link>
 				</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 				<span class="nav-item">
-				  <a href="/userServices" style="font-weight:500;" class="nav-link">Services</a>
+				  <a href="/userServices" style="font-weight:500; font-size:13px;" class="nav-link">Services</a>
 				</span>
 				<span class="nav-item">
-				  <a href="/bookevents" style="font-weight:500;" class="nav-link">Book event</a>
+				  <a href="/bookevents" style="font-weight:500; font-size:13px;" class="nav-link">Book event</a>
 				</span>
 				<span class="nav-item">
-				  <a href="userblog" style="font-weight:500;" class="nav-link">Blog</a>
+				  <a href="userblog" style="font-weight:500; font-size:13px;" class="nav-link">Blog</a>
 				</span>
 				<span class="nav-item">
-				  <a href="/userproducts" style="font-weight:500;" class="nav-link">Products</a>
+				  <a href="/userproducts" style="font-weight:500; font-size:13px;" class="nav-link">Products</a>
 				</span>
         
 

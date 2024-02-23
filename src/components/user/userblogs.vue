@@ -1,7 +1,5 @@
 <template>
-  <br>
-  
-  
+  <div style="background-color:rgb(245, 245, 245); width:100%; height:100%;">
   <section id="blog" class="blog" >
               <div class="container">
                   <div class="section-header">
@@ -247,6 +245,7 @@ Sound and stage lights production.</p>
         </div>
       </div>
     </footer>
+    </div>
   </template>
   
   

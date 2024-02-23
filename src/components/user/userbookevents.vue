@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="background-color:rgb(245, 245, 245); width:100%; height:100%;">
     <br>
     
     <div class="hero-wrap hero-wrap-2 js-fullheight" style="height:1400px;" data-stellar-background-ratio="0.5">

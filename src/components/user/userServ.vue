@@ -18,14 +18,14 @@
 
 </div>
 <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left:49%; position:absolute; top:5.5%;">OUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:74px; font-weight:400; font-family: 'WindSong', cursive;">Services...</span></h1>
+animation: fade-up 0.8s ease-out forwards;font-size: 30px; font-weight:900; left:49%; position:absolute; top:5.5%;font-family: 'Poppins', sans-serif;">OUR <span style="font-size: 30px; font-weight:100; margin-left:10px;">|</span>&nbsp;&nbsp; <span style="font-size:74px; font-weight:400; font-family: 'WindSong', cursive;">Services...</span></h1>
 
 			<br>
       <br>
 			<h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-      animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.2s;font-size: 17px; margin-left:65px;  margin-top:250px;">
-				"Welcome to QMJ Enterprises! We offer a diverse range of <br>services including sounds and lighting appointments, <br>professional photo and video shoots, album production, <br>invitations, souvenirs, pre order products,  personalized clothing,<br> and bespoke design suggestions."
+      animation: fade-up .8s ease-out forwards;font-family: 'Poppins', sans-serif;
+      animation-delay: 0.2s;font-size: 15px; margin-left:65px;  margin-top:250px;">
+				"Welcome to QMJ Enterprises! We offer a diverse range <br>of services including sounds and lighting appointments, <br>professional photo and video shoots, album production, <br>invitations, souvenirs, pre order products,  personalized<br>clothing, and bespoke design suggestions."
 			</h2>  
       
       
@@ -37,14 +37,15 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
       opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up .8s ease-out forwards;
     animation-delay: 0.5s;
+    font-family: 'Poppins', sans-serif;
         padding: 8px 30px;
         margin-top:30%;
         height:40px;
         right:40.5%;
-        font-size: 16px;
-        background: linear-gradient(45deg, #000, #000, #dad8d8);
+        font-size: 14px;
+        background: ;
         border: none;
-      color:white;
+      color:rgb(0, 0, 0);
         border-radius: 4px;
         box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
         transition: all 0.3s ease;
@@ -71,7 +72,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
           <div class="row justify-content-end" style="margin-left:450px; margin-top:140px;">
             <h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;font-size: 20px;font-size:20px; font-weight:900;  margin-right:70%; margin-top:10px;">What we <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Do...</span></h1>
+            animation-delay: 0.2s;font-size: 20px;font-size:20px; font-weight:900;  margin-right:70%; margin-top:20px;">What we <span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Do...</span></h1>
             <div class="col-md-7">
                
             </div>
@@ -90,7 +91,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
               </div>
               <div class="row" style="width: 1100px; ">
                 <div class="col-md-6 ">
-                  <div class="block-18 py-4 bg-white mb-4">
+                  <div class="block-18 py-4 ">
                     <div class="text">
                       <div class="icon ">
                       </div>
@@ -156,7 +157,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                   </div>
                   <div class="row" style="width: 1100px;">
                     <div class="col-md-6 ">
-                      <div class="block-18  py-4 bg-white mb-4">
+                      <div class="block-18  py-4 ">
                         <div class="text">
                           <div class="icon ">
                           </div>
@@ -220,7 +221,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                       </div>
                       <div class="row" style="width: 1100px; ">
                         <div class="col-md-6 ">
-                          <div class="block-18 py-4 bg-white mb-4 " >
+                          <div class="block-18 py-4  " >
                             <div class="text">
                               <div class="icon ">
                               </div>
@@ -285,7 +286,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; left
                       </div>
                       <div class="row" style="width: 1100px;">
                         <div class="col-md-6 ">
-                          <div class="block-18  py-4 bg-white mb-4">
+                          <div class="block-18  py-4 ">
                             <div class="text">
                               <div class="icon ">
                               </div>
