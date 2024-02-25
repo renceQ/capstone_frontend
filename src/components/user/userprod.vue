@@ -70,9 +70,9 @@
             <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards;font-weight:500; animation-delay: 0.2s; text-align: left; margin-left: 26px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px;color: #3686ff;">
               Sold: {{ getTotalQuantitySold(product.id) }}
             </p>
-            <!-- <p v-for="filteredRecord in getFilteredSalesRecords(product.id)" :key="filteredRecord.id" style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 42px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #494949;">
-              Sold: {{ filteredRecord.quantity }}
-            </p> -->
+            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 24px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #ffee00;">
+              ★★★★ 
+            </p>
             
               
             <button class="neumorphic" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
