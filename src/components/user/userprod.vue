@@ -305,7 +305,7 @@ Sound and stage lights production.</p>
 
 
 
-<style scoped>
+<style>
 
 
 .neumorphic-button:focus {
@@ -321,7 +321,6 @@ Sound and stage lights production.</p>
 }
 
 .room-item:hover {
-  background-color: rgba(250, 164, 4, 0.993);
   transform: scale(1.05);
 }
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

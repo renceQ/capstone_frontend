@@ -3,7 +3,7 @@
     <br>
     
     <div class="hero-wrap hero-wrap-2 js-fullheight" style="height:1400px;" data-stellar-background-ratio="0.5">
-      <div style="width: 600px; position: absolute; margin-left: 100px;">
+      <div style="width: 1200px; position: absolute; margin-left: 100px;">
         <div >
           <br>
           <br>
@@ -11,7 +11,7 @@
           <br>
           <br>
           <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:50px;">BOOK YOUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
+    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:2px;">BOOK YOUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
           <br>
           <div>
 
@@ -21,53 +21,75 @@
             :key="index"
             @click="openDialogs(item)"
             type="button"
-            class="neumorphic-button"
+            class="room-item text-center"
             style="
               opacity: 0;
               animation: fade-up 0.8s ease-out forwards;
               animation-delay: 0.2s;
               background-color: rgb(255, 255, 255);
               width: 260px;
-              height: 100px;
-              margin-left: 40px;
-              margin-top: 20px;
+              height: 330px;
+              margin-left: 30px;
+              margin-top: -10px;
+              border-radius:9px;
             "
           >
             <div>
               <img
-                :src="item.image"
-                alt="Service Image"
-                v-if="item.image"
-                style="
-                  box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
-                  border-radius: 5px;
-                  width: 80px;
-                  margin-left: -158px;
-                  margin-bottom: 10px;
-                "
-              />
+              :src="item.image"
+              alt="Service Image"
+              v-if="item.image"
+              style="
+                position: absolute;
+                box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
+                width: 260px;
+                height: 260px; /* Set the actual height of the image */
+                overflow: hidden;
+                clip: rect(0, 260px, 180px, 0); /* Clip the image to show only the upper 220 pixels */
+                margin-left: -130px;
+                top:-1px;
+              "
+            />
+            
+            <span
+            style="
+            width:200px;
+              position: absolute;
+              margin-left: -104px;
+              margin-top: 60px;
+              font-size: 17.3px;
+              font-weight:400;
+              text-align: left;
+              color:#1b1b1b; font-family: 'Roboto', sans-serif;
+            "
+          >₱&nbsp;{{ item.low_pricing }}<span style="color:rgb(168, 168, 168); font-size:13px;"> / price</span></span>
               <span
                 style="
+                width:200px;
                   position: absolute;
-                  margin-left: 24px;
-                  margin-top: 2px;
-                  font-size: 11px;
-                  font-weight: 700;
+                  margin-left: -104px;
+                  margin-top: 90px;
+                  font-size: 17.3px;
+                  font-weight:500;
                   text-align: left;
-                  font-family: 'Audiowide', cursive; 
+                  color:#1b1b1b;font-family: 'Poppins', sans-serif;
                 "
               >{{ item.service }}</span>
               <span style="display:none;">{{ item.id }}</span>
               <span
                 style="
                   position: absolute;
-                  margin-left: 80px;
-                  font-size: 12px;
-                  margin-top: 60px;
-                  color: orange;
+                  margin-left: -104px;
+                  font-size: 13px;
+                  font-weight:900px;
+                  margin-top: 135px;
+                  color: rgb(22, 103, 255);
+                  font-family: 'Roboto', sans-serif;font-family: 'Poppins', sans-serif;
                 "
-              >Click here</span>
-            </div>
+              >Avail Service <span style="font-size:20px;margin-left:6px; font-weight:300; position:absolute; top:-4px;"> ></span></span>
+            </div><br>
+            
           </button>
 
           <!-- @click="openDialog(item)" this is bookingform the form dialog -->
@@ -1107,7 +1129,17 @@ hasEventOnDate(date) {
   </script>
   
   <style scoped> 
- 
+  .room-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .room-item:hover {
+    background-color: rgba(250, 164, 4, 0.993);
+    transform: scale(1.05);
+  }
   .calendar-container {
     position: absolute;
     margin-left: 700px;
