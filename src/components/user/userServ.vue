@@ -43,7 +43,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 35px; font-weight:900; left
         height:40px;
         right:40.5%;
         font-size: 14px;
-        background: ;
+        background-color:white ;
         border: none;
       color:rgb(0, 0, 0);
         border-radius: 4px;

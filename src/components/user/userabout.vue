@@ -34,7 +34,7 @@ font-size: 14px;
     margin-top:32%;
     height:40px;
     left:14.5%;
-    background: ;
+    background-color:white ;
     border: none;
 	color:rgb(0, 0, 0);
     border-radius: 4px;

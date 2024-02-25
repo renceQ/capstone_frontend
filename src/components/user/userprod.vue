@@ -2,53 +2,72 @@
   <div style="background-color:rgb(245, 245, 245);">
   <div class="container">
     <br><br><br><br><br><br>
-    <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    <!-- <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards;font-size: 35px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
-    
+     --><br>
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-6" style="position: absolute;left:-14%; margin-top:20px;">
         <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-        animation: fade-up 0.8s ease-out forwards; font-weight:400;" class="label text-center">Select Product Category</label><br>
-        <div class="select-wrapper" style="margin-left:33%;" >
-          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-          animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.2s;width: 180px;background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); border:none; border-radius:3px;">
-            <option value="">All Categories</option>
+        animation: fade-up 0.8s ease-out forwards; font-weight:600;margin-left:-50px;font-family: 'Poppins', sans-serif;" class="label text-center">SEARCH FILTER</label><br>
+        <div class="select-wrapper" style="margin-left:36%;" >
+          <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; width: 140px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); border: none; border-radius: 3px; outline: none;">
+            <option class="option" value="">All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
               {{ category.category_name }}
             </option>
           </select>
+          
           <i class="fas fa-caret-down arrow-icon" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.1s; top:15px; position: absolute; margin-right:24px;"></i>
+          animation-delay: 0.2s; top:13px; position: absolute; margin-right:64px;"></i>
         </div>
       </div>
     </div>
+
+    <div class="neumorphic-search" style=" height:50px;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.2s; margin-top: -5px; margin-left:100px; position:absolute;box-shadow: 10px 10px 30px #eeecec, -1px -1px 10px #ffffff;">
+      <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="margin-top:10px;border: 0px;"/>
+      <button style="position:absolute; margin-left:602px; width:49px; height: 49px;margin-top:10px; " class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+      <a href="/addtocart" style="margin-top:10px;position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
+        <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
+        </a>
+      <div  style="position:absolute;right:-78%; margin-top:13px;">
+        <button @click="previousPage" :disabled="currentPage === 1" class="search-button" style="height:46px; width:46px;margin-right:20px;">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <span style="font-family: 'Poppins', sans-serif; font-size:15px;">1{{ currentPage }}</span>
+        <button @click="nextPage" :disabled="currentPage * pageSize >= info.length" class="search-button" style="height:46px; width:46px;margin-left:20px;">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+          
+      </div>
     <br>
 
-    <!-- Show products -->
-    <div class="row justify-content-center" style="">
-      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4" > 
-        <!-- Product Card -->
-        <div class="room-item text-center" style=" background-color: #ffffff;border-radius:10px;
-       ">
+    <div class="row justify-content-start" style="position:absolute; margin-left:90px; margin-top:44px;">
+      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6" style="width: 225px; margin-right:-6px;"> 
+          <!-- Product Card -->
+          <div class="room-item text-center" style="margin-bottom: 17px; height: 370px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); text-align: left;">
       
-          <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          <img class="imgs" :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
           animation-delay: 0.4s;width: 190px; height: 190px;margin-top:20px;">
           <div class="ri-text">
             <p style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;  color:rgb(53, 53, 53); font-weight:100;  margin-top:15px; font-size:18px; margin-right:17%;" align-items>₱&nbsp;{{ product.unit_price }}<span style="font-size: 12px;font-family: 'Poppins', sans-serif; color:#7a7a7a; font-weight:300">&nbsp;/ new release</span></p>
+            animation-delay: 0.2s;  color:rgb(53, 53, 53); font-weight:100;  margin-top:15px; font-size:16px; margin-right:11%;" align-items>₱&nbsp;{{ product.unit_price }}<span style="font-size: 12px;font-family: 'Poppins', sans-serif; color:#7a7a7a; font-weight:300">&nbsp;/ new release</span></p>
             <h4 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;text-align: left;margin-left:40px;font-size:20px; margin-top:-2%; font-weight:500;  font-family: 'Abel', sans-serif;">{{ product.prod_name }}</h4>
+            animation-delay: 0.2s;text-align: left;margin-left:26px;font-size:14.5px; margin-top:-2%; font-weight:500; color:#1b1b1b; font-family: 'Roboto', sans-serif;">{{ product.prod_name }}</h4>
             <h4 style="display: none;">{{ product.category_id }}</h4>
             <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s; text-align:left; margin-left:42px; font-family: 'Poppins';font-size:13px;margin-top:20px;color:#3a3a3a;">Available Size: {{ getSizeName(product.size_id) }}</p>
+            animation-delay: 0.2s; text-align:left; margin-left:26px; font-family: 'Poppins';font-size:13px;margin-top:20px;color:#575757;">Size: {{ getSizeName(product.size_id) }}</p>
   
-            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 42px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #494949;">
+            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards;font-weight:500; animation-delay: 0.2s; text-align: left; margin-left: 26px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px;color: #3686ff;">
               Sold: {{ getTotalQuantitySold(product.id) }}
             </p>
             <!-- <p v-for="filteredRecord in getFilteredSalesRecords(product.id)" :key="filteredRecord.id" style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 42px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #494949;">
@@ -56,9 +75,9 @@
             </p> -->
             
               
-            <button class="neumorphic-button" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            <button class="neumorphic" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s; width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:25%; left:25%;">Pre order</span></button>
+            animation-delay: 0.4s; background-color:none;  height:43px; position:absolute; margin-top:-62px;margin-left:50px;" @click="preOrder(product)"><span style="font-size: 18px; position:absolute; "><i style="height:100px;" class="fas fa-shopping-bag"></i></span></button>
           </div>
         </div>
       </div>
@@ -69,7 +88,7 @@
   <input type="hidden" v-model="productData.transaction_code">
 
     <!-- Footer Section -->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <footer class="ftco-footer ftco-bg-dark ftco-section" style="margin-top: 2000px;">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
@@ -286,7 +305,25 @@ Sound and stage lights production.</p>
 
 
 
-<style >
+<style scoped>
+
+
+.neumorphic-button:focus {
+  border: 0px solid; /* Set the border to 2px when focused */
+  border-radius: px;
+}
+
+.room-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.room-item:hover {
+  background-color: rgba(250, 164, 4, 0.993);
+  transform: scale(1.05);
+}
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=WindSong&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
