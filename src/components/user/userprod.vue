@@ -3,7 +3,7 @@
   <div class="container">
     <br><br><br><br><br><br>
     <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
+    animation: fade-up 0.8s ease-out forwards;font-size: 35px; font-weight:900; margin-left:50px;">AVAILABLE <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Products...</span></h1>
     
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -30,22 +30,32 @@
     <div class="row justify-content-center" style="">
       <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6 mb-4" > 
         <!-- Product Card -->
-        <div class="room-item text-center" style=" background-color: #ffffff;
-        box-shadow: 2px 2px 5px #bcbcbc, -2px -2px 7px #ffffff; border-radius:6px;">
+        <div class="room-item text-center" style=" background-color: #ffffff;border-radius:10px;
+       ">
+      
           <img :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
           animation: fade-up .8s ease-out forwards;
-          animation-delay: 0.4s;width: 180px; height: 180px;">
+          animation-delay: 0.4s;width: 190px; height: 190px;margin-top:20px;">
           <div class="ri-text">
-            <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            <p style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;  color:rgb(54, 54, 54); font-weight:500;  font-family: 'Poppins', sans-serif;"> ₱ &nbsp;&nbsp;{{ product.unit_price }}</p>
-            <h4 style="font-family: 'Bebas Neue', cursive; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation-delay: 0.2s;  color:rgb(53, 53, 53); font-weight:100;  margin-top:15px; font-size:18px; margin-right:17%;" align-items>₱&nbsp;{{ product.unit_price }}<span style="font-size: 12px;font-family: 'Poppins', sans-serif; color:#7a7a7a; font-weight:300">&nbsp;/ new release</span></p>
+            <h4 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s; ">{{ product.prod_name }}</h4>
+            animation-delay: 0.2s;text-align: left;margin-left:40px;font-size:20px; margin-top:-2%; font-weight:500;  font-family: 'Abel', sans-serif;">{{ product.prod_name }}</h4>
             <h4 style="display: none;">{{ product.category_id }}</h4>
             <p style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s; ">Available Size: {{ getSizeName(product.size_id) }}</p>
+            animation-delay: 0.2s; text-align:left; margin-left:42px; font-family: 'Poppins';font-size:13px;margin-top:20px;color:#3a3a3a;">Available Size: {{ getSizeName(product.size_id) }}</p>
+  
+            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 42px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #494949;">
+              Sold: {{ getTotalQuantitySold(product.id) }}
+            </p>
+            <!-- <p v-for="filteredRecord in getFilteredSalesRecords(product.id)" :key="filteredRecord.id" style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 42px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #494949;">
+              Sold: {{ filteredRecord.quantity }}
+            </p> -->
+            
+              
             <button class="neumorphic-button" style="font-weight:400;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
             animation-delay: 0.2s; width: 99px; background-color:rgb(43, 42, 42); color:white; border-radius:4px; height:33px; " @click="preOrder(product)"><span style="font-size: 13px; position:absolute; top:25%; left:25%;">Pre order</span></button>
@@ -132,6 +142,7 @@ Sound and stage lights production.</p>
   export default {
     data() {
       return {  
+        salesRecords: [],
         categories: [], 
         info: [],
       sizes: [],
@@ -145,7 +156,27 @@ Sound and stage lights production.</p>
     created() {
     this.getData();
   },
+
+  computed: {
+  getTotalQuantitySold() {
+    return function(productId) {
+      const salesRecords = this.getFilteredSalesRecords(productId);
+      return salesRecords.reduce((total, record) => total + parseInt(record.quantity), 0);
+    };
+  },
+},
     methods: {
+      getFilteredSalesRecords(productId) {
+      return this.salesRecords.filter(record => record.product_id === productId);
+    },
+   async getSalesRecord() {
+    try {
+        const response = await axios.get(`getitemsales`);
+        this.salesRecords = response.data; // Update salesRecords with fetched data
+    } catch (error) {
+        console.error(error);
+    }
+},
 
       generateTransactionCode() {
     // Generate a random transaction code (for example purposes)
@@ -244,7 +275,8 @@ Sound and stage lights production.</p>
       
     },
     mounted() {
-      this.fetchCategories(); // Fetch categories when the component is mounted      not finished yet insert products
+      this.fetchCategories();
+      this.getSalesRecord(); 
     },
   };
   </script>

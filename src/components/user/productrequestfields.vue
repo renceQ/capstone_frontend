@@ -73,7 +73,9 @@
   animation: fade-up .8s ease-out forwards;
   animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(0, 0, 0); zrgb(255, 129, 27);"
  >
- ({{ calculateAverageRating() }}) out of 5
+ ({{ calculateAverageRating() }}) out of 5<span style="color: yellow; font-size: 14px;">
+  {{ calculateStarRating() }}
+</span>
 </p>
 
 
@@ -412,6 +414,7 @@
   export default {
     data() {
       return {
+        showRating: true,
         selectedRating: 'all',
         products: [],
         showReviews: false,
@@ -486,6 +489,32 @@
       }
     },
     methods: {
+      
+      calculateAverageRating() {
+  // Replace this with your actual logic to calculate average rating
+  const averageRating = 0.0; // Replace with your actual calculation
+
+  // Map average rating to star rating based on specified conditions
+  if (averageRating < 0.1) {
+    return 0.0;
+  } else if (averageRating >= 0.1 && averageRating > 2.0) {
+    return 1.0;
+  } else if (averageRating >= 2.0 && averageRating > 3.0) {
+    return 2.0;
+  } else if (averageRating >= 3.0 && averageRating < 4.0) {
+    return 3.0;
+  } else if (averageRating >= 4.0 && averageRating < 5.0) {
+    return 4.0;
+  } else {
+    return 5.0;
+  }
+},
+
+        calculateStarRating() {
+          const averageRating = this.calculateAverageRating();
+          const starRating = Math.round(averageRating);
+          return '★'.repeat(starRating); // Display stars based on rounded rating
+        },
       selectRating(rating) {
       this.selectedRating = rating;
     },

@@ -74,7 +74,7 @@
                     </span>
                     <!-- Show the appropriate message based on status -->
                     <br>
-                    <span v-if="filteredInfo.status === 'approved'">
+                    <span v-if="filteredInfo.status === 'approved'" style="font-size: 13px;">
                       Hi! {{ filteredInfo.customerName }}, your order has been approved. We will be packing your parcel soon!
                     </span>
                     <span v-else-if="filteredInfo.status === 'denied'" >
@@ -346,7 +346,7 @@ export default {
   margin-left: 3px;
   background-color: #f3f3f3;
   box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
-  color: #ff9900;
+  color: #ffa600;
 }
 
 /* Additional styles for user profile display */

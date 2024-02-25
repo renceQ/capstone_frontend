@@ -9,7 +9,7 @@
           <div class="center-text">
             <h1 class="text-center" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .6s ease-out forwards;
-            font-size: 20px;font-size:20px; font-weight:900;  margin-right:190px; margin-top:70px;">MONTHLY<span style="font-size: 32px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:73px; font-weight:400; font-family: 'WindSong', cursive;">Blog...</span></h1>
+            font-size: 20px;font-size:35px; font-weight:900;  margin-right:190px; margin-top:70px;font-family: 'Poppins', sans-serif;">MONTHLY<span style="font-size: 42px;margin-left:10px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-30px;font-size:77px; font-weight:400; font-family: 'WindSong', cursive;">Blog...</span></h1>
                     
             <h4 style="margin-top:50px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
                       animation: fade-up .6s ease-out forwards; animation-delay: 0.3s;">Blogs and Articles</h4>

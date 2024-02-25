@@ -4,9 +4,9 @@
     
     <div style="display: flex; align-items: left; text-align: justify;">
 
-      <div style="margin-right: 0px;margin-top:190px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      <div style="margin-right: 0px;margin-top:180px; margin-left: 120px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
       animation: fade-up 0.8s ease-out forwards;">
-        <h1 class="text-center" style="font-size: 30px; font-weight:900; margin-left:30px;font-family: 'Poppins', sans-serif;">ABOUT <span style="font-size: 30px; font-weight:100;margin-left:10px;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
+        <h1 class="text-center" style="font-size: 35px; font-weight:900; margin-left:30px;font-family: 'Poppins', sans-serif;">ABOUT <span style="font-size: 30px; font-weight:100;margin-left:10px;">|</span>&nbsp;&nbsp; <span style="font-size:77px; font-weight:400; font-family: 'WindSong', cursive;">Us...</span></h1>
         <h2 class="navbar-brand" href="index.html" style="opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
         animation-delay: 0.2s;font-size: 14px;  font-family: 'Poppins', sans-serif;">
@@ -31,7 +31,7 @@ font-family: 'Poppins', sans-serif;
 font-size: 14px;
     font-weight:500;
     padding: 8px 30px;
-    margin-top:34%;
+    margin-top:32%;
     height:40px;
     left:14.5%;
     background: ;
@@ -49,7 +49,7 @@ font-size: 14px;
   Read More
 </router-link>
 
-      <div style="display: flex; margin-top:140px; align-items: center; justify-content: flex-end;">
+      <div style="display: flex; margin-top:140px; align-items: center; justify-content: flex-end;{ backgroundImage: 'url(' + require('../../../src/assets/img/line/png') + ')' }">
         <img 
           :src="require('../../assets/img/first.png')" 
           alt="Description of the image" 
@@ -74,16 +74,16 @@ font-size: 14px;
     <br>
     <br>
     <div class="container">
-      <div class="row d-flex">
+      <div class="row d-flex"> 
         <div class="col-md-7">
           <h3 class="navbar-brand" style="font-size: 15px;">
-            <span style="margin-left:45px;font-size: 20px;">BE SPOKE |</span>&nbsp;&nbsp;<span style="font-size: 21px; font-weight:200;">CREATIONS</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; At the heart of Qmj Enterprise lies a dedication to crafting unforgettable experiences. Established with a vision to redefine industry standards, QMJ  <br>
+            <span style="margin-left:45px;font-size: 20px;">BE SPOKE |</span>&nbsp;&nbsp;<span style="font-size: 21px; font-weight:400;font-family: 'Poppins', sans-serif;">CREATIONS</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a style="font-family: 'Poppins', sans-serif; font-size:13px;">At the heart of Qmj Enterprise lies a dedication to crafting unforgettable experiences. Established with a vision to redefine industry standards, QMJ  <br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enterprise has consistently delivered excellence across its diverse array of services. From expertly arranging sound and lighting setups to capturing cap-<br> 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tivating moments through professional photo and video shoots, QMJ Enterprise ensures that every project is marked by personalized and exceptional to-<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uches. This commitment not only ensures that its offerings are cutting-edge but also reflects a proactive approach to meeting and exceeding client expec-<br>  
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tations. Whether it's designing albums, creating bespoke souvenirs, customizing clothing, or excelling in printing tarpaulins, QMJ Enterprise embraces in- <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;novation as a driving force for success.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;novation as a driving force for success.</a>
           </h3>
         </div>
       </div>

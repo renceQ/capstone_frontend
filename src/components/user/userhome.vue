@@ -1,4 +1,5 @@
 <template>
+
   <div class="all" style="position: absolute;background-color:rgb(245, 245, 245); width:100%; height:100%;">
 	<!-- <div :class="{ 'welcome-message': true, 'hidden': !showWelcomeMessage }" style="position:absolute; width:200px; height:100px; margin-top: 180px; margin-left:155px; ">
 		<div class="box speech-bottom success">
@@ -26,21 +27,31 @@
       @click="toggleWelcomeMessage" 
       :src="require('../../../src/assets/img/band.png')" 
       alt="Description of the image" 
-      style="position:absolute; width: 250px; margin-left: 680px; margin-right: 0px; margin-top:280px; transition: transform 0.3s ease; border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; transform: rotate(-5deg);" 
-      onmouseover="this.style.transform='scale(1.1)'" 
+      style="position:absolute; width: 250px; margin-left: 680px; margin-right: 0px; margin-top:280px; transition: transform 0.3s ease; border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; transform: rotate(-5deg); z-index: 1;" 
+      onmouseover="this.style.transform='scale(1.1)'"
       onmouseout="this.style.transform='rotate(-5deg)'"
     />
     
-		<img class="neumorphic-navbar" @click="toggleWelcomeMessage" :src="require('../../../src/assets/img/shoot.png')" alt="Description of the image" style="position:absolute;width: 270px; margin-left: 900px; margin-right: 0px; margin-top:160px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc;" />
-		<img 
-  class="neumorphic-navbar" 
-  @click="toggleWelcomeMessage" 
-  :src="require('../../../src/assets/img/damit.png')" 
-  alt="Description of the image" 
-  style="position:absolute; width: 190px; margin-left: 1060px; margin-right: 0px; margin-top:320px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);  transform: rotate(5deg); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc;" 
-  onmouseover="this.style.transform='scale(1.1)'" 
-  onmouseout="this.style.transform='rotate(5deg)'"
-/>
+    <img 
+      class="neumorphic-navbar" 
+      @click="toggleWelcomeMessage" 
+      :src="require('../../../src/assets/img/shoot.png')" 
+      alt="Description of the image" 
+      style="position:absolute;width: 270px; margin-left: 900px; margin-right: 0px; margin-top:160px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc; z-index: 1;" 
+    />
+    
+    <img 
+      class="neumorphic-navbar" 
+      @click="toggleWelcomeMessage" 
+      :src="require('../../../src/assets/img/damit.png')" 
+      alt="Description of the image" 
+      style="position:absolute; width: 190px; margin-left: 1060px; margin-right: 0px; margin-top:320px; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);  transform: rotate(5deg); border-radius:3px; box-shadow: 5px 5px 10px #bcbcbc; z-index: 1;" 
+      onmouseover="this.style.transform='scale(1.1)'"
+      onmouseout="this.style.transform='rotate(5deg)'"
+    />
+    
+
+    
 
 		<div style="margin-left:180px;">
 			<br>
@@ -50,12 +61,12 @@
 	
         <h1 class="text-center" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s;font-size: 20px;font-family: 'Poppins', sans-serif; font-size:40px; font-weight:700;  margin-right:255px; margin-top:-30px;">Introducing QMJ <span style="font-size: 52px;  font-weight:100;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-10px;font-size:63px; font-weight:400; font-family: 'WindSong', cursive;">Images...</span></h1>
+        animation-delay: 0.2s;font-size: 20px;font-family: 'Poppins', sans-serif; font-size:30px; font-weight:700;  margin-right:255px; margin-top:-30px;color:orange;">Introducing<a style="color:black;font-size:50px;"> QMJ</a> <span style="font-size: 52px;  font-weight:100;color:black;">|</span>&nbsp;&nbsp; <span style="position:absolute;top:-10px;font-size:68px; font-weight:400; font-family: 'WindSong', cursive;color:black;">Images...</span></h1>
 		
 			<h2 class="navbar-brand" href="index.html" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
 			animation: fade-up .8s ease-out forwards; font-family: 'Poppins', sans-serif;
 			animation-delay: 0.4s;margin-top:40px;font-size: 16px; ">
-				Youre one stop destination for memorable experiences!
+			<a></a>	Youre one stop destination for memorable experiences!
         <br>
 				<br><a style="font-size: 13px; text-align: justify;">
           Explore our curated book event services, discover unique<br>
@@ -107,13 +118,13 @@ font-size: 14px;
 	  margin-left:10px;
 	  padding: 10px 20px;
 	  font-size: 16px;
-	  background: none;
+	  background: white;
     font-family: 'Poppins', sans-serif;
 font-size: 14px;Settings
     font-weight:500;
-	  height:41px;
+	  height:40px;
 	  color:rgb(0, 0, 0);
-	  border-radius: 4px;
+	  border-radius: 2px;
 	  box-shadow: 4px 4px 8px #c7c7c7, -4px -4px 8px #ffffff;
 	  transition: all 0.3s ease;
 	  text-decoration: 1pxx; /* Remove underline */
@@ -131,6 +142,7 @@ font-size: 14px;Settings
 		</div>
 	</div>
 </div>
+
 </template>
 
 <style scoped>
@@ -261,7 +273,12 @@ img:hover {
   img:hover {
     transform: scale(1.1);
   }
+/*.all {
+  background-image: url('../../../src/assets/img/try.png');
+  background-size:400px; 
+ 
 
+}*/
   /* ... your other styles ... */
 </style>
 
