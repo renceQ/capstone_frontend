@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6" style="position: absolute;left:-14%; margin-top:20px;">
         <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-        animation: fade-up 0.8s ease-out forwards; font-weight:600;margin-left:-50px;font-family: 'Poppins', sans-serif;" class="label text-center">SEARCH FILTER</label><br>
+        animation: fade-up 0.8s ease-out forwards; font-weight:600;margin-left:-50px;font-family: 'Poppins', sans-serif;color:#000000;" class="label text-center">SEARCH FILTER</label><br>
         <div class="select-wrapper" style="margin-left:36%;" >
           <select v-model="category_id" @change="filterProducts" class="neumorphic-button" style="opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; width: 140px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); border: none; border-radius: 3px; outline: none;">
             <option class="option" value="">All Categories</option>
@@ -70,8 +70,8 @@
             <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards;font-weight:500; animation-delay: 0.2s; text-align: left; margin-left: 26px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px;color: #3686ff;">
               Sold: {{ getTotalQuantitySold(product.id) }}
             </p>
-            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 24px; font-family: 'Poppins'; font-size: 13px; margin-top: -19px; color: #ffee00;">
-              ★★★★ 
+            <p style="font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 24px; font-family: 'Poppins'; font-size: 15px; margin-top: -19px; color: #ffee00;">
+              {{ getStarRating(getTotalQuantitySold(product.id)) }}
             </p>
             
               
@@ -183,6 +183,23 @@ Sound and stage lights production.</p>
       return salesRecords.reduce((total, record) => total + parseInt(record.quantity), 0);
     };
   },
+  getStarRating() {
+      return function(quantitySold) {
+        if (quantitySold === 0) {
+          return ''; // 0 star
+        } else if (quantitySold <= 20) {
+          return '★'; // 1 stars
+        } else if (quantitySold <= 40) {
+          return '★★'; // 2 stars
+        } else if (quantitySold <= 60) {
+          return '★★★'; // 3 stars
+        } else if (quantitySold <= 80) {
+          return '★★★★'; // 4 stars
+        } else {
+          return '★★★★★'; // 5 stars
+        }
+      };
+    },
 },
     methods: {
       getFilteredSalesRecords(productId) {

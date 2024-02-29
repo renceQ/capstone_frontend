@@ -31,7 +31,7 @@ font-family: 'Poppins', sans-serif;
 font-size: 14px;
     font-weight:500;
     padding: 8px 30px;
-    margin-top:32%;
+    margin-top:34%;
     height:40px;
     left:14.5%;
     background-color:white ;

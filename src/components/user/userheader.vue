@@ -341,6 +341,7 @@ export default {
   font-family: 'Poppins', sans-serif;
 }
 
+
 /* Navbar link hover styles */
 .neumorphic-navbar a:hover {
   margin-left: 3px;

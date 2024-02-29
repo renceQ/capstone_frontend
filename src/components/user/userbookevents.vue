@@ -3,19 +3,40 @@
     <br>
     
     <div class="hero-wrap hero-wrap-2 js-fullheight" style="height:1400px;" data-stellar-background-ratio="0.5">
-      <div style="width: 1200px; position: absolute; margin-left: 100px;">
+      <div style="width: 1200px; position: absolute; margin-left: 100px; ">
         <div >
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+          
+          <!-- <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:2px;">BOOK YOUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
-          <br>
-          <div>
+          <br> -->
+          <div style="margin-top:190px;">
 
+            <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-70px; color:rgb(0, 153, 255);" class="label text-center">AVAIL SERVICE NOW!</label><br>
+            <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:14px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-60px; color:rgba(2, 54, 97, 0.884);" class="label text-center">Turn your precious moments into unforgettable memories</label><br>
+            <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:13px; font-weight:400;margin-left:37px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-60px; color:rgb(138, 138, 138);" class="label text-center"> Explore our range services tailored to meet your unique needs.</label><br>
+           
+            
+            <div class="neumorphic-search" style=" width:420px;height:50px;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+    animation: fade-up .8s ease-out forwards;
+    animation-delay: 0.2s; margin-top: -110px; margin-left:680px; position:absolute;box-shadow: 10px 10px 30px #eeecec, -1px -1px 10px #ffffff;">
+      <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search for event..." class="search-input" style="margin-top:10px;border: 0px;"/>
+      <button style="position:absolute; margin-left:422px; width:49px; height: 49px;margin-top:10px; " class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+      <a href="/addtocart" style="text-decoration: none; margin-top: 10px; position: absolute; margin-left: -200px; width: 170px; height: 49px; color: black;" class="search-button">
+        &nbsp;&nbsp;&nbsp;Check Availability <i style="margin-left: 7px; margin-top: 8px;" class="fas fa-calendar custom-icon"></i>
+      </a>
+      
+      <div  style="position:absolute;right:-78%; margin-top:-10px;">
+       
+      </div>
+          
+      </div>
 
+      <div style="margin-top:-20px;">
             <button
             v-for="(item, index) in servinfo"
             :key="index"
@@ -32,6 +53,7 @@
               margin-left: 30px;
               margin-top: -10px;
               border-radius:9px;
+              margin-bottom:40px;
             "
           >
             <div>
@@ -57,7 +79,7 @@
             width:200px;
               position: absolute;
               margin-left: -104px;
-              margin-top: 60px;
+              margin-top: 50px;
               font-size: 17.3px;
               font-weight:400;
               text-align: left;
@@ -69,21 +91,24 @@
                 width:200px;
                   position: absolute;
                   margin-left: -104px;
-                  margin-top: 90px;
+                  margin-top: 80px;
                   font-size: 17.3px;
                   font-weight:500;
                   text-align: left;
                   color:#1b1b1b;font-family: 'Poppins', sans-serif;
                 "
               >{{ item.service }}</span>
-              <span style="display:none;">{{ item.id }}</span>
+              <span style="display:none;">{{ item.id }}</span><br>
+              <p style="position:absolute; font-weight: 400; opacity: 0; animation: fade-up .8s ease-out forwards; animation-delay: 0.2s; text-align: left; margin-left: 26px; font-family: 'Poppins'; font-size: 17px; margin-top: 108px; color: #ffee00;">
+                ★★★★ 
+              </p>
               <span
                 style="
                   position: absolute;
                   margin-left: -104px;
                   font-size: 13px;
                   font-weight:900px;
-                  margin-top: 135px;
+                  margin-top: 130px;
                   color: rgb(22, 103, 255);
                   font-family: 'Roboto', sans-serif;font-family: 'Poppins', sans-serif;
                 "
@@ -91,7 +116,7 @@
             </div><br>
             
           </button>
-
+        </div>
           <!-- @click="openDialog(item)" this is bookingform the form dialog -->
 
 
@@ -217,81 +242,162 @@ Sound and stage lights production.</p>
   </div>
 
 
- <v-dialog v-model="dialogs" max-width="500px">
+ <v-dialog v-model="dialogs" max-width="800px" >
   <form @submit.prevent="saveBooking" class="container">
-    <v-card>
+    <v-card style="height:700px;">
       <br>
-      <v-card-title class="headline" style="margin-left: 130px; font-size: 14px; font-weight:900;  ">REQUEST<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Form</span></v-card-title>
+      <img style="width:60px; height:60px; position:absolute;margin-left:20px;margin-top:20px;"  v-if="info.length > 0" :src="require('../../../src/assets/img/qmj.png')" class="logo-picture-navbar">
+      <v-card-title class="headline " style="margin-top:5px;font-size: 19px; font-weight:600;margin-left:76px;font-family: 'Poppins', sans-serif;  color:rgb(0, 153, 255); ">REQUEST FORM<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></v-card-title>
+      <v-card-title class="headline " style="position:absolute; margin-top:45px;font-size: 13px; font-weight:600;margin-left:76px;font-family: 'Poppins', sans-serif;  color:rgb(0, 61, 102); ">Fill in the following details for your event<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></v-card-title>
+
       <v-card-text>
 
+      <div style="font-family: 'Poppins', sans-serif; font-size:13px; margin-top:20px;">
         <div class="form-group">
-          <label for="event_title">Selected Service:</label>
-          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="selectedService.service" readonly>
+          <label for="event_title" style="margin-top:10px; margin-left:40px;">Selected Service:</label>
+          <input type="text"  style=" margin-top:-10px;margin-left:30px;font-size:22px;color:rgb(2, 70, 102);width:100%; height:45px; border: none;" placeholder="" v-model="selectedService.service" readonly>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="position:absolute; top:23%;right:120px;">
           <label for="total_cost">Total Cost:</label>
-          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="computedTotal" readonly>
+          <br>
+          <input type="text" style="  margin-top:-10px;height:45px; border: none;font-size:22px;color:rgb(2, 70, 102);" placeholder="" v-model="computedTotal" readonly>
         </div>
 
-        <div class="form-group">
-          <label for="total_cost">Added Items:</label>
-          <input type="text" class="search-input" style="width:100%; height:45px; border: none;" placeholder="" v-model="computedTotal" readonly>
-        </div>
-
-        <div class="form-row">
+        <div class="form-row" style="margin-top:-27px;margin-left:360px;  position: absolute;">
           <div class="form-group col-md-6">
-            <label for="start_date">Start Date:</label>
-            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="start_date" required>
+            <label for="start_date">Event Start Date:</label>
+            <input type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="start_date" required>
           </div>
 
-          <div class="form-group col-md-6">
-            <label for="end_date">End Date:</label>
-            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="end_date" required>
+          <div class="form-group col-md-6" style="margin-left:-10px;">
+            <label for="end_date" style="position:absolute; margin-left:40px; width:200px;">Event End Date:</label>
+            <input type="date" class="neumorphic-button" style="position:absolute;margin-top:27px; margin-left:40px;font-size:13px;width:150px; background-color:white; border-radius:3px;" v-model="end_date" required>
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" style="margin-top:127px;margin-left:366px;  position: absolute;">
+          <label for="event">Meeting Schedule:</label>
+          <div>
+            <input type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="start_date" required>
+            <input type="time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;margin-left:14px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
+        </div>
+        </div>
+
+        <div class="form-row" style="margin-top:50px;margin-left:360px;  position: absolute;">
           <div class="form-group col-md-6">
-            <label for="location">Location:</label>
-            <input type="text" class="search-input" style="width:206%;height:60%" placeholder="Location" v-model="location" required>
+            <label for="start_date">Event Start Time:</label>
+            <input type="time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
+            <label for="end_date" style="width:200px;position:absolute; margin-left:165px; top:-1px;">Event End Time:</label>
+            <input type="time" class="neumorphic-button" style="position:absolute; margin-left:165px; top:26px;font-size:13px; width:150px;background-color:white; border-radius:3px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" style="position: absolute; margin-top:-27px; margin-left:35px;">
+          <div class="form-group col-md-6">
+            <label for="location">Location:</label><br>
+            <input type="text" class="search-input" style="height:40px;width:290px; border:0px;" placeholder="Street-City-Province" v-model="location" required>
+          </div>
+        </div>
+
+        <div class="form-row" style="position: absolute;margin-top:50px; margin-left:35px;">
+          <div class="form-group col-md-6">
+            <label for="event">Event:</label><br>
+            <input type="text" class="search-input" style="height:40px;width:290px; border:0px;" placeholder="example (Wedding, 7th Birthday)" v-model="event" required>
+          </div>
+        </div>
+
+        <div class="form-row" style="position: absolute;margin-left:35px;margin-top:125px;">
           <div class="form-group col-md-6">
             <label for="event_description">Description:</label>
-            <textarea class="search-input" v-model="event_description" style="width:206%; height:60%;" placeholder="Other Description" required></textarea>
+            <textarea class="search-input" v-model="event_description" style="height:50%;width:290px; border:0px;" placeholder="Other Description" required></textarea>
+          </div>
+        </div>
+        
+
+        <div class="form-group" v-if="shouldShowTable" style="position:absolute; margin-left:330px; margin-top:340px;">
+          <label for="total_cost" style="margin-left:40px;">Added Items:</label><br>
+          <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; margin-top:-1px;width:320px;margin-left:30px;  font-size:12px; ">
+           
+            <thead style="border:0px;">
+              <tr>
+                <th style=" text-align:center;">ITEM'S</th>
+                <th style=" text-align:center;">PRICE</th>
+                <th style="width:100px;text-align:center;">QUANTITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== '' && inputValue > 0" style="height:10px; ">
+                <td >{{ selectedService.first_req }} </td>
+                <td>₱{{ selectedService.first_price }}</td>
+                <td>{{ inputValue || '0' }}</td>
+              </tr>
+              <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== '' && secondInputValue > 0" style="height:10px; ">
+                <td>{{ selectedService.second_req }} </td>
+                <td>₱{{ selectedService.second_price }}</td>
+                <td>{{ secondInputValue || '0' }}</td>
+              </tr>
+              <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== '' && thirdInputValue > 0" style="height:10px; ">
+                <td>{{ selectedService.third_req }} </td>
+                <td>₱{{ selectedService.third_price }}</td>
+                <td>{{ thirdInputValue || '0' }}</td>
+              </tr>
+              <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== '' && fourthInputValue > 0" style="height:10px; ">
+                <td>{{ selectedService.fourth_req }} </td>
+                <td>₱{{ selectedService.fourth_price }}</td>
+                <td>{{ fourthInputValue || '0' }}</td>
+              </tr>
+              <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== '' && fifthInputValue > 0" style="height:10px; ">
+                <td>{{ selectedService.fifth_req }} </td>
+                <td>₱{{ selectedService.fifth_price }}</td>
+                <td>{{ fifthInputValue || '0' }}</td>
+              </tr>
+              <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== '' && sixthInputValue > 0" style="height:10px; ">
+                <td>{{ selectedService.sixth_req }} </td>
+                <td>₱{{ selectedService.sixth_price }}</td>
+                <td>{{ sixthInputValue || '0' }}</td>
+              </tr>
+             
+  
+            </tbody>
+          </table>
+          <br><br>
+        </div>
+
+        <div class="form-row" style="">
+          <div class="form-group col-md-6" style="margin-left:365px;margin-top:260px;">
+            <label for="email">Email:</label>
+            <br>
+            <input type="email" class="search-input" style="height:40px; width:310px;" placeholder="Email Address" v-model="email" required>
           </div>
         </div>
 
-        <br><br>
-        <h3 style="margin-left: 95px; font-size: 14px; font-weight:900;" >CONTACT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Details</span></h3>
+        <div style="position:absolute;">
+        <h3 style="margin-top:-120px; font-size: 14px; font-weight:500;margin-left:41px;font-size:20px;color:rgb(2, 70, 102);" >Contact Details<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></h3>
         <br>
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6" style="margin-left:37px;margin-top:-31px;">
             <label for="name">Name:</label>
-            <input type="text" class="search-input" style="width:206%;height:70%;" placeholder="Name" v-model="name" required>
+            <br>
+            <input type="text" class="search-input" style="width:295px;border:0px;height:40px;" placeholder="Name" v-model="name" required>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email">Email:</label>
-            <input type="email" class="search-input" style="width:206%;height:70%;" placeholder="Email Address" v-model="email" required>
-          </div>
-        </div>
+       
 
-        <div class="form-group">
+        <div class="form-group" style="margin-left:37px; margin-top:-10px;">
           <label for="phone">Phone:</label>
-          <input type="tel" class="search-input" style="width:100%;height:50px;;" placeholder="09*********" v-model="phone" required>
+          <div>
+          <input type="tel" class="search-input" style="width:295px; height:40px;;" placeholder="format 09218510473" v-model="phone" required>
+          </div>
         </div>
-
+      </div>
+      </div>
       </v-card-text>
       <v-card-actions>
 
         <div style="margin-bottom: 10px;">
-          <button type="submit" class="neumorphic-button" style="margin-left: 10px; width: 320%; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
+          <button type="submit" class="neumorphic-button" style="margin-left: 52px;margin-top:80px; width: 295px;; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
         </div>
 
       </v-card-actions>
@@ -319,13 +425,7 @@ Sound and stage lights production.</p>
           <label for="service">Services</label>
           <div class="position-relative">
             <select class="neumorphic-button" style="width:100%;" v-model="service" required>
-              <option value="" disabled selected>Select a service</option>
-              <option value="Sounds Service">Sounds Service</option>
-              <option value="Lights Service">Lights Service</option>
-              <option value="Photo Shoot Service">Photo Shoot Service</option>
-              <option value="Video Shoot Service">Video Shoot Service</option>
-              <option value="Photo & Video Shoots Service">Photo & Video Shoots Service</option>
-              <option value="Photo & Video Shoots Service With SDE">Photo & Video Shoots Service With SDE</option>
+              
               <option value="Sounds & Lights Service">Sounds & Lights Service</option>
               <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
               <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
@@ -400,233 +500,122 @@ Sound and stage lights production.</p>
 
 
 <!--service info dialog-->
-<v-dialog v-model="dialogss" max-width="900px">
+<v-dialog v-model="dialogss" max-width="780px">
   <form @submit.prevent="saveBooking" class="container">
-    <v-card style="height:550px;">
+    <v-card style="height:570px;">
       <br>
-      <v-card-title class="headline text-center" style="font-size: 14px; font-weight:900;  ">SERVICE<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Information</span></v-card-title>
+      <v-card-title class="headline " style="font-size: 19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif;  color:rgb(0, 153, 255); ">SERVICE INFROMATION<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></v-card-title>
       <v-card-text>
        
-        <v-card-text class="headline text-center" style="font-size: 14px; font-weight:900; margin-top:-25px;">
+        <v-card-text class="headline text-center" style="font-family: 'Poppins', sans-serif;font-size: 17px; font-weight:500; margin-top:-42px; margin-left:15px; position:absolute;color:#022a80;">
           {{ selectedService.service }} 
         </v-card-text>
 
-        <div style=" margin-left:20px; width:150px;" class="neumorphic-navbars" >
+        <div style=" margin-left:10px; margin-top:-1px; width:150px;" >
         <v-card-text class="headline text-left" style="">
-          <img :src="selectedService.image" style="height:120px; height:120px;" alt="Service Image">
+          <img :src="selectedService.image" style="height:220px; height:220px;" alt="Service Image">
         </v-card-text>
         </div>
 
-        <v-card-text class="headline text-left" style="position:absolute; top:22%; left:36%; width:350px; font-size: 14px; font-weight:400;">
-         &nbsp;&nbsp;{{ selectedService.information }} 
-        </v-card-text>  
+        <v-card-text class="headline text-left" style="font-family: 'Poppins', sans-serif;position:absolute; top:70%; left:6%; width:270px; font-size: 13px; font-weight:400; text-align: justify;">
+
+          &nbsp;&nbsp;{{ selectedService.information }}
+        
+        </v-card-text>
+        
+        
+        
+        
 
         <br>
   <!-- &nbsp;&nbsp;Minimum Price:{{ formatPrice(selectedService.low_pricing) }} old pricing method convert 1000 into 1k -->
   <span>
-    <v-card-text class="headline text-left" style="position:absolute; top:49%; left:5%; width:350px; font-size: 14px; font-weight:600;">
-      &nbsp;&nbsp;Minimum Price: {{ displayMinimumPrice }}
+    <v-card-text class="headline text-left" style="position:absolute; top:60%; left:3%; width:350px; font-size: 24px; font-weight:500;color:#3a3a3a;">
+      &nbsp;&nbsp;₱&nbsp;{{ displayMinimumPrice }} <span style="font-size: 15px;color:#aaaaaa;"> / minimum price</span>
     </v-card-text>
   </span>
         
-        <span><v-card-text class="headline text-left" style="position:absolute; top:55%; left:5%; width:350px; font-size: 14px; font-weight:600;">
-          &nbsp;&nbsp;Request for additional item quantity:
+        <span><v-card-text class="headline text-left" style="  font-family: 'Poppins', sans-serif; color: rgb(2, 97, 185);position:absolute; top:3%; left:46%; width:360px; font-size: 16px; font-weight:500;">
+          &nbsp;&nbsp;Incremental Cost for Additional Units
          </v-card-text>  </span>
-         
-        <button
-        type="button"
-        @click="openDialogss(selectedService.first_req)"
+         <v-card-text class="headline text-left" style="font-family: 'Poppins', sans-serif; color: rgb(2, 37, 70); position: absolute; top: 9%; left: 47.5%; width: 322px; font-size: 11.7px; font-weight: 500;">
+         Customize your request by adding item based<br>
+                     on your preferences. The total price will reflect <br>
+                     any additional items accordingly.
+        </v-card-text>
         
-        style="
-          position:absolute;
-          opacity: 0;
-          animation: fade-up 0.8s ease-out forwards;
-          animation-delay: 0.2s;
-          background-color: rgb(255, 255, 255);
-          width: 164px;
-          height: 50px;
-          margin-left: 20px;
-          margin-top: 75px;
-          border-radius:3px;
-        "
-      >{{ selectedService.first_req }} - {{ selectedService.first_price }} 
-      </button>
+        <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; width:340px;top:130px;right:60px; position:absolute; font-size:12px; color:black;">
+          <thead>
+            <tr>
+              <th style=" text-align:center;">ITEM'S</th>
+              <th style=" text-align:center;">PRICE</th>
+              <th style="width:100px;text-align:center;">QUANTITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== ''" style="height:10px;">
+              <td >{{ selectedService.first_req }} </td>
+              <td>₱{{ selectedService.first_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" ></td>
+            </tr>
+            <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
+              <td>{{ selectedService.second_req }} </td>
+              <td>₱{{ selectedService.second_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"   v-model="secondInputValue" @input="updateMinimumPrice" ></td>
+            </tr>
+            <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px;">
+              <td>{{ selectedService.third_req }} </td>
+              <td>₱{{ selectedService.third_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"   v-model="thirdInputValue" @input="updateMinimumPrice" ></td>
+            </tr>
+            <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px;">
+              <td>{{ selectedService.fourth_req }} </td>
+              <td>₱{{ selectedService.fourth_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"   v-model="fourthInputValue" @input="updateMinimumPrice" ></td>
+            </tr>
+            <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px;">
+              <td>{{ selectedService.fifth_req }} </td>
+              <td>₱{{ selectedService.fifth_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"   v-model="fifthInputValue" @input="updateMinimumPrice" ></td>
+            </tr>
+            <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px;">
+              <td>{{ selectedService.sixth_req }} </td>
+              <td>₱{{ selectedService.sixth_price }}</td>
+              <td> <input type="number" class="search-input"  inputmode="numeric"  style="
+                background-color: rgb(255, 255, 255);
+                width: 80px;
+                height: 30px;
+                border-radius:2px;
+              " placeholder="0"   v-model="sixthInputValue" @input="updateMinimumPrice" ></td>
+            </tr>
 
-        <input type="number" class="search-input"  inputmode="numeric"  style="
-        position:absolute;
-        opacity: 0;
-        animation: fade-up 0.8s ease-out forwards;
-        animation-delay: 0.2s;
-        background-color: rgb(255, 255, 255);
-        width: 154px;
-        height: 50px;
-        margin-left: 20px;
-        margin-top: 125px;
-        border-radius:3px;
-      " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" >
-
-      <button
-        type="button"
-        @click="openDialogss(selectedService.second_req)"
-        
-        style="
-          position:absolute;
-          opacity: 0;
-          animation: fade-up 0.8s ease-out forwards;
-          animation-delay: 0.2s;
-          background-color: rgb(255, 255, 255);
-          width: 164px;
-          height: 50px;
-          margin-left: 190px;
-          margin-top: 75px;
-          border-radius:3px;
-        "
-      >{{ selectedService.second_req }} - {{ selectedService.second_price }} 
-      </button>
-
-      <input type="number" class="search-input"  inputmode="numeric"  style="
-      position:absolute;
-      opacity: 0;
-      animation: fade-up 0.8s ease-out forwards;
-      animation-delay: 0.2s;
-      background-color: rgb(255, 255, 255);
-      width: 154px;
-      height: 50px;
-      margin-left: 196px;
-      margin-top: 125px;
-      border-radius:3px;
-    " placeholder="0" v-model="secondInputValue" @input="updateMinimumPrice"  >
-
-      <button
-      type="button"
-      @click="openDialogss(selectedService.third_req)"
-    
-      style="
-        position:absolute;
-        opacity: 0;
-        animation: fade-up 0.8s ease-out forwards;
-        animation-delay: 0.2s;
-        background-color: rgb(255, 255, 255);
-        width: 164px;
-        height: 50px;
-        margin-left: 360px;
-        margin-top: 75px;
-        border-radius:3px;
-      "
-    >{{ selectedService.third_req }} - {{ selectedService.third_price }} 
-    </button>
-
-    <input type="number" class="search-input"  inputmode="numeric"  style="
-    position:absolute;
-    opacity: 0;
-    animation: fade-up 0.8s ease-out forwards;
-    animation-delay: 0.2s;
-    background-color: rgb(255, 255, 255);
-    width: 154px;
-    height: 50px;
-    margin-left: 370px;
-    margin-top: 125px;
-    border-radius:3px;
-  " placeholder="0" v-model="thirdInputValue" @input="updateMinimumPrice"  >
-
-      <button
-        type="button"
-        @click="openDialogss(selectedService.fourth_req)"
-       
-        style="
-          position:absolute;
-          opacity: 0;
-          animation: fade-up 0.8s ease-out forwards;
-          animation-delay: 0.2s;
-          background-color: rgb(255, 255, 255);
-          width: 164px;
-          height: 50px;
-          margin-left: 20px;
-          margin-top: 182px;
-          border-radius:3px;
-        "
-      >{{ selectedService.fourth_req }} - {{ selectedService.fourth_price }} 
-      </button>
-
-      <input type="number" class="search-input"  inputmode="numeric"  style="
-      position:absolute;
-      opacity: 0;
-      animation: fade-up 0.8s ease-out forwards;
-      animation-delay: 0.2s;
-      background-color: rgb(255, 255, 255);
-      width: 154px;
-      height: 50px;
-      margin-left: 20px;
-      margin-top: 230px;
-      border-radius:3px;
-    " placeholder="0" v-model="fourthInputValue" @input="updateMinimumPrice" >
-
-
-      <button
-      type="button"
-      @click="openDialogss(selectedService.fifth_req)"
-     
-      style="
-        position:absolute;
-        opacity: 0;
-        animation: fade-up 0.8s ease-out forwards;
-        animation-delay: 0.2s;
-        background-color: rgb(255, 255, 255);
-        width: 164px;
-        height: 50px;
-        margin-left: 190px;
-        margin-top: 182px;
-        border-radius:3px;
-      "
-    >{{ selectedService.fifth_req }} - {{ selectedService.fifth_price }} 
-    </button>
-
-    <input type="number" class="search-input"  inputmode="numeric"  style="
-    position:absolute;
-    opacity: 0;
-    animation: fade-up 0.8s ease-out forwards;
-    animation-delay: 0.2s;
-    background-color: rgb(255, 255, 255);
-    width: 154px;
-    height: 50px;
-    margin-left: 196px;
-    margin-top: 230px;
-    border-radius:3px;
-  " placeholder="0"  v-model="fifthInputValue" @input="updateMinimumPrice" >
-
-    <button
-    type="button"
-    @click="openDialogss(selectedService.sixth_req)"
-   
-    style="
-      position:absolute;
-      opacity: 0;
-      animation: fade-up 0.8s ease-out forwards;
-      animation-delay: 0.2s;
-      background-color: rgb(255, 255, 255);
-      width: 164px;
-      height: 50px;
-      margin-left: 360px;
-      margin-top: 182px;
-      border-radius:3px;
-    "
-  >{{ selectedService.sixth_req }} - {{ selectedService.sixth_price }} 
-  </button>
-
-
-  <input type="number" class="search-input"  inputmode="numeric"  style="
-    position:absolute;
-    opacity: 0;
-    animation: fade-up 0.8s ease-out forwards;
-    animation-delay: 0.2s;
-    background-color: rgb(255, 255, 255);
-    width: 154px;
-    height: 50px;
-    margin-left: 370px;
-    margin-top: 230px;
-    border-radius:3px;
-  " placeholder="0" v-model="sixthInputValue" @input="updateMinimumPrice" >
-
+          </tbody>
+        </table>
 
       <button
       type="button"
@@ -634,16 +623,34 @@ Sound and stage lights production.</p>
       class="neumorphic-button"
       style="
         position:absolute;
-        background-color: rgb(51, 50, 50);
+        background-color: rgb(50, 50, 51);
         width: 155px;
         height: 40px;
-        margin-left:370px;
-        margin-top: 318px;
+        margin-left:520px;
+        margin-top: 135px;
         border-radius:3px;
         color:white;
         
       "
     >File Request
+    </button>
+    <button
+      type="button"
+      @click="closeDialogs()"
+    
+      style="
+        position:absolute;
+        background-color:none;
+        width: 48px;
+        height: 40px;
+        margin-left:686px;
+        margin-top: -352px;
+        border-radius:3px;
+        color:rgb(49, 47, 47);
+        font-size:17px;
+        
+      "
+    >&nbsp;&nbsp;🗙 &nbsp;&nbsp;
     </button>
 
     <li class="menu-item" >
@@ -653,25 +660,16 @@ Sound and stage lights production.</p>
       class="neumorphic-button"
       style="
         position:absolute;
-        opacity: 0;
-        animation: fade-up 0.8s ease-out forwards;
-        animation-delay: 0.2s;
         background-color: rgb(255, 255, 255);
         width: 169px;
         height: 40px;
-        margin-left: 354px;
-        margin-top: 15px;
+        margin-left: 340px;
+        margin-top: 120px;
         border-radius:3px;
       "
     > Show Added Items
     </a>
-    </li>
-
-   
-
-        <v-card-text class="headline text-left" style=" font-size: 14px; font-weight:400; margin-top:50%;">
-          &nbsp;   &nbsp;&nbsp;
-        </v-card-text>     
+    </li> 
 
       </v-card-text>
       <v-card-actions>
@@ -686,24 +684,81 @@ Sound and stage lights production.</p>
 
 <v-dialog v-model="dialogssss" max-width="400px">
   <form @submit.prevent="saveBooking" class="container">
-    <v-card style="height:360px;">
+    <v-card style="height:430px;">
       <br>
-      <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:900;   ">  Added Items</v-card-title>
-      <v-card-title class="headline text-center" style="height:40px;font-size: 14px; font-weight:400; margin-top:-15px; ">  Added Quantity of the items</v-card-title>
+      <v-card-title class="headline text-center" style="height:40px;font-size: 17px; font-weight:700;font-family: 'Poppins', sans-serif;">  ADDED ITEMS</v-card-title>
+      <v-card-title class="headline text-center" style="height:40px;font-size: 13px; font-weight:400; margin-top:-15px;color:#0569ff; ">  Price calculation for the addded item</v-card-title>
       <v-card-text>
 
-        <div>{{ selectedService.first_req }}: {{ inputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ first_totalPrice }}) <span style="display:none;">{{ selectedService.first_price }}</span></div>
-        <div>{{ selectedService.second_req }} : {{ secondInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ second_totalPrice }}) <span style="display:none;">{{ selectedService.second_price }}</span></div>
-        <div>{{ selectedService.third_req }} : {{ thirdInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ third_totalPrice }}) <span style="display:none;">{{ selectedService.third_price }}</span></div>
-        <div>{{ selectedService.fourth_req }} : {{ fourthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fourth_totalPrice }}) <span style="display:none;">{{ selectedService.fourth_price }}</span></div>
-        <div>{{ selectedService.fifth_req }} : {{ fifthInputValue || '0' }}     &nbsp;&nbsp;&nbsp;(added item price: {{ fifth_totalPrice }}) <span style="display:none;">{{ selectedService.fifth_price }}</span></div>
-        <div>{{ selectedService.sixth_req }} : {{ sixthInputValue || '0' }}    &nbsp;&nbsp;&nbsp; (added item price: {{ sixth_totalPrice }}) <span style="display:none;">{{ selectedService.sixth_price }}</span></div>
+        <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; width:340px;top:70px;right:17px; position:absolute; font-size:12px;">
+          <thead>
+            <tr>
+              <th style=" text-align:center;">ITEM'S</th>
+              <th style=" text-align:center;">PRICE</th>
+              <th style="width:100px;text-align:center;">QUANTITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== ''" style="height:10px; ">
+              <td >{{ selectedService.first_req }} </td>
+              <td>₱{{ selectedService.first_price }}</td>
+              <td>{{ inputValue || '0' }}</td>
+            </tr>
+            <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px; ">
+              <td>{{ selectedService.second_req }} </td>
+              <td>₱{{ selectedService.second_price }}</td>
+              <td>{{ secondInputValue || '0' }}</td>
+            </tr>
+            <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px; ">
+              <td>{{ selectedService.third_req }} </td>
+              <td>₱{{ selectedService.third_price }}</td>
+              <td>{{ thirdInputValue || '0' }}</td>
+            </tr>
+            <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px; ">
+              <td>{{ selectedService.fourth_req }} </td>
+              <td>₱{{ selectedService.fourth_price }}</td>
+              <td>{{ fourthInputValue || '0' }}</td>
+            </tr>
+            <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px; ">
+              <td>{{ selectedService.fifth_req }} </td>
+              <td>₱{{ selectedService.fifth_price }}</td>
+              <td>{{ fifthInputValue || '0' }}</td>
+            </tr>
+            <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px; ">
+              <td>{{ selectedService.sixth_req }} </td>
+              <td>₱{{ selectedService.sixth_price }}</td>
+              <td>{{ sixthInputValue || '0' }}</td>
+            </tr>
+           
+
+          </tbody>
+        </table>
+
+       
         <br>
-        <div>Added items total price: {{ totalSum }}</div>
+        <div style="position:absolute;">
+        <div style="margin-top:225px;">Added items total price: {{ totalSum }}</div>
         <div>Minimum price: {{selectedService.low_pricing}}</div>
         <div>Total cost: {{ (parseFloat(totalSum) + parseFloat(selectedService.low_pricing)).toFixed(2).replace(/\.0+$/, '') }}</div>
-
+        </div>
         
+        <button
+        type="button"
+        @click="closeDialogsss()"
+        class="neumorphic-button"
+        style="
+          position:absolute;
+          background-color: rgb(50, 50, 51);
+          width: 115px;
+          height: 40px;
+          margin-left:214px;
+          margin-top: 245px;
+          border-radius:3px;
+          color:white;
+          
+        "
+      >Done
+      </button>
       </v-card-text>
       <v-card-actions>
       
@@ -760,6 +815,13 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    shouldShowTable() {
+      // Check if at least one input value is greater than 0
+      return (
+        this.inputValue > 0 || this.secondInputValue > 0 || this.thirdInputValue > 0 ||
+        this.fourthInputValue > 0 || this.fifthInputValue > 0 || this.sixthInputValue > 0
+      );
+    },
     computedTotal() {
       const sum = parseFloat(this.totalSum) + parseFloat(this.selectedService.low_pricing);
       return sum.toFixed(2).replace(/\.0+$/, '');
@@ -918,9 +980,8 @@ Sound and stage lights production.</p>
   methods: {
 
     updateMinimumPrice() {
-      // You can add any additional logic here if needed
-      // This method is called whenever the user input changes
-    },
+  
+},
     formatPrice(price) {
       if (price >= 1e6) {
         return (price / 1e6).toFixed(price % 1e6 !== 0 ? 1 : 0) + 'M';
