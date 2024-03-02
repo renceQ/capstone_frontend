@@ -1,5 +1,5 @@
 <template>
-
+<div style="position:absolute;background-color:rgb(245, 245, 245); width:100%; height:2000px;">
     <div style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards; position: absolute; margin-top:160px; margin-left:90px; ">
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
@@ -13,18 +13,18 @@
     </div>
     <div>
 
-        <div class="neumorphic-search" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        <div class="neumorphic-search" style="  height:50px; margin-top: 150px;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s; margin-top: 170px; margin-left:315px;">
-          <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="border: 0px;"/>
-          <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
+        animation-delay: 0.2s; margin-left:315px;">
+          <input v-model="searchText" @input="updateSearch" type="text" placeholder="Search Product by name..." class="search-input" style="margin-top:8px;border: 0px;"/>
+          <button style="position:absolute; margin-top:10px;margin-left:602px; width:49px; height: 49px; " class="search-button">
             <i class="fas fa-search"></i>
           </button>
-              <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
+              <a href="/addtocart" style="position:absolute;margin-top:10px; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
                 <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
                 </a>
           </div>
-             
+         
                
       
     
@@ -110,7 +110,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-              
+              </div>
 </template>
 <script>
 import axios from 'axios';
@@ -310,7 +310,7 @@ a[href="#"] {
     align-items: center;
     border-radius: 5px;
     background-color: #fff;
-    box-shadow: 10px 10px 30px #eeecec, -10px -10px 30px #ffffff;
+    box-shadow: 10px 10px 30px #eeecec, -1px -1px 0px #ffffff;
     padding: 8px;
     height: 40px;
     margin-top: 35px; /* Adjust this margin as needed */
@@ -326,7 +326,7 @@ a[href="#"] {
     flex: 1;
     padding: 8px;
     border-radius: 5px;
-    box-shadow: inset 2px 2px 5px #c9c9c9, inset -2px -2px 5px #ffffff;
+    box-shadow: inset 2px 2px 0px #c9c9c9, inset -0px -0px 0px #ffffff;
   }
 
   .search-button {

@@ -12,7 +12,7 @@
           <div style="margin-top:190px;">
 
             <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-            animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-70px; color:rgb(0, 153, 255);" class="label text-center">AVAIL SERVICE NOW!</label><br>
+            animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-70px; color:rgb(255, 145, 0);" class="label text-center">AVAIL SERVICE NOW!</label><br>
             <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up 0.8s ease-out forwards;animation-delay: 0.2s; font-size:14px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif; position:absolute; margin-top:-60px; color:rgba(2, 54, 97, 0.884);" class="label text-center">Turn your precious moments into unforgettable memories</label><br>
             <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
@@ -36,7 +36,7 @@
           
       </div>
 
-      <div style="margin-top:-20px;">
+      <!-- <div style="margin-top:-20px;">
             <button
             v-for="(item, index) in servinfo"
             :key="index"
@@ -55,7 +55,25 @@
               border-radius:9px;
               margin-bottom:40px;
             "
-          >
+          > -->
+          <div style="margin-top:-20px;">
+            <button
+              v-for="(item, index) in filteredServinfo"
+              :key="index"
+              @click="openDialogs(item)"
+              type="button"
+              class="room-item text-center"
+              style=" opacity: 0;
+              animation: fade-up 0.8s ease-out forwards;
+              animation-delay: 0.2s;
+              background-color: rgb(255, 255, 255);
+              width: 260px;
+              height: 330px;
+              margin-left: 30px;
+              margin-top: -10px;
+              border-radius:9px;
+              margin-bottom:40px;"
+            >
             <div>
               <img
               :src="item.image"
@@ -117,57 +135,7 @@
             
           </button>
         </div>
-          <!-- @click="openDialog(item)" this is bookingform the form dialog -->
 
-
-<!--                 
-<div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-animation: fade-up .8s ease-out forwards;
-animation-delay: 0.4s;position: absolute; margin-left:700px; top: 160px;">
-
-  <v-row>
-    <v-col cols="12">
-      <h2 style=" font-family: 'Bebas Neue', cursive; ">Event Schedules</h2>
-      <ul>
-        <li v-for="event in approvedRequests" :key="event.id">
-          {{ event.event_title }} - {{ formatDate(event.start_date) }} to {{ formatDate(event.end_date) }}
-        </li>
-      </ul>
-    </v-col>
-  </v-row>
-
-
-  <div >
-    <label for="month">Select Month:</label>
-        <select id="month" v-model="selectedMonth" @change="updateCalendar">
-          <option v-for="(month, index) in months" :key="index" :value="index">{{ month }}</option>
-        </select>
-    <label for="year">Select Year:</label>
-        <select id="year" v-model="selectedYear" @change="updateCalendar">
-          <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-        </select>
-  </div>
-  <div >
-    <table style="width: 440px; height: 400px;">
-      <thead>
-        <tr>
-          <th colspan="7">{{ currentMonth }} {{ selectedYear }}</th>
-        </tr>
-        <tr>
-          <th v-for="day in days" :key="day">{{ day }}</th>
-        </tr>
-      </thead>
-        <tbody>
-          <tr v-for="week in calendar" :key="week">
-            <td v-for="day in week" :key="day.number"
-              :class="{ highlighted: day.highlighted, today: isToday(day), eventDay: hasEvent(day) }">
-              {{ day.number }}
-            </td>
-          </tr>
-        </tbody>
-    </table>
-  </div>
-  </div> -->
   
             
           </div>
@@ -254,12 +222,12 @@ Sound and stage lights production.</p>
 
       <div style="font-family: 'Poppins', sans-serif; font-size:13px; margin-top:20px;">
         <div class="form-group">
-          <label for="event_title" style="margin-top:10px; margin-left:40px;">Selected Service:</label>
+          <label for="service" style="margin-top:10px; margin-left:40px;">Selected Service:</label>
           <input type="text"  style=" margin-top:-10px;margin-left:30px;font-size:22px;color:rgb(2, 70, 102);width:100%; height:45px; border: none;" placeholder="" v-model="selectedService.service" readonly>
         </div>
 
         <div class="form-group" style="position:absolute; top:23%;right:120px;">
-          <label for="total_cost">Total Cost:</label>
+          <label for="computedTotal">Total Cost:</label>
           <br>
           <input type="text" style="  margin-top:-10px;height:45px; border: none;font-size:22px;color:rgb(2, 70, 102);" placeholder="" v-model="computedTotal" readonly>
         </div>
@@ -279,17 +247,17 @@ Sound and stage lights production.</p>
         <div class="form-row" style="margin-top:127px;margin-left:366px;  position: absolute;">
           <label for="event">Meeting Schedule:</label>
           <div>
-            <input type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="start_date" required>
-            <input type="time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;margin-left:14px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
+            <input for="meeting_date" type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="meeting_date" required>
+            <input for="meeting_time" type="time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;margin-left:14px;" id="meeting-time" v-model="meeting_time" name="meeting-time" required>
         </div>
         </div>
 
         <div class="form-row" style="margin-top:50px;margin-left:360px;  position: absolute;">
           <div class="form-group col-md-6">
             <label for="start_date">Event Start Time:</label>
-            <input type="time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
-            <label for="end_date" style="width:200px;position:absolute; margin-left:165px; top:-1px;">Event End Time:</label>
-            <input type="time" class="neumorphic-button" style="position:absolute; margin-left:165px; top:26px;font-size:13px; width:150px;background-color:white; border-radius:3px;" id="meeting-time" v-model="start_time" name="meeting-time" required>
+            <input type="time" for="start_time" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" id="start_time" v-model="start_time" name="start_time" required>
+            <label for="end_time" style="width:200px;position:absolute; margin-left:165px; top:-1px;">Event End Time:</label>
+            <input type="time" for="end_time" class="neumorphic-button" style="position:absolute; margin-left:165px; top:26px;font-size:13px; width:150px;background-color:white; border-radius:3px;" id="end_time" v-model="end_time" name="end_time" required>
           </div>
         </div>
 
@@ -302,8 +270,8 @@ Sound and stage lights production.</p>
 
         <div class="form-row" style="position: absolute;margin-top:50px; margin-left:35px;">
           <div class="form-group col-md-6">
-            <label for="event">Event:</label><br>
-            <input type="text" class="search-input" style="height:40px;width:290px; border:0px;" placeholder="example (Wedding, 7th Birthday)" v-model="event" required>
+            <label for="event_title">Event:</label><br>
+            <input type="text" class="search-input" style="height:40px;width:290px; border:0px;" placeholder="example (Wedding, 7th Birthday)" v-model="event_title" required>
           </div>
         </div>
 
@@ -328,7 +296,7 @@ Sound and stage lights production.</p>
             </thead>
             <tbody>
               <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== '' && inputValue > 0" style="height:10px; ">
-                <td >{{ selectedService.first_req }} </td>
+                <td>{{ selectedService.first_req }} </td>
                 <td>₱{{ selectedService.first_price }}</td>
                 <td>{{ inputValue || '0' }}</td>
               </tr>
@@ -408,98 +376,7 @@ Sound and stage lights production.</p>
 
 
 
-                <!-- booking dialog-->
-<!-- <v-dialog v-model="dialogs" max-width="500px">
-  <form @submit.prevent="saveBooking" class="container">
-    <v-card>
-      <br>
-      <v-card-title class="headline" style="margin-left: 130px; font-size: 14px; font-weight:900;  ">REQUEST<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Form</span></v-card-title>
-      <v-card-text>
 
-        <div class="form-group">
-          <label for="event_title">Event Title:</label>
-          <input type="text" class="search-input" style="width:100%; height:45px;" placeholder="Event Title" v-model="event_title" required>
-        </div>
-
-        <div class="form-group">
-          <label for="service">Services</label>
-          <div class="position-relative">
-            <select class="neumorphic-button" style="width:100%;" v-model="service" required>
-              
-              <option value="Sounds & Lights Service">Sounds & Lights Service</option>
-              <option value="Sounds & Lights with Photo Shoot Service">Sounds & Lights with Photo Shoot Service</option>
-              <option value="Sounds and Lights with Photo & Video Shoots Service">Sounds and Lights with Photo & Video Shoots Service</option>
-              <option value="Sounds and Lights with Photo Video Shoots and SDE Service">Sounds and Lights with Photo Video Shoots and SDE Service</option>
-            </select>
-            <i class="fas fa-caret-down position-absolute end-0 bottom-0 p-3" style="pointer-events: none; top:-5px;"></i>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="start_date">Start Date:</label>
-            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="start_date" required>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="end_date">End Date:</label>
-            <input type="date" class="neumorphic-button" style="width:100%; background-color:white; border-radius:3px;" v-model="end_date" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="location">Location:</label>
-            <input type="text" class="search-input" style="width:206%;height:60%" placeholder="Location" v-model="location" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="event_description">Description:</label>
-            <textarea class="search-input" v-model="event_description" style="width:206%; height:60%;" placeholder="Other Description" required></textarea>
-          </div>
-        </div>
-
-        <br><br>
-        <h3 style="margin-left: 95px; font-size: 14px; font-weight:900;" >CONTACT<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;|&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;">Details</span></h3>
-        <br>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="name">Name:</label>
-            <input type="text" class="search-input" style="width:206%;height:70%;" placeholder="Name" v-model="name" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email">Email:</label>
-            <input type="email" class="search-input" style="width:206%;height:70%;" placeholder="Email Address" v-model="email" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone:</label>
-          <input type="tel" class="search-input" style="width:100%;height:50px;;" placeholder="09*********" v-model="phone" required>
-        </div>
-
-      </v-card-text>
-      <v-card-actions>
-
-        <div style="margin-bottom: 10px;">
-          <button type="submit" class="neumorphic-button" style="margin-left: 10px; width: 320%; background-color: rgb(49, 48, 48); color: white;">Book Event</button>
-        </div>
-
-      </v-card-actions>
-
-    </v-card>
-  </form>
-</v-dialog> -->
-
-
-
-
-<!--service info dialog-->
 <v-dialog v-model="dialogss" max-width="780px">
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:570px;">
@@ -777,6 +654,7 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      searchText: '',
       inputValue: "",
       secondInputValue: "",
       thirdInputValue: "",
@@ -811,7 +689,18 @@ Sound and stage lights production.</p>
         email:"", 
         phone:"", 
         service:"",
-      info: [],
+        computedTotalValue: "", 
+        meeting_date:"",
+        meeting_time:"",
+        start_time:"",
+        end_time:"",
+        info: [],
+        first_req:"",
+        second_req:"",
+        third_req:"",
+        fourth_req:"",
+        fifth_req:"",
+        sixth_req:"",
     }
   },
   computed: {
@@ -822,6 +711,16 @@ Sound and stage lights production.</p>
         this.fourthInputValue > 0 || this.fifthInputValue > 0 || this.sixthInputValue > 0
       );
     },
+    filteredServinfo() {
+    const searchText = this.searchText.toLowerCase();
+    return this.servinfo.filter(item => {
+      return (
+        item.service.toLowerCase().includes(searchText) ||
+        item.low_pricing.toString().includes(searchText)
+        // Add more fields to search if needed
+      );
+    });
+  },
     computedTotal() {
       const sum = parseFloat(this.totalSum) + parseFloat(this.selectedService.low_pricing);
       return sum.toFixed(2).replace(/\.0+$/, '');
@@ -979,6 +878,9 @@ Sound and stage lights production.</p>
 },
   methods: {
 
+    updateSearch() {
+    // You can add additional functionality here if needed
+  },
     updateMinimumPrice() {
   
 },
@@ -1144,7 +1046,8 @@ hasEventOnDate(date) {
         console.error(error);
       }
     },
-    async saveBooking() {
+
+async saveBooking() {
   try {
     // Display a confirmation dialog
     const userConfirmed = window.confirm('Are you sure you want to save?');
@@ -1160,24 +1063,62 @@ hasEventOnDate(date) {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        service: this.service,
+        service: this.selectedService.service,
+        computedTotal: this.computedTotal,
+        meeting_date: this.meeting_date,
+        meeting_time: this.meeting_time, // Ensure both date and time are included
+        start_time: this.start_time, // Include AM/PM information
+        end_time: this.end_time, // Include AM/PM information
+        additionalData: {
+          // Include additional data here
+          first_req: this.selectedService.first_req,
+          second_req: this.selectedService.second_req,
+          third_req: this.selectedService.third_req,
+          fourth_req: this.selectedService.fourth_req,
+          fifth_req: this.selectedService.fifth_req,
+          sixth_req: this.selectedService.sixth_req,
+          inputValue: this.inputValue,
+          secondInputValue: this.secondInputValue,
+          thirdInputValue: this.thirdInputValue,
+          fourthInputValue: this.fourthInputValue,
+          fifthInputValue: this.fifthInputValue,
+          sixthInputValue: this.sixthInputValue,
+        },
       });
 
       // Clear form fields after successful save
-      this.event_title ="";
-      this.start_date ="";
-      this.end_date ="";
-      this.location ="";
-      this.event_description ="";
-      this.name ="";
-      this.email ="";
-      this.phone ="";
-      this.service ="";
+      this.event_title = "";
+      this.start_date = "";
+      this.end_date = "";
+      this.location = "";
+      this.event_description = "";
+      this.name = "";
+      this.email = "";
+      this.phone = "";
+      this.service = "";
+      this.computedTotal = "";
+      this.meeting_date = "";
+      this.meeting_time = "";
+      this.start_time = "";
+      this.end_time = "";
+       this.selectedService.first_req = "";
+       this.selectedService.second_req = "";
+       this.selectedService.third_req = "";
+       this.selectedService.fourth_req = "";
+       this.selectedService.fifth_req = "";
+       this.selectedService.sixth_req = "";
+       this.inputValue = "";
+       this.secondInputValue = "";
+       this.thirdInputValue = "";
+       this.fourthInputValue = "";
+       this.fifthInputValue = "";
+       this.sixthInputValue = "";
 
       // Emit event and perform other actions
       this.$emit('data-saved');
-     
+
       this.dialogs = false;
+      this.dialogss = false;
     }
     // If the user clicked Cancel, do nothing
   } catch (error) {

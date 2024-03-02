@@ -347,7 +347,7 @@ export default {
   margin-left: 3px;
   background-color: #f3f3f3;
   box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
-  color: #ffa600;
+  color: #00a2ff;
 }
 
 /* Additional styles for user profile display */

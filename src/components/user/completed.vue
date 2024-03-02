@@ -1,5 +1,5 @@
 <template>
-
+  <div style="position:absolute;background-color:rgb(245, 245, 245); width:100%;height:2000px;">
     <div style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards; position: absolute; margin-top:160px; margin-left:90px; ">
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
@@ -13,21 +13,21 @@
     </div>
     <div>
 
-        <div class="neumorphic-search" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+        <div class="neumorphic-search" style=" height:50px; margin-top: 150px;  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s; margin-top: 170px; margin-left:315px;">
+        animation-delay: 0.2s;  margin-left:315px;">
           <input
           v-model="searchInput"
           @input="performSearch"
           type="text"
           placeholder="Search Product by name..."
           class="search-input"
-          style="border: 0px;"
+          style="margin-top:8px;border: 0px;"
         />
-            <button style="position:absolute; margin-left:602px; width:49px; height: 49px; " class="search-button">
+            <button style="position:absolute;margin-top:8px; margin-left:602px; width:49px; height: 49px; " class="search-button">
                 <i class="fas fa-search"></i>
               </button>
-              <a href="/addtocart" style="position:absolute; margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
+              <a href="/addtocart" style="position:absolute; margin-top:8px;margin-left:660px; width:49px; height: 49px; color: black;"  class="search-button">
                 <i style="margin-left:7px; margin-top:8px;" class="fas fa-shopping-cart custom-icon"></i>
                 </a>
           </div>
@@ -159,7 +159,7 @@
   </v-card>
 </v-dialog>
 
-              
+         </div>     
 </template>
 <script>
 import axios from 'axios';

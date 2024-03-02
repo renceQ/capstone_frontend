@@ -24,6 +24,7 @@
       </div>
     </div>
 
+   
     <div class="neumorphic-search" style=" height:50px;opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up .8s ease-out forwards;
     animation-delay: 0.2s; margin-top: -5px; margin-left:100px; position:absolute;box-shadow: 10px 10px 30px #eeecec, -1px -1px 10px #ffffff;">
@@ -47,9 +48,15 @@
       </div>
     <br>
 
-    <div class="row justify-content-start" style="position:absolute; margin-left:90px; margin-top:44px;">
-      <div v-for="(product, index) in info" :key="product.id" class="col-lg-3 col-md-6" style="width: 225px; margin-right:-6px;"> 
-          <!-- Product Card -->
+    <div v-if="isLoading" style="left:600px;margin-top:130px; position:absolute;">
+      <img :src="require('../../../src/assets/img/load.gif')"  style="margin-left-600px;width: 220px; height: 160px;"><br>
+     <a style="margin-left:84px;"> Loading...</a>
+    </div>
+
+    <div v-else>
+      <div class="row justify-content-start" style="position:absolute; margin-left:90px; margin-top:44px;">
+          <div v-for="(product, index) in filteredProducts" :key="product.id" class="col-lg-3 col-md-6" style="width: 225px; margin-right:-6px;">
+   
           <div class="room-item text-center" style="margin-bottom: 17px; height: 370px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); text-align: left;">
       
           <img class="imgs" :src="product.image" alt="" style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
@@ -83,7 +90,7 @@
       </div>
     </div>
   </div>
-
+</div>
    <!-- generated transact code -->
   <input type="hidden" v-model="productData.transaction_code">
 
@@ -161,6 +168,8 @@ Sound and stage lights production.</p>
   export default {
     data() {
       return {  
+        isLoading: false,
+        searchText: "",
         salesRecords: [],
         categories: [], 
         info: [],
@@ -177,6 +186,18 @@ Sound and stage lights production.</p>
   },
 
   computed: {
+    filteredProducts() {
+            if (!this.searchText) {
+                return this.info;  // Return all products if search text is empty
+            }
+
+            // Filter products based on the search text
+            const searchTextLower = this.searchText.toLowerCase();
+            return this.info.filter(product => {
+                // Adjust the condition based on your actual product name property
+                return product.prod_name.toLowerCase().includes(searchTextLower);
+            });
+        },
   getTotalQuantitySold() {
     return function(productId) {
       const salesRecords = this.getFilteredSalesRecords(productId);
@@ -202,6 +223,18 @@ Sound and stage lights production.</p>
     },
 },
     methods: {
+      updateSearch() {
+            // Set loading state to true
+            this.isLoading = true;
+
+            // Simulate loading for 3 seconds
+            setTimeout(() => {
+                // Reset loading state after 3 seconds
+                this.isLoading = false;
+            }, 3000);
+
+            // Add any additional functionality you need for updating the search
+        },
       getFilteredSalesRecords(productId) {
       return this.salesRecords.filter(record => record.product_id === productId);
     },
