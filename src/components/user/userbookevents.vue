@@ -638,7 +638,7 @@ Sound and stage lights production.</p>
             <ul>
               <li v-for="event in approvedRequests" :key="event.id">
               
-               {{ event.start_date }}
+              <a style="display: none;"> {{ event.start_date }}</a>
               </li>
             </ul>
           </v-col>
@@ -1065,8 +1065,10 @@ isDateMarked(date) {
         const response = await axios.get('getevent');
         this.info = response.data;
 
-        // Update markedDates array with start dates from events
-        this.markedDates = this.info.map(event => event.start_date);
+        // Filter events with status "approved" and update markedDates array
+        this.markedDates = this.info
+          .filter(event => event.status === 'approved')
+          .map(event => event.start_date);
 
         // Call updateCalendar to refresh the calendar with the new marked dates
         this.updateCalendar();
