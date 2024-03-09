@@ -6,9 +6,7 @@
       <div style="width: 1200px; position: absolute; margin-left: 100px; ">
         <div >
           
-          <!-- <h1 class="text-center" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-    animation: fade-up 0.8s ease-out forwards;font-size: 20px; font-weight:900; margin-left:50px; margin-top:2px;">BOOK YOUR <span style="font-size: 30px; font-weight:100;">|</span>&nbsp;&nbsp; <span style="font-size:70px; font-weight:400; font-family: 'WindSong', cursive;">Events...</span></h1>
-          <br> -->
+         
           <div style="margin-top:190px;">
 
             <label for="category_id" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
@@ -26,7 +24,7 @@
       <button style="position:absolute; margin-left:422px; width:49px; height: 49px;margin-top:10px; " class="search-button">
         <i class="fas fa-search"></i>
       </button>
-      <a href="/addtocart" style="text-decoration: none; margin-top: 10px; position: absolute; margin-left: -200px; width: 170px; height: 49px; color: black;" class="search-button">
+      <a  @click="availability_dialog()" style="text-decoration: none; margin-top: 10px; position: absolute; margin-left: -200px; width: 170px; height: 49px; color: black;" class="search-button">
         &nbsp;&nbsp;&nbsp;Check Availability <i style="margin-left: 7px; margin-top: 8px;" class="fas fa-calendar custom-icon"></i>
       </a>
       
@@ -36,26 +34,6 @@
           
       </div>
 
-      <!-- <div style="margin-top:-20px;">
-            <button
-            v-for="(item, index) in servinfo"
-            :key="index"
-            @click="openDialogs(item)"
-            type="button"
-            class="room-item text-center"
-            style="
-              opacity: 0;
-              animation: fade-up 0.8s ease-out forwards;
-              animation-delay: 0.2s;
-              background-color: rgb(255, 255, 255);
-              width: 260px;
-              height: 330px;
-              margin-left: 30px;
-              margin-top: -10px;
-              border-radius:9px;
-              margin-bottom:40px;
-            "
-          > -->
           <div style="margin-top:-20px;">
             <button
               v-for="(item, index) in filteredServinfo"
@@ -405,7 +383,7 @@ Sound and stage lights production.</p>
         
 
         <br>
-  <!-- &nbsp;&nbsp;Minimum Price:{{ formatPrice(selectedService.low_pricing) }} old pricing method convert 1000 into 1k -->
+
   <span>
     <v-card-text class="headline text-left" style="position:absolute; top:60%; left:3%; width:350px; font-size: 24px; font-weight:500;color:#3a3a3a;">
       &nbsp;&nbsp;₱&nbsp;{{ displayMinimumPrice }} <span style="font-size: 15px;color:#aaaaaa;"> / minimum price</span>
@@ -644,6 +622,83 @@ Sound and stage lights production.</p>
   </form>
 </v-dialog>
 
+<v-dialog v-model="avail" max-width="530px" style="position:absolute;">
+  <form @submit.prevent="save_request" class="container">
+    <v-card style="height:650px;">
+
+      <div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+      animation: fade-up .8s ease-out forwards;
+      animation-delay: 0.4s;position: absolute; margin-left:15px;top: 11px;">
+
+ <!-- <a style="display: none;">{{ event.event_title }} </a> {{ event.start_date }} <a style="display: none;">to {{ event.end_date }} </a> -->
+      <div>
+        <v-row>
+          <v-col cols="12">
+            <h2 style="font-family: 'Bebas Neue', cursive;">Event Schedules</h2>
+            <ul>
+              <li v-for="event in approvedRequests" :key="event.id">
+              
+               {{ event.start_date }}
+              </li>
+            </ul>
+          </v-col>
+        </v-row>
+    
+        <div>
+          <label for="month">Select Month:</label>
+          <select id="month" v-model="selectedMonth" @change="updateCalendar">
+            <option v-for="(month, index) in months" :key="index" :value="index">{{ month }}</option>
+          </select>
+          <label for="year">Select Year:</label>
+          <select id="year" v-model="selectedYear" @change="updateCalendar">
+            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+          </select>
+        </div>
+    
+        <div>
+          <table style="width: 440px; height: 380px;">
+            <thead>
+              <tr>
+                <th colspan="7">{{ currentMonth }} {{ selectedYear }}</th>
+              </tr>
+              <tr>
+                <th v-for="day in days" :key="day">{{ day }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="week in calendar" :key="week">
+                <td
+                v-for="day in week"
+                :key="day.number"
+                :class="{ 'marked-day': day.marked }"
+              >
+                <button
+                  @click="openday()"
+                >
+                  {{ day.number }}
+                </button>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+                  
+              
+    </v-card>
+  </form>
+</v-dialog>
+
+<v-dialog v-model="day_event" max-width="500px" style="position:absolute;">
+  <form @submit.prevent="save_event" class="container">
+    <v-card style="height:340px;">
+      <label for="category_id" style=" font-size:19px; font-weight:600;font-family: 'Poppins', sans-serif; position:absolute;  color:rgb(255, 145, 0);" class="label text-center">Available Event</label>
+    </v-card>
+  </form>
+</v-dialog>
+
+
 
   </template>
   
@@ -654,6 +709,7 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      markedDates: [],
       searchText: '',
       inputValue: "",
       secondInputValue: "",
@@ -666,6 +722,8 @@ Sound and stage lights production.</p>
       selectedService: null,
       retrievedService: "",
       servinfo: [],
+      day_event:false,
+      avail: false,
       dialogs: false,
       dialogss: false,
       dialogsss: false,
@@ -687,7 +745,7 @@ Sound and stage lights production.</p>
         event_description:"", 
         name:"", 
         email:"", 
-        phone:"", 
+        phone:"",
         service:"",
         computedTotalValue: "", 
         meeting_date:"",
@@ -704,6 +762,7 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+
     shouldShowTable() {
       // Check if at least one input value is greater than 0
       return (
@@ -877,22 +936,22 @@ Sound and stage lights production.</p>
   },
 },
   methods: {
-
+   
+    availability_dialog()
+    {
+      this.avail = true;
+    },
+    openday()
+    {
+      this.day_event = true;
+    },
     updateSearch() {
     // You can add additional functionality here if needed
   },
     updateMinimumPrice() {
   
 },
-    formatPrice(price) {
-      if (price >= 1e6) {
-        return (price / 1e6).toFixed(price % 1e6 !== 0 ? 1 : 0) + 'M';
-      } else if (price >= 1e3) {
-        return (price / 1e3).toFixed(price % 1e3 !== 0 ? 1 : 0) + 'K'; // Add 'K' only for values in the thousands
-      } else {
-        return price.toString(); // Keep the original value for smaller values
-      }
-    },
+   
 
     async getInfo() {
       try {
@@ -934,83 +993,46 @@ Sound and stage lights production.</p>
       this.dialogssss = false;
     },
     updateCalendar() {
-    const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
-    const lastDate = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
-    const calendar = [];
-    let date = 1;
+  const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
+  const lastDate = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
+  const calendar = [];
+  let date = 1;
 
-    for (let i = 0; i < 6; i++) {
-      const week = [];
+  for (let i = 0; i < 6; i++) {
+    const week = [];
 
-      for (let j = 0; j < 7; j++) {
-        if (i === 0 && j < firstDay) {
-          week.push({ number: '', event: false, approvedEvent: null, highlighted: false });
-        } else if (date > lastDate) {
-          break;
-        } else {
-          const currentDate = new Date(this.selectedYear, this.selectedMonth, date);
-          const isEventDay = this.hasEventOnDate(date);
-          const approvedEvent = isEventDay ? this.getApprovedEvent(currentDate) : null;
+    for (let j = 0; j < 7; j++) {
+      if (i === 0 && j < firstDay) {
+        week.push({ number: '', marked: false });
+      } else if (date > lastDate) {
+        break;
+      } else {
+        const currentDate = new Date(this.selectedYear, this.selectedMonth, date);
+        const isMarked = this.isDateMarked(currentDate);
 
-          let highlighted = false; // Initialize highlighted flag to false
+        week.push({
+          number: date,
+          marked: isMarked,
+        });
 
-          if (approvedEvent) {
-            // Check if the current date falls within the start_date and end_date of an approved event
-            highlighted = currentDate >= new Date(approvedEvent.start_date) &&
-                          currentDate <= new Date(approvedEvent.end_date);
-          }
-
-          week.push({
-            number: date,
-            event: isEventDay,
-            approvedEvent: approvedEvent,
-            highlighted: highlighted, // Update highlighted flag
-          });
-
-          date++;
-        }
+        date++;
       }
-
-      calendar.push(week);
-      if (date > lastDate) break;
     }
 
-    this.calendar = calendar;
-  },
+    calendar.push(week);
+    if (date > lastDate) break;
+  }
 
-  getApprovedEvent(date) {
-  return this.approvedRequests.find(event => {
-    const eventStartDate = new Date(event.start_date);
-    const eventEndDate = new Date(event.end_date);
-
-    return date >= eventStartDate && date <= eventEndDate;
-  });
+  this.calendar = calendar;
 },
-hasEventOnDate(date) {
-    const currentDate = new Date(this.selectedYear, this.selectedMonth, date);
 
-    return this.approvedRequests.some(event => {
-      const eventStartDate = new Date(event.start_date);
-      const eventEndDate = new Date(event.end_date);
+isDateMarked(date) {
+  const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return this.markedDates.includes(formattedDate);
+},
 
-      // Check if the current date falls within the event's start and end dates
-      return currentDate >= eventStartDate && currentDate <= eventEndDate;
-    });
-  },
-    formatDate(date) {
-      // Add your formatting logic for the event dates
-      // Example: Format the date to your preferred format
-      return new Date(date).toLocaleDateString();
-    },
-    isToday(day) {
-      const today = new Date();
-      return today.getFullYear() === this.selectedYear &&
-        today.getMonth() === this.selectedMonth &&
-        today.getDate() === day.number;
-    },
-    hasEvent(day) {
-      return day.event;
-    },
+ 
+ 
     async approveEvent() {
     try {
       const response = await axios.post('/updateEventStatus', {
@@ -1042,6 +1064,12 @@ hasEventOnDate(date) {
       try {
         const response = await axios.get('getevent');
         this.info = response.data;
+
+        // Update markedDates array with start dates from events
+        this.markedDates = this.info.map(event => event.start_date);
+
+        // Call updateCalendar to refresh the calendar with the new marked dates
+        this.updateCalendar();
       } catch (error) {
         console.error(error);
       }
@@ -1146,8 +1174,7 @@ async saveBooking() {
     position: absolute;
     margin-left: 700px;
     top: 160px;
-    background-color: #e0e5ec; /* Background color */
-    box-shadow: 8px 8px 15px #babecc, -8px -8px 15px #ffffff; /* Neumorphic shadow */
+   
     border-radius: 4px; /* Rounded corners */
     padding: 20px;
   }
@@ -1173,8 +1200,8 @@ async saveBooking() {
 
   /* Table styles */
   table {
-    width: 450px;
-    height: 450px;
+    width: 400px;
+    height: 400px;
     border-collapse: collapse;
     margin-top: 15px;
     backdrop-filter: blur(5px); /* Adding blur effect */
@@ -1195,18 +1222,7 @@ async saveBooking() {
     background-color: rgba(255, 255, 255, 0.2); /* Transparent background for table cell */
   }
 
-  /* Highlighted, today, and event day styles */
-  .highlighted {
-    background-color: rgba(166, 192, 254, 0.5); /* Transparent highlighted day color */
-  }
-
-  .today {
-    background-color: rgba(255, 182, 193, 0.5); /* Transparent today's color */
-  }
-
-  .eventDay {
-    background-color: rgba(255, 215, 0, 0.5); /* Transparent event day color */
-  }
+ 
   .glass-effect {
     padding: 8px;
     border-radius: 4px;
@@ -1218,8 +1234,8 @@ async saveBooking() {
   
   /* Styling for the calendar background image */
   .calendar-container table {
-    width: 450px;
-    height: 450px;
+    width: 380px;
+    height: 380px;
     border-collapse: collapse;
     margin-top: 15px;
     backdrop-filter: blur(5px); /* Adding blur effect */
@@ -1243,4 +1259,8 @@ async saveBooking() {
   @import '../../assets/css/flaticon.css';
   @import '../../assets/css/icomoon.css';
   @import '../../assets/css/style.css';
+  .marked-day {
+    background-color: #ddb8ff; /* or any other style you prefer */
+  }
+  
   </style>

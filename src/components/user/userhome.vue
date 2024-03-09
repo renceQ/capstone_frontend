@@ -120,7 +120,7 @@ font-size: 14px;
 	  font-size: 16px;
 	  background: white;
     font-family: 'Poppins', sans-serif;
-font-size: 14px;Settings
+font-size: 14px;
     font-weight:500;
 	  height:40px;
 	  color:rgb(0, 0, 0);
