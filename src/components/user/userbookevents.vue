@@ -681,7 +681,7 @@ Sound and stage lights production.</p>
                 <td @click="openday()"
                 v-for="day in week"
                 :key="day.number"
-                :class="{ 'marked-day': day.marked }" style="width: 20px; height: 20px;  margin-top:20px; cursor: pointer;"
+                :class="{ 'marked-day': day.marked }" style="width: 20px; height: -20px;  margin-top:20px; cursor: pointer;"
               >
                 <button
                 style="width: 30px; height: 30px; "
