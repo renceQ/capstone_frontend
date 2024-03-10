@@ -622,19 +622,17 @@ Sound and stage lights production.</p>
   </form>
 </v-dialog>
 
-<v-dialog v-model="avail" max-width="530px" style="position:absolute;">
+<v-dialog v-model="avail" max-width="830px" style="border-radius:0px;position:absolute;">
   <form @submit.prevent="save_request" class="container">
-    <v-card style="height:650px;">
+    <v-card style="height:650px; overflow: hidden;font-family: 'Poppins', sans-serif; font-weight: 600;font-size:11.5px;">
 
-      <div class="calendar-container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
-      animation: fade-up .8s ease-out forwards;
-      animation-delay: 0.4s;position: absolute; margin-left:15px;top: 11px;">
+      <div class="calendar-container" style=" position: absolute; left:-375px;top: 11px;">
 
  <!-- <a style="display: none;">{{ event.event_title }} </a> {{ event.start_date }} <a style="display: none;">to {{ event.end_date }} </a> -->
       <div>
         <v-row>
           <v-col cols="12">
-            <h2 style="font-family: 'Bebas Neue', cursive;">Event Schedules</h2>
+           
             <ul>
               <li v-for="event in approvedRequests" :key="event.id">
               
@@ -643,37 +641,51 @@ Sound and stage lights production.</p>
             </ul>
           </v-col>
         </v-row>
-    
-        <div>
-          <label for="month">Select Month:</label>
-          <select id="month" v-model="selectedMonth" @change="updateCalendar">
-            <option v-for="(month, index) in months" :key="index" :value="index">{{ month }}</option>
-          </select>
-          <label for="year">Select Year:</label>
-          <select id="year" v-model="selectedYear" @change="updateCalendar">
-            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-          </select>
+
+        <div style="position: absolute; top:3px;">
+          <tr>
+            <th  colspan="7"><a style="font-size:30px; font-weight:400;">{{ currentMonth }}</a> <a style="font-size:30px; color:#ffcc5c; font-weight:300; margin-left:10px;">{{ selectedYear }}</a></th>
+          </tr>
         </div>
     
+        <div style="margin-left:20px; margin-top:30px;">
+          <div>
+          <label for="month">Select Month:</label><br>
+          <select style="width: 120px; background-color: #fff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);color: rgb(0, 0, 0); border: none; border-radius: 3px; outline: none;" id="month" v-model="selectedMonth" @change="updateCalendar">
+            <option v-for="(month, index) in months" :key="index" :value="index">{{ month }}</option>
+          </select>
+          <i class="fas fa-caret-down arrow-icon" style=" z-index: 2;top:109px; position: absolute; margin-right:322px;"></i>
+         
+        </div>
+        <div style="position: absolute; top:65px; margin-left:300px;">
+          <label style="" for="year">Select Year:</label><br>
+          <select style="z-index: 1;width: 80px; background-color: #fff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);color: rgb(0, 0, 0); border: none; border-radius: 3px; outline: none;" id="year" v-model="selectedYear" @change="updateCalendar">
+            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+          </select>
+          <i class="fas fa-caret-down arrow-icon" style=" z-index: 2;top:41px; position: absolute; margin-right:14px;"></i>
+        </div>
+        </div>
+    
+      
         <div>
-          <table style="width: 440px; height: 380px;">
+          <table style=" margin-left:10px; width: 410px; height: 380px;">
             <thead>
-              <tr>
-                <th colspan="7">{{ currentMonth }} {{ selectedYear }}</th>
-              </tr>
               <tr>
                 <th v-for="day in days" :key="day">{{ day }}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               <tr v-for="week in calendar" :key="week">
-                <td
+                <td @click="openday()"
                 v-for="day in week"
                 :key="day.number"
-                :class="{ 'marked-day': day.marked }"
+                :class="{ 'marked-day': day.marked }" style="width: 20px; height: 20px;  margin-top:20px; cursor: pointer;"
               >
                 <button
-                  @click="openday()"
+                style="width: 30px; height: 30px; "
+                  @click="openday()" 
                 >
                   {{ day.number }}
                 </button>
@@ -684,7 +696,26 @@ Sound and stage lights production.</p>
         </div>
       </div>
       </div>
-                  
+
+      <div class="calendar-container" style="  box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;height:662px; width:400px;position: absolute; left:-780px;top: -10px; background-color:#111213;">
+       <div>
+       </div>
+        <div style="position: absolute;margin-top:-60px; margin-left:100px;">
+          <button for="service" style="position:absolute; margin-top:-70px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-5px; color:#ffffff;" @click="availability_dialogs()"><i style="color:white; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
+          <label for="service" style="margin-top:140px; font-size:40px; font-weight:500; margin-left:40px; color:#ffffff;"> {{ currentDay }}</label><br>
+          <label for="service" style="position:absolute; margin-top:-40px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:25px; color:#ffffff;"> {{ currentDayNumber }}</label>
+
+          <br><br><br><br><br><br><br><br><br> <li v-for="event in approvedRequests" :key="event.id">
+            <div style="margin-top:5px; height:50px; width:220px;opacity:0.2; border-radius:3px; margin-left:10px;  background-color:#eeecec; color:#ffffff;"></div>
+        <label for="service" style="position:absolute; margin-top:-38px; width:200px; font-size:17px; font-weight:300; margin-left:25px;  color:#ffffff;"> {{ event.event_title }}<a style="display: none;">{{ event.start_date }}</a></label>
+        </li>
+          
+
+        </div>
+
+
+
+      </div>
               
     </v-card>
   </form>
@@ -762,7 +793,17 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    currentFormattedDate() {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+    return formattedDate;
+  },
 
+    currentDayNumber() {
+      const currentDate = new Date();
+      const currentDayNumber = currentDate.getDate();
+      return `${currentDayNumber}`;
+    },
     shouldShowTable() {
       // Check if at least one input value is greater than 0
       return (
@@ -894,9 +935,12 @@ Sound and stage lights production.</p>
     currentMonth() {
       return this.months[this.selectedMonth];
     },
-     approvedRequests() {
-      return this.info.filter(item => item.status === 'approved');
-    },
+    approvedRequests() {
+  const currentDate = new Date();
+  const formattedCurrentDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+
+  return this.info.filter(item => item.status === 'approved' && item.start_date === formattedCurrentDate);
+},
     years() {
   const currentYear = new Date().getFullYear();
   const yearsBefore = 10;
@@ -908,7 +952,16 @@ Sound and stage lights production.</p>
   }
 
   return years;
-}
+},
+currentDay() {
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const currentDate = new Date();
+      const currentDayIndex = currentDate.getDay(); // 0 for Sunday, 1 for Monday, etc.
+      return ` ${days[currentDayIndex]}`;
+    },
+    filteredApprovedRequests() {
+    return this.approvedRequests.filter(event => event.start_date === this.currentFormattedDate);
+  },
   },
   created() {
     this.getEventInfo();
@@ -940,6 +993,11 @@ Sound and stage lights production.</p>
     availability_dialog()
     {
       this.avail = true;
+    },
+
+    availability_dialogs()
+    {
+      this.avail = false;
     },
     openday()
     {
@@ -1066,12 +1124,26 @@ isDateMarked(date) {
         this.info = response.data;
 
         // Filter events with status "approved" and update markedDates array
-        this.markedDates = this.info
-          .filter(event => event.status === 'approved')
-          .map(event => event.start_date);
+       this.markedDates = this.info
+  .filter(event => event.status === 'approved')
+  .flatMap(event => {
+    const startDate = new Date(event.start_date);
+    const endDate = new Date(event.end_date);
+    const dateRange = [];
 
-        // Call updateCalendar to refresh the calendar with the new marked dates
-        this.updateCalendar();
+    // Loop through the date range and add each date to the array
+    for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+      dateRange.push(date.toISOString().split('T')[0]); // Format as "YYYY-MM-DD"
+    }
+
+    return dateRange;
+  });
+
+// Remove duplicates from markedDates array
+this.markedDates = [...new Set(this.markedDates)];
+
+// Call updateCalendar to refresh the calendar with the new marked dates
+this.updateCalendar();
       } catch (error) {
         console.error(error);
       }
@@ -1262,7 +1334,16 @@ async saveBooking() {
   @import '../../assets/css/icomoon.css';
   @import '../../assets/css/style.css';
   .marked-day {
-    background-color: #ddb8ff; /* or any other style you prefer */
-  }
+    background-color: #ffaa0b; /* or any other style you prefer */
+    border:0px;
+    width: 20px; /* Set the width of the element */
+    height: 20px; /* Set the height of the element */
+    color: #ffffff;
+    border-radius:2px;
+    box-shadow: 5px 5px 10px #bcbcbc; 
+   
+  
+}
+
   
   </style>
