@@ -626,7 +626,7 @@ Sound and stage lights production.</p>
   <form @submit.prevent="save_request" class="container">
     <v-card style="height:650px; overflow: hidden;font-family: 'Poppins', sans-serif; font-weight: 600;font-size:11.5px;">
 
-      <div class="calendar-container" style=" position: absolute; left:-375px;top: 11px;">
+      <div class="calendar-container" style=" position: absolute; left:-375px;top: 25px;">
 
  <!-- <a style="display: none;">{{ event.event_title }} </a> {{ event.start_date }} <a style="display: none;">to {{ event.end_date }} </a> -->
       <div>
@@ -644,18 +644,18 @@ Sound and stage lights production.</p>
 
         <div style="position: absolute; top:3px;">
           <tr>
-            <th  colspan="7"><a style="font-size:30px; font-weight:400;">{{ currentMonth }}</a> <a style="font-size:30px; color:#ffcc5c; font-weight:300; margin-left:10px;">{{ selectedYear }}</a></th>
+            <th  colspan="7"><a style="font-size:30px; margin-left:8px; font-weight:400;">{{ currentMonth }}</a> <a style="font-size:30px; color:#ffcc5c; font-weight:300; margin-left:10px;">{{ selectedYear }}</a></th>
           </tr>
         </div>
     
         <div style="margin-left:20px; margin-top:30px;">
           <div>
           <label for="month">Select Month:</label><br>
-          <select style="width: 120px; background-color: #fff;
+          <select style="width: 100px; background-color: #fff;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);color: rgb(0, 0, 0); border: none; border-radius: 3px; outline: none;" id="month" v-model="selectedMonth" @change="updateCalendar">
             <option v-for="(month, index) in months" :key="index" :value="index">{{ month }}</option>
           </select>
-          <i class="fas fa-caret-down arrow-icon" style=" z-index: 2;top:109px; position: absolute; margin-right:322px;"></i>
+          <i class="fas fa-caret-down arrow-icon" style=" z-index: 2;top:109px; position: absolute; margin-right:309px;"></i>
          
         </div>
         <div style="position: absolute; top:65px; margin-left:300px;">
@@ -670,25 +670,24 @@ Sound and stage lights production.</p>
     
       
         <div>
-          <table style=" margin-left:10px; width: 410px; height: 380px;">
+          <table style=" margin-left:23px; height:350px; width:380px; ">
             <thead>
               <tr>
-                <th v-for="day in days" :key="day">{{ day }}</th>
+                <th v-for="day in days" style="margin-left:2px; width:50px; height:50px; background-color:none;" :key="day">{{ day }}</th>
               </tr>
             </thead>
             <tbody >
               <tr v-for="week in calendar" :key="week">
-                <td @click="openday()"
-                v-for="day in week"
+                <td 
+                v-for="day in week" 
                 :key="day.number"
-                :class="{ 'marked-day': day.marked }" style="width: 20px; height: -20px;  margin-top:20px; cursor: pointer;"
+                :class="{ 'marked-day': day.marked }" style=" cursor: pointer;"
               >
-                <button
-                style="width: 30px; height: 30px; "
-                  @click="openday()" 
-                >
-                  {{ day.number }}
-                </button>
+              <button
+              style="width: 30px; height: 30px;"
+              @click="openday(day.number)"
+            >{{ day.number }}</button>
+            
               </td>
               </tr>
             </tbody>
@@ -700,18 +699,25 @@ Sound and stage lights production.</p>
       <div class="calendar-container" style="  box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;height:662px; width:400px;position: absolute; left:-780px;top: -10px; background-color:#111213;">
        <div>
        </div>
-        <div style="position: absolute;margin-top:-60px; margin-left:100px;">
-          <button for="service" style="position:absolute; margin-top:-70px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-5px; color:#ffffff;" @click="availability_dialogs()"><i style="color:white; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
-          <label for="service" style="margin-top:140px; font-size:40px; font-weight:500; margin-left:40px; color:#ffffff;"> {{ currentDay }}</label><br>
-          <label for="service" style="position:absolute; margin-top:-40px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:25px; color:#ffffff;"> {{ currentDayNumber }}</label>
+        <div style="position: absolute;margin-top:-80px; margin-left:100px;">
+          <button for="service" style="position:absolute; margin-top:-55px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-12px; color:#FEAA01;" @click="availability_dialogs()"><i style="color:#FEAA01; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
+          <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:40px;color:#ffffff;"> {{ currentDay }}</label><br>
+          <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:35px; color:#ffffff;"> {{ currentDayNumber }}</label>
 
-          <br><br><br><br><br><br><br><br><br> <li v-for="event in approvedRequests" :key="event.id">
+          <br><br><br><br><br><br><br><br> <li v-for="event in approvedRequests" :key="event.id">
             <div style="margin-top:5px; height:50px; width:220px;opacity:0.2; border-radius:3px; margin-left:10px;  background-color:#eeecec; color:#ffffff;"></div>
-        <label for="service" style="position:absolute; margin-top:-38px; width:200px; font-size:17px; font-weight:300; margin-left:25px;  color:#ffffff;"> {{ event.event_title }}<a style="display: none;">{{ event.start_date }}</a></label>
+        <label for="service" style="position:absolute; margin-top:-38px; width:200px; font-size:15px; font-weight:300; margin-left:35px;  color:#Ffffff;"> {{ event.event_title }}<a style="display: none;">{{ event.start_date }}</a></label>
+       
         </li>
-          
-
-        </div>
+        <div style="margin-top:20px; ">
+        <li v-for="event in approvedRequests" :key="event.id">
+        <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
+        
+        <a style="color:#E3E3E3; font-size:14px;  margin-left:15px; margin-top:30px;  font-weight:300;"><a style="color:#FEAA01;font-size:17px;">&nbsp;•&nbsp;</a> {{ event.service }}</a>
+   
+      </li>
+      </div>
+    </div>
 
 
 
@@ -724,7 +730,16 @@ Sound and stage lights production.</p>
 <v-dialog v-model="day_event" max-width="500px" style="position:absolute;">
   <form @submit.prevent="save_event" class="container">
     <v-card style="height:340px;">
-      <label for="category_id" style=" font-size:19px; font-weight:600;font-family: 'Poppins', sans-serif; position:absolute;  color:rgb(255, 145, 0);" class="label text-center">Available Event</label>
+      <label for="category_id" style="font-size:19px; font-weight:600; font-family: 'Poppins', sans-serif; position:absolute; color:rgb(255, 145, 0);" class="label text-center">Available Event</label>
+      <div style="margin-top:70px;" >
+
+        <li v-for="event in matchingEvents" :key="event.id">
+        
+          <a style=""><a style="display: none;">{{ clickedDate }}</a> - {{ event.start_date }} - {{ event.end_date }} - {{ event.event_title }} - {{ event.service }}</a>
+          
+        </li>
+      </div>
+     
     </v-card>
   </form>
 </v-dialog>
@@ -740,6 +755,8 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      matchingEvents: [],
+      clickedDate: null,
       markedDates: [],
       searchText: '',
       inputValue: "",
@@ -939,7 +956,20 @@ Sound and stage lights production.</p>
   const currentDate = new Date();
   const formattedCurrentDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
 
-  return this.info.filter(item => item.status === 'approved' && item.start_date === formattedCurrentDate);
+  return this.info.filter(item => {
+    const startDate = new Date(item.start_date);
+    const endDate = new Date(item.end_date);
+
+    // Check if the event is approved and falls within the date range
+    return item.status === 'approved' && currentDate >= startDate && currentDate <= endDate;
+  });
+},
+
+approvedRequests_perday() {
+  const currentDate = new Date();
+  const formattedCurrentDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+
+  return this.info.filter(item => item.status === 'approved'  );
 },
     years() {
   const currentYear = new Date().getFullYear();
@@ -999,9 +1029,18 @@ currentDay() {
     {
       this.avail = false;
     },
-    openday()
-    {
-      this.day_event = true;
+    openday(day) {
+      this.clickedDate = `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      
+      // Filter events that match the date range
+      this.matchingEvents = this.approvedRequests_perday.filter(event => {
+        const startDate = new Date(event.start_date);
+        const endDate = new Date(event.end_date);
+        const clickedDate = new Date(this.clickedDate);
+        return clickedDate >= startDate && clickedDate <= endDate;
+      });
+
+      this.day_event = true; // Open the dialog
     },
     updateSearch() {
     // You can add additional functionality here if needed
@@ -1118,6 +1157,8 @@ isDateMarked(date) {
       console.error('Error updating event status:', error);
     }
   },
+
+
   async getEventInfo() {
       try {
         const response = await axios.get('getevent');
@@ -1334,13 +1375,16 @@ async saveBooking() {
   @import '../../assets/css/icomoon.css';
   @import '../../assets/css/style.css';
   .marked-day {
-    background-color: #ffaa0b; /* or any other style you prefer */
+    background-color: #ffa600fa; /* or any other style you prefer */
     border:0px;
-    width: 20px; /* Set the width of the element */
-    height: 20px; /* Set the height of the element */
+    width: 10px; /* Set the width of the element */
+    height: 10px; /* Set the height of the element */
+    border-radius: 50%;
     color: #ffffff;
-    border-radius:2px;
-    box-shadow: 5px 5px 10px #bcbcbc; 
+  
+    
+  
+   box-shadow: 5px 5px 10px #bcbcbc; 
    
   
 }
