@@ -1,3 +1,4 @@
+
 <template>
   <div style="background-color:rgb(245, 245, 245); width:100%; height:100%;">
     <br>
@@ -707,11 +708,11 @@ Sound and stage lights production.</p>
           <br><br><br><br><br><br><br><br> <li v-for="event in approvedRequests" :key="event.id">
             <div style="margin-top:5px; height:50px; width:220px;opacity:0.2; border-radius:3px; margin-left:10px;  background-color:#eeecec; color:#ffffff;"></div>
         <label for="service" style="position:absolute; margin-top:-38px; width:200px; font-size:15px; font-weight:300; margin-left:35px;  color:#Ffffff;"> {{ event.event_title }}<a style="display: none;">{{ event.start_date }}</a></label>
-       
+        <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
         </li>
         <div style="margin-top:20px; ">
         <li v-for="event in approvedRequests" :key="event.id">
-        <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
+
         
         <a style="color:#E3E3E3; font-size:14px;  margin-left:15px; margin-top:30px;  font-weight:300;"><a style="color:#FEAA01;font-size:17px;">&nbsp;•&nbsp;</a> {{ event.service }}</a>
    
@@ -732,10 +733,10 @@ Sound and stage lights production.</p>
     <v-card style="height:340px;">
       <label for="category_id" style="font-size:19px; font-weight:600; font-family: 'Poppins', sans-serif; position:absolute; color:rgb(255, 145, 0);" class="label text-center">Available Event</label>
       <div style="margin-top:70px;" >
-
+        <a style="font-size:16px;">{{ clickedDate }}</a>
         <li v-for="event in matchingEvents" :key="event.id">
         
-          <a style=""><a style="display: none;">{{ clickedDate }}</a> - {{ event.start_date }} - {{ event.end_date }} - {{ event.event_title }} - {{ event.service }}</a>
+          <a style=""><a style="display:none;"> {{ event.start_date }}  {{ event.end_date }}</a>   {{ event.event_title }} {{ event.service }}</a>
           
         </li>
       </div>
@@ -952,18 +953,19 @@ Sound and stage lights production.</p>
     currentMonth() {
       return this.months[this.selectedMonth];
     },
-    approvedRequests() {
-  const currentDate = new Date();
-  const formattedCurrentDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+      approvedRequests() {
+    const currentDate = new Date();
+    const formattedCurrentDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
 
-  return this.info.filter(item => {
-    const startDate = new Date(item.start_date);
-    const endDate = new Date(item.end_date);
+    return this.info.filter(item => {
+      const startDate = new Date(item.start_date);
+      const endDate = new Date(item.end_date);
 
-    // Check if the event is approved and falls within the date range
-    return item.status === 'approved' && currentDate >= startDate && currentDate <= endDate;
-  });
-},
+    
+      return item.status === 'approved' && currentDate >= startDate && currentDate <= new Date(endDate.getTime() + 86400000);
+
+    });
+  },
 
 approvedRequests_perday() {
   const currentDate = new Date();
@@ -1125,8 +1127,9 @@ currentDay() {
 
 isDateMarked(date) {
   const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  return this.markedDates.includes(formattedDate);
+  return this.markedDates.includes(formattedDate) && date >= new Date(this.selectedYear, this.selectedMonth, 1) && date <= new Date(this.selectedYear, this.selectedMonth + 1, 0);
 },
+
 
  
  
