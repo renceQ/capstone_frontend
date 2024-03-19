@@ -736,43 +736,36 @@ Sound and stage lights production.</p>
   </form>
 </v-dialog>
 
-<v-dialog v-model="day_event" max-width="650px" style="position:absolute;">
+<v-dialog v-model="day_event" max-width="650px" class="modern-dialog">
   <form @submit.prevent="save_event" class="container">
-    <v-card style="height:340px;">
-      <label for="category_id" style="font-size:19px; font-weight:600; font-family: 'Poppins', sans-serif; position:absolute; color:rgb(255, 145, 0);" class="label text-center">{{ formatDate(clickedDate) }} Scheduled Event</label>
-      <div style="margin-top:70px;" >
-       
-        <!-- <li v-for="event in matchingEvents" :key="event.id">
-        
-          <a style="font-size:14px; font-weight:500; font-family: 'Poppins', sans-serif; color:black;"><a style="display:none;"> {{ event.start_date }} </a>   {{ event.event_title }} {{ event.service }} {{ event.start_time }} {{ event.end_time }} {{ event.end_date }}</a> -->
-          <table id="datatable-responsive" cellspacing="0" style="border:0px; font-family: 'Poppins', sans-serif; height:50px; width:340px; top:70px; right:17px; position:absolute; font-size:12px; background-color: #FFE4B2;">
-            <thead>
-              <tr style="">
-                <th style=" background-color: white; color : black; width:150px;text-align:center;">Event</th>
-                <th style=" background-color: white; color : black; width:140px;text-align:center;">Service</th>
-                <th style=" background-color: white; color : black; width:100px;text-align:center;">Start Time</th>
-                <th style=" background-color: white; color : black; width:100px;text-align:center;">End Time</th>
-                <th style=" background-color: white; color : black; width:100px;text-align:center;">End Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr v-for="event in matchingEvents" :key="event.id" style=" background-color: white; height:10px; ">
-                <td>{{ event.event_title }} </td>
-                <td>{{ event.service }}</td>
-                <td>{{ event.start_time }} </td>
-                <td>{{ event.end_time }} </td>
-                <td>{{ event.end_date }} </td>
-              </tr>
-  
-            </tbody>
-          </table>
-        <!-- </li> -->
+    <v-card class="event-card">
+      <h2 class="dialog-title" style="font-family: 'Poppins', sans-serif; margin-left:34px; ">{{ formatDate(clickedDate) }} Scheduled Event</h2>
+      <div class="event-table-wrapper">
+        <table class="event-table" style="width:580px; margin-left:24px;  margin-bottom:24px;">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Service</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="event in matchingEvents" :key="event.id">
+              <td>{{ event.event_title }}</td>
+              <td>{{ event.service }}</td>
+              <td>{{ event.start_time }}</td>
+              <td>{{ event.end_time }}</td>
+              <td>{{ event.end_date }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-     
     </v-card>
   </form>
 </v-dialog>
+
 
 
 
@@ -1411,6 +1404,58 @@ async saveBooking() {
   @import '../../assets/css/flaticon.css';
   @import '../../assets/css/icomoon.css';
   @import '../../assets/css/style.css';
+  .modern-dialog {
+    position: absolute;
+  }
+  
+  .event-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dialog-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .event-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .event-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .event-table th,
+  .event-table td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .event-table th {
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .event-table td {
+    background-color: #fff;
+    color: #555;
+  }
+  
+  .event-table tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  .event-table tbody tr:hover {
+    background-color: #fafafa;
+  }
+  
   .marked-day {
     background-color: #ffa600fa; /* or any other style you prefer */
     border:0px;
