@@ -704,11 +704,19 @@ Sound and stage lights production.</p>
           <button for="service" style="position:absolute; margin-top:-55px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-12px; color:#FEAA01;" @click="availability_dialogs()"><i style="color:#FEAA01; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
           <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:40px;color:#ffffff;"> {{ currentDay }}</label><br>
           <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:35px; color:#ffffff;"> {{ currentDayNumber }}</label>
-
+        
+        
+          <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
+         
+         
+          <img v-if="approvedRequests.length === 0" :src="require('../../../public/img/event.png')" style="margin-top:140px; margin-left:42px; width: 150px; height: 150px;" ref="cartGif"> <br>
+        <a v-if="approvedRequests.length === 0" style="margin-left:65px;margin-top:-12px;  position:absolute; width: 300px; height: 150px; color: white;" > No Event for Today</a>
+         
           <br><br><br><br><br><br><br><br> <li v-for="event in approvedRequests" :key="event.id">
+
             <div style="margin-top:5px; height:50px; width:220px;opacity:0.2; border-radius:3px; margin-left:10px;  background-color:#eeecec; color:#ffffff;"></div>
         <label for="service" style="position:absolute; margin-top:-38px; width:200px; font-size:15px; font-weight:300; margin-left:35px;  color:#Ffffff;"> {{ event.event_title }}<a style="display: none;">{{ event.start_date }}</a></label>
-        <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
+
         </li>
         <div style="margin-top:20px; ">
         <li v-for="event in approvedRequests" :key="event.id">
@@ -728,17 +736,38 @@ Sound and stage lights production.</p>
   </form>
 </v-dialog>
 
-<v-dialog v-model="day_event" max-width="500px" style="position:absolute;">
+<v-dialog v-model="day_event" max-width="650px" style="position:absolute;">
   <form @submit.prevent="save_event" class="container">
     <v-card style="height:340px;">
-      <label for="category_id" style="font-size:19px; font-weight:600; font-family: 'Poppins', sans-serif; position:absolute; color:rgb(255, 145, 0);" class="label text-center">Available Event</label>
+      <label for="category_id" style="font-size:19px; font-weight:600; font-family: 'Poppins', sans-serif; position:absolute; color:rgb(255, 145, 0);" class="label text-center">{{ formatDate(clickedDate) }} Scheduled Event</label>
       <div style="margin-top:70px;" >
-        <a style="font-size:16px;">{{ clickedDate }}</a>
-        <li v-for="event in matchingEvents" :key="event.id">
+       
+        <!-- <li v-for="event in matchingEvents" :key="event.id">
         
-          <a style=""><a style="display:none;"> {{ event.start_date }}  {{ event.end_date }}</a>   {{ event.event_title }} {{ event.service }}</a>
-          
-        </li>
+          <a style="font-size:14px; font-weight:500; font-family: 'Poppins', sans-serif; color:black;"><a style="display:none;"> {{ event.start_date }} </a>   {{ event.event_title }} {{ event.service }} {{ event.start_time }} {{ event.end_time }} {{ event.end_date }}</a> -->
+          <table id="datatable-responsive" cellspacing="0" style="border:0px; font-family: 'Poppins', sans-serif; height:50px; width:340px; top:70px; right:17px; position:absolute; font-size:12px; background-color: #FFE4B2;">
+            <thead>
+              <tr style="">
+                <th style=" background-color: white; color : black; width:150px;text-align:center;">Event</th>
+                <th style=" background-color: white; color : black; width:140px;text-align:center;">Service</th>
+                <th style=" background-color: white; color : black; width:100px;text-align:center;">Start Time</th>
+                <th style=" background-color: white; color : black; width:100px;text-align:center;">End Time</th>
+                <th style=" background-color: white; color : black; width:100px;text-align:center;">End Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr v-for="event in matchingEvents" :key="event.id" style=" background-color: white; height:10px; ">
+                <td>{{ event.event_title }} </td>
+                <td>{{ event.service }}</td>
+                <td>{{ event.start_time }} </td>
+                <td>{{ event.end_time }} </td>
+                <td>{{ event.end_date }} </td>
+              </tr>
+  
+            </tbody>
+          </table>
+        <!-- </li> -->
       </div>
      
     </v-card>
@@ -1022,6 +1051,11 @@ currentDay() {
 },
   methods: {
    
+    formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+},
     availability_dialog()
     {
       this.avail = true;
