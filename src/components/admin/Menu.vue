@@ -1,6 +1,6 @@
 <template>
 
-<nav style="paddiNG; " >    
+<nav style="" >    
     <input type="checkbox" id="check">
     <label for="check">
   <i class="fa fa-bars" id="btn" ></i>

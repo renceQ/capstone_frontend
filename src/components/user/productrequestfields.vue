@@ -19,7 +19,7 @@
         <router-link
         to="#"
         @click="toggleDescription"
-        style="position: fixed; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
+        style="position: fixed; bottom: 34px; width: 150px; right: 35px; font-size: 14px; font-weight: 400; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
         class="neumorphic-button"
       >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRODUCT INFO
@@ -62,7 +62,7 @@
  
   style="font-weight:600; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
   animation: fade-up .8s ease-out forwards;
-  animation-delay: 0.4s; position: fixed; top: 20px; left: 30px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(240, 141, 29); zrgb(255, 129, 27);"
+  animation-delay: 0.4s; position: fixed; top: 20px; left: 30px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(240, 141, 29);"
  >
    PRODUCT RATINGS 
 </p>
@@ -71,7 +71,7 @@
  
   style="font-weight:600; opacity: 0; /* Set initial opacity to 0 for fade-in effect */
   animation: fade-up .8s ease-out forwards;
-  animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(0, 0, 0); zrgb(255, 129, 27);"
+  animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; font-size: 12px; border-radius:3px;  background-color:none; color:rgb(0, 0, 0); "
  >
  ({{ calculateAverageRating() }}) out of 5<span style="color: yellow; font-size: 14px;">
   {{ calculateStarRating() }}
@@ -380,13 +380,13 @@
               <img :src="productData.image" alt="Product Image" class="img-fluid" style="max-width: 250px; max-height: 250px; margin-top:20px; margin-left: 90px;">
           </div>
       
-          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">UNIT PRICE: <span style="font-weight: 200; margin-left: 10px; color:rgb(240, 141, 29); font-size:20px; font-family: 'Podkova', sans-serif;">₱  <span style="font-family: 'Wallpoet', cursive; font-weight:200;font-size:30px; color:rgb(240, 141, 29);">{{ productData.unit_price }}</span></span></p>
+          <p style="margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:700;font-family: 'Audiowide', cursive;">UNIT PRICE: <span style="font-weight: 200; margin-left: 10px; color:rgb(240, 141, 29); font-size:20px; font-family: 'Poppins', sans-serif;">₱  <span style="font-family: 'Wallpoet', cursive; font-weight:200;font-size:25px; color:rgb(240, 141, 29);">{{ productData.unit_price }}</span></span></p>
           <p style="margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600;font-family: 'Audiowide', cursive;" >SIZE: <span style="margin-left: 10px; color:rgb(240, 141, 29);font-weight:100; font-size:16px;">{{ getSizeName(productData.size_id) }}</span></p>
           <p style="margin-left: 20px; margin-bottom: 15px; font-size: 11px; font-weight:600;font-family: 'Audiowide', cursive;" >SHARE: <span style="margin-left: 10px; font-size:20px; "><i class="fab fa-facebook custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-instagram custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-twitter custom-icon"></i>&nbsp;&nbsp;<i class="fab fa-facebook-messenger custom-icon"></i></span></p>
           <router-link
         to="#"
         @click="toggleReviews"
-        style="position: absolute; bottom: 114px; width: 150px; right: 35px; font-size: 14px; font-weight: 200; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
+        style="position: absolute; bottom: 114px; width: 150px; right: 35px; font-size: 14px; font-weight: 400; font-size: 11px; background-color:green; color: rgb(255, 255, 255)"
         class="neumorphic-button"
       >
         &nbsp;&nbsp;PRODUCT REVIEWS
@@ -394,12 +394,12 @@
       <router-link
       to="#"
       @click="toggleDescription"
-      style="position: absolute; bottom: 74px; width: 150px; right: 35px; height:31px; font-size: 9.5px; font-weight: 200;  background-color:#868686; color: rgb(255, 255, 255)"
+      style="position: absolute; bottom: 74px; width: 150px; right: 35px; height:31px; font-size: 9.5px; font-weight: 400;  background-color:#868686; color: rgb(255, 255, 255)"
       class="neumorphic-button"
     >
       &nbsp;&nbsp;PRODUCT DESCRIPTION
     </router-link>
-          <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:402px; font-size:10px; font-weight:500; background-color:rgb(19, 18, 18);color:rgb(255, 255, 255)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
+          <router-link to="/userproducts" style=" border-radius:5px;width:150px; margin-left:250px; position:absolute; margin-top:402px; font-size:10px; font-weight:400; background-color:rgb(19, 18, 18);color:rgb(255, 255, 255)" class="neumorphic-button">  CHOOSE ANOTHER PRODUCT</router-link>
           
       </nav>
     </div>

@@ -15,7 +15,7 @@
 				  <a href="#" class="nav-link">Services</a>
 				</span>
 				<span class="nav-item">
-				  <a class="nav-link" @click="openDialog">Book Event</a>Zaxz
+				  <a class="nav-link" @click="openDialog">Book Event</a>
 				</span>
 				<span class="nav-item">
 				  <a href="#" class="nav-link">Blog</a>

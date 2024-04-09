@@ -187,6 +187,7 @@ Sound and stage lights production.</p>
       </div>
     </div>
   </div>
+  
 
 
  <v-dialog v-model="dialogs" max-width="800px" >
@@ -702,8 +703,8 @@ Sound and stage lights production.</p>
        </div>
         <div style="position: absolute;margin-top:-80px; margin-left:100px;">
           <button for="service" style="position:absolute; margin-top:-55px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-12px; color:#FEAA01;" @click="availability_dialogs()"><i style="color:#FEAA01; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
-          <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:40px;color:#ffffff;"> {{ currentDay }}</label><br>
-          <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:35px; color:#ffffff;"> {{ currentDayNumber }}</label>
+          <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:10px;color:#ffffff;"> {{ currentDay }}</label><br>
+          <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:30px; color:#ffffff;"> {{ currentDayNumber }}</label>
         
         
           <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>
@@ -739,11 +740,21 @@ Sound and stage lights production.</p>
 <v-dialog v-model="day_event" max-width="650px" class="modern-dialog">
   <form @submit.prevent="save_event" class="container">
     <v-card class="event-card">
-      <h2 class="dialog-title" style="font-family: 'Poppins', sans-serif; margin-left:34px; ">{{ formatDate(clickedDate) }} Scheduled Event</h2>
+      <h2 class="dialog-title" style="font-family: 'Poppins', sans-serif; margin-left:34px;margin-top:30px; ">{{ formatDate(clickedDate) }}<a style="font-size:15px; font-weight:400; color:#FEAA01;">&nbsp;&nbsp;&nbsp;Event Schedules</a> </h2>
+      <h2 class="dialog-title" style="position:absolute; font-size:19px; font-family: 'Poppins', sans-serif; margin-left:414px; margin-top:30px;">
+        Available Slot : 
+        <a style="display:none; color:#FEAA01;font-size:19px; font-weight:400;">
+          {{ matchingEvents.length }}
+        </a>
+        <a style="color:#FEAA01;font-size:19px; font-weight:400;">
+          {{ availableSlotsCount }}
+        </a>
+        <!-- <a style="font-size:14px; font-weight:400; color:#FEAA01;">&nbsp;&nbsp;&nbsp;</a>  -->
+      </h2>
       <div class="event-table-wrapper">
-        <table class="event-table" style="width:580px; margin-left:24px;  margin-bottom:24px;">
+        <table class="event-table" style="width:580px; margin-left:24px; height:280px;  margin-bottom:24px;">
           <thead>
-            <tr>
+            <tr style="height:60px;">
               <th>Event</th>
               <th>Service</th>
               <th>Start Time</th>
@@ -752,20 +763,47 @@ Sound and stage lights production.</p>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="event in matchingEvents" :key="event.id">
-              <td>{{ event.event_title }}</td>
-              <td>{{ event.service }}</td>
-              <td>{{ event.start_time }}</td>
-              <td>{{ event.end_time }}</td>
-              <td>{{ event.end_date }}</td>
+            <tr style="height:40px;" v-for="event in matchingEvents" :key="event.id">
+              <td style="height:40px;" >{{ event.event_title }}</td>
+              <td style="height:40px;" >{{ event.service }}</td>
+              <td style="height:40px;" >{{ event.start_time }}</td>
+              <td style="height:40px;" >{{ event.end_time }}</td>
+              <td style="height:40px;" >{{ event.end_date }}</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+    <div>
+      <button @click="openchooseService()" class="neumorphic-button" style="border-radius:3px; margin-left:400px; width: 200px; margin-bottom:30px;" :disabled="disableButton" :style="{ opacity: disableButton ? '0.5' : '1' }">
+        <i :class="disableButton ? 'fas fa-question-circle' : 'fas fa-calendar-plus custom-icon'" v-bind:title="disableButton ? 'This day has reached the limit for booking service' : ''"></i>&nbsp;&nbsp;{{ disableButton ? 'Book Service' : 'Book Service' }}
+      </button>  
+
+    </div>
+
+    <div>
+      <v-btn text @click="toggleDropdown" style="position:absolute;bottom:30px; margin-left:200px;">Select Service</v-btn>
+      <v-menu v-model="dropdown" offset-y>
+        <v-list>
+          <v-list-item v-for="(service, index) in servinfo" :key="index" @click="selectService(service)">
+            <v-list-item-title>{{ service.service }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
     </v-card>
   </form>
 </v-dialog>
 
+<!-- choose servie dialog -->
+<v-dialog v-model="dialogservice" max-width="500px" max-height="500px" >
+  <form @submit.prevent="saveBooking" class="container">
+    <v-card style="height:700px;">
+hello
+      
+  </v-card>
+</form>
+</v-dialog> 
 
 
 
@@ -778,6 +816,9 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      servinfo: [],
+      dropdown: false,
+      selectedService: null,
       matchingEvents: [],
       clickedDate: null,
       markedDates: [],
@@ -799,6 +840,7 @@ Sound and stage lights production.</p>
       dialogss: false,
       dialogsss: false,
       dialogssss: false,
+      dialogservice: false,
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -833,6 +875,13 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    availableSlotsCount() {
+    let availableSlots = 3 - this.matchingEvents.length;
+    return availableSlots < 0 ? 0 : availableSlots;
+  },
+    disableButton() {
+    return this.matchingEvents.length >= 3;
+  },
     currentFormattedDate() {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
@@ -1044,6 +1093,22 @@ currentDay() {
 },
   methods: {
    
+    async getInfo() {
+      try {
+        const response = await axios.get('getservice');
+        this.servinfo = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    toggleDropdown() {
+      this.dropdown = !this.dropdown;
+    },
+    selectService(service) {
+      this.selectedService = service.service;
+      // Do something with the selected service, if needed
+      console.log('Selected service:', this.selectedService);
+    },
     formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date(dateString);
@@ -1090,6 +1155,9 @@ currentDay() {
 
     openDialog() {
     this.dialogs = true;
+  },
+  openchooseService() {
+    this.dialogservice = true;
   },
     closeDialog() {
       this.dialogs = false;
@@ -1427,7 +1495,7 @@ async saveBooking() {
   }
   
   .event-table {
-    width: 100%;
+   
     border-collapse: collapse;
   }
   
