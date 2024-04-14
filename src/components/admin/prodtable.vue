@@ -1,22 +1,24 @@
 <template>
   
- 
+ <div style="height:930px;">
+  <br><br>
   <div class="row" style="margin-left: 300px; margin-right: 20px;">
-    <div class="text-right mt-3" style="margin-top: 100px;">
-      <button @click="previousPage" :disabled="currentPage === 1" class="btn btn-outline-primary mr-2">
+    <div class="text-right mt-3" style="top: 6%; position:absolute; margin-left:-930px; ">
+      <button @click="previousPage" :disabled="currentPage === 1" class="btn btn-outline-primary mr-2" style="background-color: #f0f2f5; border: none; border-radius: 3px; box-shadow: -5px -5px 10px #abacae, 5px 5px 10px #ffffff; padding: 10px 20px; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">
         <i class="fa fa-chevron-left"></i>
       </button>
       <span>{{ currentPage }}</span>
-      <button @click="nextPage" :disabled="currentPage * pageSize >= info.length" class="btn btn-outline-primary ml-2">
+      <button @click="nextPage" :disabled="currentPage * pageSize >= info.length" class="btn btn-outline-primary ml-2" style="background-color: #f0f2f5; border: none; border-radius: 3px; box-shadow: -5px -5px 10px #abacae, 5px 5px 10px #ffffff; padding: 10px 20px; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">
         <i class="fa fa-chevron-right"></i>
       </button>
     </div>
     <div class="col-md-12 col-sm-12">
-          <h2>List of Products</h2>
+          <!-- <h2 style="font-size:24px; font-family: 'Poppins', sans-serif; position:absolute; margin-top:20px; margin-left:10px;">List of Products</h2> -->
         </div>
-        <div class="container">
+        <div class="container" style="margin-top:50px; margin-left:30px; font-family: 'Poppins', sans-serif; font-weight:500;">
           <div class="row">
-            <button @click="openModal" style=" width:18%; margin-left:78%; margin-bottom:3%;" class="neumorphic-button">Add Product</button>
+            <button @click="openModal" style="border-radius:3px; width:18%; margin-left:78%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Add Product</button>
+            <button @click="" style="border-radius:3px; width:18%; margin-left:-1%; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;" class="neumorphic-button">List of Product</button>
                 <div class="card-body">
                   <insert @data-saved="getInfo" />
                   <div class="table-container">
@@ -55,7 +57,7 @@
                           <td>
                             <td>
                               <div>
-                              <btn @click="openEditModal(product.id)" class="neumorphic-edit">
+                              <btn  @click="openEditModal(product.id)" class="neumorphic-edit">
                                 <i class="fa fa-edit"></i> EDIT
                               </btn>
                             </div>
@@ -313,7 +315,7 @@
 
 
          
-
+</div>
 </template>
 
 <script>

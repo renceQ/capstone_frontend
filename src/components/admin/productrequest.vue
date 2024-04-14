@@ -1,19 +1,26 @@
 <template>
-
-  
-  <v-container style="width: 1000px; margin-left: 330px;">
+<div style="height:1200px;">
+  <br><br>
+  <v-row>
+    <v-col>
+      <v-select v-model="selectedOption" :items="options" label="Select Table" style=" position:absolute; right:73px; width:200px;" outlined></v-select>
+    </v-col>
+  </v-row>
+  <v-container style="margin-top:50px; width:940px; margin-left: 350px;font-family: 'Poppins', sans-serif; font-size:13px; ">
       <!-- Pending Orders table -->
-      <v-row>
+      <v-row v-if="selectedOption === 'Pending Orders'">
         <v-col>
           <v-card>
-            <v-card-title>Pending Orders</v-card-title>
+            <v-card-title style="color:#1679AB; ">Pending Orders</v-card-title>
             <!-- Replace with your insert component -->
             <insert @data-saved="getOrder" />
             <v-data-table 
               :headers="headers"
               :items="pendingOrders"
               item-key="id"
+             
             >
+            
             <template v-slot:[`item.transaction_code`]="{ item }">
                 <span>{{ item.transaction_code }}</span>
               </template>
@@ -30,10 +37,11 @@
                 <v-btn @click="approveEvent(item.id)" color="success" small>
                   Approve
                 </v-btn>
-                <v-btn @click="denyEvent(item.id)" color="error" small>
+                <v-btn @click="denyEvent(item.id)" color="error" style="width:105px;margin-top:5px;" small>
                   Deny
                 </v-btn>
               </template>
+              
               <template v-for="(header, index) in headers" v-slot:[`header.${header.value}`]="{ props }">
                 <th :key="index">
                   <span>{{ getHeaderTitle(header.value) }}</span>
@@ -45,7 +53,7 @@
       </v-row>
   
       <!-- Approved Orders table -->
-      <v-row>
+      <v-row v-else-if="selectedOption === 'Approved Orders'">
         <v-col>
           <v-card>
             <v-card-title>Approved Orders</v-card-title>
@@ -85,7 +93,7 @@
       </v-row>
   
       <!-- Declined Orders table -->
-      <v-row>
+      <v-row v-else-if="selectedOption === 'Declined Orders'">
         <v-col>
           <v-card>
             <v-card-title>Declined Orders</v-card-title>
@@ -124,6 +132,7 @@
         </v-col>
       </v-row>
     </v-container>
+  </div>
   </template>
   
   <script>
@@ -132,7 +141,10 @@
   export default {
     data() {
       return {
+        selectedOption: 'Pending Orders', // Default selected option
+        options: ['Pending Orders', 'Approved Orders', 'Declined Orders'], // Dropdown options
         headers: [
+          { text: 'Actions', value: 'actions', sortable: false },
           { text: 'Transaction Code', value: 'transaction_code' }, 
           { text: 'Date Updated', value: 'updated_at' }, 
           { text: 'Date Requested', value: 'created_at' }, 
@@ -147,7 +159,7 @@
           { text: 'Other Info', value: 'other_info' },
           { text: 'Customer Name', value: 'customerName' },
           { text: 'Status', value: 'status' },
-          { text: 'Actions', value: 'actions', sortable: false },
+          
         ],
         infos: [] // Initialize infos as an empty array
       };
@@ -167,6 +179,15 @@
       }
     },
     methods: {
+      showPendingOrders() {
+      this.selectedOption = 'pending';
+    },
+    showApprovedOrders() {
+      this.selectedOption = 'approved';
+    },
+    showDeclinedOrders() {
+      this.selectedOption = 'declined';
+    },
       async getOrder() {
         try {
           const response = await axios.get('getOrder');

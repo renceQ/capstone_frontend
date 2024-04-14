@@ -142,7 +142,7 @@ export default {
           if (this.username === 'admin' && this.password === 'guitarLord26') {
             // Set isAdmin flag for admin users
             sessionStorage.setItem('isAdmin', 'true');
-            router.push('/admin'); // Redirect to '/admin' if admin credentials match
+            router.push('/productstable'); // Redirect to '/admin' if admin credentials match
           } else {
             router.push('/home'); // Redirect to '/home' if non-admin credentials
           }

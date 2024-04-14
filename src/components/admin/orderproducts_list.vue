@@ -4,6 +4,12 @@
         <!-- Pending Orders table -->
         <v-row>
           <v-col>
+            <v-select v-model="selectedOption" :items="options" label="Select Table" style=" position:absolute; right:73px; width:200px;" outlined></v-select>
+          </v-col>
+        </v-row>
+      <br><br><br>
+        <v-row>
+          <v-col>
             <v-card>
               <v-card-title>Order List</v-card-title>
               <!-- Replace with your insert component -->

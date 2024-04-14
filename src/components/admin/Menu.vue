@@ -1,30 +1,39 @@
 <template>
+  <div>
 
-<nav style="" >    
-    <input type="checkbox" id="check">
+<nav style=" margin-left:-30px; position:absolute; margin-top:-1px; " >    
+    <!-- <input type="checkbox" id="check">
     <label for="check">
   <i class="fa fa-bars" id="btn" ></i>
   <i class="fa fa-times" id="cancle" style=" margin-left:20px;" ></i>
-  </label>
+  </label> -->
     <div class="sidebar">
-  <header><img v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" >
-  <p>Qmj Images</p>
-  </header>
-  <ul>
-      <li><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></li>
-      <li><a href="/productstable"><i class="fas fa-link"></i>Products List</a></li>
-      <li><a href="/orderRequest"><i class="fas fa-eye"></i>Product Order Request</a></li>
-      <li><a href="/productcategory"><i class="fas fa-eye"></i>Product Category</a></li>
-      <li><a href="/orderproducts"><i class="fas fa-eye"></i>Order List</a></li>
-      <li><a href="/service"><i class="fas fa-eye"></i>Service List</a></li>
-      <li><a href="/bookingtable"><i class="fas fa-link"></i>Book Request</a></li>
-      <li><a href="/customer"><i class="fas fa-link"></i>Customer List</a></li>
-      <li><a href="/approved_events"><i class="fas fa-link"></i>Event Schedules</a></li>
-      <li><a href="#"><i class="fas fa-question-circle"></i>About</a></li>
-      <li><a href="#"><i class="fas fa-cog"></i>Services</a></li>
-      <li><a href="#"><i class="fas fa-phone"></i>Contact</a></li>
-      </ul>
-     <li>
+  <header>
+    <img v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" style="margin-top: 30px; margin-left:30px;" >
+  <p style="margin-top:5px; font-family: 'Poppins', sans-serif; font-weight:500; font-size:18px; margin-left:30px; color: rgba(250, 123, 4, 0.993); ">Qmj Images</p>
+  <p style=" position:absolute; font-family: 'Poppins', sans-serif; font-weight:400; font-size:16px; margin-left:95px; top:17.5%; ">Administrator</p>
+  <br>
+</header>
+
+
+  <ul> 
+    <div style="">
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-qrcode"></i> Dashboard</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/productstable"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-list"></i>Products List</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/orderRequest"> &nbsp;&nbsp;&nbsp;&nbsp<i class="fas fa-shopping-cart"></i>Product Request</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/productcategory"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-tags"></i>Product Category</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/orderproducts"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-clipboard-list"></i> Order List</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/service"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-cogs"></i>Service List</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/bookingtable"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-book"></i>Service Request</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/approved_events"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-calendar-alt"></i>Event Schedules</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="/customer"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-link"></i> Customer List</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-question-circle"></i> About</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-cog"></i> Services</a></li>
+      <li><a style="font-size:15px;font-weight:500;font-family: 'Poppins', sans-serif; text-decoration: none;" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-phone"></i> Contact</a></li>
+    </div>
+    </ul>
+
+     <li style="margin-left:43px;">
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook"></i></a>
           <a href="#"><i class="fab fa-youtube"></i></a>
@@ -34,6 +43,7 @@
       </li>
   </div>
 </nav>
+</div>
   </template>
   
   <script>
@@ -87,7 +97,7 @@ export default {
   }
   body{
     height: 100vh;
-    background: #dde1e7;
+    background: #ffffff;
     font-family: Arial;
     font-weight: 600;
   }
@@ -123,37 +133,33 @@ export default {
     transition: all 0.5s;
   }
   /* active side bar */
-  .sidebar {
-    position: absolute;
-    left: -250px;
-    width: 250px;
-     
-     
-    background: #dde1e7;
-    box-shadow: -3px -3px 7px #ffffff73,
-                2px 2px 5px rgba(128, 135, 148, 0.562);
-    transition: all 0.5s ease;
-     
-     
-  }
-  .sidebar ul a{
-    text-decoration: none;
-  }
-  #check:checked ~ .sidebar {
-    left: 0;
+  /* CSS for sidebar */
+.sidebar {
+  position: absolute;
+  left: 1; /* Change this from -250px to 0 */
+  width: 300px;
+  background-color: #dde1e7;
+  box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(128, 135, 148, 0.562);
+  transition: all 0.5s ease;
+}
 
-  }
-  #check:checked ~ label #btn {
-    left: 250px;
-    opacity: 0;
-    pointer-events: none;
-  }
-  #check:checked ~ label #cancle {
-    left: 245px;
-  }
-  #check:checked ~ section {
-    margin-left: 250px;
-  }
+/* Hide the toggle button when sidebar is visible */
+#check:checked ~ label #btn {
+  left: 250px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Adjust cancel button position */
+#check:checked ~ label #cancle {
+  left: 245px;
+}
+
+/* Move content to the right when sidebar is visible */
+#check:checked ~ section {
+  margin-left: 250px;
+}
+
   .sidebar header img {
     border-radius: 50%;
     width: 120px;
@@ -200,7 +206,7 @@ export default {
   }
   /* hover effect */
   ul li:hover a {
-    padding-left: 70px;
+    padding-left: 50px;
     color: rgb(0, 158, 216);
     box-shadow: inset -1px -1px 2px #dde1e7;
   }

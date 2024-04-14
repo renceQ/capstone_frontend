@@ -1,9 +1,10 @@
 <template>
+  <button @click="" style="border-radius:3px; width:18%; margin-left:27.5%; margin-top:4%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;" class="neumorphic-button">List of Product</button>
     <div class="row" style="margin-left: 300px; margin-right: 20px;">
       <div class="col-md-12 col-sm-12">
-            <h2>List of Category</h2>
+            
           </div>
-            <div class="row">
+            <div class="row" style="margin-top:140px;width:940px; margin-left:50px;">
               <div class="col-sm-12">
                 <div class="card-box table-responsive">
                     <insert @data-saved="getInfo" />

@@ -791,7 +791,7 @@ Sound and stage lights production.</p>
         </v-list>
       </v-menu>
 
-      <input type="text" v-model="lowPricing" placeholder="Low Pricing" style="position:absolute; bottom:30px; margin-left:260px; width: 150px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      <input type="text" v-model="lowPricing" placeholder="Low Pricing" style="display:none; position:absolute; bottom:30px; margin-left:260px; width: 150px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
     
@@ -1326,9 +1326,9 @@ currentDay() {
       }
     }, 
 
-    openDialog() {
-    this.dialogs = true;
-  },
+    openDialog(item) {    
+        this.dialogs = true;
+    },
   openchooseService() {
     this.dialogservice = true;
   },
