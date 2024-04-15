@@ -1,16 +1,16 @@
 <template>
     <Menu />
-    <button @click="opendialog" class="neumorphic-button" style="position:absolute; width:170px; left:83%;">ADD EVENT</button>
-    <br>
+    <button @click="opendialog" class="neumorphic-button" style="border-radius:3px;position:absolute; width:170px; right:105px; margin-top:65px;">ADD EVENT</button>
+    <br><br><br><br>
     <div class="row" style="margin-left: 300px; margin-right: 20px;">
         <div class="col-md-12 col-sm-12">
-              <h2>List of Services</h2>
+          <button @click="" style="border-radius:3px; width:18%; margin-left:80px; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;color:#1679AB;" class="neumorphic-button">List of Product</button>
             </div>
-              <div class="row">
+              <div class="row" style="margin-left:70px; margin-top:60px; width:900px; font-family: 'Poppins', sans-serif;">
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                       <insert @data-saved="getInfo" />
-                    <table id="datatable-responsive" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="80%" style="margin: 0 auto;">
+                    <table id="datatable-responsive"  cellspacing="0"  style="margin: 0 auto;">
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -18,7 +18,6 @@
                           <th>SERVICE</th>
                           <th>INFORMATION</th>
                           <th>LOWEST PRICE</th>
-                          <th>HIGHEST PRICE</th>
                           <th>ACTION</th>
                         </tr>
                       </thead>
@@ -26,13 +25,12 @@
                         <tr v-for="info in info">
                           <td>{{ info.id}}</td>
                           <td>
-                            <img v-if="info.image" :src="info.image" alt="Image" style="width:100px; height:100px;">
+                            <img v-if="info.image" :src="info.image" alt="Image" style="width:120px;margin-left:3px; height:120px;">
                             <span v-else>No Image</span>
                           </td>
                           <td>{{ info.service}}</td>
                           <td>{{ info.information}}</td>
                           <td>{{ info.low_pricing}}</td>
-                          <td>{{ info.high_pricing}}</td>
                           <td>
                             <button @click="editRecord" class="btn btn-success btn-sm edit"> EDIT</button>
                           </td>
@@ -319,7 +317,7 @@ handleFileChange(event) {
   });
   </script>
   
-  <style>
+  <style scoped>
   
   </style>
   

@@ -10,8 +10,9 @@
     <div class="sidebar">
   <header>
     <img v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" style="margin-top: 30px; margin-left:30px;" >
-  <p style="margin-top:5px; font-family: 'Poppins', sans-serif; font-weight:500; font-size:18px; margin-left:30px; color: rgba(250, 123, 4, 0.993); ">Qmj Images</p>
-  <p style=" position:absolute; font-family: 'Poppins', sans-serif; font-weight:400; font-size:16px; margin-left:95px; top:17.5%; ">Administrator</p>
+  <p style="margin-top:5px; font-family: 'Poppins', sans-serif; font-weight:600; font-size:18px; margin-left:30px; color: rgba(250, 123, 4, 0.993); ">Qmj Images&nbsp;&nbsp;<i class="fas fa-user-edit"></i>
+  </p>
+  <p style=" position:absolute; font-family: 'Poppins', sans-serif; font-weight:500; font-size:16px; margin-left:92px; top:18.5%; ">Administrator</p>
   <br>
 </header>
 
@@ -66,6 +67,7 @@ export default {
 },
   
   methods: {
+    
 	async logout() {
 		        sessionStorage.clear();
     },

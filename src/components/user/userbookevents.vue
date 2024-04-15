@@ -412,7 +412,7 @@ Sound and stage lights production.</p>
           <tbody>
             <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== ''" style="height:10px;">
               <td >{{ selectedService.first_req }} </td>
-              <td>₱{{ selectedService.first_price }}</td>
+              <td>{{ selectedService.first_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -422,7 +422,7 @@ Sound and stage lights production.</p>
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.second_req }} </td>
-              <td>₱{{ selectedService.second_price }}</td>
+              <td>{{ selectedService.second_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -432,7 +432,7 @@ Sound and stage lights production.</p>
             </tr>
             <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.third_req }} </td>
-              <td>₱{{ selectedService.third_price }}</td>
+              <td>{{ selectedService.third_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -442,7 +442,7 @@ Sound and stage lights production.</p>
             </tr>
             <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fourth_req }} </td>
-              <td>₱{{ selectedService.fourth_price }}</td>
+              <td>{{ selectedService.fourth_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -452,7 +452,7 @@ Sound and stage lights production.</p>
             </tr>
             <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fifth_req }} </td>
-              <td>₱{{ selectedService.fifth_price }}</td>
+              <td>{{ selectedService.fifth_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -462,7 +462,7 @@ Sound and stage lights production.</p>
             </tr>
             <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.sixth_req }} </td>
-              <td>₱{{ selectedService.sixth_price }}</td>
+              <td>{{ selectedService.sixth_price }}</td>
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
@@ -558,32 +558,32 @@ Sound and stage lights production.</p>
           <tbody>
             <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== ''" style="height:10px; ">
               <td >{{ selectedService.first_req }} </td>
-              <td>₱{{ selectedService.first_price }}</td>
+              <td>{{ selectedService.first_price }}</td>
               <td>{{ inputValue || '0' }}</td>
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px; ">
               <td>{{ selectedService.second_req }} </td>
-              <td>₱{{ selectedService.second_price }}</td>
+              <td>{{ selectedService.second_price }}</td>
               <td>{{ secondInputValue || '0' }}</td>
             </tr>
             <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px; ">
               <td>{{ selectedService.third_req }} </td>
-              <td>₱{{ selectedService.third_price }}</td>
+              <td>{{ selectedService.third_price }}</td>
               <td>{{ thirdInputValue || '0' }}</td>
             </tr>
             <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px; ">
               <td>{{ selectedService.fourth_req }} </td>
-              <td>₱{{ selectedService.fourth_price }}</td>
+              <td>{{ selectedService.fourth_price }}</td>
               <td>{{ fourthInputValue || '0' }}</td>
             </tr>
             <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px; ">
               <td>{{ selectedService.fifth_req }} </td>
-              <td>₱{{ selectedService.fifth_price }}</td>
+              <td>{{ selectedService.fifth_price }}</td>
               <td>{{ fifthInputValue || '0' }}</td>
             </tr>
             <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px; ">
               <td>{{ selectedService.sixth_req }} </td>
-              <td>₱{{ selectedService.sixth_price }}</td>
+              <td>{{ selectedService.sixth_price }}</td>
               <td>{{ sixthInputValue || '0' }}</td>
             </tr>
            
@@ -594,10 +594,18 @@ Sound and stage lights production.</p>
        
         <br>
         <div style="position:absolute;">
-        <div style="margin-top:225px;">Added items total price: {{ totalSum }}</div>
-        <div>Minimum price: {{selectedService.low_pricing}}</div>
-        <div>Total cost: {{ (parseFloat(totalSum) + parseFloat(selectedService.low_pricing)).toFixed(2).replace(/\.0+$/, '') }}</div>
-        </div>
+          <div style="margin-top:225px;">Added items total price: {{ totalSum }}</div>
+          <div>Minimum price: {{ selectedService.low_pricing.toLocaleString() }}</div>
+          <div>Total cost: {{
+              (parseFloat(totalSum) + parseFloat(selectedService.low_pricing))
+                  .toFixed(2)
+                  .replace(/\.0+$/, '')
+                  .toLocaleString()
+          }}</div>
+      </div>
+      
+      
+
         
         <button
         type="button"
@@ -703,7 +711,7 @@ Sound and stage lights production.</p>
        </div>
         <div style="position: absolute;margin-top:-80px; margin-left:100px;">
           <button for="service" style="position:absolute; margin-top:-55px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-12px; color:#FEAA01;" @click="availability_dialogs()"><i style="color:#FEAA01; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
-          <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:10px;color:#ffffff;"> {{ currentDay }}</label><br>
+          <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:40px;color:#ffffff;"> {{ currentDay }}</label><br>
           <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:30px; color:#ffffff;"> {{ currentDayNumber }}</label>
         
         

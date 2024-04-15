@@ -1,9 +1,16 @@
 <template>
+<div style="height:1000px;">
+  <v-col cols="12" style="margin-left: 350px; width:940px;">
+    <v-row>
+      <v-col>
+        <v-select v-model="selectedOption" :items="options" label="Select Table" style=" position:absolute; right:73px; width:200px;top:5%;" outlined></v-select>
+      </v-col>
+    </v-row>
+    <br><br><br><br><br><br>
+    <v-card v-if="selectedOption === 'Event Schedules'">
 
-  <v-col cols="12" style="margin-left: 350px; width:950px;">
-    <v-card v-if="showApprovedTable" class="custom-data-table">
       <v-card-title>
-        <h2>Event Schedules</h2>
+        <h2 style="color:#1679AB; font-size:25px;">Event Schedules</h2>
       </v-card-title>
       <v-card-text>
         <v-data-table
@@ -55,9 +62,9 @@
 
   <!-- Declined Request Table -->
   <v-col cols="12" style="margin-left: 350px; width:950px;">
-  <v-card v-if="showDeclinedTable" class="custom-data-table">
+    <v-card v-if="selectedOption === 'Event Completed'">
     <v-card-title>
-      <h2>Event Completed</h2>
+      <h2 style="color:#1679AB; font-size:25px;">Event Completed</h2>
     </v-card-title>
     <v-card-text>
       <v-data-table
@@ -141,7 +148,7 @@
 </v-dialog>
 
 
-
+</div>
 
   
 
@@ -157,8 +164,11 @@ export default {
       showModal: false,
       selectedEvent: {}, // Holds the selected event details
       info: [],
+      selectedOption: 'Event Schedules', // Default selected option
+      options: ['Event Schedules', 'Event Completed'], // Dropdown options
       
       tableHeaders: [
+        { text: 'Action', value: 'actions', sortable: false },
         { text: 'Event', value: 'event_title' },
         { text: 'Start Date', value: 'start_date' },
         { text: 'End Date', value: 'end_date' },
@@ -168,7 +178,7 @@ export default {
         { text: 'Email', value: 'email' },
         { text: 'Phone Number', value: 'phone' },
         { text: 'Type of Service', value: 'service' },
-        { text: 'Action', value: 'actions', sortable: false },
+       
       ],
     };
   },

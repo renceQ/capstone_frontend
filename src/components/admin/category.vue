@@ -1,5 +1,6 @@
 <template>
-  <button @click="" style="border-radius:3px; width:18%; margin-left:27.5%; margin-top:4%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;" class="neumorphic-button">List of Product</button>
+  <div style="height:950px;">
+  <button @click="" style="border-radius:3px; width:18%; margin-left:27.5%; margin-top:4%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif; color:#1679AB;" class="neumorphic-button ">Product Category</button>
     <div class="row" style="margin-left: 300px; margin-right: 20px;">
       <div class="col-md-12 col-sm-12">
             
@@ -42,7 +43,7 @@
     </div>
 
   
-
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="neumorphic-navbar" style="position:absolute; width:500px; height:500px; margin-left:450px; ">
+  <div class="neumorphic-navbar" style="box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;position:absolute; width:500px; height:500px; margin-left:450px; ">
 
     <div style="position:absolute;" >
       <div style="margin-bottom: 20px;">
@@ -20,26 +20,26 @@
         <br>
         <h4 style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up .8s ease-out forwards;
-        animation-delay: 0.2s;margin-left:100px; font-size: 14px; margin-top:-110px; margin-left:170px;">Register New Account</h4>
-        <h5 style="margin-left: 630px;"></h5>
+        animation-delay: 0.2s;margin-left:100px; font-size: 14px; margin-top:-100px; margin-left:170px;">Register New Account</h4>
+       
         
         <div class="v-sheet"> 
           <form @submit.prevent="register">
             <div v-if="message" class="error-message-box" style="position:absolute; width:355px; margin-left:-87%; top:20%;">
               <div class="error-message">{{ message }}</div>
             </div>
-            <br>
+           
         
             <label for="username" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;position:absolute; right:70%;">Username:</label>
+            animation-delay: 0.2s;position:absolute; right:70%;margin-top:30px;">Username:</label>
             <input style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
             animation-delay: 0.2s;position:absolute;  right:13%; top:40.5%; border:0px;" class="search-input" v-model="username" id="username" type="text" required>
         
             <label for="password" style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
-            animation-delay: 0.2s;position:absolute; right:70.5%;top:54.5%;">Password:</label>
+            animation-delay: 0.2s;position:absolute; right:70.5%;top:54%;">Password:</label>
             <input style=" opacity: 0; /* Set initial opacity to 0 for fade-in effect */
             animation: fade-up .8s ease-out forwards;
             animation-delay: 0.2s;position:absolute;  right:13%; top:51.5%; width:250px;" class="search-input" v-model="password" id="password" type="password" required>

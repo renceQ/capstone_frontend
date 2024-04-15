@@ -278,11 +278,11 @@ animation: fade-up 0.8s ease-out forwards;font-size: 35px; font-weight:900; left
                 <div class="container">
                   <div class="row d-flex">
                     <div class="col-md-6 d-flex">
-                      <img :src="require('../../assets/images/tarp.jpg')" alt="Description of the image" style="border-radius: 10px; width: 400px; height:370px; margin-left: 80px; margin-top: 40px;margin-bottom: 100px;">
+                      <img :src="require('../../assets/images/eccom.jpg')" alt="Description of the image" style="border-radius: 10px; width: 400px; height:370px; margin-left: 80px; margin-top: 40px;margin-bottom: 100px;">
                     </div>
                     <div class="col-md-6 pl-md-5 py-5">    
                         <div class="col-md-12 ">
-                          <h2 class="mb-4" style="margin-top:60px;">Tarpaulin Printing </h2>
+                          <h2 class="mb-4" style="margin-top:60px;">Efficient Order Handling of Products  </h2>
                       </div>
                       <div class="row" style="width: 1100px;">
                         <div class="col-md-6 ">
@@ -316,7 +316,7 @@ animation: fade-up 0.8s ease-out forwards;font-size: 35px; font-weight:900; left
               animation-delay: 0.5s;
                   padding: 8px 30px;
                 
-                  top:78.1%;
+                  top:79.1%;
                   height:40px;
                   left:51.5%;
                   font-size: 16px;

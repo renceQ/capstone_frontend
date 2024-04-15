@@ -1,8 +1,9 @@
 <template>
-    <div class="table-container">
-        <h1>Sales ID: {{ productId }}</h1>
+  <br><br><br><br><br>
+    <div class="table-container" style="font-family: 'Poppins', sans-serif;">
+        <h1 style="font-size: 25px; color:#1679AB;">Sales ID: {{ productId }}</h1>
         <insert @data-saved="getSalesRecord" />
-        <table class="product-table">
+        <table  style="font-family: 'Poppins', sans-serif;" class="product-table">
         <thead>
           <tr>
             <th>Image</th>

@@ -1,5 +1,5 @@
 <template>
-
+<div style="background-color:rgb(245, 245, 245);">
     <div style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
     animation: fade-up 0.8s ease-out forwards; position: absolute; margin-top:160px; margin-left:90px; ">
       <img style="width:70px; height:70px; "  v-if="info.length > 0" :src="info[0].profile_picture" alt="Profile" class="profile-picture-navbar">
@@ -36,7 +36,7 @@
                   <div class="container" style="   opacity: 0; /* Set initial opacity to 0 for fade-in effect */
                   animation: fade-up .8s ease-out forwards;
                   animation-delay: 0.2s;margin-top: 20px;">
-                    <nav class="neumorphic-navbars" style="width: 945px; margin-left: 200px; z-index: 10;">
+                    <nav class="neumorphic-navbars" style="background-color:rgb(245, 245, 245);width: 945px; margin-left: 200px; z-index: 10;">
                       <ul>
                         <li>
                           <br>
@@ -138,7 +138,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-              
+              </div>
 </template>
 <script>
 import axios from 'axios';

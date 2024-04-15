@@ -2,7 +2,7 @@ User
 
 <template>
   
-  <div class="neumorphic-navbar" style="position:absolute; width:500px; height:500px; margin-left:450px; ">
+  <div class="neumorphic-navbar" style="box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;position:absolute; width:500px; height:500px; margin-left:450px;  ">
   <div>
      <div style="">
     <div>

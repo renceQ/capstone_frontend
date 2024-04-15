@@ -1,17 +1,19 @@
 <template>
-    
-    <v-container style="width: 1000px; margin-left: 330px;">
-        <!-- Pending Orders table -->
+  <div style="height: 1000px;">
+  <br>
+    <v-container style="width: 940px; margin-left: 350px;font-family: 'Poppins', sans-serif; font-size:13px;  ">
+        <!-- Order List table -->
         <v-row>
           <v-col>
             <v-select v-model="selectedOption" :items="options" label="Select Table" style=" position:absolute; right:73px; width:200px;" outlined></v-select>
           </v-col>
         </v-row>
       <br><br><br>
-        <v-row>
+
+        <v-row style="margin-top:5px;" v-if="selectedOption === 'Order List'">
           <v-col>
             <v-card>
-              <v-card-title>Order List</v-card-title>
+              <v-card-title style="color:#1679AB; ">Order List</v-card-title>
               <!-- Replace with your insert component -->
               <insert @data-saved="getOrder" />
               <v-data-table 
@@ -35,10 +37,10 @@
                   <!-- <v-btn @click="pendingEvent(item.id)" color="error" small>
                     Undo
                   </v-btn> -->
-                  <v-btn @click="deliveringEvent(item.id)" color="success" small>
+                  <v-btn style="margin-bottom:5px;" @click="deliveringEvent(item.id)" color="success" small>
                     Deliver Product
                   </v-btn>
-                  <v-btn @click="openviewdialog(item.id)" color="black" small> <v-icon>mdi-eye</v-icon>
+                  <v-btn style="width:175px;" click="openviewdialog(item.id)" color="black" small> <v-icon>mdi-eye</v-icon>
                     View Details
                   </v-btn>
                 </template>
@@ -52,11 +54,11 @@
           </v-col>
         </v-row>
     
-        <!-- Approved Orders table -->
-        <v-row>
+        <!-- On Delivery Orders table -->
+        <v-row style="margin-top:5px;" v-else-if="selectedOption === 'On Delivery Orders'">
           <v-col>
             <v-card>
-              <v-card-title>On Delivery Orders</v-card-title>
+              <v-card-title style="color:#1679AB; ">On Delivery Orders</v-card-title>
               <v-data-table
                 :headers="headers"
                 :items="deliveringOrders"
@@ -75,13 +77,13 @@
                   <img :src="item.image" alt="Product Image" width="50" height="50">
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                  <v-btn @click="approveEvent(item.id)" color="error" small>
+                  <v-btn style="width:157px; margin-bottom:5px;" @click="approveEvent(item.id)" color="error" small>
                     Undo
                   </v-btn>
                   <v-btn @click="delivered(item.id)" color="success" small>
                     Item Delivered
                   </v-btn>
-                  <v-btn @click="openviewdialog(item.id)" color="black" small> <v-icon>mdi-eye</v-icon>
+                  <v-btn style="width:157px; margin-top:5px;" @click="openviewdialog(item.id)" color="black" small> <v-icon>mdi-eye</v-icon>
                     View Details
                   </v-btn>
                 </template>
@@ -95,11 +97,11 @@
           </v-col>
         </v-row>
     
-        <!-- Declined Orders table -->
-        <v-row>
+        <!-- Delivered Orders table -->
+        <v-row style="margin-top:5px;" v-else-if="selectedOption === 'Delivered Orders'">
           <v-col>
             <v-card>
-              <v-card-title>Delivered Orders</v-card-title>
+              <v-card-title style="color:#1679AB; ">Delivered Orders</v-card-title>
               <v-data-table
                 :headers="headers"
                 :items="deliveredOrders"
@@ -118,7 +120,7 @@
                   <img :src="item.image" alt="Product Image" width="50" height="50">
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                  <v-btn @click="deliveringEvent(item.id)" color="success" small>
+                  <v-btn style="width:160px; margin-bottom:5px;" @click="deliveringEvent(item.id)" color="success" small>
                     Undo
                   </v-btn>
                   <v-btn @click="openviewdialog(item.id)" color="black" small> <v-icon>mdi-eye</v-icon>
@@ -135,6 +137,7 @@
           </v-col>
         </v-row>
       </v-container>
+    </div>
     </template>
     
     <script>
@@ -143,7 +146,10 @@
     export default {
       data() {
         return {
+          selectedOption: 'Order List', // Default selected option
+        options: ['Order List', 'On Delivery Orders', 'Delivered Orders'], // Dropdown options
           headers: [
+            { text: 'Actions', value: 'actions', sortable: false },
             { text: 'Transaction Code', value: 'transaction_code' }, 
             { text: 'Date Updated', value: 'updated_at' }, 
             { text: 'Date Requested', value: 'created_at' }, 
@@ -158,7 +164,7 @@
             { text: 'Other Info', value: 'other_info' },
             { text: 'Customer Name', value: 'customerName' },
             { text: 'Status', value: 'status' },
-            { text: 'Actions', value: 'actions', sortable: false },
+           
           ],
           infos: [] // Initialize infos as an empty array
         };

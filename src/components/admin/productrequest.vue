@@ -56,7 +56,7 @@
       <v-row v-else-if="selectedOption === 'Approved Orders'">
         <v-col>
           <v-card>
-            <v-card-title>Approved Orders</v-card-title>
+            <v-card-title style="color:#1679AB; ">Approved Orders</v-card-title>
             <v-data-table
               :headers="headers"
               :items="approvedOrders"
@@ -75,10 +75,10 @@
                 <img :src="item.image" alt="Product Image" width="50" height="50">
               </template>
               <template v-slot:[`item.actions`]="{ item }">
-                <v-btn @click="pendingEvent(item.id)" color="success" small>
+                <v-btn style="width:100px; margin-bottom:5px;" @click="pendingEvent(item.id)" color="success" small>
                   Undo
                 </v-btn>
-                <v-btn @click="denyEvent(item.id)" color="error" small>
+                <v-btn style="width:100px;" @click="denyEvent(item.id)" color="error" small>
                   Deny
                 </v-btn>
               </template>
@@ -96,7 +96,7 @@
       <v-row v-else-if="selectedOption === 'Declined Orders'">
         <v-col>
           <v-card>
-            <v-card-title>Declined Orders</v-card-title>
+            <v-card-title style="color:#1679AB; ">Declined Orders</v-card-title>
             <v-data-table
               :headers="headers"
               :items="declinedOrders"
@@ -115,10 +115,10 @@
                 <img :src="item.image" alt="Product Image" width="50" height="50">
               </template>
               <template v-slot:[`item.actions`]="{ item }">
-                <v-btn @click="pendingEvent(item.id)" color="success" small>
+                <v-btn style="width:100px; margin-bottom:5px;" @click="pendingEvent(item.id)" color="success" small>
                   Undo
                 </v-btn>
-                <v-btn @click="denyEvent(item.id)" color="error" small>
+                <v-btn style="width:100px;" @click="denyEvent(item.id)" color="error" small>
                   Deny
                 </v-btn>
               </template>

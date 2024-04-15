@@ -1,9 +1,23 @@
 <template>
+  <br>
+  <nav class="navbar" style="top:3%;height:40px; position:absolute; background-color: #f0f0f0; padding: 10px; border-radius: 3px; box-shadow: 3px 3px 5px #bfbfbf, -5px -5px 15px #ffffff; width:100px;left:315px;z-index: 9999;">
+    <li class="menu-item">
+      <a style="font-weight: 500; text-decoration: none; color: #333333;" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu</a>
+      <ul class="dropdown" style="position: absolute; right: 200px; margin-top: 10px; list-style: none; background-color: #f0f0f0; padding: 10px; border-radius: 3px; box-shadow: 2px 2px 5px #bfbfbf, -5px -5px 15px #ffffff;  z-index: 9999;">
+        <h2></h2>
+    <div >
+        <li style="width: 140px; margin-top: 10px;"><a href="#" style="text-decoration: none; color: #333333;">Settings and Privacy</a></li>
+        <li style="width: 140px;"><a href="editprofiles" style="text-decoration: none; color: #333333;">Edit Profile</a></li>
+        <li style="width: 140px;"><a href="#" class="nav-link" @click="logout" style="text-decoration: none; color: #333333;">Log out</a></li>
+      </div>
+      </ul>
+    </li>
+  </nav>
   
  <div style="height:930px;">
   <br><br>
   <div class="row" style="margin-left: 300px; margin-right: 20px;">
-    <div class="text-right mt-3" style="top: 6%; position:absolute; margin-left:-930px; ">
+    <div class="text-right mt-3" style="top: 8%; position:absolute; margin-left:-930px; ">
       <button @click="previousPage" :disabled="currentPage === 1" class="btn btn-outline-primary mr-2" style="background-color: #f0f2f5; border: none; border-radius: 3px; box-shadow: -5px -5px 10px #abacae, 5px 5px 10px #ffffff; padding: 10px 20px; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">
         <i class="fa fa-chevron-left"></i>
       </button>
@@ -18,7 +32,7 @@
         <div class="container" style="margin-top:50px; margin-left:30px; font-family: 'Poppins', sans-serif; font-weight:500;">
           <div class="row">
             <button @click="openModal" style="border-radius:3px; width:18%; margin-left:78%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Add Product</button>
-            <button @click="" style="border-radius:3px; width:18%; margin-left:-1%; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;" class="neumorphic-button">List of Product</button>
+            <button @click="" style="border-radius:3px; width:18%; margin-left:-1%; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;color:#1679AB;" class="neumorphic-button">List of Product</button>
                 <div class="card-body">
                   <insert @data-saved="getInfo" />
                   <div class="table-container">
@@ -86,7 +100,7 @@
         
         
  
-          <v-dialog v-model="modalOpen" max-width="600" @close="clearModalFields">
+          <v-dialog v-model="modalOpen" max-width="600" @close="clearModalFields" style="z-index: 9999;">
             <v-card>
               <v-card-title>Add Product</v-card-title>
               <v-card-text>
@@ -206,7 +220,7 @@
 
 
   <!--edit-->
-  <v-dialog v-model="editmodal" max-width="600">
+  <v-dialog v-model="editmodal" max-width="600" style="z-index: 9999;">
     <v-card>
       <v-card-title>Edit Product</v-card-title>
       <v-card-text>
@@ -408,6 +422,10 @@ export default {
     this.getInfo();
   },
   methods: {
+    async logout() {
+		        sessionStorage.clear();
+            // this.$router.push('/landing');
+    },
     
     async openAuditModal(productId) {
     try {

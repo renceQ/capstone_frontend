@@ -268,7 +268,7 @@
               </div>
           
               <div>
-               <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
+               <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 14px; color:darkorange;font-family: 'Poppins', sans-serif;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
                <p style="position:absolute; left:43%; top:14%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">UNIT PRICE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;₱&nbsp;{{ productData.unit_price }}</a></p>
                <p style="position:absolute; left:43%; top:20%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">SIZE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp; {{ getSizeName(productData.size_id) }}</a></p>
 
@@ -373,7 +373,7 @@
         style="  opacity: 0; /* Set initial opacity to 0 for fade-in effect */
         animation: fade-up 0.8s ease-out forwards;border-radius:5px;height:483px; width: 450px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-top:60px; margin-left:13%;"
       >
-          <p style=" margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME:  <span style="font-size: 30px; font-weight:400; margin-left:15px; color:rgb(223, 146, 5);font-family: 'Sacramento', cursive;">{{ productData.prod_name }}</span></p> 
+          <p style=" margin-left: 20px; margin-bottom: 10px; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME:  <span style="font-size: 30px; font-weight:200; margin-left:15px; color:rgb(223, 146, 5);font-family: 'Bebas Neue', cursive; ">{{ productData.prod_name }}</span></p> 
       
           <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
               <!-- <p>Image:</p> -->

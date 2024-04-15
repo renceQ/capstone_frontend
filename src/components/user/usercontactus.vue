@@ -1,6 +1,6 @@
 <template>
 
-
+<div style="background-color:rgb(245, 245, 245);">
 <br>
 <br>
 <br>
@@ -118,6 +118,7 @@ Sound and stage lights production.</p>
         </div>
       </div>
     </footer>
+  </div>
   </template>
   
 

@@ -1,13 +1,21 @@
 <template>
   
    <!-- Approved Request Table -->
-   <v-col cols="12" style="margin-left: 350px; width:950px;">
-    <v-card v-if="showPendingtable" class="custom-data-table">
-     <v-card-title>
-       <h2>Pending Requests</h2>
+   <div style="height:1000px;">
+   <v-col cols="12" style="margin-left: 350px; width:940px;">
+    <br><br><br><br><br><br><br>
+    <v-row>
+      <v-col>
+        <v-select v-model="selectedOption" :items="options" label="Select Table" style=" position:absolute; right:73px; width:200px;top:7%;" outlined></v-select>
+      </v-col>
+    </v-row>
+    <v-card v-if="selectedOption === 'Pending Request'">
+     <v-card-title >
+       <h2 style="color:#1679AB; font-size:25px;">Pending Requests</h2>
      </v-card-title>
      <v-card-text>
        <v-data-table
+       
          :headers="tableHeaders"
          :items="pendingRequests"
          item-key="event_title"
@@ -59,9 +67,9 @@
 
    <!-- Approved Request Table -->
    <v-col cols="12" style="margin-left: 350px; width:950px;">
-   <v-card v-if="showApprovedTable" class="custom-data-table">
+    <v-card v-if="selectedOption === 'Approved Request'">
     <v-card-title>
-      <h2>Approved Requests</h2>
+      <h2 style="color:#1679AB; font-size:25px;">Approved Requests</h2>
     </v-card-title>
     <v-card-text>
       <v-data-table
@@ -116,9 +124,9 @@
 
   <!-- Declined Request Table -->
   <v-col cols="12" style="margin-left: 350px; width:950px;">
-  <v-card v-if="showDeclinedTable" class="custom-data-table">
+    <v-card v-if="selectedOption === 'Declined Request'">
     <v-card-title>
-      <h2>Declined Requests</h2>
+      <h2 style="color:#1679AB; font-size:25px;">Declined Requests</h2>
     </v-card-title>
     <v-card-text>
       <v-data-table
@@ -208,7 +216,7 @@
 
 
 
-
+</div>
   
 
 
@@ -223,8 +231,11 @@ export default {
       showModal: false,
       selectedEvent: {}, // Holds the selected event details
       info: [],
+      selectedOption: 'Pending Request', // Default selected option
+      options: ['Pending Request', 'Approved Request', 'Declined Request'], // Dropdown options
       
       tableHeaders: [
+        { text: 'Action', value: 'actions', sortable: false },
         { text: 'Event', value: 'event_title' },
         { text: 'Start Date', value: 'start_date' },
         { text: 'End Date', value: 'end_date' },
@@ -235,7 +246,7 @@ export default {
         { text: 'Phone Number', value: 'phone' },
         { text: 'Type of Service', value: 'service' },
         { text: 'Status', value: 'status' },
-        { text: 'Action', value: 'actions', sortable: false },
+       
       ],
     };
   },
