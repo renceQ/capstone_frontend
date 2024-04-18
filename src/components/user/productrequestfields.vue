@@ -268,7 +268,7 @@
               </div>
           
               <div>
-               <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 14px; color:darkorange;font-family: 'Poppins', sans-serif;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
+               <p style="position:absolute; left:43%; top:8%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">PRODUCT NAME: <a style="font-size: 22px; color:darkorange;font-family: 'Poppins', sans-serif;">&nbsp;&nbsp;{{ productData.prod_name }}</a></p>
                <p style="position:absolute; left:43%; top:14%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">UNIT PRICE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp;&nbsp;₱&nbsp;{{ productData.unit_price }}</a></p>
                <p style="position:absolute; left:43%; top:20%; font-size: 11px; font-weight:600; font-family: 'Audiowide', cursive;">SIZE:  <a style="font-size: 14px;font-family:'Courier New', Courier, monospace; color:darkorange;">&nbsp; {{ getSizeName(productData.size_id) }}</a></p>
 

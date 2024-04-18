@@ -361,7 +361,7 @@ Sound and stage lights production.</p>
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:570px;">
       <br>
-      <v-card-title class="headline " style="font-size: 19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif;  color:rgb(0, 153, 255); ">SERVICE INFROMATION<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></v-card-title>
+      <v-card-title class="headline " style="font-size: 19px; font-weight:600;margin-left:36px;font-family: 'Poppins', sans-serif;  color:rgb(0, 153, 255); ">SERVICE INFORMATION<span style="font-size: 22px;  font-weight:100;">&nbsp;&nbsp;&nbsp;</span><span style="font-weight:400; font-family: 'WindSong', cursive; font-size:33px;"></span></v-card-title>
       <v-card-text>
        
         <v-card-text class="headline text-center" style="font-family: 'Poppins', sans-serif;font-size: 17px; font-weight:500; margin-top:-42px; margin-left:15px; position:absolute;color:#022a80;">
@@ -413,12 +413,14 @@ Sound and stage lights production.</p>
             <tr v-if="selectedService.first_req && selectedService.first_req.trim() !== ''" style="height:10px;">
               <td >{{ selectedService.first_req }} </td>
               <td>{{ selectedService.first_price }}</td>
+              
               <td> <input type="number" class="search-input"  inputmode="numeric"  style="
                 background-color: rgb(255, 255, 255);
                 width: 80px;
                 height: 30px;
                 border-radius:2px;
-              " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" ></td>
+              " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" :max="selectedService.first_stock" ></td>
+              <td>{{ selectedService.first_stock }}</td>
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.second_req }} </td>
@@ -429,6 +431,7 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="secondInputValue" @input="updateMinimumPrice" ></td>
+              <td>{{ selectedService.second_stock }}</td>
             </tr>
             <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.third_req }} </td>
@@ -439,6 +442,7 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="thirdInputValue" @input="updateMinimumPrice" ></td>
+              <td>{{ selectedService.third_stock }}</td>
             </tr>
             <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fourth_req }} </td>
@@ -449,6 +453,7 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="fourthInputValue" @input="updateMinimumPrice" ></td>
+              <td>{{ selectedService.fourth_stock }}</td>
             </tr>
             <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fifth_req }} </td>
@@ -459,6 +464,7 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="fifthInputValue" @input="updateMinimumPrice" ></td>
+              <td>{{ selectedService.fifth_stock }}</td>
             </tr>
             <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.sixth_req }} </td>
@@ -469,6 +475,7 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="sixthInputValue" @input="updateMinimumPrice" ></td>
+              <td>{{ selectedService.sixth_stock }}</td>
             </tr>
 
           </tbody>
@@ -526,6 +533,11 @@ Sound and stage lights production.</p>
       "
     > Show Added Items
     </a>
+    <div style="position:absolute; margin-top:121px; margin-left:180px;">
+    <!-- <label for="start_date" style="position:absolute;">Select Day for Service Request:</label> -->
+    <!-- <input type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="start_date" required> -->
+    <input type="date" class="neumorphic-button" style="font-size:13px; width:150px;background-color:white; border-radius:3px;" v-model="startDate" required>
+    </div>
     </li> 
 
       </v-card-text>
@@ -1032,7 +1044,7 @@ Sound and stage lights production.</p>
       ],
       approvedRequests: [ /* Your approved events data */ ],
       calendar: [],
-
+      startDate: this.getFormattedDate(new Date()),
         event_title:"", 
         start_date:"", 
         end_date:"", 
@@ -1275,6 +1287,14 @@ currentDay() {
 },
   methods: {
    
+    
+    getFormattedDate(date) {
+      const year = date.getFullYear();
+      let month = (1 + date.getMonth()).toString().padStart(2, '0');
+      let day = date.getDate().toString().padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+    },
     async getInfo() {
       try {
         const response = await axios.get('getservice');

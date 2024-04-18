@@ -43,7 +43,7 @@
             </div>
 
 
-            <v-dialog v-model="dialogss" max-width="500px">
+            <v-dialog v-model="dialogss" max-width="800px">
                 <form @submit.prevent="saveService" class="container">
                   <v-card>
                     <br>
@@ -111,68 +111,92 @@
                       <br>
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                         <div class="form-group col-md-4">
                           <label for="first_req">Request 1:</label>
-                          <input type="text" class="search-input" style="width:126%;height:70%; border:none;" placeholder="first request" v-model="first_req" >
+                          <input type="text" class="search-input" style="width:200px; height:70%; border:none;" placeholder="first request" v-model="first_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                         <div class="form-group col-md-4">
                           <label for="first_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="first_price" >
+                        </div>
+                         <div class="form-group col-md-4">
+                          <label for="first_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="first_stock" >
                         </div>
                       </div>
               
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                         <div class="form-group col-md-4">
                           <label for="second_req">Request 2:</label>
                           <input type="text" class="search-input" style="width:126%;height:70%;border:none;" placeholder="second request" v-model="second_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                         <div class="form-group col-md-4">
                           <label for="second_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="second_price" >
                         </div>
+                         <div class="form-group col-md-4">
+                          <label for="second_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="second_stock" >
+                        </div>
                       </div>
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="third_req">Request 3:</label>
                           <input type="text" class="search-input" style="width:126%;height:70%;border:none;" placeholder="third request" v-model="third_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                        <div class="form-group col-md-4">
                           <label for="third_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="third_price" >
                         </div>
+                        <div class="form-group col-md-4">
+                          <label for="third_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="third_stock" >
+                        </div>
                       </div>
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="fourth_req">Request 4:</label>
                           <input type="text" class="search-input" style="width:126%;height:70%;border:none;" placeholder="fourth request" v-model="fourth_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                        <div class="form-group col-md-4">
                           <label for="fourth_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="fourth_price" >
                         </div>
+                        <div class="form-group col-md-4">
+                          <label for="fourth_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="fourth_stock" >
+                        </div>
                       </div>
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="fifth_req">Request 5:</label>
                           <input type="text" class="search-input" style="width:126%;height:70%;border:none;" placeholder="fifth request" v-model="fifth_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                        <div class="form-group col-md-4">
                           <label for="fifth_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="fifth_price" >
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="fifth_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="fifth_stock" >
                         </div>
                       </div>
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="sixth_req">Request 6:</label>
                           <input type="text" class="search-input" style="width:126%;height:70%;border:none;" placeholder="sixth request" v-model="sixth_req" >
                         </div>
-                        <div class="form-group col-md-6" >
+                        <div class="form-group col-md-4">
                           <label for="sixth_price" style="margin-left:32%;">request price:</label>
                           <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="sixth_price" >
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="sixth_stock" style="margin-left:32%;">stock:</label>
+                          <input type="number" class="search-input"  inputmode="numeric" style="width:66%;height:70%; border:none;margin-left:32%;" placeholder="0000" v-model="sixth_stock" >
                         </div>
                       </div>
 
@@ -218,7 +242,13 @@
       third_price:"", 
       fourth_price:"", 
       fifth_price:"", 
-      sixth_price:"", 
+      sixth_price:"",
+      first_stock:"", 
+      second_stock:"", 
+      third_stock:"", 
+      fourth_stock:"", 
+      fifth_stock:"", 
+      sixth_stock:"", 
     }
   },
       components:{
@@ -255,6 +285,12 @@ async saveService() {
       formData.append('fourth_price', this.fourth_price);
       formData.append('fifth_price', this.fifth_price);
       formData.append('sixth_price', this.sixth_price);
+      formData.append('first_stock', this.first_stock);
+      formData.append('second_stock', this.second_stock);
+      formData.append('third_stock', this.third_stock);
+      formData.append('fourth_stock', this.fourth_stock);
+      formData.append('fifth_stock', this.fifth_stock);
+      formData.append('sixth_stock', this.sixth_stock);
 
       if (this.image instanceof File) {
         formData.append('image', this.image);
@@ -279,6 +315,12 @@ async saveService() {
       this.fourth_price = "";
       this.fifth_price = "";
       this.sixth_price = "";
+      this.first_stock = "";
+      this.second_stock = "";
+      this.third_stock = "";
+      this.fourth_stock = "";
+      this.fifth_stock = "";
+      this.sixth_stock = "";
 
       // Emit event and perform other actions
       this.$emit('data-saved');

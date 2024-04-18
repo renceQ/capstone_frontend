@@ -66,7 +66,7 @@
 
 
    <!-- Approved Request Table -->
-   <v-col cols="12" style="margin-left: 350px; width:950px;">
+   <v-col cols="12" style="margin-top:-30px;margin-left: 350px; width:935px;">
     <v-card v-if="selectedOption === 'Approved Request'">
     <v-card-title>
       <h2 style="color:#1679AB; font-size:25px;">Approved Requests</h2>
@@ -123,7 +123,7 @@
 
 
   <!-- Declined Request Table -->
-  <v-col cols="12" style="margin-left: 350px; width:950px;">
+  <v-col cols="12" style="margin-top:-30px; margin-left: 350px; width:940px;">
     <v-card v-if="selectedOption === 'Declined Request'">
     <v-card-title>
       <h2 style="color:#1679AB; font-size:25px;">Declined Requests</h2>
