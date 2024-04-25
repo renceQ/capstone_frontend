@@ -419,7 +419,7 @@ Sound and stage lights production.</p>
                 width: 80px;
                 height: 30px;
                 border-radius:2px;
-              " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" :max="selectedService.first_stock" ></td>
+              " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.first_stock }}</td>
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
@@ -844,9 +844,6 @@ Sound and stage lights production.</p>
         
         </v-card-text>
         
-        
-        
-        
 
         <br>
 
@@ -1269,20 +1266,66 @@ currentDay() {
   },
   
   watch: {
-  secondInputValue: function () {
-    this.updateMinimumPrice();
+    inputValue: function (newValue) {
+    // Check if the new input value is negative
+    if (newValue < 0) {
+      // Display an alert to notify the user
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      
+      // Reset the input value to 0
+      this.inputValue = 0;
+    } else if (newValue > this.selectedService.first_stock) {
+      // Check if the new input value exceeds the first_stock value of the selected service
+      alert('Input exceeds the limit for first stock.');
+      
+      // Reset the input value to the maximum allowed value
+      this.inputValue = this.selectedService.first_stock;
+    }
   },
-  thirdInputValue: function () {
-    this.updateMinimumPrice();
+  secondInputValue: function (newValue) {
+    if (newValue < 0) {
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      this.secondInputValue = 0;
+    } else if (newValue > this.selectedService.second_stock) {
+      alert('Input exceeds the limit for second stock.');
+      this.secondInputValue = this.selectedService.second_stock;
+    }
   },
-  fourthInputValue: function () {
-    this.updateMinimumPrice();
+  thirdInputValue: function (newValue) {
+    if (newValue < 0) {
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      this.thirdInputValue = 0;
+    } else if (newValue > this.selectedService.third_stock) {
+      alert('Input exceeds the limit for third stock.');
+      this.thirdInputValue = this.selectedService.third_stock;
+    }
   },
-  fifthInputValue: function () {
-    this.updateMinimumPrice();
+  fourthInputValue: function (newValue) {
+    if (newValue < 0) {
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      this.fourthInputValue = 0;
+    } else if (newValue > this.selectedService.fourth_stock) {
+      alert('Input exceeds the limit for fourth stock.');
+      this.fourthInputValue = this.selectedService.fourth_stock;
+    }
   },
-  sixthInputValue: function () {
-    this.updateMinimumPrice();
+  fifthInputValue: function (newValue) {
+    if (newValue < 0) {
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      this.fifthInputValue = 0;
+    } else if (newValue > this.selectedService.fifth_stock) {
+      alert('Input exceeds the limit for fifth stock.');
+      this.fifthInputValue = this.selectedService.fifth_stock;
+    }
+  },
+  sixthInputValue: function (newValue) {
+    if (newValue < 0) {
+      alert('Input cannot be negative. Please enter a value of 0 or higher.');
+      this.sixthInputValue = 0;
+    } else if (newValue > this.selectedService.sixth_stock) {
+      alert('Input exceeds the limit for sixth stock.');
+      this.sixthInputValue = this.selectedService.sixth_stock;
+    }
   },
 },
   methods: {
