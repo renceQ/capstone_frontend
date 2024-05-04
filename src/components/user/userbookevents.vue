@@ -357,7 +357,7 @@ Sound and stage lights production.</p>
 
 
 
-<v-dialog v-model="dialogss" max-width="780px">
+<v-dialog v-model="dialogss" max-width="980px"> 780
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:570px;">
       <br>
@@ -385,12 +385,12 @@ Sound and stage lights production.</p>
         
 
         <br>
-
+<!-- piliin lang data sa table start_date at quantity at request type. ayusing date format gawing YYYY-MM-DD imatch sa start date> i filter laman ng table sa approved lang na status. hana[pin] match start date at date sa input.  -->
   <span>
     <v-card-text class="headline text-left" style="position:absolute; top:60%; left:3%; width:350px; font-size: 24px; font-weight:500;color:#3a3a3a;">
       &nbsp;&nbsp;₱&nbsp;{{ displayMinimumPrice }} <span style="font-size: 15px;color:#aaaaaa;"> / minimum price</span>
     </v-card-text>
-  </span>
+  </span> 
         
         <span><v-card-text class="headline text-left" style="  font-family: 'Poppins', sans-serif; color: rgb(2, 97, 185);position:absolute; top:3%; left:46%; width:360px; font-size: 16px; font-weight:500;">
           &nbsp;&nbsp;Incremental Cost for Additional Units
@@ -401,6 +401,60 @@ Sound and stage lights production.</p>
                      any additional items accordingly.
         </v-card-text>
         
+        <table id="datatable-responsive" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="80%" style="margin: 0 auto;">
+          <thead>
+            <tr>
+              
+              <th>start_date</th>
+              <th>end_date</th>
+
+              <th>service</th>
+              <th>status</th>
+             
+              <th>first_req</th>
+              <th>second_req</th>
+              <th>third_req</th>
+              <th>fourth_req</th>
+              <th>fifth_req</th>
+              <th>sixth_req</th>
+              <th>inputValue</th>
+              <th>secondInputValue</th>
+              <th>thirdInputValue</th>
+              <th>fourthInputValue</th>
+              <th>fifthInputValue</th>
+              <th>sixthInputValue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr v-for="info in info"> -->
+              <tr v-for="bookinginfo in bookinginfo" :key="bookinginfo.id">
+               
+                <td>{{ bookinginfo.start_date }}</td>
+                <td>{{ bookinginfo.end_date }}</td>
+
+                <td>{{ bookinginfo.service }}</td>
+                <td>{{ bookinginfo.status }}</td>
+               
+                <td>{{ bookinginfo.first_req }}</td>
+                <td>{{ bookinginfo.second_req }}</td>
+                <td>{{ bookinginfo.third_req }}</td>
+                <td>{{ bookinginfo.fourth_req }}</td>
+                <td>{{ bookinginfo.fifth_req }}</td>
+                <td>{{ bookinginfo.sixth_req }}</td>
+                <td>{{ bookinginfo.inputValue }}</td>
+                <td>{{ bookinginfo.secondInputValue }}</td>
+                <td>{{ bookinginfo.thirdInputValue }}</td>
+                <td>{{ bookinginfo.fourthInputValue }}</td>
+                <td>{{ bookinginfo.fifthInputValue }}</td>
+                <td>{{ bookinginfo.sixthInputValue }}</td>
+                <td>
+                    <button @click="editRecord(bookinginfo)" class="btn btn-success btn-sm edit">EDIT</button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+
+
         <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; width:340px;top:130px;right:60px; position:absolute; font-size:12px; color:black;">
           <thead>
             <tr>
@@ -822,6 +876,7 @@ Sound and stage lights production.</p>
 
 
 <v-dialog v-model="dialogservice" max-width="780px">
+
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:570px;">
       <br>
@@ -862,6 +917,7 @@ Sound and stage lights production.</p>
                      any additional items accordingly.
         </v-card-text>
         
+       
         <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; width:340px;top:130px;right:60px; position:absolute; font-size:12px; color:black;">
           <thead>
             <tr>
@@ -934,6 +990,7 @@ Sound and stage lights production.</p>
 
           </tbody>
         </table>
+       
 
       <button
       type="button"
@@ -1006,6 +1063,7 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      bookinginfo: [],
       servinfo: [],
       dropdown: false,
       selectedService: null,
@@ -1259,6 +1317,7 @@ currentDay() {
   },
   created() {
     this.getEventInfo();
+    this.getbookingInfo();
   },
   mounted() {
     this.updateCalendar();
@@ -1266,6 +1325,11 @@ currentDay() {
   },
   
   watch: {
+    selectedService(newService) {
+    if (newService) {
+      this.getbookingInfo();
+    }
+  },
     inputValue: function (newValue) {
     // Check if the new input value is negative
     if (newValue < 0) {
@@ -1329,8 +1393,18 @@ currentDay() {
   },
 },
   methods: {
-   
-    
+    async getbookingInfo() {
+  try {
+    const response = await axios.get('geteventforslot');
+    // Filter the data to show only entries with status "approved" and service equal to selectedService.service
+    const filteredBookingInfo = response.data.filter(
+      booking => booking.status === 'approved' && booking.service === this.selectedService.service
+    );
+    this.bookinginfo = filteredBookingInfo;
+  } catch (error) {
+    console.error(error);
+  }
+},
     getFormattedDate(date) {
       const year = date.getFullYear();
       let month = (1 + date.getMonth()).toString().padStart(2, '0');
