@@ -385,7 +385,7 @@ Sound and stage lights production.</p>
         
 
         <br>
-<!-- piliin lang data sa table start_date at quantity at request type. ayusing date format gawing YYYY-MM-DD imatch sa start date> i filter laman ng table sa approved lang na status. hana[pin] match start date at date sa input.  -->
+<!-- filter pa ang table sa startdate na match sa button select date  -->
   <span>
     <v-card-text class="headline text-left" style="position:absolute; top:60%; left:3%; width:350px; font-size: 24px; font-weight:500;color:#3a3a3a;">
       &nbsp;&nbsp;₱&nbsp;{{ displayMinimumPrice }} <span style="font-size: 15px;color:#aaaaaa;"> / minimum price</span>
@@ -429,7 +429,8 @@ Sound and stage lights production.</p>
             <!-- <tr v-for="info in info"> -->
               <tr v-for="bookinginfo in bookinginfo" :key="bookinginfo.id">
                
-                <td>{{ bookinginfo.start_date }}</td>
+                <td>{{ formatDate(bookinginfo.start_date) }}</td>
+
                 <td>{{ bookinginfo.end_date }}</td>
 
                 <td>{{ bookinginfo.service }}</td>
@@ -1325,7 +1326,12 @@ currentDay() {
   },
   
   watch: {
-    selectedService(newService) {
+    startDate(newDate) {
+    if (newDate) {
+      this.getbookingInfo();
+    }
+  },
+  selectedService(newService) {
     if (newService) {
       this.getbookingInfo();
     }
@@ -1393,12 +1399,25 @@ currentDay() {
   },
 },
   methods: {
-    async getbookingInfo() {
+    formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+  },
+  async getbookingInfo() {
   try {
     const response = await axios.get('geteventforslot');
-    // Filter the data to show only entries with status "approved" and service equal to selectedService.service
+    // Filter the data to show only entries with:
+    // - Status "approved"
+    // - Service equal to the selected service
+    // - start_date matches the selected start date from the input
     const filteredBookingInfo = response.data.filter(
-      booking => booking.status === 'approved' && booking.service === this.selectedService.service
+      booking =>
+        booking.status === 'approved' &&
+        booking.service === this.selectedService.service &&
+        // Check if the selected start date is within the booking's date range
+        new Date(this.startDate) >= new Date(booking.start_date) &&
+        new Date(this.startDate) <= new Date(booking.end_date)
     );
     this.bookinginfo = filteredBookingInfo;
   } catch (error) {
