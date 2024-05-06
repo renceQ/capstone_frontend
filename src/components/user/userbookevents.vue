@@ -476,6 +476,8 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.first_stock }}</td>
+              <td>{{ stockDifferences.first }}</td>
+              <td></td>
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.second_req }} </td>
@@ -487,6 +489,8 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"   v-model="secondInputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.second_stock }}</td>
+              <td>{{ stockDifferences.second }}</td>
+              <td></td>
             </tr>
             <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.third_req }} </td>
@@ -498,6 +502,8 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"   v-model="thirdInputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.third_stock }}</td>
+              <td>{{ stockDifferences.third }}</td>
+              <td></td>
             </tr>
             <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fourth_req }} </td>
@@ -509,6 +515,8 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"   v-model="fourthInputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.fourth_stock }}</td>
+              <td>{{ stockDifferences.fourth }}</td>
+              <td></td>
             </tr>
             <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fifth_req }} </td>
@@ -520,6 +528,8 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"   v-model="fifthInputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.fifth_stock }}</td>
+              <td>{{ stockDifferences.fifth }}</td>
+              <td></td>
             </tr>
             <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.sixth_req }} </td>
@@ -531,6 +541,7 @@ Sound and stage lights production.</p>
                 border-radius:2px;
               " placeholder="0"   v-model="sixthInputValue" @input="updateMinimumPrice" ></td>
               <td>{{ selectedService.sixth_stock }}</td>
+              <td>{{ stockDifferences.sixth }}</td>
             </tr>
 
           </tbody>
@@ -1125,6 +1136,32 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    stockDifferences() {
+    // Initialize an object to store the differences for each stock item
+    const differences = {
+      first: this.selectedService.first_stock,
+      second: this.selectedService.second_stock,
+      third: this.selectedService.third_stock,
+      fourth: this.selectedService.fourth_stock,
+      fifth: this.selectedService.fifth_stock,
+      sixth: this.selectedService.sixth_stock,
+    };
+    
+    // Iterate over the filtered booking info
+    this.bookinginfo.forEach(booking => {
+      // Subtract input values from the corresponding stock values
+      differences.first -= booking.inputValue || 0;
+      differences.second -= booking.secondInputValue || 0;
+      differences.third -= booking.thirdInputValue || 0;
+      differences.fourth -= booking.fourthInputValue || 0;
+      differences.fifth -= booking.fifthInputValue || 0;
+      differences.sixth -= booking.sixthInputValue || 0;
+    });
+
+    // Return the calculated differences
+    return differences;
+  },
+    
     availableSlotsCount() {
     let availableSlots = 3 - this.matchingEvents.length;
     return availableSlots < 0 ? 0 : availableSlots;
@@ -1407,15 +1444,12 @@ currentDay() {
   async getbookingInfo() {
   try {
     const response = await axios.get('geteventforslot');
-    // Filter the data to show only entries with:
-    // - Status "approved"
-    // - Service equal to the selected service
-    // - start_date matches the selected start date from the input
+  
     const filteredBookingInfo = response.data.filter(
       booking =>
         booking.status === 'approved' &&
         booking.service === this.selectedService.service &&
-        // Check if the selected start date is within the booking's date range
+       
         new Date(this.startDate) >= new Date(booking.start_date) &&
         new Date(this.startDate) <= new Date(booking.end_date)
     );
