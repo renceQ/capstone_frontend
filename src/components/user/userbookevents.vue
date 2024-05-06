@@ -922,6 +922,7 @@ Sound and stage lights production.</p>
         
         <span><v-card-text class="headline text-left" style="  font-family: 'Poppins', sans-serif; color: rgb(2, 97, 185);position:absolute; top:3%; left:46%; width:360px; font-size: 16px; font-weight:500;">
           &nbsp;&nbsp;Incremental Cost for Additional Units
+          <!-- geteventfullrecord bagong retrieved data para sa 3 slot per day na pag babasehan para ma disable file request button -->
          </v-card-text>  </span>
          <v-card-text class="headline text-left" style="font-family: 'Poppins', sans-serif; color: rgb(2, 37, 70); position: absolute; top: 9%; left: 47.5%; width: 322px; font-size: 11.7px; font-weight: 500;">
          Customize your request by adding item based<br>
@@ -1136,6 +1137,7 @@ Sound and stage lights production.</p>
     }
   },
   computed: {
+    
     stockDifferences() {
     // Initialize an object to store the differences for each stock item
     const differences = {
@@ -1381,57 +1383,57 @@ currentDay() {
       
       // Reset the input value to 0
       this.inputValue = 0;
-    } else if (newValue > this.selectedService.first_stock) {
+    } else if (newValue > this.stockDifferences.first) {
       // Check if the new input value exceeds the first_stock value of the selected service
       alert('Input exceeds the limit for first stock.');
       
       // Reset the input value to the maximum allowed value
-      this.inputValue = this.selectedService.first_stock;
+      this.inputValue = this.stockDifferences.first;
     }
   },
   secondInputValue: function (newValue) {
     if (newValue < 0) {
       alert('Input cannot be negative. Please enter a value of 0 or higher.');
       this.secondInputValue = 0;
-    } else if (newValue > this.selectedService.second_stock) {
+    } else if (newValue > this.stockDifferences.second) {
       alert('Input exceeds the limit for second stock.');
-      this.secondInputValue = this.selectedService.second_stock;
+      this.secondInputValue = this.stockDifferences.second;
     }
   },
   thirdInputValue: function (newValue) {
     if (newValue < 0) {
       alert('Input cannot be negative. Please enter a value of 0 or higher.');
       this.thirdInputValue = 0;
-    } else if (newValue > this.selectedService.third_stock) {
+    } else if (newValue > this.stockDifferences.third) {
       alert('Input exceeds the limit for third stock.');
-      this.thirdInputValue = this.selectedService.third_stock;
+      this.thirdInputValue = this.stockDifferences.third;
     }
   },
   fourthInputValue: function (newValue) {
     if (newValue < 0) {
       alert('Input cannot be negative. Please enter a value of 0 or higher.');
       this.fourthInputValue = 0;
-    } else if (newValue > this.selectedService.fourth_stock) {
+    } else if (newValue > this.stockDifferences.fourth) {
       alert('Input exceeds the limit for fourth stock.');
-      this.fourthInputValue = this.selectedService.fourth_stock;
+      this.fourthInputValue = this.stockDifferences.fourth;
     }
   },
   fifthInputValue: function (newValue) {
     if (newValue < 0) {
       alert('Input cannot be negative. Please enter a value of 0 or higher.');
       this.fifthInputValue = 0;
-    } else if (newValue > this.selectedService.fifth_stock) {
+    } else if (newValue > this.stockDifferences.fifth) {
       alert('Input exceeds the limit for fifth stock.');
-      this.fifthInputValue = this.selectedService.fifth_stock;
+      this.fifthInputValue = this.stockDifferences.fifth;
     }
   },
   sixthInputValue: function (newValue) {
     if (newValue < 0) {
       alert('Input cannot be negative. Please enter a value of 0 or higher.');
       this.sixthInputValue = 0;
-    } else if (newValue > this.selectedService.sixth_stock) {
+    } else if (newValue > this.stockDifferences.sixth) {
       alert('Input exceeds the limit for sixth stock.');
-      this.sixthInputValue = this.selectedService.sixth_stock;
+      this.sixthInputValue = this.stockDifferences.sixth;
     }
   },
 },
