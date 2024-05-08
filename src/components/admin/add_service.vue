@@ -1,46 +1,91 @@
 <template>
+  <div style="height:1000px;">
     <Menu />
     <button @click="opendialog" class="neumorphic-button" style="border-radius:3px;position:absolute; width:170px; right:105px; margin-top:65px;">ADD EVENT</button>
     <br><br><br><br>
     <div class="row" style="margin-left: 300px; margin-right: 20px;">
         <div class="col-md-12 col-sm-12">
           <button @click="" style="border-radius:3px; width:18%; margin-left:80px; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;color:#1679AB;" class="neumorphic-button">List of Product</button>
+          <input type="date" class="neumorphic-button" style=" margin-left:590px; top:-12px; height:40px;font-size:13px; width:150px;background-color:white; border-radius:3px; position:absolute;" v-model="startDate" required>
+
             </div>
               <div class="row" style="margin-left:70px; margin-top:60px; width:900px; font-family: 'Poppins', sans-serif;">
                 <div class="col-sm-12">
-                  <div class="card-box table-responsive">
+                
                       <insert @data-saved="getInfo" />
-                    <table id="datatable-responsive"  cellspacing="0"  style="margin: 0 auto;">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>IMAGE</th>
-                          <th>SERVICE</th>
-                          <th>INFORMATION</th>
-                          <th>LOWEST PRICE</th>
-                          <th>ACTION</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="info in info">
-                          <td>{{ info.id}}</td>
-                          <td>
-                            <img v-if="info.image" :src="info.image" alt="Image" style="width:120px;margin-left:3px; height:120px;">
-                            <span v-else>No Image</span>
-                          </td>
-                          <td>{{ info.service}}</td>
-                          <td>{{ info.information}}</td>
-                          <td>{{ info.low_pricing}}</td>
-                          <td>
-                            <button @click="editRecord" class="btn btn-success btn-sm edit"> EDIT</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <!-- Container with fixed width and height, and scrollbars enabled -->
+<div style="width: 900px; height: 400px; overflow: auto;">
+  <!-- Fixed width of 760px for the table and font size of 12px -->
+  <table id="datatable-responsive" cellspacing="0" style="margin: 0 auto; width: 100%; font-size: 12px;">
+    <thead>
+      <tr>
+        <!-- Setting the width and height of each column to 100px -->
+        <th style="width: 100px; height: 100px;">ID</th>
+        <th style="width: 100px; height: 100px;">IMAGE</th>
+        <th style="width: 100px; height: 100px;">SERVICE</th>
+        <th style="width: 100px; height: 100px;">INFORMATION</th>
+        <th style="width: 100px; height: 100px;">LOWEST PRICE</th>
+        <th style="width: 100px; height: 100px;">FIRST REQUEST</th>
+        <th style="width: 100px; height: 100px;">SECOND REQUEST</th>
+        <th style="width: 100px; height: 100px;">THIRD REQUEST</th>
+        <th style="width: 100px; height: 100px;">FOURTH REQUEST</th>
+        <th style="width: 100px; height: 100px;">FIFTH REQUEST</th>
+        <th style="width: 100px; height: 100px;">SIXTH REQUEST</th>
+        <th style="width: 100px; height: 100px;">FIRST PRICE</th>
+        <th style="width: 100px; height: 100px;">SECOND PRICE</th>
+        <th style="width: 100px; height: 100px;">THIRD PRICE</th>
+        <th style="width: 100px; height: 100px;">FOURTH PRICE</th>
+        <th style="width: 100px; height: 100px;">FIFTH PRICE</th>
+        <th style="width: 100px; height: 100px;">SIXTH PRICE</th>
+        <th style="width: 100px; height: 100px;">FIRST STOCK</th>
+        <th style="width: 100px; height: 100px;">SECOND STOCK</th>
+        <th style="width: 100px; height: 100px;">THIRD STOCK</th>
+        <th style="width: 100px; height: 100px;">FOURTH STOCK</th>
+        <th style="width: 100px; height: 100px;">FIFTH STOCK</th>
+        <th style="width: 100px; height: 100px;">SIXTH STOCK</th>
+        <th style="width: 100px; height: 100px;">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="info in info">
+        <td style="width: 100px; height: 100px;">{{ info.id }}</td>
+        <td style="width: 100px; height: 100px;">
+          <img v-if="info.image" :src="info.image" alt="Image" style="width:100px;height:100px;">
+          <span v-else>No Image</span>
+        </td>
+        <td style="width: 100px; height: 100px;">{{ info.service }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.information }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.low_pricing }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.first_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.second_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.third_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fourth_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fifth_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.sixth_req }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.first_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.second_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.third_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fourth_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fifth_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.sixth_price }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.first_stock }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.second_stock }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.third_stock }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fourth_stock }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.fifth_stock }}</td>
+        <td style="width: 100px; height: 100px;">{{ info.sixth_stock }}</td>
+        <td style="width: 100px; height: 100px;">
+          <button @click="editRecord" class="btn btn-success btn-sm edit">EDIT</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
                   </div>
                 </div>
               </div>
-            </div>
+            
 
 
             <v-dialog v-model="dialogss" max-width="800px">
@@ -212,6 +257,7 @@
                   </v-card>
                 </form>
               </v-dialog>
+            </div>
   </template>
     
   <script>
