@@ -357,7 +357,7 @@ Sound and stage lights production.</p>
 
 
 
-<v-dialog v-model="dialogss" max-width="980px"> 780
+<v-dialog v-model="dialogss" max-width="780px"> 
   <form @submit.prevent="saveBooking" class="container">
     <v-card style="height:570px;">
       <br>
@@ -401,7 +401,7 @@ Sound and stage lights production.</p>
                      any additional items accordingly.
         </v-card-text>
         
-        <table id="datatable-responsive" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="80%" style="margin: 0 auto;">
+        <table id="datatable-responsive" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="80%" style="margin: 0 auto; display:none;">
           <thead>
             <tr>
               
@@ -456,12 +456,69 @@ Sound and stage lights production.</p>
         </table>
 
 
+
+        <table id="datatable-responsive" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="80%" style="margin: 0 auto;display:none;">
+          <thead>
+            <tr>
+              
+              <th>start_date</th>
+              <th>end_date</th>
+
+              <th>service</th>
+              <th>status</th>
+             
+              <th>first_req</th>
+              <th>second_req</th>
+              <th>third_req</th>
+              <th>fourth_req</th>
+              <th>fifth_req</th>
+              <th>sixth_req</th>
+              <th>inputValue</th>
+              <th>secondInputValue</th>
+              <th>thirdInputValue</th>
+              <th>fourthInputValue</th>
+              <th>fifthInputValue</th>
+              <th>sixthInputValue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr v-for="info in info"> -->
+              <tr v-for="bookinginfoallservices in bookinginfoallservices" :key="bookinginfoallservices.id">
+               
+                <td>{{ formatDate(bookinginfoallservices.start_date) }}</td>
+
+                <td>{{ bookinginfoallservices.end_date }}</td>
+
+                <td>{{ bookinginfoallservices.service }}</td>
+                <td>{{ bookinginfoallservices.status }}</td>
+               
+                <td>{{ bookinginfoallservices.first_req }}</td>
+                <td>{{ bookinginfoallservices.second_req }}</td>
+                <td>{{ bookinginfoallservices.third_req }}</td>
+                <td>{{ bookinginfoallservices.fourth_req }}</td>
+                <td>{{ bookinginfoallservices.fifth_req }}</td>
+                <td>{{ bookinginfoallservices.sixth_req }}</td>
+                <td>{{ bookinginfoallservices.inputValue }}</td>
+                <td>{{ bookinginfoallservices.secondInputValue }}</td>
+                <td>{{ bookinginfoallservices.thirdInputValue }}</td>
+                <td>{{ bookinginfoallservices.fourthInputValue }}</td>
+                <td>{{ bookinginfoallservices.fifthInputValue }}</td>
+                <td>{{ bookinginfoallservices.sixthInputValue }}</td>
+                <td>
+                    <button @click="editRecord(bookinginfoallservice)" class="btn btn-success btn-sm edit">EDIT</button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+
+
         <table id="datatable-responsive"  cellspacing="0"  style=" font-family: 'Poppins', sans-serif; height:50px; width:340px;top:130px;right:60px; position:absolute; font-size:12px; color:black;">
           <thead>
             <tr>
               <th style=" text-align:center;">ITEM'S</th>
               <th style=" text-align:center;">PRICE</th>
               <th style="width:100px;text-align:center;">QUANTITY</th>
+              <th style="width:100px;text-align:center;">STOCK</th>
             </tr>
           </thead>
           <tbody>
@@ -475,9 +532,9 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"  v-model="inputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.first_stock }}</td>
+              <td style="display:none;">{{ selectedService.first_stock }}</td>
               <td>{{ stockDifferences.first }}</td>
-              <td></td>
+              
             </tr>
             <tr v-if="selectedService.second_req && selectedService.second_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.second_req }} </td>
@@ -488,9 +545,9 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="secondInputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.second_stock }}</td>
+              <td style="display:none;">{{ selectedService.second_stock }}</td>
               <td>{{ stockDifferences.second }}</td>
-              <td></td>
+              
             </tr>
             <tr v-if="selectedService.third_req && selectedService.third_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.third_req }} </td>
@@ -501,9 +558,9 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="thirdInputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.third_stock }}</td>
+              <td style="display:none;">{{ selectedService.third_stock }}</td>
               <td>{{ stockDifferences.third }}</td>
-              <td></td>
+              
             </tr>
             <tr v-if="selectedService.fourth_req && selectedService.fourth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fourth_req }} </td>
@@ -514,9 +571,9 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="fourthInputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.fourth_stock }}</td>
+              <td style="display:none;">{{ selectedService.fourth_stock }}</td>
               <td>{{ stockDifferences.fourth }}</td>
-              <td></td>
+              
             </tr>
             <tr v-if="selectedService.fifth_req && selectedService.fifth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.fifth_req }} </td>
@@ -527,9 +584,9 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="fifthInputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.fifth_stock }}</td>
+              <td style="display:none;">{{ selectedService.fifth_stock }}</td>
               <td>{{ stockDifferences.fifth }}</td>
-              <td></td>
+              
             </tr>
             <tr v-if="selectedService.sixth_req && selectedService.sixth_req.trim() !== ''" style="height:10px;">
               <td>{{ selectedService.sixth_req }} </td>
@@ -540,17 +597,21 @@ Sound and stage lights production.</p>
                 height: 30px;
                 border-radius:2px;
               " placeholder="0"   v-model="sixthInputValue" @input="updateMinimumPrice" ></td>
-              <td>{{ selectedService.sixth_stock }}</td>
+              <td style="display:none;">{{ selectedService.sixth_stock }}</td>
               <td>{{ stockDifferences.sixth }}</td>
             </tr>
 
           </tbody>
         </table>
-
+   
+      
       <button
       type="button"
       @click="openDialog(item)"
       class="neumorphic-button"
+      :class="{ 'disabled-button': disableButton }"
+      :style="buttonStyles"
+      :disabled="disableButton"
       style="
         position:absolute;
         background-color: rgb(50, 50, 51);
@@ -562,7 +623,7 @@ Sound and stage lights production.</p>
         color:white;
         
       "
-    >File Request
+    >File Request <span v-if="disableButton" class="question-icon" title="Button is disabled due to reaching the limit of 3 records.">?</span>
     </button>
     <button
       type="button"
@@ -1076,6 +1137,8 @@ Sound and stage lights production.</p>
   export default {
   data() {
     return {
+      bookinginfoallservices: [],
+      disableButton: false,
       bookinginfo: [],
       servinfo: [],
       dropdown: false,
@@ -1138,6 +1201,9 @@ Sound and stage lights production.</p>
   },
   computed: {
     
+    buttonStyles() {
+      return this.disableButton ? { opacity: 0.9 } : {};
+    },
     stockDifferences() {
     // Initialize an object to store the differences for each stock item
     const differences = {
@@ -1358,6 +1424,7 @@ currentDay() {
   created() {
     this.getEventInfo();
     this.getbookingInfo();
+    this.bookinginfoallservice();
   },
   mounted() {
     this.updateCalendar();
@@ -1365,9 +1432,18 @@ currentDay() {
   },
   
   watch: {
+    bookinginfoallservices: {
+      handler(newVal) {
+        // Check the length of the bookinginfoallservices array
+        this.disableButton = newVal.length >= 3;
+      },
+      immediate: true, // Run the handler function immediately on initial load
+    },
     startDate(newDate) {
     if (newDate) {
       this.getbookingInfo();
+    this.bookinginfoallservice();
+
     }
   },
   selectedService(newService) {
@@ -1438,6 +1514,11 @@ currentDay() {
   },
 },
   methods: {
+    openDialog(item) {
+      if (!this.disableButton) {
+        this.dialogs = true;
+      }
+    },
     formatDate(dateString) {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -1456,6 +1537,22 @@ currentDay() {
         new Date(this.startDate) <= new Date(booking.end_date)
     );
     this.bookinginfo = filteredBookingInfo;
+  } catch (error) {
+    console.error(error);
+  }
+},
+async bookinginfoallservice() {
+  try {
+    const response = await axios.get('geteventfullrecord');
+  
+    const filteredBookingInfo = response.data.filter(
+      booking =>
+        booking.status === 'approved' &&
+       
+        new Date(this.startDate) >= new Date(booking.start_date) &&
+        new Date(this.startDate) <= new Date(booking.end_date)
+    );
+    this.bookinginfoallservices = filteredBookingInfo;
   } catch (error) {
     console.error(error);
   }
@@ -1526,9 +1623,7 @@ currentDay() {
       }
     }, 
 
-    openDialog(item) {    
-        this.dialogs = true;
-    },
+
   openchooseService() {
     this.dialogservice = true;
   },
