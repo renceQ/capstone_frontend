@@ -32,7 +32,7 @@
         <div class="container" style="margin-top:50px; margin-left:30px; font-family: 'Poppins', sans-serif; font-weight:500;">
           <div class="row">
             <button @click="openModal" style="border-radius:3px; width:18%; margin-left:78%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Add Product</button>
-            <button @click="" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px;color:white; margin-left:43%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i></button>
+            <button @click="downloadPDF" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px;color:white; margin-left:43%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i></button>
             <button @click="" style="border-radius:3px; width:18%; margin-left:-1%; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;color:#1679AB;" class="neumorphic-button">List of Product</button>
                 <div class="card-body">
                   <insert @data-saved="getInfo" />
@@ -337,6 +337,8 @@
 import axios from 'axios';
 import JsBarcode from 'jsbarcode'; 
 import { sha256 } from 'js-sha256';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export default {
   data() {
@@ -423,6 +425,27 @@ export default {
     this.getInfo();
   },
   methods: {
+    async downloadPDF() {
+      // Select the table element
+      const table = document.getElementById('datatable-responsive');
+
+      // Convert the table to a canvas using html2canvas
+      const canvas = await html2canvas(table);
+
+      // Initialize jsPDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      // Calculate the width and height of the PDF
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      // Add the canvas to the PDF
+      const contentDataURL = canvas.toDataURL('image/png');
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+
+      // Download the PDF
+      pdf.save('table_data.pdf');
+    },
     async logout() {
 		        sessionStorage.clear();
             // this.$router.push('/landing');
