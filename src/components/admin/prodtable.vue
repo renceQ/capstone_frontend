@@ -32,6 +32,7 @@
         <div class="container" style="margin-top:50px; margin-left:30px; font-family: 'Poppins', sans-serif; font-weight:500;">
           <div class="row">
             <button @click="openModal" style="border-radius:3px; width:18%; margin-left:78%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Add Product</button>
+            <button @click="" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px;color:white; margin-left:43%;margin-top:-2.5px;margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i></button>
             <button @click="" style="border-radius:3px; width:18%; margin-left:-1%; margin-top:-1.5%; position:absolute; font-size:18px;font-family: 'Poppins', sans-serif;color:#1679AB;" class="neumorphic-button">List of Product</button>
                 <div class="card-body">
                   <insert @data-saved="getInfo" />
