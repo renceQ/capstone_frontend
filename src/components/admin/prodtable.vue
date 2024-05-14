@@ -339,6 +339,21 @@ import JsBarcode from 'jsbarcode';
 import { sha256 } from 'js-sha256';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+// Load the Roboto Medium font file
+const RobotoMedium = require('pdfmake/build/vfs_fonts').pdfMake.vfs['Roboto-Medium.ttf'];
+
+// Add the font to pdfFonts
+pdfMake.vfs = {
+  ...pdfFonts.pdfMake.vfs,
+  'Roboto-Medium.ttf': RobotoMedium
+};
+
+
+
 
 export default {
   data() {
@@ -426,25 +441,60 @@ export default {
   },
   methods: {
     async downloadPDF() {
-      // Select the table element
-      const table = document.getElementById('datatable-responsive');
+      // Create a data array to hold the table data
+      const data = [];
 
-      // Convert the table to a canvas using html2canvas
-      const canvas = await html2canvas(table);
+      // Push table headers
+      data.push([
+        { text: 'UPC', style: 'tableHeader' },
+        { text: 'Category', style: 'tableHeader' },
+        { text: 'Product', style: 'tableHeader' },
+        { text: 'Status', style: 'tableHeader' },
+        { text: 'Stock', style: 'tableHeader' },
+        { text: 'Price', style: 'tableHeader' },
+        { text: 'Size', style: 'tableHeader' },
+        { text: 'Unit Price', style: 'tableHeader' }
+      ]);
 
-      // Initialize jsPDF
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      // Push table rows with retrieved data
+      this.info.forEach(product => {
+        data.push([
+          product.UPC,
+          this.getCategoryName(product.category_id),
+          product.prod_name,
+          product.stock <= 15 ? 'Low Stock' : 'High Stock',
+          product.stock,
+          product.price,
+          this.getSizeName(product.size_id),
+          product.unit_price
+        ]);
+      });
 
-      // Calculate the width and height of the PDF
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      // Create a document definition
+      const docDefinition = {
+        content: [
+          {
+            table: {
+              headerRows: 1,
+              widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+              body: data
+            }
+          }
+        ],
+        styles: {
+          tableHeader: {
+            bold: true,
+            fontSize: 12,
+            color: 'black'
+          }
+        }
+      };
 
-      // Add the canvas to the PDF
-      const contentDataURL = canvas.toDataURL('image/png');
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+      // Convert the document definition to PDF
+      const pdfDocGenerator = pdfMake.createPdf(docDefinition);
 
       // Download the PDF
-      pdf.save('table_data.pdf');
+      pdfDocGenerator.download('table_data.pdf');
     },
     async logout() {
 		        sessionStorage.clear();
