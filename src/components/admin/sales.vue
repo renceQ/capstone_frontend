@@ -1,94 +1,94 @@
 <template>
   <br><br><br><br><br>
-    <div class="table-container" style="font-family: 'Poppins', sans-serif;">
-        <h1 style="font-size: 25px; color:#1679AB;">Sales ID: {{ productId }}</h1>
-        <insert @data-saved="getSalesRecord" />
-        <table  style="font-family: 'Poppins', sans-serif;" class="product-table">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Product Name</th>
-            <th>Unit Price</th>
-            <th>Total Price</th>
-            <th>Size ID</th>
-            <th>Quantity</th>
-            <th>Address</th>
-            <th>Contact</th>
-            <th>Other Info</th>
-            <th>Customer Name</th>
-            <th>Status</th>
-            <th>Transaction Code</th>
-            <th>Type</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-            <tr v-for="salesRecord in salesRecords" :key="salesRecord.id">
-            <td v-if="salesRecord.image">
-                <img :src="salesRecord.image" alt="image" class="img-fluid" style="max-width: 100px; max-height:100px;">
-              </td>
-            <td>{{ salesRecord.prod_name }}</td>
-            <td>{{ salesRecord.unit_price }}</td>
-            <td>{{ salesRecord.total }}</td>
-            <td>{{ getSizeName(salesRecord.size_id) }}</td>
-            <td>{{ salesRecord.quantity }}</td>
-            <td>{{ salesRecord.address }}</td>
-            <td>{{ salesRecord.contact }}</td>
-            <td>{{ salesRecord.other_info }}</td>
-            <td>{{ salesRecord.customerName }}</td>
-            <td>{{ salesRecord.status }}</td>
-            <td>{{ salesRecord.transaction_code }}</td>
-            <td>{{ salesRecord.type }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
+  <div class="table-container" style="font-family: 'Poppins', sans-serif;">
+    <h1 style="font-size: 25px; color:#1679AB;">Sales ID: {{ productId }}</h1>
+    <button @click="downloadPDF" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px; color:white; margin-left:43%; margin-top:-2.5px; margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">
+      Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i>
+    </button>
+    <insert @data-saved="getSalesRecord" />
+    <table style="font-family: 'Poppins', sans-serif;" class="product-table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">Product Name</th>
+          <th style="width: 5%;">Unit Price</th>
+          <th style="width: 8%;">Total Price</th>
+          <th style="width: 5%;">Size ID</th>
+          <th style="width: 5%;">Quantity</th>
+          <th style="width: 20%;">Address</th>
+          <th style="width: 10%;">Contact</th>
+          <th style="width: 10%;">Other Info</th>
+          <th style="width: 12%;">Customer Name</th>
+          <th style="width: 5%;">Status</th>
+          <th style="width: 10%;">Transaction Code</th>
+          <th style="width: 10%;">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="salesRecord in salesRecords" :key="salesRecord.id">
+          <td>{{ salesRecord.prod_name }}</td>
+          <td>{{ salesRecord.unit_price }}</td>
+          <td>{{ salesRecord.total }}</td>
+          <td>{{ getSizeName(salesRecord.size_id) }}</td>
+          <td>{{ salesRecord.quantity }}</td>
+          <td>{{ salesRecord.address }}</td>
+          <td>{{ salesRecord.contact }}</td>
+          <td>{{ salesRecord.other_info }}</td>
+          <td>{{ salesRecord.customerName }}</td>
+          <td>{{ salesRecord.status }}</td>
+          <td>{{ salesRecord.transaction_code }}</td>
+          <td>{{ salesRecord.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
 
-  <script>
-import axios from 'axios'
+<script>
+import axios from 'axios';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default {
   data() {
     return {
-        id: "",
-        image: null,
-        quantity: "",
-        prod_name: "",
-        stock: "",
-        address: "",
-        unit_price: "",
-        size_id: "",
-        contact: "",
-        other_info: "",
-        customerName: "",
-        status: "",
-        product_id: "",
-        old_stock:"",
-        transaction_code: "",
-        type: "",
-        total: "",
+      id: "",
+      image: null,
+      quantity: "",
+      prod_name: "",
+      stock: "",
+      address: "",
+      unit_price: "",
+      size_id: "",
+      contact: "",
+      other_info: "",
+      customerName: "",
+      status: "",
+      product_id: "",
+      old_stock:"",
+      transaction_code: "",
+      type: "",
+      total: "",
       products: [],
       categories: [],
       sizes: [],
       selectedProductId: null,
       productId: '',
       salesRecords: [],
-      }
+    };
   },
   created() {
-   
-    this.productId = this.$route.params.productId; // Get the productId from the route
-
-if (this.productId) {
-  this.getSalesRecord(this.productId); // Fetch audit records based on productId
-}
+    this.productId = this.$route.params.productId;
+    if (this.productId) {
+      this.getSalesRecord(this.productId);
+    }
   },
   methods: {
     async getSalesRecord(productId) {
       try {
         const response = await axios.get(`getsales/${productId}`);
-        this.salesRecords = response.data; // Update salesRecords with fetched data
+        this.salesRecords = response.data;
       } catch (error) {
         console.error(error);
       }
@@ -113,52 +113,88 @@ if (this.productId) {
       const size = this.sizes.find(size => size.size_id === sizeId);
       return size ? size.item_size : 'Unknown';
     },
-    getCategoryName(categoryId) {
-      const category = this.categories.find(category => category.id === categoryId);
-      return category ? category.category_name : 'Unknown';
-    },async fetchCategories() {
-      try {
-        const response = await axios.get("getcat");
-        this.categories = response.data; // Assuming response.data contains the categories array
-      } catch (error) {
-        console.error(error);
-      }
+    async downloadPDF() {
+  const data = [
+    [
+      { text: 'Product Name', style: 'tableHeader' },
+      { text: 'Unit Price', style: 'tableHeader' },
+      { text: 'Total Price', style: 'tableHeader' },
+      { text: 'Size ID', style: 'tableHeader' },
+      { text: 'Quantity', style: 'tableHeader' },
+      { text: 'Address', style: 'tableHeader' },
+      { text: 'Contact', style: 'tableHeader' },
+      { text: 'Other Info', style: 'tableHeader' },
+      { text: 'Customer Name', style: 'tableHeader' },
+      { text: 'Status', style: 'tableHeader' },
+      { text: 'Transaction Code', style: 'tableHeader' },
+      { text: 'Type', style: 'tableHeader' },
+    ]
+  ];
+
+  this.salesRecords.forEach(record => {
+    data.push([
+      record.prod_name,
+      record.unit_price,
+      record.total,
+      this.getSizeName(record.size_id),
+      record.quantity,
+      record.address,
+      record.contact,
+      record.other_info,
+      record.customerName,
+      record.status,
+      record.transaction_code,
+      record.type,
+    ]);
+  });
+
+  const documentContent = [
+    {
+      text: 'QMJ ENTERPRISE EVENT MANAGEMENT AND CREATIVE SERVICES',
+      style: 'title'
     },
-    async fetchsizes() {
-      try {
-        const response = await axios.get("getsize");
-        this.sizes = response.data;
-      } catch (error) {
-        console.error(error);
-      }
+    {
+      text: 'Generated Report for sales of products.',
+      style: 'subtitle'
     },
-    async fetchsizes() {
-      try {
-        const response = await axios.get("getsize");
-        this.sizes = response.data;
-      } catch (error) {
-        console.error(error);
+    {
+      table: {
+        headerRows: 1,
+        widths: ['*', 'auto', 'auto', 'auto', 'auto', '*', '*', '*', '*', 'auto', 'auto', 'auto'], // Adjust column widths
+        body: data
       }
-    },
+    }
+  ];
+
+  const styles = {
+    title: { fontSize: 16, bold: true, alignment: 'center', margin: [0, 20] },
+    subtitle: { fontSize: 12, italic: true, alignment: 'center', margin: [0, 10] },
+    tableHeader: { bold: true, fontSize: 12, color: 'black' }
+  };
+
+  const docDefinition = {
+    content: documentContent,
+    styles: styles
+  };
+
+  const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+  pdfDocGenerator.download('sales_report.pdf');
+}
   },
-  
-   
-    mounted() {
-    this.fetchCategories();
-    this.fetchsizes();
-  },
+  mounted() {
+    this.getCategories();
+    this.getItemSizes();
+  }
 };
 </script>
-  
-<style >
-/* Add styles to the table container */
+
+<style>
 .table-container {
   width: 1000px;
   margin-right: 40px;
-  font-size: 12px; /* Adjust the font size as needed */
+  font-size: 12px;
 }
 
-/* Add styles to the table */
 .product-table {
   width: 100%;
   border-collapse: collapse;
@@ -168,7 +204,7 @@ if (this.productId) {
 .product-table th,
 .product-table td {
   border: 1px solid #ddd;
-  padding: 6px; /* Adjust cell padding */
+  padding: 6px;
   text-align: left;
 }
 
@@ -185,11 +221,10 @@ if (this.productId) {
   background-color: #e9e9e9;
 }
 
-/* Align the table to the right */
 @media (min-width: 768px) {
   .table-container {
     float: right;
-    margin-left: 20px; /* Adjust margin as needed */
+    margin-left: 20px;
   }
 }
 </style>

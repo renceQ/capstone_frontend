@@ -470,24 +470,46 @@ export default {
         ]);
       });
 
+      // Create document content
+      const documentContent = [];
+
+      // Add logo and title
+      documentContent.push({
+  text:'  "QMJ ENTERPRISE EVENT MANAGEMENT AND CREATIVE SERVICES PRODUCT LIST" ',
+  style: 'title',
+ 
+  
+});
+
+      // Add subtitle
+      documentContent.push({
+        text: 'Genrated Report for the inventory of products.',
+        style: 'subtitle'
+      });
+
+      // Add spacer
+      documentContent.push({ text: '', margin: [0, 20] });
+
+      // Add table
+      documentContent.push({
+        table: {
+          headerRows: 1,
+          widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+          body: data
+        }
+      });
+
+      // Define styles
+      const styles = {
+        title: { fontSize: 16, bold: true, alignment: 'center', margin: [0, 20] },
+        subtitle: { fontSize: 12, italic: true, alignment: 'center', margin: [0, 10] },
+        tableHeader: { bold: true, fontSize: 12, color: 'black' }
+      };
+
       // Create a document definition
       const docDefinition = {
-        content: [
-          {
-            table: {
-              headerRows: 1,
-              widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
-              body: data
-            }
-          }
-        ],
-        styles: {
-          tableHeader: {
-            bold: true,
-            fontSize: 12,
-            color: 'black'
-          }
-        }
+        content: documentContent,
+        styles: styles
       };
 
       // Convert the document definition to PDF
