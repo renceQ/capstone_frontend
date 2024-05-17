@@ -1,8 +1,9 @@
 <template>
+  <div style="height:1000px;">
   <br><br><br><br><br>
   <div class="table-container" style="font-family: 'Poppins', sans-serif;">
     <h1 style="font-size: 25px; color:#1679AB;">Sales ID: {{ productId }}</h1>
-    <button @click="downloadPDF" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px; color:white; margin-left:43%; margin-top:-2.5px; margin-top:-9px; margin-bottom:3%;" class="neumorphic-button">
+    <button @click="downloadPDF" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px; color:white; margin-left:59.1%;  margin-top:-90px; margin-bottom:3%;" class="neumorphic-button">
       Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i>
     </button>
     <insert @data-saved="getSalesRecord" />
@@ -10,6 +11,7 @@
       <thead>
         <tr>
           <th style="width: 10%;">Product Name</th>
+          <th style="width: 10%;">Image</th>
           <th style="width: 5%;">Unit Price</th>
           <th style="width: 8%;">Total Price</th>
           <th style="width: 5%;">Size ID</th>
@@ -26,6 +28,9 @@
       <tbody>
         <tr v-for="salesRecord in salesRecords" :key="salesRecord.id">
           <td>{{ salesRecord.prod_name }}</td>
+          <td v-if="salesRecord.image">
+            <img :src="salesRecord.image" alt="image" class="img-fluid" style="max-width: 100px; max-height:100px;">
+          </td>
           <td>{{ salesRecord.unit_price }}</td>
           <td>{{ salesRecord.total }}</td>
           <td>{{ getSizeName(salesRecord.size_id) }}</td>
@@ -41,6 +46,7 @@
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <script>
@@ -133,18 +139,18 @@ export default {
 
   this.salesRecords.forEach(record => {
     data.push([
-      record.prod_name,
-      record.unit_price,
-      record.total,
-      this.getSizeName(record.size_id),
-      record.quantity,
-      record.address,
-      record.contact,
-      record.other_info,
-      record.customerName,
-      record.status,
-      record.transaction_code,
-      record.type,
+      { text: record.prod_name, style: 'tableData' },
+      { text: record.unit_price, style: 'tableData' },
+      { text: record.total, style: 'tableData' },
+      { text: this.getSizeName(record.size_id), style: 'tableData' },
+      { text: record.quantity, style: 'tableData' },
+      { text: record.address, style: 'tableData' },
+      { text: record.contact, style: 'tableData' },
+      { text: record.other_info, style: 'tableData' },
+      { text: record.customerName, style: 'tableData' },
+      { text: record.status, style: 'tableData' },
+      { text: record.transaction_code, style: 'tableData' },
+      { text: record.type, style: 'tableData' },
     ]);
   });
 
@@ -160,16 +166,17 @@ export default {
     {
       table: {
         headerRows: 1,
-        widths: ['*', 'auto', 'auto', 'auto', 'auto', '*', '*', '*', '*', 'auto', 'auto', 'auto'], // Adjust column widths
+        widths: [60, 50, 50, 40, 40, 80, 60, 80, 80, 50, 60, 40], // Adjust column widths to be more compact
         body: data
       }
     }
   ];
 
   const styles = {
-    title: { fontSize: 16, bold: true, alignment: 'center', margin: [0, 20] },
-    subtitle: { fontSize: 12, italic: true, alignment: 'center', margin: [0, 10] },
-    tableHeader: { bold: true, fontSize: 12, color: 'black' }
+    title: { fontSize: 14, bold: true, alignment: 'center', margin: [0, 10] }, // Slightly smaller title
+    subtitle: { fontSize: 10, italic: true, alignment: 'center', margin: [0, 5] }, // Slightly smaller subtitle
+    tableHeader: { bold: true, fontSize: 10, color: 'black' }, // Smaller table headers
+    tableData: { fontSize: 8 } // Smaller table data
   };
 
   const docDefinition = {
@@ -180,6 +187,7 @@ export default {
   const pdfDocGenerator = pdfMake.createPdf(docDefinition);
   pdfDocGenerator.download('sales_report.pdf');
 }
+
   },
   mounted() {
     this.getCategories();

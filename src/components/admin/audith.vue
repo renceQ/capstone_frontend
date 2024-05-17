@@ -1,7 +1,11 @@
 <template>
+  <div style="height:1000px;">
   <br><br><br><br><br>
     <div class="table-container" style="font-family: 'Poppins', sans-serif;">
         <h1 style="font-size: 25px; color:#1679AB;">Product History: {{ productId }}</h1>
+        <button @click="downloadPDF" style="position:absolute; background-color:#C51605; border-radius:3px; width:200px; color:white; margin-left:59.1%;  margin-top:-90px; margin-bottom:3%;" class="neumorphic-button">
+          Download as PDF  <i style="color:white;" class="fas fa-file-pdf"></i>
+        </button>
         <insert @data-saved="getAuditRecords" />
         <table class="product-table" style="font-family: 'Poppins', sans-serif;">
         <thead>
@@ -46,9 +50,10 @@
         </tbody>
       </table>
     </div>
-  </template>
+  </div>
+</template>
 
-  <script>
+<script>
 import axios from 'axios'
 
 export default {
@@ -86,6 +91,89 @@ if (this.productId) {
 }
   },
   methods: {
+    downloadPDF() {
+    const docDefinition = {
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
+      content: [
+        {
+          text: 'QMJ ENTERPRISE EVENT MANAGEMENT AND CREATIVE SERVICES',
+          style: 'title',
+          alignment: 'center'
+        },
+        {
+          text: 'Generated Report for sales of products.',
+          style: 'subtitle',
+          alignment: 'center'
+        },
+        {
+          style: 'tableExample',
+          table: {
+            headerRows: 1,
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            body: [
+              [
+               
+                { text: 'Category ID', style: 'tableHeader' },
+                { text: 'Product Name', style: 'tableHeader' },
+                { text: 'Price', style: 'tableHeader' },
+                { text: 'Unit Price', style: 'tableHeader' },
+                { text: 'Size ID', style: 'tableHeader' },
+                { text: 'UPC', style: 'tableHeader' },
+                // { text: 'Barcode Image', style: 'tableHeader' },
+                { text: 'Created At', style: 'tableHeader' },
+                { text: 'Updated At', style: 'tableHeader' },
+                { text: 'Product Description', style: 'tableHeader' },
+                { text: 'Type', style: 'tableHeader' },
+                { text: 'Current Stock', style: 'tableHeader' },
+                { text: 'Old Stock', style: 'tableHeader' },
+              ],
+              ...this.auditRecords.map(record => [
+                
+                { text: this.getCategoryName(record.category_id), fontSize: 8 },
+                { text: record.prod_name, fontSize: 8 },
+                { text: record.price, fontSize: 8 },
+                { text: record.unit_price, fontSize: 8 },
+                { text: this.getSizeName(record.size_id), fontSize: 8 },
+                { text: record.UPC, fontSize: 8 },
+                // { image: record.barcode_image ? record.barcode_image : '', width: 30, height: 30 },
+                { text: record.created_at, fontSize: 8 },
+                { text: record.updated_at, fontSize: 8 },
+                { text: record.product_description, fontSize: 8 },
+                { text: record.type, fontSize: 8 },
+                { text: record.stock, fontSize: 8 },
+                { text: record.old_stock, fontSize: 8 },
+              ])
+            ]
+          },
+          layout: {
+            paddingLeft: function(i, node) { return 4; },
+            paddingRight: function(i, node) { return 4; },
+            paddingTop: function(i, node) { return 2; },
+            paddingBottom: function(i, node) { return 2; }
+          }
+        }
+      ],
+      styles: {
+        title: {
+          fontSize: 18,
+          bold: true,
+          marginBottom: 5
+        },
+        subtitle: {
+          fontSize: 12,
+          marginBottom: 10
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 10,
+          color: 'black'
+        }
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).download(`Product_History_${this.productId}.pdf`);
+  },
     async getAuditRecords(productId) {
       try {
         const response = await axios.get(`getaudith/${productId}`);
@@ -164,7 +252,7 @@ if (this.productId) {
 .table-container {
   width: 1000px;
   margin-right: 40px;
-  font-size: 12px; /* Adjust the font size as needed */
+  font-size: 10px; /* Adjust the font size as needed */
 }
 
 /* Add styles to the table */
@@ -177,8 +265,9 @@ if (this.productId) {
 .product-table th,
 .product-table td {
   border: 1px solid #ddd;
-  padding: 6px; /* Adjust cell padding */
+  padding: 4px; /* Adjust cell padding */
   text-align: left;
+  font-size: 10px; /* Adjust the font size as needed */
 }
 
 .product-table th {

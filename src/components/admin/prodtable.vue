@@ -42,7 +42,7 @@
                         <tr>
                           <th>UPC</th>
                           <th>Category</th>
-                          <th>Item Image</th>
+                          <th style="width:120px;">Item Image</th>
                           <th>Product</th>
                           <th>Status</th>
                           <th>Stock</th>
@@ -57,7 +57,7 @@
                           <td>{{ product.UPC }}</td>
 
                           <td>{{ getCategoryName(product.category_id) }}</td> 
-                          <td v-if="product.image">
+                          <td v-if="product.image" >
                             <img :src="product.image" alt="image" class="img-fluid" style="max-width: 100px; max-height:100px;">
                           </td>
                           <td>{{ product.prod_name }}</td>
