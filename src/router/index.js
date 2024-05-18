@@ -21,6 +21,7 @@ import audith_table from '../views/audith_table.vue'
 import orderRequest from '../views/orderRequest.vue'
 import sales_table from '../views/sales_table.vue'
 import calendar from '../views/calendar.vue'
+import itemcustomization from '../views/itemcustomization.vue'
 import landing from '../views/landing.vue'
 import toship_main from '../views/toship_main.vue'
 import torecieve_main from '../views/torecieve_main.vue'
@@ -127,6 +128,10 @@ const routes = [
   {
     path: '/calendar',
     component: calendar
+  },
+  {
+    path: '/itemcustomization',
+    component: itemcustomization
   },
   {
     path: '/toship_main',
