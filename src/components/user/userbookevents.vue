@@ -851,7 +851,7 @@ Sound and stage lights production.</p>
         <div style="position: absolute;margin-top:-80px; margin-left:100px;">
           <button for="service" style="position:absolute; margin-top:-55px; font-family: 'Stok Web', sans-serif; font-size:160px; font-weight:400;margin-left:-12px; color:#FEAA01;" @click="availability_dialogs()"><i style="color:#FEAA01; font-size:20px;" class="fas fa-calendar custom-icon"></i></button>
           <label for="service" style="margin-top:140px; font-size:35px; font-weight:600; margin-left:40px;color:#ffffff;"> {{ currentDay }}</label><br>
-          <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:30px; color:#ffffff;"> {{ currentDayNumber }}</label>
+          <label for="service" style="position:absolute; margin-top:-30px; font-family: 'Stok Web', sans-serif; font-size:140px; font-weight:400;margin-left:50px; color:#ffffff;"> {{ currentDayNumber }}</label>
         
         
           <a style="color:#E3E3E3; font-size:14px; position:absolute; margin-left:15px; margin-top:30px; top:65px; font-weight:300;"><a style="color:#FEAA01;font-size:17px;"></a> Today's Event</a>

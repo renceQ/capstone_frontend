@@ -159,6 +159,8 @@
           { text: 'Other Info', value: 'other_info' },
           { text: 'Customer Name', value: 'customerName' },
           { text: 'Status', value: 'status' },
+          { text: 'Total w Shipping', value: 'totalplusshipping' },
+        { text: 'Shipping Fee', value: 'shippingFee' },
           
         ],
         infos: [] // Initialize infos as an empty array
@@ -252,6 +254,8 @@
           other_info: 'Other Info',
           customerName: 'Customer Name',
           status: 'Status',
+          totalplusshipping: 'Total w Shipping',
+        shippingFee: 'Shipping Fee',
           actions: 'Actions',
           
           // Add other field titles accordingly

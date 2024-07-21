@@ -190,7 +190,6 @@
       <!-- Neumorphic Approve Button -->
       <v-btn text color="white" @click="approveEvent">Approve</v-btn>
       <v-btn text color="white" @click="declineEvent">Decline</v-btn>
-      <!-- <v-btn text color="white" @click="declineEvent">Decline</v-btn> -->
     </v-toolbar>
     <v-card-text>
       <v-container>
@@ -224,6 +223,7 @@
 
 <script>
 import axios from 'axios';
+import emailjs from 'emailjs-com';
 
 export default {
   data() {
@@ -233,7 +233,6 @@ export default {
       info: [],
       selectedOption: 'Pending Request', // Default selected option
       options: ['Pending Request', 'Approved Request', 'Declined Request'], // Dropdown options
-      
       tableHeaders: [
         { text: 'Action', value: 'actions', sortable: false },
         { text: 'Event', value: 'event_title' },
@@ -246,14 +245,13 @@ export default {
         { text: 'Phone Number', value: 'phone' },
         { text: 'Type of Service', value: 'service' },
         { text: 'Status', value: 'status' },
-       
       ],
     };
   },
   computed: {
     pendingRequests() {
-        return this.info.filter(item => item.status !== 'approved' && item.status !== 'declined' && item.status !== 'done');
-      },
+      return this.info.filter(item => item.status !== 'approved' && item.status !== 'declined' && item.status !== 'done');
+    },
     approvedRequests() {
       return this.info.filter(item => item.status === 'approved');
     },
@@ -278,62 +276,62 @@ export default {
       return new Date(date).toLocaleDateString(); // Adjust date formatting as needed
     },
     async approveEvent() {
-    try {
-      const response = await axios.post('/updateEventStatus', {
-        id: this.selectedEvent.id,
-        status: 'approved'
+      try {
+        const response = await axios.post('/updateEventStatus', {
+          id: this.selectedEvent.id,
+          status: 'approved'
+        });
 
-      });
+        if (response.status === 200) {
+          // Update the status in the selectedEvent object
+          this.selectedEvent.status = 'approved';
+          this.getEventInfo();
 
-      if (response.status === 200) {
-        // Update the status in the selectedEvent object
-        this.showModal = false; // Close the modal after approval
-        this.selectedEvent.status = 'approved';
-        this.getEventInfo();
+          // Find the index of the updated event in the info array and update it
+          const index = this.info.findIndex(event => event.id === this.selectedEvent.id);
+          if (index !== -1) {
+            this.$set(this.info, index, { ...this.selectedEvent });
+          }
 
-        // Find the index of the updated event in the info array and update it
-        const index = this.info.findIndex(event => event.id === this.selectedEvent.id);
-        if (index !== -1) {
-          this.$set(this.info, index, { ...this.selectedEvent });
+          this.showModal = false; // Close the modal
+
+          // Send email notification
+          this.sendApprovalEmail();
+        } else {
+          console.error('Error updating event status');
         }
-
-        this.showModal = false; // Close the modal
-      } else {
-        console.error('Error updating event status');
+      } catch (error) {
+        console.error('Error updating event status:', error);
       }
-    } catch (error) {
-      console.error('Error updating event status:', error);
-    }
-  },
+    },
+    async declineEvent() {
+      try {
+        const response = await axios.post('/updateEventStatus', {
+          id: this.selectedEvent.id,
+          status: 'declined',
+          reason: 'The Admin declined your order due to some reasons'
+        });
 
-  async declineEvent() {
-    try {
-      const response = await axios.post('/updateEventStatus', {
-        id: this.selectedEvent.id,
-        status: 'declined',
-         reason: 'The Admin declined your order due to some reasons'
-      });
+        if (response.status === 200) {
+          // Update the status in the selectedEvent object
+          this.selectedEvent.status = 'declined';
+          this.getEventInfo();
+          this.showModal = false; // Close the modal after approval
 
-      if (response.status === 200) {
-        // Update the status in the selectedEvent object
-        this.selectedEvent.status = 'declined';
-        this.getEventInfo();
-        this.showModal = false; // Close the modal after approval
-        // Find the index of the updated event in the info array and update it
-        const index = this.info.findIndex(event => event.id === this.selectedEvent.id);
-        if (index !== -1) {
-          this.$set(this.info, index, { ...this.selectedEvent });
+          // Find the index of the updated event in the info array and update it
+          const index = this.info.findIndex(event => event.id === this.selectedEvent.id);
+          if (index !== -1) {
+            this.$set(this.info, index, { ...this.selectedEvent });
+          }
+
+          this.showModal = false;
+        } else {
+          console.error('Error updating event status');
         }
-
-        this.showModal = false;
-      } else {
-        console.error('Error updating event status');
+      } catch (error) {
+        console.error('Error updating event status:', error);
       }
-    } catch (error) {
-      console.error('Error updating event status:', error);
-    }
-  },
-
+    },
     viewEvent(item) {
       // Set the selected event when "View" button is clicked
       this.selectedEvent = { ...item }; // Copy the item details to selectedEvent
@@ -354,7 +352,22 @@ export default {
         console.error(error);
       }
     },
-  },
+    sendApprovalEmail() {
+      const templateParams = {
+        to_email: this.selectedEvent.email,
+        from_email: 'rence.quinio12@gmail.com',
+        subject: 'Event Approval Notification',
+        message: 'Your event has been approved.'
+      };
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
+        .then((response) => {
+          console.log('Email sent successfully!', response.status, response.text);
+        }, (error) => {
+          console.error('Failed to send email:', error);
+        });
+    }
+  }
 };
 </script>
 

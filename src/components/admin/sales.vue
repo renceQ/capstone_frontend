@@ -14,6 +14,8 @@
           <th style="width: 10%;">Image</th>
           <th style="width: 5%;">Unit Price</th>
           <th style="width: 8%;">Total Price</th>
+          <th style="width: 8%;">Price w Shipping</th>
+          <th style="width: 8%;">Shipping Fee</th>
           <th style="width: 5%;">Size ID</th>
           <th style="width: 5%;">Quantity</th>
           <th style="width: 20%;">Address</th>
@@ -33,6 +35,8 @@
           </td>
           <td>{{ salesRecord.unit_price }}</td>
           <td>{{ salesRecord.total }}</td>
+          <td>{{ salesRecord.totalplusshipping }}</td>
+          <td>{{ salesRecord.shippingFee }}</td>
           <td>{{ getSizeName(salesRecord.size_id) }}</td>
           <td>{{ salesRecord.quantity }}</td>
           <td>{{ salesRecord.address }}</td>
@@ -76,6 +80,8 @@ export default {
       transaction_code: "",
       type: "",
       total: "",
+      totalplusshipping: "",
+      shippingFee: "",
       products: [],
       categories: [],
       sizes: [],
