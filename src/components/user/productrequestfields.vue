@@ -364,7 +364,7 @@ animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; fo
       </v-card>
     </v-dialog>
     
-
+<!--PAYMENT METHOD FIELD-->
     <v-dialog v-model="dialogss" persistent max-width="400">
       <v-card>
         <v-card-text>
@@ -375,6 +375,9 @@ animation-delay: 0.4s; position: fixed; top: 20px; left: 160px; width: 150px; fo
           <a class="neumorphic-navbars" style="width: 150px; border-radius:17px; margin-left:96px;" href="https://connect-sb-issuing.paymaya.com/login" target="_blank">
             <img src="https://payments-web-sbx-assets.maya.ph/payments-web/assets/static/media/pay-with-maya.a7968dfe.svg" alt="Paymaya" style="width: 150px; height: 50px;">
           </a>  
+
+    
+
           </div>
         </v-card-text>
         <v-card-actions>

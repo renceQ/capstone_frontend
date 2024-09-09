@@ -34,7 +34,7 @@ import addtocart from '../views/addtocart.vue'
 import editprofiles from '../views/editprofiles.vue'
 import chatbot from '../views/chatbot.vue'
 import service from '../views/service.vue'
-
+import dashBoard from '../views/dashBoard.vue'
 
 const routes = [
   {
@@ -177,6 +177,11 @@ const routes = [
     path: '/service',
     component: service
   },
+  {
+    path: '/dashBoard',
+    component: dashBoard
+  },
+
 ]
 
 const router = createRouter({
